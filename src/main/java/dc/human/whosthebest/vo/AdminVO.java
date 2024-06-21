@@ -1,6 +1,6 @@
 package dc.human.whosthebest.vo;
 
-public class AdminDTO {
+public class AdminVO {
 	
 	private String adId;
 	   private String adPw;
@@ -11,7 +11,7 @@ public class AdminDTO {
 	   private String updatedDate;
 	
 	   
-	public AdminDTO() {
+	public AdminVO() {
 		
 	}
 

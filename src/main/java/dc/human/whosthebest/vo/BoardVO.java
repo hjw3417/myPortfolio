@@ -1,30 +1,48 @@
 package dc.human.whosthebest.vo;
 
-public class TeamMemberDTO {
-	private int tID;
-	private String uID;
-	private int uStatus;
+public class BoardVO {
+	
+	private String bID;
+	private String bType;
+	private String bBullet;
+	private String bTitle;
+	private String bContent;
 	private String createdID;
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
-	public int gettID() {
-		return tID;
+	
+	
+	
+	public String getbID() {
+		return bID;
 	}
-	public void settID(int tID) {
-		this.tID = tID;
+	public void setbID(String bID) {
+		this.bID = bID;
 	}
-	public String getuID() {
-		return uID;
+	public String getbType() {
+		return bType;
 	}
-	public void setuID(String uID) {
-		this.uID = uID;
+	public void setbType(String bType) {
+		this.bType = bType;
 	}
-	public int getuStatus() {
-		return uStatus;
+	public String getbBullet() {
+		return bBullet;
 	}
-	public void setuStatus(int uStatus) {
-		this.uStatus = uStatus;
+	public void setbBullet(String bBullet) {
+		this.bBullet = bBullet;
+	}
+	public String getbTitle() {
+		return bTitle;
+	}
+	public void setbTitle(String bTitle) {
+		this.bTitle = bTitle;
+	}
+	public String getbContent() {
+		return bContent;
+	}
+	public void setbContent(String bContent) {
+		this.bContent = bContent;
 	}
 	public String getCreatedID() {
 		return createdID;
@@ -54,4 +72,7 @@ public class TeamMemberDTO {
 	
 	
 	
+	
+	
+
 }

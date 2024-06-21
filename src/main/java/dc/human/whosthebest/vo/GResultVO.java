@@ -13,7 +13,7 @@ DATE     		NAME       DESCRIPTION
 
 package dc.human.whosthebest.vo;
 
-public class GResultDTO {
+public class GResultVO {
 	
 	
 	private int gID;				//G_ID(경기 ID)
@@ -28,8 +28,8 @@ public class GResultDTO {
 	private String updatedDate;		//UPDATED_DATE(업데이트 날짜/DB에서 생성)
 	
 	
-	public GResultDTO(int gID, int tHomeID, int tAwayID, int homeGoal, int awayGoal, String uID, String createdDate,
-			String updatedID, String updatedDate) {
+	public GResultVO(int gID, int tHomeID, int tAwayID, int homeGoal, int awayGoal, String uID, String createdDate,
+					 String updatedID, String updatedDate) {
 		this.gID = gID;
 		this.tHomeID = tHomeID;
 		this.tAwayID = tAwayID;
@@ -42,7 +42,7 @@ public class GResultDTO {
 	}
 	
 	
-	public GResultDTO() {
+	public GResultVO() {
 
 	}
 

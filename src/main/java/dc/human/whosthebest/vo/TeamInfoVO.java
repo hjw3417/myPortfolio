@@ -1,6 +1,6 @@
 package dc.human.whosthebest.vo;
 
-public class TeamInfoDTO {
+public class TeamInfoVO {
 	private int tID;
 	private String tName;
 	private byte[] tLogo;

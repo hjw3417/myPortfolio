@@ -1,6 +1,6 @@
 package dc.human.whosthebest.vo;
 
-public class UserInfoDTO {
+public class UserInfoVO {
 
 	private String uID;
 	private String uName;
