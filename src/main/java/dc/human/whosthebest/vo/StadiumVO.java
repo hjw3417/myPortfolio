@@ -13,7 +13,7 @@ DATE     		NAME       DESCRIPTION
 
 package dc.human.whosthebest.vo;
 
-public class StadiumDTO {
+public class StadiumVO {
 	private int sID;			//S_ID(경기장 ID)
 	private String sName;		//S_NAME(경기장 명)
 	private String sRegion;		//S_REGION(경기장 지역/광역자치단체 명 기준)
@@ -22,7 +22,7 @@ public class StadiumDTO {
 	private String sPhone;		//S_PHONE(경기장 관리자 번호)
 	private int sNum;			//S_NUM(경기장 내 번호)
 	
-	public StadiumDTO(int sID, String sName, String sRegion, String sAddr, String sOwner, String sPhone, int sNum) {
+	public StadiumVO(int sID, String sName, String sRegion, String sAddr, String sOwner, String sPhone, int sNum) {
 		this.sID = sID;
 		this.sName = sName;
 		this.sRegion = sRegion;
@@ -32,7 +32,7 @@ public class StadiumDTO {
 		this.sNum = sNum;
 	}
 	
-	public StadiumDTO() {
+	public StadiumVO() {
 
 	}
 

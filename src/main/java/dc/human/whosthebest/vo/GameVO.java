@@ -13,7 +13,7 @@ DATE     		NAME       DESCRIPTION
 
 package dc.human.whosthebest.vo;
 
-	public class GameDTO {
+	public class GameVO {
 		
 		private int gID;               //G_ID(경기 아이디/sequence)
 		private int gTeamID;		   //G_TEAMID(팀 ID)	
@@ -38,9 +38,9 @@ package dc.human.whosthebest.vo;
 		
 		
 		
-		public GameDTO(int gID, int gTeamID, String gTitle, String gTag, String gCreatedDate, int gTime, String gInfo,
-				int gMinMember, String gResTime, String gResDate, int gStatus, int tID, int tAwayID, int sID, int sNum,
-				String createdID, String createdDate, String updateID, String updatedDate, String u_id) {
+		public GameVO(int gID, int gTeamID, String gTitle, String gTag, String gCreatedDate, int gTime, String gInfo,
+					  int gMinMember, String gResTime, String gResDate, int gStatus, int tID, int tAwayID, int sID, int sNum,
+					  String createdID, String createdDate, String updateID, String updatedDate, String u_id) {
 			this.gID = gID;
 			this.gTeamID = gTeamID;
 			this.gTitle = gTitle;
@@ -65,7 +65,7 @@ package dc.human.whosthebest.vo;
 
 
 
-		public GameDTO() {}
+		public GameVO() {}
 
 
 

@@ -14,7 +14,7 @@ DATE     		NAME       DESCRIPTION
 
 package dc.human.whosthebest.vo;
 
-public class GameListDTO {
+public class GameListVO {
 	//game table
 	private int gID;					//G_ID(경기 아이디/sequence)
 	private int gTeamID;				//G_TEAMID(팀 ID)
@@ -55,11 +55,11 @@ public class GameListDTO {
 	
 	
 	
-	public GameListDTO(int gID, int gTeamID, String gTitle, String gTag, String gCreatedDate, int gTime, String gInfo,
-			int gMinMember, String gResTime, String gResDate, int gStatus, int tID, int tAwayID, int sID, int sNum,
-			String uID, String tName, byte[] tLogo, String tregion, String tphone, int tRankScore, int tMinAge,
-			int tMaxAge, int tMaxMember, int tMember, String tInfo, String sName, String sRegion, String sAddr,
-			String sOwner, String sPhone) {
+	public GameListVO(int gID, int gTeamID, String gTitle, String gTag, String gCreatedDate, int gTime, String gInfo,
+					  int gMinMember, String gResTime, String gResDate, int gStatus, int tID, int tAwayID, int sID, int sNum,
+					  String uID, String tName, byte[] tLogo, String tregion, String tphone, int tRankScore, int tMinAge,
+					  int tMaxAge, int tMaxMember, int tMember, String tInfo, String sName, String sRegion, String sAddr,
+					  String sOwner, String sPhone) {
 		this.gID = gID;
 		this.gTeamID = gTeamID;
 		this.gTitle = gTitle;
@@ -104,7 +104,7 @@ public class GameListDTO {
 	}
 
 
-	public GameListDTO() {}
+	public GameListVO() {}
 
 
 	public int getgID() {

@@ -1,70 +1,83 @@
 package dc.human.whosthebest.vo;
 
-public class BoardDTO {
-	
-	private String bID;
-	private String bType;
-	private String bBullet;
-	private String bTitle;
-	private String bContent;
+public class SquadVO {
+
+	private int gID;
+	private String tID;
+	private String uID;
 	private String createdID;
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
 	
 	
+	public SquadVO(int gID, String tID, String uID, String createdID, String createdDate, String updatedID,
+				   String updatedDate) {
+		this.gID = gID;
+		this.tID = tID;
+		this.uID = uID;
+		this.createdID = createdID;
+		this.createdDate = createdDate;
+		this.updatedID = updatedID;
+		this.updatedDate = updatedDate;
+	}
 	
-	public String getbID() {
-		return bID;
+	public SquadVO() {
+
 	}
-	public void setbID(String bID) {
-		this.bID = bID;
+
+	public int getgID() {
+		return gID;
 	}
-	public String getbType() {
-		return bType;
+
+	public void setgID(int gID) {
+		this.gID = gID;
 	}
-	public void setbType(String bType) {
-		this.bType = bType;
+
+	public String gettID() {
+		return tID;
 	}
-	public String getbBullet() {
-		return bBullet;
+
+	public void settID(String tID) {
+		this.tID = tID;
 	}
-	public void setbBullet(String bBullet) {
-		this.bBullet = bBullet;
+
+	public String getuID() {
+		return uID;
 	}
-	public String getbTitle() {
-		return bTitle;
+
+	public void setuID(String uID) {
+		this.uID = uID;
 	}
-	public void setbTitle(String bTitle) {
-		this.bTitle = bTitle;
-	}
-	public String getbContent() {
-		return bContent;
-	}
-	public void setbContent(String bContent) {
-		this.bContent = bContent;
-	}
+
 	public String getCreatedID() {
 		return createdID;
 	}
+
 	public void setCreatedID(String createdID) {
 		this.createdID = createdID;
 	}
+
 	public String getCreatedDate() {
 		return createdDate;
 	}
+
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
 	public String getUpdatedID() {
 		return updatedID;
 	}
+
 	public void setUpdatedID(String updatedID) {
 		this.updatedID = updatedID;
 	}
+
 	public String getUpdatedDate() {
 		return updatedDate;
 	}
+
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
 	}
@@ -73,6 +86,4 @@ public class BoardDTO {
 	
 	
 	
-	
-
 }
