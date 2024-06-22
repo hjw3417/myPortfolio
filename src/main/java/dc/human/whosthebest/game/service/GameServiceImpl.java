@@ -10,6 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.service;
 
 import dc.human.whosthebest.game.dao.GameDAO;
+import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,12 @@ public class GameServiceImpl implements  GameService {
         List<TeamInfoVO> teamNameList = null;
         teamNameList = gameDAO.loadMyTeam(uID);
         return teamNameList;
+    }
+
+    @Override
+    public List<StadiumVO> selectStadium(String sRegion, String search) throws  Exception {
+        List<StadiumVO> stadiumList = null;
+        stadiumList = gameDAO.selectStadium(sRegion, search);
+        return stadiumList;
     }
 }

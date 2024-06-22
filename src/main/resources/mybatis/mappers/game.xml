@@ -119,4 +119,23 @@
         )
       ]]>
 	</select>
+
+	<select id="selectStadium" parameterType="map" resultMap="stadiumResultMap">
+		<![CDATA[
+        SELECT * FROM stadium
+        <where>
+            <if test="sRegion != null and sRegion != ''">
+                s_region = #{sRegion}
+                <if test="search != null and search != ''">
+                    AND (s_name || s_region || s_addr || s_owner LIKE CONCAT('%', #{search}, '%'))
+                </if>
+            </if>
+            <if test="sRegion == null or sRegion == ''">
+                <if test="search != null and search != ''">
+                    (s_name || s_region || s_addr || s_owner LIKE CONCAT('%', #{search}, '%'))
+                </if>
+            </if>
+        </where>
+      ]]>
+	</select>
 </mapper>

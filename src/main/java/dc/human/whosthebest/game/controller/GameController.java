@@ -15,4 +15,5 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface GameController {
     public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

@@ -10,6 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.controller;
 
 import dc.human.whosthebest.game.service.GameService;
+import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -38,5 +39,16 @@ public class GameControllerImpl implements GameController {
         ModelAndView mav = new ModelAndView("/game/gameMake");
         mav.addObject("teamNameList", teamNameList);
         return mav;
+    }
+
+    @Override
+    @RequestMapping(value = "game/selectStadium.do", method = requestMethod.GET)
+    public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String sRegion = "전체";
+        String search = null;
+        sRegion = request.getParameter("sRegion");
+        search = request.getParameter("search");
+        List<StadiumVO> stadiumList = gameService.selectStadium(sRegion, search);
+        ModelAndView mav = new ModelAndView()
     }
 }

@@ -9,6 +9,7 @@ CREATED DATE    : 2024.06.21.
 */
 package dc.human.whosthebest.game.dao;
 
+import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
@@ -20,4 +21,5 @@ import java.util.List;
 @Mapper
 public interface GameDAO {
     public List<TeamInfoVO> loadMyTeam(String uID) throws DataAccessException;
+    public List<StadiumVO> selectStadium(String sRegion, String search) throws DataAccessException;
 }

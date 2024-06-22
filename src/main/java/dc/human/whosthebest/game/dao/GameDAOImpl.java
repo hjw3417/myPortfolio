@@ -9,6 +9,7 @@ CREATED DATE    : 2024.06.21.
 */
 package dc.human.whosthebest.game.dao;
 
+import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Repository("gameDAOImpl")
 public class GameDAOImpl implements GameDAO {
     @Autowired
@@ -33,5 +38,15 @@ public class GameDAOImpl implements GameDAO {
         List<TeamInfoVO> teamInfoList = null;
         teamInfoList = sqlSession.selectList("mapper.game.loadMyTeam", uID);
         return teamInfoList;
+    }
+
+    @Override
+    public List<StadiumVO> selectStadium(String sRegion, String search) throws DataAccessException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("sRegion", sRegion);
+        params.put("search", search);
+        List<StadiumVO> stadiumList = null;
+        stadiumList = sqlSession.selectList("mapper.game.selectStadium");
+        return stadiumList;
     }
 }
