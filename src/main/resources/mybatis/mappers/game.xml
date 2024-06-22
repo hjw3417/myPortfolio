@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.game.dao.gameDAO">
+	<resultMap id="gameResult" type="gameVO">
+		<result property="gID" column="G_ID" />
+		<result property="gTeamID" column="G_TEAMID" />
+		<result property="gTitle" column="G_TITLE" />
+		<result property="gTag" column="G_TAG" />
+		<result property="gCreatedDate" column="G_CREATEDATE" />
+		<result property="gTime" column="G_TIME" />
+		<result property="gInfo" column="G_INFO" />
+		<result property="gMinMember" column="G_MINMEMBER" />
+		<result property="gResTime" column="G_RESTIME" />
+		<result property="gResDate" column="G_RESDATE" />
+		<result property="gStatus" column="G_STATUS" />
+		<result property="tID" column="T_ID" />
+		<result property="tAwayID" column="T_AWAYID" />
+		<result property="sID" column="S_ID" />
+		<result property="sNum" column="S_NUM" />
+		<result property="createdID" column="CREATED_ID" />
+		<result property="createdDate" column="CREATED_DATE" />
+		<result property="updateID" column="UPDATED_ID" />
+		<result property="updatedDate" column="UPDATED_DATE" />
+		<result property="u_id" column="U_ID" />
+	</resultMap>
+
+
+	<select id="selectAllMemberList" resultMap="gameResult">
+		<![CDATA[
+        select * from t_member order by joinDate desc
+      ]]>
+	</select>
+</mapper>
