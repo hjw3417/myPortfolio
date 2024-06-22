@@ -33,7 +33,7 @@ public class GameServiceImpl implements  GameService {
      */
     @Override
     public List<TeamInfoVO> loadMyTeam(String uID) throws Exception {
-        List teamNameList = null;
+        List<TeamInfoVO> teamNameList = null;
         teamNameList = gameDAO.loadMyTeam(uID);
         return teamNameList;
     }

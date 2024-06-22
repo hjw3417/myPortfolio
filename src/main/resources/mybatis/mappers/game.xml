@@ -3,7 +3,7 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="dc.human.whosthebest.game.dao.gameDAO">
+<mapper namespace="dc.human.whosthebest.game.dao.GameDAO">
 	<!--  gameVO resultMap	-->
 	<resultMap id="gameResult" type="gameVO">
 		<result property="gID" column="G_ID" />

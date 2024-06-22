@@ -10,14 +10,14 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.dao;
 
 import dc.human.whosthebest.vo.TeamInfoVO;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-@Repository("gameDAO")
+@Repository("gameDAOImpl")
 public class GameDAOImpl implements GameDAO {
     @Autowired
     private SqlSession sqlSession;

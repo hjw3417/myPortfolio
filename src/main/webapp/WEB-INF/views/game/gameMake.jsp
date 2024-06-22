@@ -20,7 +20,7 @@
 <body>
   <header>
     <div class="logo">
-      <img src="../../../../../../../../../2차포트폴리오/웹페이지/image/logo.png">
+      <img src="../image/logo.png">
       <!-- <div>누가 잘차</div> -->
     </div>
     <div>
@@ -54,9 +54,10 @@
           <tr>
             <td colspan="3">
               <select name="selectTeam" id="selectTeam">
-                <option selected>팀 선택하기</option>
-                <option>문주군단</option>
-                <option>개발냥발</option>
+              <option selected>팀 선택하기</option>
+              <c:forEach var="tName" items="${teamNameList}">
+                <option>${tName.tName}</option>
+              </c:forEach>
               </select>
             </td>
           </tr>

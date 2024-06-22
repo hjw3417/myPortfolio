@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
-@Repository("gameDAO")
 public interface GameDAO {
     public List<TeamInfoVO> loadMyTeam(String uID) throws DataAccessException;
 }
