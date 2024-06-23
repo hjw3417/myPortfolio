@@ -52,9 +52,9 @@
         <!-- 컨텐트 영역 시작 -->
         <div class="resStadium-content">
             <!-- 검색 바 시작 -->
-            <form class="findForm">
+          <form class="findForm" method="get" action="${contextPath}/game/resStadium.do">
                 <select name="sRegion">
-                    <option value="전체">전체</option>
+                    <option value="">전체</option>
                     <option value="서울">서울</option>
                     <option value="인천">인천</option>
                     <option value="경기">경기</option>
@@ -80,25 +80,12 @@
                 <!-- 경기장 List 시작 -->
                 <div class="stadiumList">
                     <label><경기장 목록></label>
-                    <ul >
+                    <ul>
+                        <c:forEach var="stadiumVO" items="${stadiumList}">
                         <li>
-                            <form method="get" action="./stadiumdetail">
-                                <input type="hidden" name="sID" value="<%= stadiumDTO.getsID()%>">
-                                <a type="submit" class="studiumInfo" id="sID">천안축구센터</a>
-                            </form>
+                            ${stadiumVO.sName}
                         </li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
-                        <li>경기장 없음</li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <!-- 경기장 List 끝 -->

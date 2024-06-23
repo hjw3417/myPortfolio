@@ -47,9 +47,9 @@ public class GameControllerImpl implements GameController {
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String sRegion = request.getParameter("sRegion");
         String search = request.getParameter("search");
-        if(sRegion == null || sRegion =="") {
-            sRegion = "전체";
-        }
+
+        System.out.println("controller sRegion : " + sRegion);
+        System.out.println("controller search : " + search);
         List<StadiumVO> stadiumList = gameService.selectStadium(sRegion, search);
         ModelAndView mav = new ModelAndView("/game/resStadium");
         mav.addObject("stadiumList", stadiumList);

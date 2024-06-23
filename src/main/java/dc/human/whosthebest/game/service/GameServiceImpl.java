@@ -42,7 +42,11 @@ public class GameServiceImpl implements  GameService {
     @Override
     public List<StadiumVO> selectStadium(String sRegion, String search) throws  Exception {
         List<StadiumVO> stadiumList = null;
+        System.out.println("service sRegion : " + sRegion);
+        System.out.println("service search : " + search);
         stadiumList = gameDAO.selectStadium(sRegion, search);
         return stadiumList;
     }
+
+    @Override
 }

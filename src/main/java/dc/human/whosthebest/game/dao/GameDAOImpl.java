@@ -11,13 +11,11 @@ package dc.human.whosthebest.game.dao;
 
 import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +24,7 @@ import java.util.Map;
 public class GameDAOImpl implements GameDAO {
     @Autowired
     private SqlSession sqlSession;
+
     /**
      * 사용자 ID에 해당하는 팀명을 로드합니다.
      *
@@ -43,10 +42,20 @@ public class GameDAOImpl implements GameDAO {
     @Override
     public List<StadiumVO> selectStadium(String sRegion, String search) throws DataAccessException {
         Map<String, Object> params = new HashMap<>();
+        System.out.println("dao sRegion : " + sRegion);
+        System.out.println("dao search : " + search);
         params.put("sRegion", sRegion);
         params.put("search", search);
         List<StadiumVO> stadiumList = null;
-        stadiumList = sqlSession.selectList("mapper.game.selectStadium");
+        stadiumList = sqlSession.selectList("mapper.game.selectStadium", params);
         return stadiumList;
+    }
+
+    @Override
+    public List<StadiumVO> stdiumDetail(int sID) throws DataAccessException {
+        System.out.println("dao sID : " + sID);
+        List<StadiumVO> stadiumDetailList = null;
+        stadiumDetailList = sqlSession.selectList("mapper.game.selectStadium", sID);
+        return stadiumDetailList;
     }
 }

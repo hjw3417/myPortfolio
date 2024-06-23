@@ -22,4 +22,5 @@ import java.util.List;
 public interface GameDAO {
     public List<TeamInfoVO> loadMyTeam(String uID) throws DataAccessException;
     public List<StadiumVO> selectStadium(String sRegion, String search) throws DataAccessException;
+    public List<StadiumVO> stdiumDetail(int sID) throws DataAccessException;
 }
