@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -31,7 +32,6 @@ public class GameControllerImpl implements GameController {
     @Override
     @RequestMapping(value = "/game/gameMake.do", method = RequestMethod.GET)
     public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         HttpSession session = request.getSession();
         session.setAttribute("uID", "heo");
         String uID = (String) session.getAttribute("uID");
@@ -42,13 +42,17 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    @RequestMapping(value = "game/selectStadium.do", method = requestMethod.GET)
+    @RequestMapping(value = "game/resStadium.do", method = RequestMethod.GET)
+    @ResponseBody
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String sRegion = "전체";
-        String search = null;
-        sRegion = request.getParameter("sRegion");
-        search = request.getParameter("search");
+        String sRegion = request.getParameter("sRegion");
+        String search = request.getParameter("search");
+        if(sRegion == null || sRegion =="") {
+            sRegion = "전체";
+        }
         List<StadiumVO> stadiumList = gameService.selectStadium(sRegion, search);
-        ModelAndView mav = new ModelAndView()
+        ModelAndView mav = new ModelAndView("/game/resStadium");
+        mav.addObject("stadiumList", stadiumList);
+        return mav;
     }
 }

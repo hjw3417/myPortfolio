@@ -9,9 +9,12 @@ CREATED DATE    : 2024.06.21.
 */
 package dc.human.whosthebest.game.controller;
 
+import dc.human.whosthebest.vo.StadiumVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 public interface GameController {
     public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception;
