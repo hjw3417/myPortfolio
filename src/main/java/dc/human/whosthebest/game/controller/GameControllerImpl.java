@@ -17,20 +17,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller("gameController")
+@RequestMapping("/game")
 public class GameControllerImpl implements GameController {
     @Autowired
     private GameService gameService;
 
     @Override
-    @RequestMapping(value = "/game/gameMake.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/gameMake.do", method = RequestMethod.GET)
     public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         session.setAttribute("uID", "heo");
@@ -42,17 +41,27 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    @RequestMapping(value = "game/resStadium.do", method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "/resStadium.do", method = RequestMethod.GET, params = "!responseType")
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String sRegion = request.getParameter("sRegion");
         String search = request.getParameter("search");
 
-        System.out.println("controller sRegion : " + sRegion);
-        System.out.println("controller search : " + search);
+        System.out.println("MAV controller sRegion : " + sRegion);
+        System.out.println("MAV controller search : " + search);
         List<StadiumVO> stadiumList = gameService.selectStadium(sRegion, search);
         ModelAndView mav = new ModelAndView("/game/resStadium");
         mav.addObject("stadiumList", stadiumList);
+        mav.addObject("isAjaxRequest", false);
         return mav;
+    }
+
+    @Override
+    @RequestMapping(value = "/resStadium.do", method = RequestMethod.GET, params = "responseType=json")
+    @ResponseBody
+    public List<StadiumVO> searchStadiumName(@RequestParam(value = "sRegion", required = false) String sRegion,
+                                             @RequestParam(value = "search", required = false) String search) throws Exception {
+        System.out.println("RESTful controller sRegion : " + sRegion);
+        System.out.println("RESTful controller search : " + search);
+        return gameService.selectStadium(sRegion, search);
     }
 }

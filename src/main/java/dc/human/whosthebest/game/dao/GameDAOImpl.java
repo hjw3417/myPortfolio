@@ -41,9 +41,9 @@ public class GameDAOImpl implements GameDAO {
 
     @Override
     public List<StadiumVO> selectStadium(String sRegion, String search) throws DataAccessException {
-        Map<String, Object> params = new HashMap<>();
         System.out.println("dao sRegion : " + sRegion);
         System.out.println("dao search : " + search);
+        Map<String, Object> params = new HashMap<>();
         params.put("sRegion", sRegion);
         params.put("search", search);
         List<StadiumVO> stadiumList = null;

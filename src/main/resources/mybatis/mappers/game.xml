@@ -124,7 +124,10 @@
 		SELECT * FROM stadium
 		<where>
 			<if test="(search == null or search == '') and (sRegion != null and sRegion != '')">
-				s_region = #{sRegion}
+				s_region in
+				(select region_name
+				from regioncode
+				where region_code = #{sRegion})
 			</if>
 			<if test="!(search == null or search == '') and (sRegion == null or sRegion == '')">
 				(s_name LIKE '%' || #{search} || '%'
@@ -133,7 +136,11 @@
 				OR s_owner LIKE '%' || #{search} || '%')
 			</if>
 			<if test="!(search == null or search == '') and !(sRegion == null or sRegion == '')">
-				s_region = #{sRegion} AND
+				s_region in
+				(select region_name
+				from regioncode
+				where region_code = #{sRegion})
+				AND
 				(s_name LIKE '%' || #{search} || '%'
 				OR s_region LIKE '%' || #{search} || '%'
 				OR s_addr LIKE '%' || #{search} || '%'

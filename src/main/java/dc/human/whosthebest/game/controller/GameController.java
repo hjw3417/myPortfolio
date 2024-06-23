@@ -12,6 +12,7 @@ package dc.human.whosthebest.game.controller;
 import dc.human.whosthebest.vo.StadiumVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,4 +20,6 @@ import java.util.List;
 public interface GameController {
     public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public List<StadiumVO> searchStadiumName(@RequestParam(value = "sRegion", required = false) String sRegion,
+                                             @RequestParam(value = "search", required = false) String search) throws Exception;
 }

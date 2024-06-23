@@ -17,6 +17,39 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>경기 만들기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script>
+    $(document).ready(function(){
+        $("#findForm").submit(function(event){
+            event.preventDefault(); // 폼의 기본 제출을 막음
+
+            var sRegion = $("#sRegion").val();
+            var search = $("#search").val();
+
+            $.ajax({
+                url: '/game/resStadium.do',
+                type: 'GET',
+                data: {
+                    sRegion: sRegion,
+                    search: search,
+                    responseType: 'json'
+                },
+                success: function(response) {
+                    // 응답 데이터를 처리
+                    var stadiumList = response;
+                    var html = '';
+                    for(var i = 0; i < stadiumList.length; i++) {
+                        html += '<li>' + i +". " + stadiumList[i].sName + '</li>';
+                    }
+                    $("#stadiumList").html(html);
+                },
+                error: function(error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+    </script>
 </head>
 <body>
 <header>
@@ -52,27 +85,28 @@
         <!-- 컨텐트 영역 시작 -->
         <div class="resStadium-content">
             <!-- 검색 바 시작 -->
-          <form class="findForm" method="get" action="${contextPath}/game/resStadium.do">
-                <select name="sRegion">
+          <form class="findForm" id="findForm">
+                <select name="sRegion" id="sRegion">
                     <option value="">전체</option>
-                    <option value="서울">서울</option>
-                    <option value="인천">인천</option>
-                    <option value="경기">경기</option>
-                    <option value="충남">충남</option>
-                    <option value="충북">충북</option>
-                    <option value="대전">대전</option>
-                    <option value="대구">대구</option>
-                    <option value="경북">경북</option>
-                    <option value="경남">경남</option>
-                    <option value="울산">울산</option>
-                    <option value="부산">부산</option>
-                    <option value="전남">전남</option>
-                    <option value="전북">전북</option>
-                    <option value="광주">광주</option>
-                    <option value="강원">강원</option>
+                    <option value="A">서울</option>
+                    <option value="B">경기</option>
+                    <option value="C">인천</option>
+                    <option value="D">강원</option>
+                    <option value="E">충남</option>
+                    <option value="F">충북</option>
+                    <option value="G">대전</option>
+                    <option value="H">경북</option>
+                    <option value="I">대구</option>
+                    <option value="J">경남</option>
+                    <option value="K">울산</option>
+                    <option value="L">부산</option>
+                    <option value="M">광주</option>
+                    <option value="N">전북</option>
+                    <option value="O">전남</option>
+                    <option value="P">제주</option>
                 </select>
-                <input type="text" class="search" name="search" name="search" placeholder="경기장 이름 검색">
-                <input type="submit" class="findFormSubmit" value="검색" >
+                <input type="text" class="search" name="search" id="search" placeholder="경기장 이름 검색">
+                <input type="submit" class="findFormSubmit" id="findFormSubmit" value="검색" >
             </form>
             <!-- 검색 바 끝 -->
             <!-- 경기장 정보 시작 -->
@@ -80,11 +114,11 @@
                 <!-- 경기장 List 시작 -->
                 <div class="stadiumList">
                     <label><경기장 목록></label>
-                    <ul>
+                    <ul id="stadiumList">
                         <c:forEach var="stadiumVO" items="${stadiumList}">
-                        <li>
-                            ${stadiumVO.sName}
-                        </li>
+                            <li>
+                                ${stadiumVO.sName}
+                            </li>
                         </c:forEach>
                     </ul>
                 </div>
