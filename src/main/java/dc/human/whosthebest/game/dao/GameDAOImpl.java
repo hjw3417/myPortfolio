@@ -63,7 +63,7 @@ public class GameDAOImpl implements GameDAO {
     public List<StadiumVO> stdiumDetail(int sID) throws DataAccessException {
         System.out.println("dao sID : " + sID);
         List<StadiumVO> stadiumDetailList = null;
-        stadiumDetailList = sqlSession.selectList("mapper.game.selectStadium", sID);
+        stadiumDetailList = sqlSession.selectList("mapper.game.stadiumDetail", sID);
         return stadiumDetailList;
     }
 }

@@ -72,6 +72,7 @@ public class GameControllerImpl implements GameController {
         mav.addObject("isAjaxRequest", false);
         return mav;
     }
+
     /**
      * 경기장을 이름으로 검색하는 GET 요청을 처리합니다.
      * 이 메서드는 선택한 지역과 검색어에 따라 경기장 목록을 JSON 형식으로 반환합니다.
@@ -81,14 +82,24 @@ public class GameControllerImpl implements GameController {
      * @return 경기장 목록을 포함하는 List<StadiumVO>
      * @throws Exception 오류가 발생할 경우 예외를 던집니다
      */
-
     @Override
-    @RequestMapping(value = "/resStadium.do", method = RequestMethod.GET, params = "responseType=json")
+    @RequestMapping(value = "/search/resStadium.do", method = RequestMethod.GET, params = "responseType=json")
     @ResponseBody
     public List<StadiumVO> searchStadiumName(@RequestParam(value = "sRegion", required = false) String sRegion,
                                              @RequestParam(value = "search", required = false) String search) throws Exception {
         System.out.println("RESTful controller sRegion : " + sRegion);
         System.out.println("RESTful controller search : " + search);
-        return gameService.selectStadium(sRegion, search);
+        List<StadiumVO> stadiumList = gameService.selectStadium(sRegion, search);
+        return stadiumList;
+    }
+
+    @Override
+    @RequestMapping(value = "/stadiumDetail.do", method = RequestMethod.GET)
+    @ResponseBody
+    public List<StadiumVO> stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception {
+        System.out.println("RESTful controller sID : " + sID);
+        int sIDInt = Integer.parseInt(sID);
+        List<StadiumVO> stadiumDetailList = gameService.stadiumDetil(sIDInt);
+        return stadiumDetailList;
     }
 }

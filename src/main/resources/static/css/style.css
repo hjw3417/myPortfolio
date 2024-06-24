@@ -1134,6 +1134,7 @@ footer{
   display: block;
   width: 1200px;
   height: 850px;
+  font-weight: bold;
   >.findForm {
     justify-content: center;
     margin-bottom: 50px;
@@ -1144,6 +1145,7 @@ footer{
       height: 32px;
       border: 2pt solid rgb(146, 172, 101);
       margin-right: 10px;
+      font-weight: bold;
     }
     >select {
       height: 36px;
@@ -1151,6 +1153,7 @@ footer{
       background-color: rgb(184, 206, 146);
       border: 1pt solid rgb(146, 172, 101);
       margin-right: 10px;
+      font-weight: bold;
     }
     >select:focus {outline: none;}
     >input:focus {outline: none;}
@@ -1160,6 +1163,7 @@ footer{
       border: 1pt solid rgb(146, 172, 101);
       height: 36px;
       cursor: pointer;
+      font-weight: bold;
     }
   }
   >.stadiumContainer {
@@ -1173,6 +1177,8 @@ footer{
       width: 300px;
       height: 250px;
       overflow-y: scroll;
+      overflow-x: scroll;
+      white-space: nowrap;
       padding: 20px;
       box-sizing: border-box;
       >ul {
@@ -1180,7 +1186,17 @@ footer{
         padding-left: 20px;
         >li {
           text-align: left;
-          margin-bottom: 2px;
+          margin-bottom: 1px;
+          >form {
+            >button {
+                font-family: 'GmarketSansMedium', sans-serif;
+                background-color: transparent;
+                                border: 0pt;
+                                cursor: pointer;
+                                font-size: 12pt;
+                                font-weight: bold;
+            }
+          }
         }
       }
     }

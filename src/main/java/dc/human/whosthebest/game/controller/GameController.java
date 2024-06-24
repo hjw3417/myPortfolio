@@ -22,4 +22,5 @@ public interface GameController {
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception;
     public List<StadiumVO> searchStadiumName(@RequestParam(value = "sRegion", required = false) String sRegion,
                                              @RequestParam(value = "search", required = false) String search) throws Exception;
+    public List<StadiumVO> stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception;
 }
