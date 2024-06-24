@@ -82,12 +82,13 @@
                         $('#sAddrDetail').html(stadiumDetail.sAddr ? stadiumDetail.sAddr : '없음');
                         $('#sOwnerDetail').html(stadiumDetail.sOwner ? stadiumDetail.sOwner : '없음');
                         $('#sPhoneDetail').html(stadiumDetail.sPhone ? stadiumDetail.sPhone : '없음');
-
+                        // input 요소에 값을 설정
+                        $('#sIDInput').val(stadiumDetail.sID);
                         var html = '<option disabled selected>경기장 선택하기</option>';
                         for (var i = 1; i <= stadiumDetail.sNum; i++) {
                             html += '<option value="' + i + '">' + i + ' 경기장</option>';
                         }
-                        $("#sNumDetail").html(html);
+                        $("#sResNum").html(html);
                     },
                     error: function(error) {
                         // 요청이 실패하면 실행될 함수를 정의
@@ -175,22 +176,23 @@
                 </div>
                 <!-- 경기장 List 끝 -->
                 <!-- 경기장 form 시작 -->
-                <form method="get" action="commitstadium">
+                <form method="post" action="${contextPath}/game/StadiumRes.do">
                     <!-- 경기장 디테일 시작 -->
                     <div class="stadiumDetail">
                         <label><상세정보></label>
                         <div id="message">경기장을 선택해주세요.</div>
                         <ul id="stadiumDetailInfo">
-                            <input type="hidden" name="sName" value="1">
+                            <input type="hidden" name="sId" id="sIDInput">
+                            <input type="hidden" name="sName" id="sNameInput">
                             <li>경기장 명 : <span id="sNameDetail"></span></li>
 
-                            <input type="hidden" name="sAddr" value="1">
+                            <input type="hidden" name="sAddr" id="sAddrInput">
                             <li>주소 : <span id="sAddrDetail"></span></li>
 
-                            <input type="hidden" name="sOwner" value="1">
+                            <input type="hidden" name="sOwner" id="sOwnerInput">
                             <li>관리자 : <span id="sOwnerDetail"></span></li>
 
-                            <input type="hidden" name="sPhone" value="1">
+                            <input type="hidden" name="sPhone" id="sPhoneInput">
                             <li>연락처 : <span id="sPhoneDetail"></span></li>
                         </ul>
                     </div>
@@ -201,12 +203,12 @@
             <table class="resInfoContainer">
                 <tr>
                     <td>예약일 : </td>
-                    <td><input type="date" name="gResDate"></td>
+                    <td><input type="date" name="sResDate"></td>
                 </tr>
                 <tr>
                     <td>시작 시작 : </td>
                     <td>
-                        <select  name="sTime">
+                        <select  name="sResSTime">
                             <option selected disabled>시작 시간 선택</option>
                             <option value="8">08 : 00</option>
                             <option value="9">09 : 00</option>
@@ -224,7 +226,7 @@
                 <tr>
                     <td>종료 시작 : </td>
                     <td>
-                        <select name="eTime">
+                        <select name="sResETime">
                             <option selected disabled>종료 시간 선택</option>
                             <option value="8">08 : 00</option>
                             <option value="9">09 : 00</option>
@@ -242,7 +244,7 @@
                 <tr>
                     <td>경기장 선택 : </td>
                     <td>
-                        <select name="sNum" id="sNumDetail">
+                        <select name="sNum" id="sResNum">
                             <option disabled selected>경기장 선택하기</option>
                         </select>
                     </td>
@@ -252,7 +254,7 @@
             <!-- 버튼 영역 시작 -->
             <div class="buttonContainer">
                 <a href="gameMake.html">취소하기</a>
-                <a href="gameMake.html">선택 완료</a>
+                <input type="submit" value="다시입력">
             </div>
             <!-- 버튼 영역 끝 -->
             </form>

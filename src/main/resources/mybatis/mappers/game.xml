@@ -108,14 +108,14 @@
 		<result property="updatedDate" column="UPDATED_DATE"/>
 	</resultMap>
 	<!--  StadiumReservationInfo ResultMap	-->
-	<resultMap id="StadiumReservationInfoResultMap" type="StadiumResInfoVO">
-		<id property="sId" column="s_id"/>
-		<result property="sResDate" column="sRes_Date"/>
-		<result property="sResGameTime" column="sRes_gameTime"/>
-		<result property="sResCreatedId" column="sRes_created_id"/>
-		<result property="sResCreatedDate" column="sRes_created_date"/>
-		<result property="sResUpdatedId" column="sRes_updated_id"/>
-		<result property="sResUpdatedDate" column="sRes_updated_date"/>
+	<resultMap id="StadiumResInfoResultMap" type="StadiumResInfoVO">
+		<result property="sResDate" column="SRES_DATE"/>
+		<result property="sResGameTime" column="SRES_GAMETIME"/>
+		<result property="sResNum" column="SRES_NUM"/>
+		<result property="sResCreatedId" column="SRES_CREATED_ID"/>
+		<result property="sResCreatedDate" column="SRES_CREATED_DATE"/>
+		<result property="sResUpdatedId" column="SRES_UPDATED_ID"/>
+		<result property="sResUpdatedDate" column="SRES_UPDATED_DATE"/>
 	</resultMap>
 
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">

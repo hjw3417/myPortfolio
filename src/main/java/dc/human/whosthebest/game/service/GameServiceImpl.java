@@ -11,6 +11,7 @@ package dc.human.whosthebest.game.service;
 
 import dc.human.whosthebest.game.dao.GameDAO;
 import dc.human.whosthebest.vo.StadiumResInfoVO;
+import dc.human.whosthebest.vo.StadiumResRawVO;
 import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,10 +71,21 @@ public class GameServiceImpl implements  GameService {
         stadiumDetil = gameDAO.stadiumDetail(sID);
         return stadiumDetil;
     }
-
     @Override
-    public int insertSREs(StadiumResInfoVO stdiumResInfoVO) throws Exception {
-        gameDAO.insertSREs(stdiumResInfoVO);
+    public int insertSRes(StadiumResRawVO stadiumResRawVO) throws Exception {
+        StadiumResInfoVO stadiumResInfoVO = null;
+        stadiumResInfoVO.setsResCreatedId(stadiumResRawVO.getsResCreatedId());
+        stadiumResInfoVO.setsId(stadiumResRawVO.getsId());
+        stadiumResInfoVO.setsResDate(
+                stadiumResRawVO.getsResDate() + " " + String.format("%02d",stadiumResRawVO.getsResSTime()) + ":00:00"
+        );
+        stadiumResInfoVO.setsResGameTime(
+                Math.abs(
+                        stadiumResRawVO.getsResETime() -  stadiumResRawVO.getsResSTime()
+                )
+        );
+        gameDAO.insertSRes(stadiumResInfoVO);
         return 1;
     }
+
 }

@@ -47,5 +47,5 @@ public interface GameDAO {
      * @throws DataAccessException 데이터 액세스 중 예외가 발생한 경우
      */
     public StadiumVO stadiumDetail(int sID) throws DataAccessException;
-    public int insertSREs(StadiumResInfoVO stdiumResInfoVO) throws DataAccessException;
+    public int insertSRes(StadiumResInfoVO stadiumResInfoVO) throws DataAccessException;
 }

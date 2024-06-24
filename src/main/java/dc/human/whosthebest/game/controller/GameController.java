@@ -9,11 +9,14 @@ CREATED DATE    : 2024.06.21.
 */
 package dc.human.whosthebest.game.controller;
 
+import dc.human.whosthebest.vo.StadiumResRawVO;
 import dc.human.whosthebest.vo.StadiumVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -23,4 +26,8 @@ public interface GameController {
     public List<StadiumVO> searchStadiumName(@RequestParam(value = "sRegion", required = false) String sRegion,
                                              @RequestParam(value = "search", required = false) String search) throws Exception;
     public StadiumVO stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception;
+    public ModelAndView insertSRes(@ModelAttribute("stadiumResRawVO") StadiumResRawVO stadiumResRawVO,
+                                   RedirectAttributes redirectAttributes,
+                                   HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
+

@@ -10,6 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.service;
 
 import dc.human.whosthebest.vo.StadiumResInfoVO;
+import dc.human.whosthebest.vo.StadiumResRawVO;
 import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.springframework.dao.DataAccessException;
@@ -20,5 +21,5 @@ public interface GameService {
     public List<TeamInfoVO> loadMyTeam(String uID) throws Exception;
     public List<StadiumVO> selectStadium(String sRegion, String search) throws  Exception;
     public StadiumVO stadiumDetail(int sID) throws  Exception;
-    public int insertSREs(StadiumResInfoVO stdiumResInfoVO) throws Exception;
+    public int insertSRes(StadiumResRawVO stadiumResRawVO) throws Exception;
 }
