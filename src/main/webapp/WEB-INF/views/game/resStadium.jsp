@@ -39,12 +39,20 @@
                         // 요청이 성공하면 실행될 함수를 정의합니다.
                         var stadiumList = response;
                         var html = '';
-                        for(var i = 0; i < stadiumList.length; i++) {
-                            // 각 경기장을 목록 항목으로 추가합니다.
-                            html += '<input type="hidden" name="sID" value="' + stadiumList[i].sID + '" />' +
-                                    '<button type="submit">' + (i + 1) + '. ' + stadiumList[i].sName + '</button><br>';
+                        if (stadiumList.length === 0) {
+                            // 리스트가 비어 있는 경우
+                            html = '<p>경기장 정보가 없습니다.</p>';
+                        } else {
+                            // 리스트가 비어 있지 않은 경우
+                            for (var i = 0; i < stadiumList.length; i++) {
+                                // 각 경기장을 목록 항목으로 추가합니다.
+                                html += '<form class="stadiumDetailForm">' +
+                                            '<input type="hidden" name="sID" value="' + stadiumList[i].sID + '" />' +
+                                            '<button type="submit">' + (i + 1) + '. ' + stadiumList[i].sName + '</button>' +
+                                        '</form>';
+                            }
                         }
-                        $("#stadiumDetailForm").html(html); // HTML 목록에 경기장 목록을 추가합니다.
+                        $("#stadiumList").html(html); // HTML 목록에 경기장 목록을 추가합니다.
                     },
                     error: function(error) {
                         // 요청이 실패하면 실행될 함수를 정의합니다.
@@ -64,18 +72,20 @@
                     data: { sID: sID },             // sID 값을 데이터로 전송
                     success: function(response) {
                         // 요청이 성공하면 실행될 함수를 정의
+                        $("#message").hide();
+                        $("#stadiumDetailInfo").show();
                         var stadiumDetail = response;
-                        $('#sName').html(stadiumDetail.sName);
-                        $('#sAddr').html(stadiumDetail.sAddr);
-                        $('#sOwner').html(stadiumDetail.sOwner);
-                        $('#sPhone').html(stadiumDetail.sPhone);
+                        $('#sNameDetail').html(stadiumDetail.sName ? stadiumDetail.sName : '없음');
+                        $('#sAddrDetail').html(stadiumDetail.sAddr ? stadiumDetail.sAddr : '없음');
+                        $('#sOwnerDetail').html(stadiumDetail.sOwner ? stadiumDetail.sOwner : '없음');
+                        $('#sPhoneDetail').html(stadiumDetail.sPhone ? stadiumDetail.sPhone : '없음');
 
                         var html = "";
-                        for(var i = 0; i < stadiumDetail.sNum.length; i++) {
+                        for(var i = 0; i < stadiumDetail.length; i++) {
                             // 각 경기장 세부 경기장 번호 목록 추가
                             html += stadiumDetail.sNum[i] + " 경기장<br>";
                         }
-                        $("#sNum").html(html);
+                        $("#sNumDetail").html(html);
                     },
                     error: function(error) {
                         // 요청이 실패하면 실행될 함수를 정의
@@ -152,7 +162,7 @@
                     <ul id="stadiumList">
                         <!-- game/resStadium.do 에서 전달 받은 stadiumList.sName 표시(ajax, mav 모두 같은 값 반환 -->
                         <c:forEach var="stadiumVO" items="${stadiumList}" varStatus="status">
-                            <li>
+                            <li >
                                 <form id="stadiumDetailForm">
                                     <input type="hidden" name="sID" id="sID" value="${stadiumVO.sID}" />
                                     <button id="sName">${status.index + 1}. ${stadiumVO.sName}</button>
@@ -167,19 +177,19 @@
                     <!-- 경기장 디테일 시작 -->
                     <div class="stadiumDetail">
                         <label><상세정보></label>
-                        <ul>
-                            <li>경기장을 선택해주세요.</li>
+                        <div id="message">경기장을 선택해주세요.</div>
+                        <ul id="stadiumDetailInfo">
                             <input type="hidden" name="sName" value="1">
-                            <li>경기장 명 : <span id="sName"></span></li>
+                            <li>경기장 명 : <span id="sNameDetail"></span></li>
 
                             <input type="hidden" name="sAddr" value="1">
-                            <li>주소 : <span id="sAddr"></span></li>
+                            <li>주소 : <span id="sAddrDetail"></span></li>
 
                             <input type="hidden" name="sOwner" value="1">
-                            <li>관리자 : <span id="sOwner"></span></li>
+                            <li>관리자 : <span id="sOwnerDetail"></span></li>
 
                             <input type="hidden" name="sPhone" value="1">
-                            <li>연락처 : <span id="sPhone"></span></li>
+                            <li>연락처 : <span id="sPhoneDetail"></span></li>
                         </ul>
                     </div>
                     <!-- 경기장 디테일 끝 -->
@@ -230,9 +240,8 @@
                 <tr>
                     <td>경기장 선택 : </td>
                     <td>
-                        <select name="sNum">
+                        <select name="sNum" id="sNumDetail">
                             <option disabled selected>경기장 선택하기</option>
-                            <option id="sNum" value="1"></option>
                         </select>
                     </td>
                 </tr>

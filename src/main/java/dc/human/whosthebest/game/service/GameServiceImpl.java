@@ -57,10 +57,10 @@ public class GameServiceImpl implements  GameService {
     }
 
     @Override
-    public List<StadiumVO> stadiumDetil(int sID) throws  Exception {
-        List<StadiumVO> stadiumDetilList = null;
+    public StadiumVO stadiumDetail(int sID) throws  Exception {
+        StadiumVO stadiumDetil = null;
         System.out.println("service sID : " + sID);
-        stadiumDetilList = gameDAO.stdiumDetail(sID);
-        return stadiumDetilList;
+        stadiumDetil = gameDAO.stadiumDetail(sID);
+        return stadiumDetil;
     }
 }

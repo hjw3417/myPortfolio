@@ -1184,6 +1184,16 @@ footer{
       >ul {
         list-style-type: none;
         padding-left: 20px;
+        >form {
+            >button {
+                font-family: 'GmarketSansMedium', sans-serif;
+                background-color: transparent;
+                border: 0pt;
+                cursor: pointer;
+                font-size: 11pt;
+                font-weight: bold;
+            }
+          }
         >li {
           text-align: left;
           margin-bottom: 1px;
@@ -1191,10 +1201,10 @@ footer{
             >button {
                 font-family: 'GmarketSansMedium', sans-serif;
                 background-color: transparent;
-                                border: 0pt;
-                                cursor: pointer;
-                                font-size: 12pt;
-                                font-weight: bold;
+                border: 0pt;
+                cursor: pointer;
+                font-size: 11pt;
+                font-weight: bold;
             }
           }
         }
@@ -1209,6 +1219,7 @@ footer{
       white-space: nowrap;
       padding: 20px;
       >ul {
+        display: none;
         list-style-type: none;
         padding-left: 20px;
         >li {

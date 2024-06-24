@@ -67,6 +67,7 @@ public class GameControllerImpl implements GameController {
         System.out.println("MAV controller sRegion : " + sRegion);
         System.out.println("MAV controller search : " + search);
         List<StadiumVO> stadiumList = gameService.selectStadium(sRegion, search);
+        System.out.println("MAV controller stadiumList : " + stadiumList.get(0).getsName());
         ModelAndView mav = new ModelAndView("/game/resStadium");
         mav.addObject("stadiumList", stadiumList);
         mav.addObject("isAjaxRequest", false);
@@ -90,16 +91,22 @@ public class GameControllerImpl implements GameController {
         System.out.println("RESTful controller sRegion : " + sRegion);
         System.out.println("RESTful controller search : " + search);
         List<StadiumVO> stadiumList = gameService.selectStadium(sRegion, search);
+        // 리스트의 첫 번째 값 가져오기
+        if (!stadiumList.isEmpty()) {
+            System.out.println("RESTful controller stadiumList : " + stadiumList.get(0).getsName());
+        } else {
+            System.out.println("리스트가 비어 있습니다.");
+        }
         return stadiumList;
     }
 
     @Override
     @RequestMapping(value = "/stadiumDetail.do", method = RequestMethod.GET)
     @ResponseBody
-    public List<StadiumVO> stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception {
+    public StadiumVO stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception {
         System.out.println("RESTful controller sID : " + sID);
         int sIDInt = Integer.parseInt(sID);
-        List<StadiumVO> stadiumDetailList = gameService.stadiumDetil(sIDInt);
-        return stadiumDetailList;
+        StadiumVO stadiumDetail = gameService.stadiumDetail(sIDInt);
+        return stadiumDetail;
     }
 }

@@ -149,8 +149,10 @@
 		</where>
 	</select>
 	<select id="stadiumDetail" parameterType="int" resultMap="stadiumResultMap">
-		SELECT S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_PHONES_NUM
+		<![CDATA[
+		SELECT S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_PHONE, S_NUM
 		FROM STADIUM
 		WHERE S_ID = #{sID}
+		]]>
 	</select>
 </mapper>
