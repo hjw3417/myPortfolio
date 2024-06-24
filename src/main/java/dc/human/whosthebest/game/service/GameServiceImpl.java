@@ -10,6 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.service;
 
 import dc.human.whosthebest.game.dao.GameDAO;
+import dc.human.whosthebest.vo.StadiumResInfoVO;
 import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,12 +56,24 @@ public class GameServiceImpl implements  GameService {
         stadiumList = gameDAO.selectStadium(sRegion, search);
         return stadiumList;
     }
-
+    /**
+     * 주어진 경기장 ID에 해당하는 경기장 세부 정보를 조회합니다.
+     *
+     * @param sID 경기장 ID를 나타내는 정수
+     * @return 주어진 경기장 ID에 해당하는 {@link StadiumVO} 객체
+     * @throws Exception 예외가 발생한 경우
+     */
     @Override
     public StadiumVO stadiumDetail(int sID) throws  Exception {
         StadiumVO stadiumDetil = null;
         System.out.println("service sID : " + sID);
         stadiumDetil = gameDAO.stadiumDetail(sID);
         return stadiumDetil;
+    }
+
+    @Override
+    public int insertSREs(StadiumResInfoVO stdiumResInfoVO) throws Exception {
+        gameDAO.insertSREs(stdiumResInfoVO);
+        return 1;
     }
 }

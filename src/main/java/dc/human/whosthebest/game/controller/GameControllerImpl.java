@@ -99,7 +99,13 @@ public class GameControllerImpl implements GameController {
         }
         return stadiumList;
     }
-
+    /**
+     * RESTful 컨트롤러 메서드로, 주어진 경기장 ID에 해당하는 경기장 세부 정보를 반환합니다.
+     *
+     * @param sID 경기장 ID를 나타내는 문자열 (선택 사항)
+     * @return 주어진 경기장 ID에 해당하는 {@link StadiumVO} 객체
+     * @throws Exception 예외가 발생한 경우
+     */
     @Override
     @RequestMapping(value = "/stadiumDetail.do", method = RequestMethod.GET)
     @ResponseBody
