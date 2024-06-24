@@ -110,7 +110,7 @@ public class GameControllerImpl implements GameController {
     @RequestMapping(value = "/stadiumDetail.do", method = RequestMethod.GET)
     @ResponseBody
     public StadiumVO stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception {
-        System.out.println("RESTful controller sID : " + sID);
+        System.out.println("RESTful  controller sID : " + sID);
         int sIDInt = Integer.parseInt(sID);
         StadiumVO stadiumDetail = gameService.stadiumDetail(sIDInt);
         return stadiumDetail;
