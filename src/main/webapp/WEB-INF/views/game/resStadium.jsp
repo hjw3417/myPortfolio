@@ -20,31 +20,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script>
     $(document).ready(function(){
+        // 문서가 준비되면 실행될 함수를 정의합니다.
         $("#findForm").submit(function(event){
-            event.preventDefault(); // 폼의 기본 제출을 막음
+            event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
 
-            var sRegion = $("#sRegion").val();
-            var search = $("#search").val();
+            var sRegion = $("#sRegion").val(); // sRegion 입력 필드의 값을 가져옵니다.
+            var search = $("#search").val(); // search 입력 필드의 값을 가져옵니다.
 
             $.ajax({
-                url: '/game/resStadium.do',
-                type: 'GET',
+                url: '/game/resStadium.do', // 요청할 URL을 설정합니다.
+                type: 'GET', // 요청 방식을 GET으로 설정합니다.
                 data: {
-                    sRegion: sRegion,
-                    search: search,
-                    responseType: 'json'
+                    sRegion: sRegion, // sRegion 값을 데이터로 전송합니다.
+                    search: search, // search 값을 데이터로 전송합니다.
+                    responseType: 'json' // 응답 형식을 JSON으로 설정합니다.
                 },
                 success: function(response) {
-                    // 응답 데이터를 처리
+                    // 요청이 성공하면 실행될 함수를 정의합니다.
+                    // 응답 데이터를 처리합니다.
                     var stadiumList = response;
                     var html = '';
                     for(var i = 0; i < stadiumList.length; i++) {
-                        html += '<li>' + i +". " + stadiumList[i].sName + '</li>';
+                        html += '<li>' + i +". " + stadiumList[i].sName + '</li>'; // 각 경기장을 목록 항목으로 추가합니다.
                     }
-                    $("#stadiumList").html(html);
+                    $("#stadiumList").html(html); // HTML 목록에 경기장 목록을 추가합니다.
                 },
                 error: function(error) {
-                    console.log("Error:", error);
+                    // 요청이 실패하면 실행될 함수를 정의합니다.
+                    console.log("Error:", error); // 에러 메시지를 콘솔에 출력합니다.
                 }
             });
         });
@@ -115,6 +118,7 @@
                 <div class="stadiumList">
                     <label><경기장 목록></label>
                     <ul id="stadiumList">
+                        <!-- game/resStadium.do 에서 전달 받은 stadiumList.sName 표시(ajax, mav 모두 같은 값 반환 -->
                         <c:forEach var="stadiumVO" items="${stadiumList}">
                             <li>
                                 ${stadiumVO.sName}

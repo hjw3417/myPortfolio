@@ -28,6 +28,15 @@ public class GameControllerImpl implements GameController {
     @Autowired
     private GameService gameService;
 
+    /**
+     * 게임 생성 GET 요청을 처리합니다.
+     * 이 메서드는 사용자의 팀 정보를 가져와서 게임 생성 페이지를 표시합니다.
+     *
+     * @param request  클라이언트가 서블릿에 요청한 내용을 포함하는 HttpServletRequest 객체
+     * @param response 서블릿이 클라이언트에게 보내는 응답을 포함하는 HttpServletResponse 객체
+     * @return 뷰 이름과 모델 데이터를 포함하는 ModelAndView 객체
+     * @throws Exception 오류가 발생할 경우 예외를 던집니다
+     */
     @Override
     @RequestMapping(value = "/gameMake.do", method = RequestMethod.GET)
     public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -40,6 +49,15 @@ public class GameControllerImpl implements GameController {
         return mav;
     }
 
+    /**
+     * 경기장을 선택하는 GET 요청을 처리합니다.
+     * 이 메서드는 사용자가 선택한 지역과 검색어에 따라 경기장 목록을 가져와서 경기장 예약 페이지를 표시합니다.
+     *
+     * @param request  클라이언트가 서블릿에 요청한 내용을 포함하는 HttpServletRequest 객체
+     * @param response 서블릿이 클라이언트에게 보내는 응답을 포함하는 HttpServletResponse 객체
+     * @return 뷰 이름과 모델 데이터를 포함하는 ModelAndView 객체
+     * @throws Exception 오류가 발생할 경우 예외를 던집니다
+     */
     @Override
     @RequestMapping(value = "/resStadium.do", method = RequestMethod.GET, params = "!responseType")
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -54,6 +72,15 @@ public class GameControllerImpl implements GameController {
         mav.addObject("isAjaxRequest", false);
         return mav;
     }
+    /**
+     * 경기장을 이름으로 검색하는 GET 요청을 처리합니다.
+     * 이 메서드는 선택한 지역과 검색어에 따라 경기장 목록을 JSON 형식으로 반환합니다.
+     *
+     * @param sRegion 선택한 지역 (필수 아님)
+     * @param search  검색어 (필수 아님)
+     * @return 경기장 목록을 포함하는 List<StadiumVO>
+     * @throws Exception 오류가 발생할 경우 예외를 던집니다
+     */
 
     @Override
     @RequestMapping(value = "/resStadium.do", method = RequestMethod.GET, params = "responseType=json")

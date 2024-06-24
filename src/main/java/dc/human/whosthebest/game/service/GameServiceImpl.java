@@ -38,7 +38,15 @@ public class GameServiceImpl implements  GameService {
         teamNameList = gameDAO.loadMyTeam(uID);
         return teamNameList;
     }
-
+    /**
+     * 지역과 검색어를 기반으로 경기장 목록을 검색합니다.
+     * 이 메서드는 데이터 접근 객체(DAO)를 사용하여 주어진 지역과 검색어에 맞는 경기장 목록을 조회합니다.
+     *
+     * @param sRegion 선택한 지역
+     * @param search  검색어
+     * @return 경기장 목록을 포함하는 List<StadiumVO>
+     * @throws Exception 오류가 발생할 경우 예외를 던집니다
+     */
     @Override
     public List<StadiumVO> selectStadium(String sRegion, String search) throws  Exception {
         List<StadiumVO> stadiumList = null;

@@ -38,7 +38,15 @@ public class GameDAOImpl implements GameDAO {
         teamInfoList = sqlSession.selectList("mapper.game.loadMyTeam", uID);
         return teamInfoList;
     }
-
+    /**
+     * 지역과 검색어를 기반으로 경기장 목록을 검색합니다.
+     * 이 메서드는 데이터베이스에서 주어진 지역과 검색어에 맞는 경기장 목록을 조회합니다.
+     *
+     * @param sRegion 선택한 지역
+     * @param search  검색어
+     * @return 경기장 목록을 포함하는 List<StadiumVO>
+     * @throws DataAccessException 데이터 접근 중 오류가 발생할 경우 예외를 던집니다
+     */
     @Override
     public List<StadiumVO> selectStadium(String sRegion, String search) throws DataAccessException {
         System.out.println("dao sRegion : " + sRegion);

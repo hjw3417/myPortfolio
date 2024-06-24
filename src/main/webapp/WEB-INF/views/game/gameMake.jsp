@@ -55,6 +55,7 @@
             <td colspan="3">
               <select name="selectTeam" id="selectTeam">
               <option selected>팀 선택하기</option>
+              <!-- game/gameMake.do 통해 team Table의 팀 명(t_name) 값 표시 -->
               <c:forEach var="tName" items="${teamNameList}">
                 <option>${tName.tName}</option>
               </c:forEach>
