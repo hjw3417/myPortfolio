@@ -37,6 +37,7 @@
                     },
                     success: function(response) {
                         // 요청이 성공하면 실행될 함수를 정의합니다.
+
                         var stadiumList = response;
                         var html = '';
                         if (stadiumList.length === 0) {
@@ -46,12 +47,14 @@
                             // 리스트가 비어 있지 않은 경우
                             for (var i = 0; i < stadiumList.length; i++) {
                                 // 각 경기장을 목록 항목으로 추가합니다.
-                                html += '<form class="stadiumDetailForm">' +
+                                html += '<form id="stadiumDetailForm-' + i + '" class="stadiumDetailForm">' +
                                             '<input type="hidden" name="sID" value="' + stadiumList[i].sID + '" />' +
                                             '<button type="submit">' + (i + 1) + '. ' + stadiumList[i].sName + '</button>' +
                                         '</form>';
                             }
                         }
+                        $("#stadiumDetailInfo").hide();
+                        $("#message").show();
                         $("#stadiumList").html(html); // HTML 목록에 경기장 목록을 추가합니다.
                     },
                     error: function(error) {
@@ -62,7 +65,7 @@
             });
 
             // 이벤트 위임을 사용하여 동적으로 생성된 폼에 이벤트 핸들러를 바인딩합니다.
-            $(document).on('submit', '#stadiumDetailForm', function(event) {
+            $(document).on('submit', '.stadiumDetailForm', function(event) {
                 event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
                 var sID = $(this).find("input[name='sID']").val(); // sID 값을 가져옵니다.
 
@@ -80,10 +83,9 @@
                         $('#sOwnerDetail').html(stadiumDetail.sOwner ? stadiumDetail.sOwner : '없음');
                         $('#sPhoneDetail').html(stadiumDetail.sPhone ? stadiumDetail.sPhone : '없음');
 
-                        var html = "";
-                        for(var i = 0; i < stadiumDetail.length; i++) {
-                            // 각 경기장 세부 경기장 번호 목록 추가
-                            html += stadiumDetail.sNum[i] + " 경기장<br>";
+                        var html = '<option disabled selected>경기장 선택하기</option>';
+                        for (var i = 1; i <= stadiumDetail.sNum; i++) {
+                            html += '<option value="' + i + '">' + i + ' 경기장</option>';
                         }
                         $("#sNumDetail").html(html);
                     },
@@ -163,7 +165,7 @@
                         <!-- game/resStadium.do 에서 전달 받은 stadiumList.sName 표시(ajax, mav 모두 같은 값 반환 -->
                         <c:forEach var="stadiumVO" items="${stadiumList}" varStatus="status">
                             <li >
-                                <form id="stadiumDetailForm">
+                                <form id="stadiumDetailForm" class="stadiumDetailForm">
                                     <input type="hidden" name="sID" id="sID" value="${stadiumVO.sID}" />
                                     <button id="sName">${status.index + 1}. ${stadiumVO.sName}</button>
                                 </form>
