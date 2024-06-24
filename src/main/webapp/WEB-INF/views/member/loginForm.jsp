@@ -11,7 +11,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-<title>로그인창</title>
+<title>로그인창123</title>
 <c:choose>
 	<c:when test="${result=='loginFailed' }">
 	  <script>
