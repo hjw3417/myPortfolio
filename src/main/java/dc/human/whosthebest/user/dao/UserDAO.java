@@ -6,7 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 @Mapper
-@Repository("joinDAO")
-public interface JoinDAO {
+@Repository("userDAO")
+public interface UserDAO {
     public int insertJoin (UserInfoVO userInfoVO) throws DataAccessException;
 }

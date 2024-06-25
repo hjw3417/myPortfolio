@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="dc.human.whosthebest.user.dao.joinDAO">
-    <resultMap id="usersResult" type="userInfoVO">
+<mapper namespace="dc.human.whosthebest.user.dao.UserDAO">
+
+    <resultMap id="usersResult" type="dc.human.whosthebest.vo.UserInfoVO">
         <result property="uID" column="U_ID" />
         <result property="uName" column="U_NAME" />
         <result property="uBday" column="U_BDAY" />
@@ -49,6 +50,7 @@
 		    )
 		]]>
     </insert>
+
 
 
 </mapper>

@@ -2,6 +2,7 @@ package dc.human.whosthebest.dao;
 
 import dc.human.whosthebest.vo.MemberVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 

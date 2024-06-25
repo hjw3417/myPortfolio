@@ -1,6 +1,6 @@
 package dc.human.whosthebest.user.service;
 
-import dc.human.whosthebest.user.dao.JoinDAO;
+import dc.human.whosthebest.user.dao.UserDAO;
 import dc.human.whosthebest.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class JoinServiceImpl implements JoinService {
 
     @Autowired
-    private JoinDAO joinDAO;
+    private UserDAO userDAO;
 
     @Override
     public int insertJoin(UserInfoVO userInfoVO) throws Exception{
 
-        return joinDAO.insertJoin(userInfoVO);
+        return userDAO.insertJoin(userInfoVO);
     }
 }

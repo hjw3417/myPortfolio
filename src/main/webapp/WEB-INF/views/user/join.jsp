@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="./css/main.css">
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
       //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -86,7 +86,7 @@
           회원가입
         </div>
         <div>
-          <form name="join" method="post" action="/join" enctype="utf-8">
+          <form name="join" method="post" action="/join.do" enctype="utf-8">
             <div>
               <input type="text" name="join_id" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
               <input type="button" value="아이디 중복">
