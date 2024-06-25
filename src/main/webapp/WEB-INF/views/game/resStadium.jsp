@@ -18,36 +18,9 @@
     <title>경기 만들기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/js.js"></script>
+    <script src="../../js.js"></script>
 </head>
 <body>
-<header>
-    <div class="logo">
-        <img src="../image/logo.png">
-        <!-- <div>누가 잘차</div> -->
-    </div>
-    <div>
-        <span><a href="login.html">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
-        <span><a href="myPage.html">마이페이지</a></span>
-    </div>
-    <div>
-        <ul>
-            <li>
-                <a href="teamlist.html">팀</a>
-                <div>
-                    <ul>
-                        <li><a href="teamlist.html">팀 목록</a></li>
-                        <li><a href="myteam.html">나의 팀</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li><a href="gameList.html">경기 목록</a></li>
-            <li><a href="stadiumList.html">경기장 목록</a></li>
-            <li><a href="rankWatch.html">랭킹</a></li>
-            <li><a href="#">게시판</a></li>
-        </ul>
-    </div>
-</header>
 <main>
     <div>　</div>
     <div>
@@ -185,19 +158,6 @@
     </div>
     <!-- 이름 없는 div 끝 -->
 </main>
-<footer>
-    <div>
-        <ul>
-            <li><a href="#">이용약관</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-            <li><a href="#">개인정보처리방침</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-            <li><a href="#">오류/건의</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-            <li><a href="#">광고/후원문의</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-            <li><a href="#">고객센터</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-            <li><a href="#">&copy;누가잘차</a></li>
-        </ul>
-    </div>
-    <div>&copy;2024.MunjuGangz All rights reserved.</div>
-</footer>
 </body>
 </html>
 

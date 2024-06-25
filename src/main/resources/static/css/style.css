@@ -1132,8 +1132,8 @@ footer{
 
 .resStadium-content {
   display: block;
-  width: 1200px;
-  height: 850px;
+  width: 800px;
+  height: 650px;
   font-weight: bold;
   >.findForm {
     justify-content: center;

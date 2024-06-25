@@ -15,6 +15,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/js.js"></script>
+  <script>
+
+  </script>
   <title>경기 만들기</title>
 </head>
 <body>
@@ -49,7 +55,6 @@
   <div style="height: 70px;">　</div>
   <div class="sec-container">
     <section>
-      <form class="frmCreateMatch" name="frmCreateMatch" method="get" action="./makegame">
         <table class="inputTable">
           <tr>
             <td colspan="3">
@@ -74,11 +79,9 @@
           </tr>
           <tr>
             <td colspan="3" style="background-color: rgb(146, 172, 101); height: 40px;">
-              <a href="resStadium.html" name="sID" id="sID" value="4">
-                경기장 선택하기
-              </a>
+              <!-- JSP에서 EL을 사용하여 전체 URL을 생성하고 JavaScript 함수 호출 시 매개변수로 전달 -->
+              <button onclick="openResStadium('${pageContext.request.contextPath}')">경기장 선택하기</button>
               <a href="#" name="sID" id="sID" value="3">
-
               </a>
             </td>
           </tr>
@@ -126,7 +129,6 @@
               </td>
             </tr>
           </table>
-        </form>
       </section>
     </div>
   </main>
