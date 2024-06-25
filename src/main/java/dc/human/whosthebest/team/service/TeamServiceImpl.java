@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("memberService")
+@Service("teamService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class TeamServiceImpl implements TeamService {
     @Autowired

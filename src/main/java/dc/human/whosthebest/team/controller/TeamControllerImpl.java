@@ -25,7 +25,7 @@ public class TeamControllerImpl implements TeamController{
 
     @Override
     @RequestMapping(value="/addTeam" ,method = RequestMethod.POST)
-    public ModelAndView addTeam(@ModelAttribute("member") TeamInfoVO team,
+    public ModelAndView addTeam(@ModelAttribute("team") TeamInfoVO team,
                                   HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
         int result = 0;
@@ -33,10 +33,10 @@ public class TeamControllerImpl implements TeamController{
         ModelAndView mav = new ModelAndView("redirect:/myTeam");
         return mav;
     }
-
+    @Override
     @GetMapping("/addTeamInfo")
     public String index() {
-        return "team/teamMake";
+        return "/team/teamMake";
     }
 
 }
