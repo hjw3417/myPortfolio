@@ -73,9 +73,11 @@ public class GameServiceImpl implements  GameService {
     }
     @Override
     public int insertSRes(StadiumResRawVO stadiumResRawVO) throws Exception {
-        StadiumResInfoVO stadiumResInfoVO = null;
+        StadiumResInfoVO stadiumResInfoVO = new StadiumResInfoVO();
+
         stadiumResInfoVO.setsResCreatedId(stadiumResRawVO.getsResCreatedId());
         stadiumResInfoVO.setsId(stadiumResRawVO.getsId());
+        stadiumResInfoVO.setsResNum(stadiumResRawVO.getsResNum());
         stadiumResInfoVO.setsResDate(
                 stadiumResRawVO.getsResDate() + " " + String.format("%02d",stadiumResRawVO.getsResSTime()) + ":00:00"
         );

@@ -165,20 +165,18 @@
 		WHERE S_ID = #{sID}
 		]]>
 	</select>
-	<insert id="insertStadiumRes" parameterType="StadiumResInfoVO">
+	<insert id="insertSRes" parameterType="StadiumResInfoVO">
 		<![CDATA[
 		 INSERT INTO stadium_res_info (
-			s_id,
-			sRes_Date,
-			sRes_gameTime,
-			sRes_created_id,
-			sRes_updated_id,
+			S_ID,
+			SRES_DATE,
+			SRES_GAMETIME,
+			sRes_created_id
 		) VALUES (
 			#{sId},
 			#{sResDate},
 			#{sResGameTime},
-			#{sResCreatedId},
-			#{sResUpdatedId},
+			#{sResCreatedId}
 		)
 		]]>
 	</insert>

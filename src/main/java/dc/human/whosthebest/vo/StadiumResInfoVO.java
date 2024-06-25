@@ -4,15 +4,29 @@ public class StadiumResInfoVO {
     private String sId;                  // 경기장 id
     private String sResDate;             // 경기장 예약 일시
     private int sResGameTime;            // 경기 시간
+    private int sResNum;                 //경기장 번호
     private String sResCreatedId;        // 데이터 생성 ID
     private String sResUpdatedId;        // 데이터 업데이트 ID
 
-    public StadiumResInfoVO(String sId, String sResDate, int sResGameTime, String sResCreatedId, String sResUpdatedId) {
+    public StadiumResInfoVO(String sId, String sResDate, int sResGameTime, int sResNum, String sResCreatedId, String sResUpdatedId) {
         this.sId = sId;
         this.sResDate = sResDate;
         this.sResGameTime = sResGameTime;
+        this.sResNum = sResNum;
         this.sResCreatedId = sResCreatedId;
         this.sResUpdatedId = sResUpdatedId;
+    }
+
+    public int getsResNum() {
+        return sResNum;
+    }
+
+    public void setsResNum(int sResNum) {
+        this.sResNum = sResNum;
+    }
+
+    public StadiumResInfoVO() {
+
     }
 
     public String getsId() {

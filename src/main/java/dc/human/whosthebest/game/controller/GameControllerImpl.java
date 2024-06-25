@@ -127,7 +127,7 @@ public class GameControllerImpl implements GameController {
         String uID = (String) session.getAttribute("uID");
         stadiumResRawVO.setsResCreatedId(uID);
         gameService.insertSRes(stadiumResRawVO);
-        ModelAndView mav = new ModelAndView("/game/gameMake.do");
+        ModelAndView mav = new ModelAndView("redirect:/game/gameMake.do");
         return mav;
     }
 }
