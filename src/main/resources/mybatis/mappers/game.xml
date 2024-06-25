@@ -4,42 +4,6 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dc.human.whosthebest.game.dao.GameDAO">
-	<!--  gameVO resultMap	-->
-	<resultMap id="gameResult" type="gameVO">
-		<result property="gID" column="G_ID" />
-		<result property="gTeamID" column="G_TEAMID" />
-		<result property="gTitle" column="G_TITLE" />
-		<result property="gTag" column="G_TAG" />
-		<result property="gCreatedDate" column="G_CREATEDATE" />
-		<result property="gTime" column="G_TIME" />
-		<result property="gInfo" column="G_INFO" />
-		<result property="gMinMember" column="G_MINMEMBER" />
-		<result property="gResTime" column="G_RESTIME" />
-		<result property="gResDate" column="G_RESDATE" />
-		<result property="gStatus" column="G_STATUS" />
-		<result property="tID" column="T_ID" />
-		<result property="tAwayID" column="T_AWAYID" />
-		<result property="sID" column="S_ID" />
-		<result property="sNum" column="S_NUM" />
-		<result property="createdID" column="CREATED_ID" />
-		<result property="createdDate" column="CREATED_DATE" />
-		<result property="updateID" column="UPDATED_ID" />
-		<result property="updatedDate" column="UPDATED_DATE" />
-		<result property="u_id" column="U_ID" />
-	</resultMap>
-	<!--  GResultVO resultMap	-->
-	<resultMap id="gResultMap" type="GResultVO">
-		<result property="gID" column="G_ID"/>
-		<result property="tHomeID" column="T_HOMEID"/>
-		<result property="tAwayID" column="T_AWAYID"/>
-		<result property="homeGoal" column="HOME_GOAL"/>
-		<result property="awayGoal" column="AWAY_GOAL"/>
-		<result property="uID" column="U_ID"/>
-		<result property="createdID" column="CREATED_ID"/>
-		<result property="createdDate" column="CREATED_DATE"/>
-		<result property="updatedID" column="UPDATED_ID"/>
-		<result property="updatedDate" column="UPDATED_DATE"/>
-	</resultMap>
 	<!--  StadiumVO resultMap	-->
 	<resultMap id="stadiumResultMap" type="StadiumVO">
 		<result property="sID" column="S_ID"/>
@@ -49,45 +13,6 @@
 		<result property="sOwner" column="S_OWNER"/>
 		<result property="sPhone" column="S_PHONE"/>
 		<result property="sNum" column="S_NUM"/>
-	</resultMap>
-	<!--  GameListVO ResultMap	-->
-	<resultMap id="gameListResultMap" type="GameListVO">
-		<!-- Game table -->
-		<result property="gID" column="G_ID"/>
-		<result property="gTeamID" column="G_TEAMID"/>
-		<result property="gTitle" column="G_TITLE"/>
-		<result property="gTag" column="G_TAG"/>
-		<result property="gCreatedDate" column="G_CREATEDATE"/>
-		<result property="gTime" column="G_TIME"/>
-		<result property="gInfo" column="G_INFO"/>
-		<result property="gMinMember" column="G_MINMEMBER"/>
-		<result property="gResTime" column="G_RESTIME"/>
-		<result property="gResDate" column="G_RESDATE"/>
-		<result property="gStatus" column="G_STATUS"/>
-		<result property="tID" column="T_ID"/>
-		<result property="tAwayID" column="T_AWAYID"/>
-		<result property="sID" column="S_ID"/>
-		<result property="sNum" column="S_NUM"/>
-		<result property="uID" column="U_ID"/>
-
-		<!-- Team table -->
-		<result property="tName" column="T_NAME"/>
-		<result property="tLogo" column="T_LOGO"/>
-		<result property="tregion" column="T_REGION"/>
-		<result property="tphone" column="T_PHONE"/>
-		<result property="tRankScore" column="RANKSCORE"/>
-		<result property="tMinAge" column="T_MINAGE"/>
-		<result property="tMaxAge" column="T_MAXAGE"/>
-		<result property="tMaxMember" column="T_MAXMEMBER"/>
-		<result property="tMember" column="T_MEMBER"/>
-		<result property="tInfo" column="T_INFO"/>
-
-		<!-- Stadium table -->
-		<result property="sName" column="S_NAME"/>
-		<result property="sRegion" column="S_REGION"/>
-		<result property="sAddr" column="S_ADDR"/>
-		<result property="sOwner" column="S_OWNER"/>
-		<result property="sPhone" column="S_PHONE"/>
 	</resultMap>
 	<!--  TeamInfoVO ResultMap	-->
 	<resultMap id="teamInfoResultMap" type="TeamInfoVO">
@@ -106,16 +31,6 @@
 		<result property="createdDate" column="CREATED_DATE"/>
 		<result property="updatedID" column="UPDATED_ID"/>
 		<result property="updatedDate" column="UPDATED_DATE"/>
-	</resultMap>
-	<!--  StadiumReservationInfo ResultMap	-->
-	<resultMap id="StadiumResInfoResultMap" type="StadiumResInfoVO">
-		<result property="sResDate" column="SRES_DATE"/>
-		<result property="sResGameTime" column="SRES_GAMETIME"/>
-		<result property="sResNum" column="SRES_NUM"/>
-		<result property="sResCreatedId" column="SRES_CREATED_ID"/>
-		<result property="sResCreatedDate" column="SRES_CREATED_DATE"/>
-		<result property="sResUpdatedId" column="SRES_UPDATED_ID"/>
-		<result property="sResUpdatedDate" column="SRES_UPDATED_DATE"/>
 	</resultMap>
 
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
@@ -165,20 +80,4 @@
 		WHERE S_ID = #{sID}
 		]]>
 	</select>
-	<insert id="insertSRes" parameterType="StadiumResInfoVO">
-		<![CDATA[
-		 INSERT INTO stadium_res_info (
-			S_ID,
-			SRES_DATE,
-			SRES_GAMETIME,
-			sRes_created_id
-		) VALUES (
-			#{sId},
-			#{sResDate},
-			#{sResGameTime},
-			#{sResCreatedId}
-		)
-		]]>
-	</insert>
-
 </mapper>

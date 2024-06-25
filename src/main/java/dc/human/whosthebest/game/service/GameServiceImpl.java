@@ -71,23 +71,4 @@ public class GameServiceImpl implements  GameService {
         stadiumDetil = gameDAO.stadiumDetail(sID);
         return stadiumDetil;
     }
-    @Override
-    public int insertSRes(StadiumResRawVO stadiumResRawVO) throws Exception {
-        StadiumResInfoVO stadiumResInfoVO = new StadiumResInfoVO();
-
-        stadiumResInfoVO.setsResCreatedId(stadiumResRawVO.getsResCreatedId());
-        stadiumResInfoVO.setsId(stadiumResRawVO.getsId());
-        stadiumResInfoVO.setsResNum(stadiumResRawVO.getsResNum());
-        stadiumResInfoVO.setsResDate(
-                stadiumResRawVO.getsResDate() + " " + String.format("%02d", stadiumResRawVO.getsResSTime()) + ":00:00"
-        );
-        stadiumResInfoVO.setsResGameTime(
-                Math.abs(
-                        stadiumResRawVO.getsResETime() -  stadiumResRawVO.getsResSTime()
-                )
-        );
-        gameDAO.insertSRes(stadiumResInfoVO);
-        return 1;
-    }
-
 }

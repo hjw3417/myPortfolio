@@ -118,19 +118,4 @@ public class GameControllerImpl implements GameController {
         StadiumVO stadiumDetail = gameService.stadiumDetail(sIDInt);
         return stadiumDetail;
     }
-    @Override
-    @RequestMapping(value = "/StadiumRes.do", method = RequestMethod.POST)
-    public ModelAndView insertSRes(@ModelAttribute("stadiumResRawVO") StadiumResRawVO stadiumResRawVO,
-                                   RedirectAttributes redirectAttributes,
-                                   HttpServletRequest request, HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession();
-        session.setAttribute("uID", "heo");
-        String uID = (String) session.getAttribute("uID");
-        stadiumResRawVO.setsResCreatedId(uID);
-        gameService.insertSRes(stadiumResRawVO);
-        ModelAndView mav = new ModelAndView("redirect:/game/gameMake.do");
-        return mav;
-    }
-
-
 }

@@ -31,8 +31,5 @@ public interface GameController {
 
     public StadiumVO stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception;
 
-    public ModelAndView insertSRes(@ModelAttribute("stadiumResRawVO") StadiumResRawVO stadiumResRawVO,
-                                   RedirectAttributes redirectAttributes,
-                                   HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

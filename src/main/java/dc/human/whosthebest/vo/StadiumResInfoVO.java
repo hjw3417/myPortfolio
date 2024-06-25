@@ -1,30 +1,52 @@
 package dc.human.whosthebest.vo;
 
 public class StadiumResInfoVO {
-    private String sId;                  // 경기장 id
-    private String sName;                // 경기장 이름
+    private int gID;
+    private String u_id;
+    private String sID;                  // 경기장 id
     private String sResDate;             // 경기장 예약 일시
-    private int sResGameTime;            // 경기 시간
+    private int gTime;            // 경기 시간
     private int sResNum;                 //경기장 번호
-    private String sResCreatedId;        // 데이터 생성 ID
-    private String sResUpdatedId;        // 데이터 업데이트 ID
+    private String sResCreatedID;        // 데이터 생성 ID
+    private String sResUpdatedID;        // 데이터 업데이트 ID
 
-    public StadiumResInfoVO(String sId, String sName, String sResDate, int sResGameTime, int sResNum, String sResCreatedId, String sResUpdatedId) {
-        this.sId = sId;
-        this.sName = sName;
+    public StadiumResInfoVO(int gID, String u_id, String sID, String sResDate, int gTime, int sResNum, String sResCreatedID, String sResUpdatedID) {
+        this.gID = gID;
+        this.u_id = u_id;
+        this.sID = sID;
         this.sResDate = sResDate;
-        this.sResGameTime = sResGameTime;
+        this.gTime = gTime;
         this.sResNum = sResNum;
-        this.sResCreatedId = sResCreatedId;
-        this.sResUpdatedId = sResUpdatedId;
+        this.sResCreatedID = sResCreatedID;
+        this.sResUpdatedID = sResUpdatedID;
     }
 
-    public String getsName() {
-        return sName;
+    public StadiumResInfoVO() {
+
     }
 
-    public void setsName(String sName) {
-        this.sName = sName;
+    public int getgTime() {
+        return gTime;
+    }
+
+    public void setgTime(int gTime) {
+        this.gTime = gTime;
+    }
+
+    public int getgID() {
+        return gID;
+    }
+
+    public void setgID(int gID) {
+        this.gID = gID;
+    }
+
+    public String getU_id() {
+        return u_id;
+    }
+
+    public void setU_id(String u_id) {
+        this.u_id = u_id;
     }
 
     public int getsResNum() {
@@ -35,17 +57,6 @@ public class StadiumResInfoVO {
         this.sResNum = sResNum;
     }
 
-    public StadiumResInfoVO() {
-
-    }
-
-    public String getsId() {
-        return sId;
-    }
-
-    public void setsId(String sId) {
-        this.sId = sId;
-    }
 
     public String getsResDate() {
         return sResDate;
@@ -55,28 +66,29 @@ public class StadiumResInfoVO {
         this.sResDate = sResDate;
     }
 
-    public int getsResGameTime() {
-        return sResGameTime;
+
+    public String getsID() {
+        return sID;
     }
 
-    public void setsResGameTime(int sResGameTime) {
-        this.sResGameTime = sResGameTime;
+    public void setsID(String sID) {
+        this.sID = sID;
     }
 
-    public String getsResCreatedId() {
-        return sResCreatedId;
+    public String getsResCreatedID() {
+        return sResCreatedID;
     }
 
-    public void setsResCreatedId(String sResCreatedId) {
-        this.sResCreatedId = sResCreatedId;
+    public void setsResCreatedID(String sResCreatedID) {
+        this.sResCreatedID = sResCreatedID;
     }
 
-    public String getsResUpdatedId() {
-        return sResUpdatedId;
+    public String getsResUpdatedID() {
+        return sResUpdatedID;
     }
 
-    public void setsResUpdatedId(String sResUpdatedId) {
-        this.sResUpdatedId = sResUpdatedId;
+    public void setsResUpdatedID(String sResUpdatedID) {
+        this.sResUpdatedID = sResUpdatedID;
     }
 }
 

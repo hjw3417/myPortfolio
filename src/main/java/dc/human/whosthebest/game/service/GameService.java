@@ -21,5 +21,4 @@ public interface GameService {
     public List<TeamInfoVO> loadMyTeam(String uID) throws Exception;
     public List<StadiumVO> selectStadium(String sRegion, String search) throws  Exception;
     public StadiumVO stadiumDetail(int sID) throws  Exception;
-    public int insertSRes(StadiumResRawVO stadiumResRawVO) throws Exception;
 }

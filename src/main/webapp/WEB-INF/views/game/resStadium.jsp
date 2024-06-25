@@ -66,8 +66,9 @@
                 </div>
                 <!-- 경기장 List 끝 -->
                 <!-- 경기장 form 시작 -->
-                <form id="stadiumResConForm" onsubmit="return stadiumResCon()">
-                    <!-- 경기장 디테일 시작 -->
+                <form id="stadiumResConForm">
+                    <!-- 경기장
+                    디테일 시작 -->
                     <div class="stadiumDetail">
                         <label><상세정보></label>
                         <div id="message">경기장을 선택해주세요.</div>

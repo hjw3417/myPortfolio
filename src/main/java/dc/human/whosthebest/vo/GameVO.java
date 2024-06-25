@@ -23,8 +23,7 @@ package dc.human.whosthebest.vo;
 		private int gTime;             //G_TIME(경기 진행 시간)
 		private String gInfo;          //G_INFO(경기 관련 설명)
 		private int gMinMember;        //G_MINMEMBER(경기 시작 최소 인원)
-		private String gResTime;       //G_RESTIME(경기장 예약 시간)
-		private String gResDate;       //G_RESDATE(경기장 예약 일자)  
+		private String gResDate;       //G_RESDATE(경기장 예약 일자)
 		private int gStatus;           //G_STATUS(경기 상태)
 		private int tID;               //T_ID(경기 생성자 팀 ID)
 		private int tAwayID;           //T_AWAYID(경기 상대 팀) 
@@ -34,13 +33,9 @@ package dc.human.whosthebest.vo;
 		private String createdDate;    //CREATED_DATE(생성 날짜/DB에서 생성)  
 		private String updateID;       //UPDATED_ID(업데이트 ID/DB에서 생성)
 		private String updatedDate;    //UPDATED_DATE(업데이트 날짜/DB에서 생성)
-		private String u_id;           //U_ID(경기 생성자 ID)
-		
-		
-		
-		public GameVO(int gID, int gTeamID, String gTitle, String gTag, String gCreatedDate, int gTime, String gInfo,
-					  int gMinMember, String gResTime, String gResDate, int gStatus, int tID, int tAwayID, int sID, int sNum,
-					  String createdID, String createdDate, String updateID, String updatedDate, String u_id) {
+		private String uID;           //U_ID(경기 생성자 ID)
+
+		public GameVO(int gID, int gTeamID, String gTitle, String gTag, String gCreatedDate, int gTime, String gInfo, int gMinMember, String gResDate, int gStatus, int tID, int tAwayID, int sID, int sNum, String createdID, String createdDate, String updateID, String updatedDate, String uID) {
 			this.gID = gID;
 			this.gTeamID = gTeamID;
 			this.gTitle = gTitle;
@@ -49,7 +44,6 @@ package dc.human.whosthebest.vo;
 			this.gTime = gTime;
 			this.gInfo = gInfo;
 			this.gMinMember = gMinMember;
-			this.gResTime = gResTime;
 			this.gResDate = gResDate;
 			this.gStatus = gStatus;
 			this.tID = tID;
@@ -60,10 +54,8 @@ package dc.human.whosthebest.vo;
 			this.createdDate = createdDate;
 			this.updateID = updateID;
 			this.updatedDate = updatedDate;
-			this.u_id = u_id;
+			this.uID = uID;
 		}
-
-
 
 		public GameVO() {}
 
@@ -161,18 +153,6 @@ package dc.human.whosthebest.vo;
 
 		public void setgMinMember(int gMinMember) {
 			this.gMinMember = gMinMember;
-		}
-
-
-
-		public String getgResTime() {
-			return gResTime;
-		}
-
-
-
-		public void setgResTime(String gResTime) {
-			this.gResTime = gResTime;
 		}
 
 
@@ -296,18 +276,11 @@ package dc.human.whosthebest.vo;
 		}
 
 
-
-		public String getU_id() {
-			return u_id;
+		public String getuID() {
+			return uID;
 		}
 
-
-
-		public void setU_id(String u_id) {
-			this.u_id = u_id;
+		public void setuID(String uID) {
+			this.uID = uID;
 		}
-
-		
-		
-	
-}
+	}

@@ -19,7 +19,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/js.js"></script>
   <script>
-
+    alert(stadiumResConFormDate.sName);
   </script>
   <title>경기 만들기</title>
 </head>
@@ -55,37 +55,37 @@
   <div>　</div>
   <div class="gameMake-content">
     <table class="inputTable">
-        <tr>
+           <tr>
             <td colspan="3" style="background-color: white; border: 2pt solid rgb(184, 206, 146); height: 40px;">
-              <button id="openResStadiumBtn" onclick="openResStadium('${pageContext.request.contextPath}')">경기장 선택하기</button>
-              <input type="hidden" id="sIDInput" class="sIDInput" name="sIDInput" />
-              <input type="hidden" id="sNameInput" class="sNameInput" name="sNameInput" />
-              <button id="sName" class="sName" name="sName" onclick="openResStadium('${pageContext.request.contextPath}')"></button>
+              <button id="hidden1" onclick="openResStadium('${pageContext.request.contextPath}')">경기장 선택하기</button>
+              <input type="hidden" id="sID" class="sID" name="sID" />
+              <input type="hidden" id="sName" class="sName" name="sName" />
+              <button onclick="openResStadium('${pageContext.request.contextPath}')"><span id="sNameText"></sapn></button>
               </a>
             </td>
           </tr>
           <tr>
             <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  font-size: 8pt; height: 30px;">
-              <span>선택 정보 없음</span>
-                <input type="hidden" id="gResDate" name="gResDate" value="gResDate">
-                <span id="gResDate"></span>
-
+              <span id="hidden2">선택 정보 없음</span>
+              <input type="hidden" id="gResDate" name="gResDate">
+              <span id="gResDateText"></span>
             </td>
             <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  font-size: 8pt;height: 30px;">
-              <span>선택 정보 없음</span>
-                주소:
+              <span id="hidden3">선택 정보 없음</span>
+              <input type="hidden" id="sAddr" name="sAddr">
+              <span id="sAddrText"></span>
             </td>
             </tr>
             <tr>
-              <td colspan="1" style="background-color: white; border: 2pt solid rgb(184, 206, 146);  height: 30px;">
-                <span>선택 정보 없음</span>
-                <input type="hidden" id="gTime" name="gTime" value="2">
-                <span id="gTime">2</span> 시간
+              <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  height: 30px;">
+                <span id="hidden4">선택 정보 없음</span>
+                <input type="hidden" id="gTime" name="gTime">
+                <span id="gTimeText"></span>
               </td>
               <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  height: 30px;">
-                <span>선택 정보 없음</span>
+                <span id="hidden5">선택 정보 없음</span>
                 <input type="hidden" id="sNum" name="sNum" value="2">
-                <span id="sNum">2</span> 경기장
+                <span id="sNumText"></span>
               </td>
             </tr>
       <tr>
