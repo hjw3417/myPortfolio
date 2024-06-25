@@ -1,12 +1,11 @@
 package dc.human.whosthebest.dao;
 
-import java.util.List;
-
+import dc.human.whosthebest.vo.MemberVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import dc.human.whosthebest.vo.MemberVO;
+import java.util.List;
 
 
 @Mapper

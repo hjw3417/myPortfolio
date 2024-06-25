@@ -1,14 +1,13 @@
 /*
 PROJECT        : whosthebest
-PROGRAM ID    :  GameListDTO.java
-PROGRAM NAME    : gameListDTO
-DESCRIPTION    : game, team, stadium talble colum을 조합하여 gameList.jsp에 전달하기 위한 객체
+PROGRAM ID    :  GameListVO.java
+PROGRAM NAME    : gameList value object
+DESCRIPTION    : game, team, stadium talble column을 조합하여
+				 gameList.jsp에 전달하기 위한 값을 담은 객체
 AUTHOR        : 허진욱
-CREATED DATE    : 2024.05.29.
+CREATED DATE    : 2024.06.21.
 HISTORY
 ======================================================
-DATE     		NAME       DESCRIPTION
-2024.05.29.   	허진욱        init
 */
 
 

@@ -349,7 +349,6 @@ main{
         border: 1px solid rgb(184, 206, 146);
         padding: 10px 0;
         cursor: pointer;
-        margin: 0 5px;
       }
     }
   }
@@ -378,7 +377,6 @@ main{
     }
   }
   >div:nth-child(2)>form>div:nth-child(3){
-    button{
       width: 185px;
       height: 50px;
       font-size: 20px;
@@ -389,13 +387,7 @@ main{
       border: 1px solid rgb(184, 206, 146);
       padding: 10px 0;
       cursor: pointer;
-      
-      margin: 20px 5px;
-      line-height: 35px;
     }
-    a{
-      text-decoration: none;
-      color: white;
     }
   }
   >div:nth-child(3){
@@ -428,9 +420,6 @@ main{
         border-radius: 100%;
         /* border: 1px solid gray; */
       }
-      >div>a{
-        text-decoration: none;
-        >div{
           margin: 20px 0 0 170px;
           width: 100px;
           height: 50px;
@@ -444,7 +433,6 @@ main{
           cursor: pointer;
         }
       }
-    }
     >.board{
       width: 450px;
       height: 300px;
@@ -474,7 +462,6 @@ main{
         >ul{
           list-style-type: none;
           color: rgb(94, 94, 94);
-          line-height: 40px;
           >li:hover{
             text-decoration-line: underline;
           }
@@ -515,7 +502,6 @@ main{
         >ul{
           list-style-type: none;
           color: rgb(94, 94, 94);
-          line-height: 40px;
           >li:hover{
             text-decoration-line: underline;
           }
@@ -552,7 +538,6 @@ main{
         >ul{
           list-style-type: none;
           color: rgb(94, 94, 94);
-          line-height: 40px;
           >li:hover{
             text-decoration-line: underline;
           }
@@ -596,7 +581,6 @@ main{
       font-family: 'GmarketSansMedium';
       padding: 10px 0;
       cursor: pointer;
-      margin: 20px 5px;
     }
   }
 }
@@ -635,7 +619,6 @@ main{
       font-family: 'GmarketSansMedium';
       padding: 10px 0;
       cursor: pointer;
-      margin: 20px 5px;
     }
   }
 }
