@@ -10,6 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.controller;
 
 import dc.human.whosthebest.game.service.GameService;
+import dc.human.whosthebest.vo.StadiumResInfoVO;
 import dc.human.whosthebest.vo.StadiumResRawVO;
 import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
@@ -77,7 +78,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * 경기장을 이름으로 검색하는 GET 요청을 처리합니다.
+     * RESTful 컨트롤러 메서드로, 경기장을 이름으로 검색하는 GET 요청을 처리합니다.
      * 이 메서드는 선택한 지역과 검색어에 따라 경기장 목록을 JSON 형식으로 반환합니다.
      *
      * @param sRegion 선택한 지역 (필수 아님)
@@ -130,4 +131,6 @@ public class GameControllerImpl implements GameController {
         ModelAndView mav = new ModelAndView("redirect:/game/gameMake.do");
         return mav;
     }
+
+
 }

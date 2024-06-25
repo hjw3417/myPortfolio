@@ -1,5 +1,4 @@
-//폼 제출 시 Ajax 요청을 통해 서버로부터 경기장 목록 조회 및 표시
-//동적으로 생성된 폼에 대해 이벤트 핸들러를 설정하여 선택한 경기장의 세부 정보 조회 및 표시
+// 문서가 준비되면 실행될 코드를 정의합니다.
 $(document).ready(function() {
     // 첫 번째 Ajax 요청: 경기장 목록 가져오기
     $("#findForm").submit(function(event) {
@@ -18,7 +17,6 @@ $(document).ready(function() {
             },
             success: function(response) {
                 // 요청이 성공하면 실행될 함수를 정의합니다.
-
                 var stadiumList = response;
                 var html = '';
                 if (stadiumList.length === 0) {
@@ -65,6 +63,8 @@ $(document).ready(function() {
                 $('#sPhoneDetail').html(stadiumDetail.sPhone ? stadiumDetail.sPhone : '없음');
                 // input 요소에 값을 설정
                 $('#sIDInput').val(stadiumDetail.sID);
+                $('#sNameInput').val(stadiumDetail.sName);
+
                 var html = '<option disabled selected>경기장 선택하기</option>';
                 for (var i = 1; i <= stadiumDetail.sNum; i++) {
                     html += '<option value="' + i + '">' + i + ' 경기장</option>';
@@ -79,12 +79,17 @@ $(document).ready(function() {
     });
 });
 
+//gameMake.do에서 resStadium.do popup창 오픈
 function openResStadium(contextPath) {
         var url = contextPath + '/game/resStadium.do';
-        var popupWindow = window.open(url, 'resStadium', 'width=600,height=400,scrollbars=yes');
+        var popupWindow = window.open(url, 'resStadium', 'width=630,height=600,scrollbars=yes');
         if (popupWindow) {
             popupWindow.focus();
         } else {
             alert('Popup blocked. Please allow popups for this site.');
         }
     }
+//resStadium.do popup창 클로즈
+function closeWindow() {
+         window.close();
+     }

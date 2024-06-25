@@ -18,13 +18,9 @@
     <title>경기 만들기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../../js.js"></script>
+    <script src="${pageContext.request.contextPath}/js/js.js"></script>
 </head>
-<body>
-<main>
-    <div>　</div>
-    <div>
-        <!-- 컨텐트 영역 시작 -->
+<body class="resStadiumBody">
         <div class="resStadium-content">
             <!-- 검색 바 시작 -->
           <form class="findForm" id="findForm">
@@ -70,7 +66,7 @@
                 </div>
                 <!-- 경기장 List 끝 -->
                 <!-- 경기장 form 시작 -->
-                <form method="post" action="${contextPath}/game/StadiumRes.do">
+                <form id="stadiumResConForm" onsubmit="return stadiumResCon()">
                     <!-- 경기장 디테일 시작 -->
                     <div class="stadiumDetail">
                         <label><상세정보></label>
@@ -97,12 +93,12 @@
             <table class="resInfoContainer">
                 <tr>
                     <td>예약일 : </td>
-                    <td><input type="date" name="sResDate"></td>
+                    <td><input type="date" name="sResDate" id="sResDate"></td>
                 </tr>
                 <tr>
                     <td>시작 시작 : </td>
                     <td>
-                        <select  name="sResSTime">
+                        <select  name="sResSTime" id="sResSTime">
                             <option selected disabled>시작 시간 선택</option>
                             <option value="8">08 : 00</option>
                             <option value="9">09 : 00</option>
@@ -120,7 +116,7 @@
                 <tr>
                     <td>종료 시작 : </td>
                     <td>
-                        <select name="sResETime">
+                        <select name="sResETime" id="sResETime">
                             <option selected disabled>종료 시간 선택</option>
                             <option value="8">08 : 00</option>
                             <option value="9">09 : 00</option>
@@ -138,7 +134,7 @@
                 <tr>
                     <td>경기장 선택 : </td>
                     <td>
-                        <select name="sNum" id="sResNum">
+                        <select name="sResNum" id="sResNum">
                             <option disabled selected>경기장 선택하기</option>
                         </select>
                     </td>
@@ -147,17 +143,15 @@
             <!-- 예약 정보 종료 -->
             <!-- 버튼 영역 시작 -->
             <div class="buttonContainer">
-                <a href="gameMake.html">취소하기</a>
-                <input type="submit" value="다시입력">
+                <a onclick="closeWindow()">취소하기</a>
+                <input type="submit" value="선택완료">
             </div>
             <!-- 버튼 영역 끝 -->
             </form>
             <!-- form 영역 끝 -->
         </div>
         <!-- 컨텐트 영역 종료 -->
-    </div>
-    <!-- 이름 없는 div 끝 -->
-</main>
+      </div>
 </body>
 </html>
 

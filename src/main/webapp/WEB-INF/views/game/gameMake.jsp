@@ -51,85 +51,84 @@
       </ul>
     </div>
   </header>
-<main style="height: 750px; text-align: center;">
-  <div style="height: 70px;">　</div>
-  <div class="sec-container">
-    <section>
-        <table class="inputTable">
-          <tr>
-            <td colspan="3">
-              <select name="selectTeam" id="selectTeam">
-              <option selected>팀 선택하기</option>
-              <!-- game/gameMake.do 통해 team Table의 팀 명(t_name) 값 표시 -->
-              <c:forEach var="tName" items="${teamNameList}">
-                <option>${tName.tName}</option>
-              </c:forEach>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="3">
-              <input type="text" name="gTitle" id="gTitle" placeholder="경기 제목을 입력하세요.">
-            </td>
-          </tr>
-          <tr>
-            <td colspan="3">
-              <input type="text" name="gTag" id="gTag" placeholder="해시태그를 입력해주세요.(#로 구분)">
-            </td>
-          </tr>
-          <tr>
-            <td colspan="3" style="background-color: rgb(146, 172, 101); height: 40px;">
-              <!-- JSP에서 EL을 사용하여 전체 URL을 생성하고 JavaScript 함수 호출 시 매개변수로 전달 -->
-              <button onclick="openResStadium('${pageContext.request.contextPath}')">경기장 선택하기</button>
-              <a href="#" name="sID" id="sID" value="3">
+<main>
+  <div>　</div>
+  <div class="gameMake-content">
+    <table class="inputTable">
+        <tr>
+            <td colspan="3" style="background-color: white; border: 2pt solid rgb(184, 206, 146); height: 40px;">
+              <button id="openResStadiumBtn" onclick="openResStadium('${pageContext.request.contextPath}')">경기장 선택하기</button>
+              <input type="hidden" id="sIDInput" class="sIDInput" name="sIDInput" />
+              <input type="hidden" id="sNameInput" class="sNameInput" name="sNameInput" />
+              <button id="sName" class="sName" name="sName" onclick="openResStadium('${pageContext.request.contextPath}')"></button>
               </a>
             </td>
           </tr>
           <tr>
-            <td style="font-size: 8pt; background-color: rgb(146, 172, 101); height: 30px;">
+            <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  font-size: 8pt; height: 30px;">
               <span>선택 정보 없음</span>
                 <input type="hidden" id="gResDate" name="gResDate" value="gResDate">
-                <span id="gResDate">2024-06-14</span>
-                <input type="hidden" id="sTime" name="gResTime" value="3">
-                <span id="sTime">3</span> : 00
+                <span id="gResDate"></span>
+
             </td>
-            <td style="font-size: 8pt; background-color: rgb(146, 172, 101); height: 30px;">
+            <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  font-size: 8pt;height: 30px;">
               <span>선택 정보 없음</span>
                 주소:
             </td>
             </tr>
             <tr>
-              <td colspan="1" style="background-color: rgb(146, 172, 101); height: 30px;">
+              <td colspan="1" style="background-color: white; border: 2pt solid rgb(184, 206, 146);  height: 30px;">
                 <span>선택 정보 없음</span>
                 <input type="hidden" id="gTime" name="gTime" value="2">
                 <span id="gTime">2</span> 시간
               </td>
-              <td style="background-color: rgb(146, 172, 101); height: 30px;">
+              <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  height: 30px;">
                 <span>선택 정보 없음</span>
                 <input type="hidden" id="sNum" name="sNum" value="2">
                 <span id="sNum">2</span> 경기장
               </td>
             </tr>
-            <tr>
-              <td colspan="3">
-                <input type="text" name="gMinMember" placeholder="참여 인원 설정하기">
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3"  style="height: 300px; margin: 0;">
-                <input type="textarea" name="gInfo" placeholder="공지사항을 입력하기">
-              </td>
-            </tr>
-            <tr>
-              <td style="background-color: rgb(146, 172, 101); height: 40px;">
-                <a href="#">저장</a>
-              </td>
-              <td style="background-color: rgb(146, 172, 101); height: 40px;">
-                <a href="gameInfo.html">경기 만들기</a>
-              </td>
-            </tr>
-          </table>
-      </section>
+      <tr>
+        <td colspan="3">
+          <select name="selectTeam" id="selectTeam">
+          <option selected>팀 선택하기</option>
+          <!-- game/gameMake.do 통해 team Table의 팀 명(t_name) 값 표시 -->
+          <c:forEach var="tName" items="${teamNameList}">
+            <option>${tName.tName}</option>
+          </c:forEach>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <input type="text" name="gTitle" id="gTitle" placeholder="경기 제목을 입력하세요.">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <input type="text" name="gTag" id="gTag" placeholder="해시태그를 입력해주세요.(#로 구분)">
+        </td>
+      </tr>
+
+        <tr>
+          <td colspan="3">
+            <input type="text" name="gMinMember" placeholder="참여 인원 설정하기">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"  style="height: 300px; margin: 0;">
+            <input type="textarea" name="gInfo" placeholder="공지사항을 입력하기">
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: rgb(146, 172, 101); height: 40px;">
+            <a href="#">저장</a>
+          </td>
+          <td style="background-color: rgb(146, 172, 101); height: 40px;">
+            <a href="gameInfo.html">경기 만들기</a>
+          </td>
+        </tr>
+      </table>
     </div>
   </main>
   <footer>

@@ -79,7 +79,7 @@ public class GameServiceImpl implements  GameService {
         stadiumResInfoVO.setsId(stadiumResRawVO.getsId());
         stadiumResInfoVO.setsResNum(stadiumResRawVO.getsResNum());
         stadiumResInfoVO.setsResDate(
-                stadiumResRawVO.getsResDate() + " " + String.format("%02d",stadiumResRawVO.getsResSTime()) + ":00:00"
+                stadiumResRawVO.getsResDate() + " " + String.format("%02d", stadiumResRawVO.getsResSTime()) + ":00:00"
         );
         stadiumResInfoVO.setsResGameTime(
                 Math.abs(
