@@ -4,8 +4,8 @@ public class TeamInfoVO {
 	private int tID;
 	private String tName;
 	private byte[] tLogo;
-	private String tregion;
-	private String tphone;
+	private String tRegion;
+	private String tPhone;
 	private int tRankScore;
 	private int tMinAge;
 	private int tMaxAge;
@@ -36,17 +36,17 @@ public class TeamInfoVO {
 	public void settLogo(byte[] tLogo) {
 		this.tLogo = tLogo;
 	}
-	public String getTregion() {
-		return tregion;
+	public String gettRegion() {
+		return tRegion;
 	}
-	public void setTregion(String tregion) {
-		this.tregion = tregion;
+	public void settRegion(String tRegion) {
+		this.tRegion = tRegion;
 	}
-	public String getTphone() {
-		return tphone;
+	public String gettPhone() {
+		return tPhone;
 	}
 	public void setTphone(String tphone) {
-		this.tphone = tphone;
+		this.tPhone = tPhone;
 	}
 	public int gettRankScore() {
 		return tRankScore;

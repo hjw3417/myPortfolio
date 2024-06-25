@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.dao.TeamInfoMapper">
+    <resultMap id="teamInfoResultMap" type="dc.human.whosthebest.vo.TeamInfoVO">
+        <id property="tID" column="T_ID" />
+        <result property="tName" column="T_NAME" />
+        <result property="tLogo" column="T_LOGO" />
+        <result property="tRegion" column="T_REGION" />
+        <result property="tPhone" column="T_PHONE" />
+        <result property="tRankScore" column="RANKSCORE" />
+        <result property="tMinAge" column="T_MINAGE" />
+        <result property="tMaxAge" column="T_MAXAGE" />
+        <result property="tMaxMember" column="T_MAXMEMBER" />
+        <result property="tMember" column="T_MEMBER" />
+        <result property="tInfo" column="T_INFO" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+    <select id="selectAllTeamInfo" resultMap="teamInfoResultMap">
+        <![CDATA[
+            SELECT * FROM TEAM_INFO
+        ]]>
+    </select>
+
+    <insert id="insertTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
+        <![CDATA[
+            INSERT INTO TEAM_INFO (T_ID, T_NAME, T_LOGO, T_REGION, T_PHONE, RANKSCORE, T_MINAGE,
+                                   T_MAXAGE, T_MAXMEMBER, T_MEMBER, T_INFO, CREATED_ID, CREATED_DATE,
+                                   UPDATED_ID, UPDATED_DATE)
+            VALUES (#{tID}, #{tName}, #{tLogo}, #{tRegion}, #{tPhone}, #{tRankScore}, #{tMinAge},
+                    #{tMaxAge}, #{tMaxMember}, #{tMember}, #{tInfo}, #{createdID}, #{createdDate},
+                    #{updatedID}, #{updatedDate})
+        ]]>
+    </insert>
+
+    <update id="updateTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
+        <![CDATA[
+            UPDATE TEAM_INFO
+            SET T_NAME = #{tName}, T_LOGO = #{tLogo}, T_REGION = #{tRegion}, T_PHONE = #{tPhone},
+                RANKSCORE = #{tRankScore}, T_MINAGE = #{tMinAge}, T_MAXAGE = #{tMaxAge},
+                T_MAXMEMBER = #{tMaxMember}, T_MEMBER = #{tMember}, T_INFO = #{tInfo},
+                UPDATED_ID = #{updatedID}, UPDATED_DATE = #{updatedDate}
+            WHERE T_ID = #{tID}
+        ]]>
+    </update>
+
+    <delete id="deleteTeamInfo" parameterType="int">
+        <![CDATA[
+            DELETE FROM TEAM_INFO
+            WHERE T_ID = #{tID}
+        ]]>
+    </delete>
+</mapper>
