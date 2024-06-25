@@ -1,5 +1,8 @@
 package dc.human.whosthebest.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component("userInfoVO")
 public class UserInfoVO {
 
 	private String uID;
@@ -9,14 +12,22 @@ public class UserInfoVO {
 	private String uAddr2;
 	private String uEmail;
 	private String uPhone;
+	private String uGender;
 	private String uPW;
 	private byte[] uPhoto;
 	private String createdID;
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
-	
-	
+
+	public String getuGender() {
+		return uGender;
+	}
+
+	public void setuGender(String uGender) {
+		this.uGender = uGender;
+	}
+
 	public String getuID() {
 		return uID;
 	}

@@ -12,6 +12,7 @@
 <html>
 <head>
 <meta charset=UTF-8">
+<link rel="stylesheet" href="../css/adminPage.css">
 <title>회원 정보 출력창</title>
 </head>
 <body>
