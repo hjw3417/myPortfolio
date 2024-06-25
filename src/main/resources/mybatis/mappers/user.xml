@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.user.dao.joinDAO">
+    <resultMap id="usersResult" type="userInfoVO">
+        <result property="uID" column="U_ID" />
+        <result property="uName" column="U_NAME" />
+        <result property="uBday" column="U_BDAY" />
+        <result property="uAddr1" column="U_ADDR1" />
+        <result property="uAddr2" column="U_ADDR2" />
+        <result property="uEmail" column="U_EMAIL" />
+        <result property="uPhone" column="U_PHONE" />
+        <result property="uPW" column="U_PW" />
+        <result property="uPhoto" column="U_PHOTO" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+    <!--join xml-->
+    <insert id="insertJoin" parameterType="userInfoVO">
+        <![CDATA[
+		 insert into users(
+		    U_ID,
+		    U_NAME,
+		    U_BDAY,
+		    U_ADDR1,
+		    U_ADDR2,
+		    U_EMAIL,
+		    U_PHONE,
+		    U_PW,
+		    CREATED_ID,
+            CREATED_DATE
+		 )
+		 values(
+		    #{uID},
+		    #{uName},
+		    #{uBday},
+		    #{uAddr1},
+		    #{uAddr2},
+		    #{uEmail},
+		    #{uPhone},
+		    #{uPW},
+		    #{uID},
+		    SYSDATE
+		    )
+		]]>
+    </insert>
+
+
+</mapper>

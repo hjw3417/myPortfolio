@@ -2,6 +2,8 @@ package dc.human.whosthebest.vo;
 
 public class UserInfoVO {
 
+	public UserInfoVO(){}
+
 	private String uID;
 	private String uName;
 	private String uBday;
