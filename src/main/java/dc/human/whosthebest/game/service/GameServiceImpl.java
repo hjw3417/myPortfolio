@@ -78,6 +78,8 @@ public class GameServiceImpl implements  GameService {
 
     @Override
     public int createGame(GameVO gameVO) throws  Exception {
+        //gResDate 최종 formatting
+        gameVO.setgResDate(gameVO.getgResDate() + ":00");
         gameDAO.createGame(gameVO);
         return 1;
     }

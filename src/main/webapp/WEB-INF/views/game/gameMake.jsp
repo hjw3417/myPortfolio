@@ -135,7 +135,7 @@
             <a href="#">저장</a>
           </td>
           <td style="background-color: rgb(146, 172, 101); height: 40px;">
-            <input type="submit" value="게임 만들기" />
+            <input class="gameMakeSubmit" type="submit" value="게임 만들기" />
           </td>
         </tr>
       </table>
