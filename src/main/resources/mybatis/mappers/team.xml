@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="dc.human.whosthebest.dao.TeamInfoMapper">
-    <resultMap id="teamInfoResultMap" type="dc.human.whosthebest.vo.TeamInfoVO">
+<mapper namespace="dc.human.whosthebest.dao.TeamDAO">
+    <resultMap id="teamInfoResult" type="dc.human.whosthebest.vo.TeamInfoVO">
         <id property="tID" column="T_ID" />
         <result property="tName" column="T_NAME" />
         <result property="tLogo" column="T_LOGO" />

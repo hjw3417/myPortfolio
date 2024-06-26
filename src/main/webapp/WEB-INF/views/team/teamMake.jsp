@@ -44,7 +44,7 @@
           팀 만들기
         </div>
         <div>
-          <form name="maketeam" method="post" action="maketeam" enctype="utf-8">
+          <form name="maketeam" method="post" action="./addTeam" enctype="utf-8">
             <div>
               <input type="file" name="t_logo">
             </div>

@@ -34,7 +34,7 @@ public class TeamControllerImpl implements TeamController{
         return mav;
     }
     @Override
-    @GetMapping("/addTeamInfo")
+    @GetMapping("/teamMake")
     public String index() {
         return "/team/teamMake";
     }
