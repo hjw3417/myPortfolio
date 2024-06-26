@@ -149,9 +149,16 @@ public class GameControllerImpl implements GameController {
         gameVO.setsNum(sNum);
         gameVO.setgTime(gTime);
         gameVO.setgResDate(gResDate);
-        gameService.createGame(gameVO);
+        int gameMakeresult = gameService.createGame(gameVO);
         System.out.println("controller gTeamIDINT : " + gameVO.getgTeamID());
-        ModelAndView mav = new ModelAndView("redirect:/game/gameMake.do");
+        ModelAndView mav = new ModelAndView();
+        if(gameMakeresult < 0) {
+            mav.setViewName("redirect:/game/gameMake.do");
+        } else {
+//          mav.setViewName("game/gameList.do");
+            mav.setViewName("redirect:/game/gameMake.do");
+        }
+        mav.addObject("gameMakeresult", gameMakeresult);
         return mav;
     }
 }

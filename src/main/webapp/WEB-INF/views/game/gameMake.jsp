@@ -19,7 +19,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/js.js"></script>
   <script>
+      <!-- restStadium popup용 contextPath 변수 설정 -->
       var contextPath = '${pageContext.request.contextPath}';
+      <!-- game/createGame.do 실패 시 알림-->
+      window.onload = function() {
+        var gameMakeresult = '${gameMakeresult}';
+        if(gameMakeresult < 0) {
+            alert("게임 생성에 실패했습니다.");
+        }
+      };
   </script>
   <title>경기 만들기</title>
 </head>
