@@ -122,7 +122,21 @@ public class GameControllerImpl implements GameController {
         StadiumVO stadiumDetail = gameService.stadiumDetail(sIDInt);
         return stadiumDetail;
     }
-
+    /**
+     * 주어진 팀 ID를 기반으로 경기를 생성하는 메서드.
+     *
+     * @param gTeamID 게임을 생성하는 팀의 ID (문자열 형태).
+     * @param gTitle 경기 제목.
+     * @param gTag 경기 태그.
+     * @param gMinMember 경기 시작에 필요한 최소 인원.
+     * @param gInfo 경기 정보.
+     * @param sID 경기장이 열릴 경기장의 ID.
+     * @param sNum 경기장의 번호.
+     * @param gTime 경기 시간.
+     * @param gResDate 경기장 예약 날짜 (문자열 형태).
+     * @return 게임 생성 프로세스의 결과를 나타내는 ModelAndView 객체.
+     * @throws Exception 게임 생성 과정에서 오류가 발생한 경우.
+     */
     @Override
     @RequestMapping(value = "/createGame.do", method = RequestMethod.POST)
     @ResponseBody
@@ -159,6 +173,19 @@ public class GameControllerImpl implements GameController {
             mav.setViewName("redirect:/game/gameMake.do");
         }
         mav.addObject("gameMakeresult", gameMakeresult);
+        return mav;
+    }
+
+    @Override
+    @RequestMapping(value = "/gameList.do", method = RequestMethod.GET)
+    public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int pageNum = 1;
+        List<GameListVO> gameList = null;
+        gameList = gameService.selectGameList(pageNum);
+        System.out.println("controller gameList 0 번째 gTitle : " + gameList.get(0).getgTitle());
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("gameList", gameList);
+        mav.setViewName("/game/gameList");
         return mav;
     }
 }

@@ -10,8 +10,12 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.service;
 
 import dc.human.whosthebest.game.dao.GameDAO;
-import dc.human.whosthebest.vo.*;
+import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.GameVO;
+import dc.human.whosthebest.vo.StadiumVO;
+import dc.human.whosthebest.vo.TeamInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,12 +79,27 @@ public class GameServiceImpl implements  GameService {
         stadiumDetil = gameDAO.stadiumDetail(sID);
         return stadiumDetil;
     }
-
+    /**
+     * 주어진 GameVO 객체를 사용하여 경기를 생성하는 메서드.
+     * gResDate 필드를 초까지 포함하도록 포맷팅함.
+     *
+     * @param gameVO 생성할 경기의 세부 정보를 담은 GameVO 객체.
+     * @return 경기 생성 작업의 결과를 나타내는 정수 (성공 시 1).
+     * @throws Exception 경기 생성 과정에서 오류가 발생한 경우.
+     */
     @Override
     public int createGame(GameVO gameVO) throws  Exception {
         //gResDate 최종 formatting
         gameVO.setgResDate(gameVO.getgResDate() + ":00");
         gameDAO.createGame(gameVO);
         return 1;
+    }
+
+    @Override
+    public List<GameListVO> selectGameList(int pageNum) throws DataAccessException {
+        List<GameListVO> gameList = null;
+        gameList = gameDAO.selectGameList(pageNum);
+        System.out.println("service gameList 0 번째 gTitle : " + gameList.get(0).getgTitle());
+        return gameList;
     }
 }

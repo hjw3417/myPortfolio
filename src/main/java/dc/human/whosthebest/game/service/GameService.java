@@ -19,4 +19,5 @@ public interface GameService {
     public List<StadiumVO> selectStadium(String sRegion, String search) throws  Exception;
     public StadiumVO stadiumDetail(int sID) throws  Exception;
     public int createGame(GameVO gameVO) throws  Exception;
+    public List<GameListVO> selectGameList(int pageNum) throws Exception;
 }

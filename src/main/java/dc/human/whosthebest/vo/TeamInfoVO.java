@@ -3,7 +3,7 @@ package dc.human.whosthebest.vo;
 public class TeamInfoVO {
 	private int tID;
 	private String tName;
-	private byte[] tLogo;
+	private String tLogo;
 	private String tRegion;
 	private String tPhone;
 	private int tRankScore;
@@ -36,11 +36,11 @@ public class TeamInfoVO {
 		this.tName = tName;
 	}
 
-	public byte[] gettLogo() {
+	public String gettLogo() {
 		return tLogo;
 	}
 
-	public void settLogo(byte[] tLogo) {
+	public void settLogo(String tLogo) {
 		this.tLogo = tLogo;
 	}
 

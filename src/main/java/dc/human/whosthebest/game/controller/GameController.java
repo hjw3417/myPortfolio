@@ -40,4 +40,5 @@ public interface GameController {
                                    @RequestParam("sNum") int sNum,
                                    @RequestParam("gTime") int gTime,
                                    @RequestParam("gResDate") String gResDate) throws Exception;
+    public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

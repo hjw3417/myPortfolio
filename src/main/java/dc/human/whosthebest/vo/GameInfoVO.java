@@ -13,7 +13,7 @@ HISTORY
 
 package dc.human.whosthebest.vo;
 
-public class GameListVO {
+public class GameInfoVO {
 	//game table
 	private int gID;					//G_ID(경기 아이디/sequence)
 	private int gTeamID;				//G_TEAMID(팀 ID)
@@ -25,12 +25,11 @@ public class GameListVO {
 	private int gMinMember;				//G_MINMEMBER(경기 시작 최소 인원)
 	private String gResDate;			//G_RESDATE(경기장 예약 일자)
 	private int gStatus;				//G_STATUS(경기 상태)
-	private int tID;					//T_ID(경기 생성자 팀 ID)
+	private String tID;					//T_ID(경기 생성자 팀 ID)
 	private int tAwayID;				//T_AWAYID(경기 상대 팀)
 	private int sID;					//S_ID(경기장 ID)
 	private int sNum;					//S_NUM(경기장 내 번호)
-	private String uID;					//U_ID(경기 생성자 ID)
-	
+
 	//team table
 	private String tName;				//T_NAME(팀 이름)
 	private byte[] tLogo;				//T_LOGO(팀 로고/image 파일)
@@ -50,7 +49,7 @@ public class GameListVO {
 	private String sOwner;				//S_OWNER
 	private String sPhone;				//S_PHONE
 
-	public GameListVO() {
+	public GameInfoVO() {
 	}
 
 	public int getgID() {
@@ -133,11 +132,11 @@ public class GameListVO {
 		this.gStatus = gStatus;
 	}
 
-	public int gettID() {
+	public String gettID() {
 		return tID;
 	}
 
-	public void settID(int tID) {
+	public void settID(String tID) {
 		this.tID = tID;
 	}
 
@@ -163,14 +162,6 @@ public class GameListVO {
 
 	public void setsNum(int sNum) {
 		this.sNum = sNum;
-	}
-
-	public String getuID() {
-		return uID;
-	}
-
-	public void setuID(String uID) {
-		this.uID = uID;
 	}
 
 	public String gettName() {

@@ -12,16 +12,21 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/style.css">
-  <title>경기 목록</title>
-  <script src="../../../../../../../../../2차포트폴리오/웹페이지/js/js.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/js.js"></script>
+<script>
+    alert('${gameList[0].gTitle}');
+</script>
+<title>경기 목록</title>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="../../../../../../../../../2차포트폴리오/웹페이지/image/logo.png">
+      <img src="../image/logo.png">
       <!-- <div>누가 잘차</div> -->
     </div>
     <div>
@@ -60,22 +65,23 @@
       <div class="gameList-content">
           <form class="findForm">
             <select name="sRegion">
-              <option value="전체"<% if(sRegion.equals("전체")) out.print("seleteted"); %>전체</option>
-              <option value="서울"<% if(sRegion.equals("서울")) out.print("seleteted"); %>서울</option>
-              <option value="인천"<% if(sRegion.equals("인천")) out.print("seleteted"); %>인천</option>
-              <option value="경기"<% if(sRegion.equals("경기")) out.print("seleteted"); %>경기</option>
-              <option value="충남"<% if(sRegion.equals("충남")) out.print("seleteted"); %>충남</option>
-              <option value="충북"<% if(sRegion.equals("충북")) out.print("seleteted"); %>충북</option>
-              <option value="대전"<% if(sRegion.equals("대전")) out.print("seleteted"); %>대전</option>
-              <option value="대구"<% if(sRegion.equals("대구")) out.print("seleteted"); %>대구</option>
-              <option value="경북"<% if(sRegion.equals("경북")) out.print("seleteted"); %>경북</option>
-              <option value="경남"<% if(sRegion.equals("경남")) out.print("seleteted"); %>경남</option>
-              <option value="울산"<% if(sRegion.equals("울산")) out.print("seleteted"); %>울산</option>
-              <option value="부산"<% if(sRegion.equals("부산")) out.print("seleteted"); %>부산</option>
-              <option value="전남"<% if(sRegion.equals("전남")) out.print("seleteted"); %>전남</option>
-              <option value="전북"<% if(sRegion.equals("전북")) out.print("seleteted"); %>전북</option>
-              <option value="광주"<% if(sRegion.equals("광주")) out.print("seleteted"); %>광주</option>
-              <option value="강원"<% if(sRegion.equals("강원")) out.print("seleteted"); %>강원</option>
+                <option value="">전체</option>
+                <option value="A">서울</option>
+                <option value="B">경기</option>
+                <option value="C">인천</option>
+                <option value="D">강원</option>
+                <option value="E">충남</option>
+                <option value="F">충북</option>
+                <option value="G">대전</option>
+                <option value="H">경북</option>
+                <option value="I">대구</option>
+                <option value="J">경남</option>
+                <option value="K">울산</option>
+                <option value="L">부산</option>
+                <option value="M">광주</option>
+                <option value="N">전북</option>
+                <option value="O">전남</option>
+                <option value="P">제주</option>
             </select>
             <input type="text" class="search" name="search" name="search" placeholder="경기장 이름 검색">
             <input type="submit" class="findFormSubmit" value="검색" >
@@ -85,13 +91,14 @@
           <a href="gameMake.html">경기 만들기</a>
         </div>
         <!-- 카드 시작 -->
+        <c:forEach var="gameListVO" items="${gameList}">
         <div class="cardContainer">
           <!-- 카드 몸체 시작 -->
           <div class="card">
             <!-- profile 시작 -->
             <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
               <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-              <div class="tName" id="tName" name="tName"> 김허반박이 </div>
+              <div class="tName" id="tName" name="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
             </div>
             <!-- profile 종료 -->
             <!-- 프로필과 카드 본문 나누는 세로선 -->
@@ -101,25 +108,25 @@
               <table>
                 <tr>
                   <td>경기명 : </td>
-                  <td>진짜 뒤지고 싶은 분~~!</td>
+                  <td>${gameListVO.gTitle}</td>
                   <td>
                     경기 생성일 :
                   </td>
                   <td>
-                    2024-06-11
+                    ${gameListVO.gCreatedDate}
                   </td>
                 </tr>
                 <tr>
                   <td>경기장 : </td>
-                  <td>천안 축구센터 1 경기장</td>
+                  <td>${gameListVO.sName} ${gameListVO.sNum} 경기장</td>
                 </tr>
                 <tr>
                   <td>경기장 주소 : </td>
-                  <td>두정동 1975</td>
+                  <td>${gameListVO.sAddr}</td>
                 </tr>
                 <tr>
                   <td>경기일시 : </td>
-                  <td>2024-06-11 08 : 00 (2 시간)</td>
+                  <td>${gameListVO.gResDate} (${gameListVO.gTime} 시간)</td>
                 </tr>
               </table>
             </div>
@@ -136,277 +143,9 @@
           </div>
           <!-- 카드 submit 종료 -->
         </div>
+        </c:forEach>
         <!-- 카드 종료 -->
 
-        <!-- 카드 시작 -->
-        <div class="cardContainer">
-          <!-- 카드 몸체 시작 -->
-          <div class="card">
-            <!-- profile 시작 -->
-            <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
-              <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-              <div class="tName" id="tName" name="tName"> 김허반박이 </div>
-            </div>
-            <!-- profile 종료 -->
-            <!-- 프로필과 카드 본문 나누는 세로선 -->
-            <div class="verticalLine"></div>
-            <!-- 본문 테이블 시작-->
-            <div class="tableContainer">
-              <table>
-                <tr>
-                  <td>경기명 : </td>
-                  <td>진짜 뒤지고 싶은 분~~!</td>
-                  <td>
-                    경기 생성일 :
-                  </td>
-                  <td>
-                    2024-06-11
-                  </td>
-                </tr>
-                <tr>
-                  <td>경기장 : </td>
-                  <td>천안 축구센터 1 경기장</td>
-                </tr>
-                <tr>
-                  <td>경기장 주소 : </td>
-                  <td>두정동 1975</td>
-                </tr>
-                <tr>
-                  <td>경기일시 : </td>
-                  <td>2024-06-11 08 : 00 (2 시간)</td>
-                </tr>
-              </table>
-            </div>
-            <!-- 본문 테이블 종료-->
-          </div>
-          <!-- 카드 몸체 종료 -->
-          <!-- 카드 submit 시작 -->
-          <div>
-            <!-- 임시 폼 -->
-            <form action="gameInfo.html">
-              <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
-            </form>
-            <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
-          </div>
-          <!-- 카드 submit 종료 -->
-        </div>
-        <!-- 카드 종료 -->
-
-        <!-- 카드 시작 -->
-        <div class="cardContainer">
-          <!-- 카드 몸체 시작 -->
-          <div class="card">
-            <!-- profile 시작 -->
-            <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
-              <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-              <div class="tName" id="tName" name="tName"> 김허반박이 </div>
-            </div>
-            <!-- profile 종료 -->
-            <!-- 프로필과 카드 본문 나누는 세로선 -->
-            <div class="verticalLine"></div>
-            <!-- 본문 테이블 시작-->
-            <div class="tableContainer">
-              <table>
-                <tr>
-                  <td>경기명 : </td>
-                  <td>진짜 뒤지고 싶은 분~~!</td>
-                  <td>
-                    경기 생성일 :
-                  </td>
-                  <td>
-                    2024-06-11
-                  </td>
-                </tr>
-                <tr>
-                  <td>경기장 : </td>
-                  <td>천안 축구센터 1 경기장</td>
-                </tr>
-                <tr>
-                  <td>경기장 주소 : </td>
-                  <td>두정동 1975</td>
-                </tr>
-                <tr>
-                  <td>경기일시 : </td>
-                  <td>2024-06-11 08 : 00 (2 시간)</td>
-                </tr>
-              </table>
-            </div>
-            <!-- 본문 테이블 종료-->
-          </div>
-          <!-- 카드 몸체 종료 -->
-          <!-- 카드 submit 시작 -->
-          <div>
-            <!-- 임시 폼 -->
-            <form action="gameInfo.html">
-              <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
-            </form>
-            <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
-          </div>
-          <!-- 카드 submit 종료 -->
-        </div>
-        <!-- 카드 종료 -->
-
-        <!-- 카드 시작 -->
-        <div class="cardContainer">
-          <!-- 카드 몸체 시작 -->
-          <div class="card">
-            <!-- profile 시작 -->
-            <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
-              <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-              <div class="tName" id="tName" name="tName"> 김허반박이 </div>
-            </div>
-            <!-- profile 종료 -->
-            <!-- 프로필과 카드 본문 나누는 세로선 -->
-            <div class="verticalLine"></div>
-            <!-- 본문 테이블 시작-->
-            <div class="tableContainer">
-              <table>
-                <tr>
-                  <td>경기명 : </td>
-                  <td>진짜 뒤지고 싶은 분~~!</td>
-                  <td>
-                    경기 생성일 :
-                  </td>
-                  <td>
-                    2024-06-11
-                  </td>
-                </tr>
-                <tr>
-                  <td>경기장 : </td>
-                  <td>천안 축구센터 1 경기장</td>
-                </tr>
-                <tr>
-                  <td>경기장 주소 : </td>
-                  <td>두정동 1975</td>
-                </tr>
-                <tr>
-                  <td>경기일시 : </td>
-                  <td>2024-06-11 08 : 00 (2 시간)</td>
-                </tr>
-              </table>
-            </div>
-            <!-- 본문 테이블 종료-->
-          </div>
-          <!-- 카드 몸체 종료 -->
-          <!-- 카드 submit 시작 -->
-          <div>
-            <!-- 임시 폼 -->
-            <form action="gameInfo.html">
-              <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
-            </form>
-            <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
-          </div>
-          <!-- 카드 submit 종료 -->
-        </div>
-        <!-- 카드 종료 -->
-
-        <!-- 카드 시작 -->
-        <div class="cardContainer">
-          <!-- 카드 몸체 시작 -->
-          <div class="card">
-            <!-- profile 시작 -->
-            <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
-              <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-              <div class="tName" id="tName" name="tName"> 김허반박이 </div>
-            </div>
-            <!-- profile 종료 -->
-            <!-- 프로필과 카드 본문 나누는 세로선 -->
-            <div class="verticalLine"></div>
-            <!-- 본문 테이블 시작-->
-            <div class="tableContainer">
-              <table>
-                <tr>
-                  <td>경기명 : </td>
-                  <td>진짜 뒤지고 싶은 분~~!</td>
-                  <td>
-                    경기 생성일 :
-                  </td>
-                  <td>
-                    2024-06-11
-                  </td>
-                </tr>
-                <tr>
-                  <td>경기장 : </td>
-                  <td>천안 축구센터 1 경기장</td>
-                </tr>
-                <tr>
-                  <td>경기장 주소 : </td>
-                  <td>두정동 1975</td>
-                </tr>
-                <tr>
-                  <td>경기일시 : </td>
-                  <td>2024-06-11 08 : 00 (2 시간)</td>
-                </tr>
-              </table>
-            </div>
-            <!-- 본문 테이블 종료-->
-          </div>
-          <!-- 카드 몸체 종료 -->
-          <!-- 카드 submit 시작 -->
-          <div>
-            <!-- 임시 폼 -->
-            <form action="gameInfo.html">
-              <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
-            </form>
-            <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
-          </div>
-          <!-- 카드 submit 종료 -->
-        </div>
-        <!-- 카드 종료 -->
-
-        <!-- 카드 시작 -->
-        <div class="cardContainer">
-          <!-- 카드 몸체 시작 -->
-          <div class="card">
-            <!-- profile 시작 -->
-            <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
-              <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-              <div class="tName" id="tName" name="tName"> 김허반박이 </div>
-            </div>
-            <!-- profile 종료 -->
-            <!-- 프로필과 카드 본문 나누는 세로선 -->
-            <div class="verticalLine"></div>
-            <!-- 본문 테이블 시작-->
-            <div class="tableContainer">
-              <table>
-                <tr>
-                  <td>경기명 : </td>
-                  <td>진짜 뒤지고 싶은 분~~!</td>
-                  <td>
-                    경기 생성일 :
-                  </td>
-                  <td>
-                    2024-06-11
-                  </td>
-                </tr>
-                <tr>
-                  <td>경기장 : </td>
-                  <td>천안 축구센터 1 경기장</td>
-                </tr>
-                <tr>
-                  <td>경기장 주소 : </td>
-                  <td>두정동 1975</td>
-                </tr>
-                <tr>
-                  <td>경기일시 : </td>
-                  <td>2024-06-11 08 : 00 (2 시간)</td>
-                </tr>
-              </table>
-            </div>
-            <!-- 본문 테이블 종료-->
-          </div>
-          <!-- 카드 몸체 종료 -->
-          <!-- 카드 submit 시작 -->
-          <div>
-            <!-- 임시 폼 -->
-            <form action="gameInfo.html">
-              <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
-            </form>
-            <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
-          </div>
-          <!-- 카드 submit 종료 -->
-        </div>
-        <!-- 카드 종료 -->
         <!-- pagination 시작 -->
         <div class="paginationContainer">
           <ul class="pagination">
