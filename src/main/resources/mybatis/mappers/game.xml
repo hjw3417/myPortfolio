@@ -55,6 +55,45 @@
 		<result property="uID" column="U_ID"/>
 	</resultMap>
 
+	<!-- Result Map -->
+	<resultMap id="gameListResultMap" type="GameListVO">
+		<!-- game table -->
+		<id property="gID" column="G_ID"/>
+		<result property="gTeamID" column="G_TEAMID"/>
+		<result property="gTitle" column="G_TITLE"/>
+		<result property="gTag" column="G_TAG"/>
+		<result property="gCreatedDate" column="G_CREATEDATE"/>
+		<result property="gTime" column="G_TIME"/>
+		<result property="gInfo" column="G_INFO"/>
+		<result property="gMinMember" column="G_MINMEMBER"/>
+		<result property="gResDate" column="G_RESDATE"/>
+		<result property="gStatus" column="G_STATUS"/>
+		<result property="tID" column="T_ID"/>
+		<result property="tAwayID" column="T_AWAYID"/>
+		<result property="sID" column="S_ID"/>
+		<result property="sNum" column="S_NUM"/>
+		<result property="uID" column="U_ID"/>
+
+		<!-- team table -->
+		<result property="tName" column="T_NAME"/>
+		<result property="tLogo" column="T_LOGO"/>
+		<result property="tRegion" column="T_REGION"/>
+		<result property="tPhone" column="T_PHONE"/>
+		<result property="tRankScore" column="RANKSCORE"/>
+		<result property="tMinAge" column="T_MINAGE"/>
+		<result property="tMaxAge" column="T_MAXAGE"/>
+		<result property="tMaxMember" column="T_MAXMEMBER"/>
+		<result property="tMember" column="T_MEMBER"/>
+		<result property="tInfo" column="T_INFO"/>
+
+		<!-- stadium table -->
+		<result property="sName" column="S_NAME"/>
+		<result property="sRegion" column="S_REGION"/>
+		<result property="sAddr" column="S_ADDR"/>
+		<result property="sOwner" column="S_OWNER"/>
+		<result property="sPhone" column="S_PHONE"/>
+	</resultMap>
+
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
 		<![CDATA[
         SELECT T_ID, T_NAME
