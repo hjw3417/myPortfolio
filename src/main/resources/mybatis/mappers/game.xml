@@ -104,22 +104,24 @@
 	</select>
 	<insert id="createGame" parameterType="GameVO">
 		INSERT INTO GAME (
+			G_TEAMID,
 			G_TITLE,
 			G_TAG,
 			G_TIME,
 			G_INFO,
 			G_MINMEMBER,
-			G_RESTIME,
+			G_RESDATE,
 			T_ID,
 			S_ID,
 			S_NUM
 			) VALUES (
+			#{gTeamID},
 			#{gTitle},
 			#{gTag},
 			#{gTime},
 			#{gInfo},
 			#{gMinMember},
-			#{gResTime},
+			#{gResDate},
 			#{tID},
 			#{sID},
 			#{sNum}

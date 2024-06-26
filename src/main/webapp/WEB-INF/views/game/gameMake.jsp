@@ -19,7 +19,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/js.js"></script>
   <script>
-    alert(stadiumResConFormDate.sName);
+      var contextPath = '${pageContext.request.contextPath}';
   </script>
   <title>경기 만들기</title>
 </head>
@@ -54,14 +54,14 @@
 <main>
   <div>　</div>
   <div class="gameMake-content">
-  <form method="post" action="/game/createGame.do">
+  <form id="gameMakeForm" method="post" action="/game/createGame.do">
     <table class="inputTable">
            <tr>
             <td colspan="3" style="background-color: white; border: 2pt solid rgb(184, 206, 146); height: 40px;">
-              <button id="hidden1" onclick="openResStadium('${pageContext.request.contextPath}')">경기장 선택하기</button>
+              <button id="hidden1">경기장 선택하기</button>
               <input type="hidden" id="sID" class="sID" name="sID" />
               <input type="hidden" id="sName" class="sName" name="sName" />
-              <button id="popupBtn" onclick="openResStadium('${pageContext.request.contextPath}')"><span id="sNameText"></sapn></button>
+              <button id="popupBtn"><span id="sNameText"></sapn></button>
               </a>
             </td>
           </tr>
@@ -85,17 +85,17 @@
               </td>
               <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  height: 30px;">
                 <span id="hidden5">선택 정보 없음</span>
-                <input type="hidden" id="sNum" name="sNum" value="2">
+                <input type="hidden" id="sNum" name="sNum">
                 <span id="sNumText"></span>
               </td>
             </tr>
       <tr>
         <td colspan="4">
-          <select name="tName" id="tName">
+          <select name="gTeamID" id="gTeamID">
           <option selected>팀 선택하기</option>
           <!-- game/gameMake.do 통해 team Table의 팀 명(t_name) 값 표시 -->
           <c:forEach var="tName" items="${teamNameList}">
-            <option>${tName.tName}</option>
+            <option value="${tName.tID}">${tName.tName}</option>
           </c:forEach>
           </select>
 

@@ -79,16 +79,7 @@ $(document).ready(function() {
     });
 });
 
-//gameMake.do에서 resStadium.do popup창 오픈
-function openResStadium(contextPath) {
-        var url = contextPath + '/game/resStadium.do';
-        var popupWindow = window.open(url, 'resStadium', 'width=630,height=600,scrollbars=yes');
-        if (popupWindow) {
-            popupWindow.focus();
-        } else {
-            alert('Popup blocked. Please allow popups for this site.');
-        }
-    }
+
 //resStadium.do popup창 클로즈
 function closeWindow() {
          window.close();
@@ -161,6 +152,7 @@ $(document).ready(function() {
     });
 });
 
+//gameMake.do에서 데이터 받는 메소드
 function receiveData(stadiumResConFormDate) {
 
     $('#sID').val(stadiumResConFormDate.sID);
@@ -185,3 +177,65 @@ function receiveData(stadiumResConFormDate) {
           'Reservation Number: ' + stadiumResConFormDate.sResNum);
     $("#hidden1, #hidden2, #hidden3, #hidden4, #hidden5").hide()
 }
+
+// 팝업 창을 여는 함수
+function openResStadium(contextPath) {
+    var url = contextPath + '/game/resStadium.do';
+    var popupWindow = window.open(url, 'resStadium', 'width=630,height=600,scrollbars=yes');
+    if (popupWindow) {
+        popupWindow.focus();
+    } else {
+        alert('Popup blocked. Please allow popups for this site.');
+    }
+}
+
+// 유효성 검사를 하는 함수
+function validateForm(formData) {
+    for (var key in formData) {
+        if (formData.hasOwnProperty(key) && !formData[key]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+$(document).ready(function() {
+    // 팝업 버튼 이벤트 리스너 설정
+    $('#hidden1, #popupBtn').on('click', function(event) {
+        event.preventDefault();
+        openResStadium(contextPath);
+    });
+
+    // 폼 제출 시 입력값 검증
+    $('#gameMakeForm').on('submit', function(event) {
+        var formDataArray = $(this).serializeArray();
+        var formData = {};
+        $.each(formDataArray, function(_, field) {
+            formData[field.name] = field.value;
+        });
+
+        // 유효성 검사 함수 호출
+        if (!validateForm(formData)) {
+            alert('입력되지 않은 사항이 있습니다.');
+            event.preventDefault(); // form 제출 중지
+            return;
+        }
+
+        // 특정 name 값을 가진 요소 찾기
+        var gMinMemberField = formDataArray.find(function(field) {
+            return field.name === 'gMinMember';
+        });
+
+        // gMinMember 유효성 검사
+        if (gMinMemberField && (isNaN(Number(gMinMemberField.value)) ||
+         !Number.isInteger(Number(gMinMemberField.value)) ||
+          Number(gMinMemberField.value) < 0 ||
+          Number(gMinMemberField.value) > 99
+          )) {
+            alert('게임 인원 설정을 다시 해주세요.(최대 인원 99명)');
+            event.preventDefault(); // form 제출 중지
+        }
+    });
+});
+
+

@@ -124,9 +124,9 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    @RequestMapping(value = "/createGame.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/createGame.do", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView createGame(@RequestParam("tID") String tID,
+    public ModelAndView createGame(@RequestParam("gTeamID") String gTeamID,
                                    @RequestParam("gTitle") String gTitle,
                                    @RequestParam("gTag") String gTag,
                                    @RequestParam("gMinMember") int gMinMember,
@@ -136,9 +136,11 @@ public class GameControllerImpl implements GameController {
                                    @RequestParam("gTime") int gTime,
                                    @RequestParam("gResDate") String gResDate) throws Exception {
         GameVO gameVO = new GameVO();
-        System.out.print("controller tID : " + tID);
-        int tIDInt = Integer.parseInt(tID);
-        gameVO.settID(tIDInt);
+        System.out.println("controller tID : " + gTeamID);
+        int gTeamIDInt = Integer.parseInt(gTeamID);
+        gameVO.setgTeamID(gTeamIDInt);
+        gameVO.settID("heo");
+        gameVO.setCreatedID("heo");
         gameVO.setgTitle(gTitle);
         gameVO.setgTag(gTag);
         gameVO.setgMinMember(gMinMember);
@@ -148,6 +150,7 @@ public class GameControllerImpl implements GameController {
         gameVO.setgTime(gTime);
         gameVO.setgResDate(gResDate);
         gameService.createGame(gameVO);
+        System.out.println("controller gTeamIDINT : " + gameVO.getgTeamID());
         ModelAndView mav = new ModelAndView("redirect:/game/gameMake.do");
         return mav;
     }

@@ -25,7 +25,7 @@ package dc.human.whosthebest.vo;
 		private int gMinMember;        //G_MINMEMBER(경기 시작 최소 인원)
 		private String gResDate;       //G_RESDATE(경기장 예약 일자)
 		private int gStatus;           //G_STATUS(경기 상태)
-		private int tID;               //T_ID(경기 생성자 팀 ID)
+		private String tID;            //T_ID(경기 생성자 팀 ID)
 		private int tAwayID;           //T_AWAYID(경기 상대 팀) 
 		private int sID;               //S_ID(경기장 ID)
 		private int sNum;              //S_NUM(경기장 내 번호)
@@ -35,7 +35,7 @@ package dc.human.whosthebest.vo;
 		private String updatedDate;    //UPDATED_DATE(업데이트 날짜/DB에서 생성)
 		private String uID;           //U_ID(경기 생성자 ID)
 
-		public GameVO(int gID, int gTeamID, String gTitle, String gTag, String gCreatedDate, int gTime, String gInfo, int gMinMember, String gResDate, int gStatus, int tID, int tAwayID, int sID, int sNum, String createdID, String createdDate, String updateID, String updatedDate, String uID) {
+		public GameVO(int gID, int gTeamID, String gTitle, String gTag, String gCreatedDate, int gTime, String gInfo, int gMinMember, String gResDate, int gStatus, String tID, int tAwayID, int sID, int sNum, String createdID, String createdDate, String updateID, String updatedDate, String uID) {
 			this.gID = gID;
 			this.gTeamID = gTeamID;
 			this.gTitle = gTitle;
@@ -181,13 +181,13 @@ package dc.human.whosthebest.vo;
 
 
 
-		public int gettID() {
+		public String gettID() {
 			return tID;
 		}
 
 
 
-		public void settID(int tID) {
+		public void settID(String tID) {
 			this.tID = tID;
 		}
 
