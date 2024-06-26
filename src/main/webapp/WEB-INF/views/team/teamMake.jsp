@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/maketeam.css">
+  <link rel="stylesheet" href="${contextPath}/css/maketeam.css">
   <title>maketeam</title>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="./image/logo.png">
+      <img src="${contextPath}/image/logo.png">
     </div>
     <div>
       <span><a href="#">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
@@ -75,11 +77,15 @@
             <div>
               <select name="tMinAge">
                 <option value=0 disabled selected>시작나이</option>
-                <option value=20>20</option>
+                <c:forEach var="i" begin="1" end="60">
+                    <option value="&{i}">${i}</option>
+                </c:forEach>
               </select>
               <select name="tMaxAge">
                 <option value=0 disabled selected>끝나이</option>
-                <option value=21>21</option>
+                <c:forEach var="i" begin="1" end="60">
+                    <option value="&{i}">${i}</option>
+                </c:forEach>
               </select>
             </div>
             <div>
