@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 @Mapper
-@Repository("memberDAO")
+@Repository("teamDAO")
 public interface TeamDAO {
 
     public int insertTeam(TeamInfoVO teamInfoVO) throws DataAccessException;
