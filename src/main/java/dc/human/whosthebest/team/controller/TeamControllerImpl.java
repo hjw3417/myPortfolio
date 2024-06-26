@@ -30,7 +30,7 @@ public class TeamControllerImpl implements TeamController{
         request.setCharacterEncoding("utf-8");
         int result = 0;
         result = teamService.addTeam(team);
-        ModelAndView mav = new ModelAndView("redirect:/myTeam");
+        ModelAndView mav = new ModelAndView("redirect:/team/teamMake");
         return mav;
     }
     @Override

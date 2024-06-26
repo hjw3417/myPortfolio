@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="dc.human.whosthebest.dao.TeamDAO">
+<mapper namespace="dc.human.whosthebest.team.dao.TeamDAO">
     <resultMap id="teamInfoResult" type="dc.human.whosthebest.vo.TeamInfoVO">
         <id property="tID" column="T_ID" />
         <result property="tName" column="T_NAME" />
@@ -24,24 +24,22 @@
 
     <select id="selectAllTeamInfo" resultMap="teamInfoResult">
         <![CDATA[
-            SELECT * FROM TEAM_INFO
+            SELECT * FROM TEAM
         ]]>
     </select>
 
     <insert id="insertTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
         <![CDATA[
-            INSERT INTO TEAM_INFO (T_ID, T_NAME, T_LOGO, T_REGION, T_PHONE, RANKSCORE, T_MINAGE,
-                                   T_MAXAGE, T_MAXMEMBER, T_MEMBER, T_INFO, CREATED_ID, CREATED_DATE,
-                                   UPDATED_ID, UPDATED_DATE)
-            VALUES (#{tID}, #{tName}, #{tLogo}, #{tRegion}, #{tPhone}, #{tRankScore}, #{tMinAge},
-                    #{tMaxAge}, #{tMaxMember}, #{tMember}, #{tInfo}, #{createdID}, #{createdDate},
-                    #{updatedID}, #{updatedDate})
+            INSERT INTO TEAM (T_NAME, T_LOGO, T_REGION, T_PHONE, T_MINAGE,
+                                   T_MAXAGE, T_INFO)
+            VALUES (#{tName}, #{tLogo}, #{tRegion}, #{tPhone}, #{tMinAge},
+                    #{tMaxAge}, #{tInfo})
         ]]>
     </insert>
 
     <update id="updateTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
         <![CDATA[
-            UPDATE TEAM_INFO
+            UPDATE TEAM
             SET T_NAME = #{tName}, T_LOGO = #{tLogo}, T_REGION = #{tRegion}, T_PHONE = #{tPhone},
                 RANKSCORE = #{tRankScore}, T_MINAGE = #{tMinAge}, T_MAXAGE = #{tMaxAge},
                 T_MAXMEMBER = #{tMaxMember}, T_MEMBER = #{tMember}, T_INFO = #{tInfo},
@@ -52,7 +50,7 @@
 
     <delete id="deleteTeamInfo" parameterType="int">
         <![CDATA[
-            DELETE FROM TEAM_INFO
+            DELETE FROM TEAM
             WHERE T_ID = #{tID}
         ]]>
     </delete>

@@ -46,14 +46,14 @@
         <div>
           <form name="maketeam" method="post" action="/addTeam" enctype="utf-8">
             <div>
-              <input type="file" name="t_logo">
+              <input type="file" name="tLogo">
             </div>
             <div>
-              <input type="text" name="t_name" size="12" maxlength="12" placeholder="팀 이름을 입력해주세요" required>
+              <input type="text" name="tName" size="12" maxlength="12" placeholder="팀 이름을 입력해주세요" required>
               <input type="button" value="팀이름 중복">
             </div>
             <div>
-              <select name="t_region">
+              <select name="tRegion">
                 <option value="" disabled selected>지역</option>
                 <option value="서울">서울</option>
                 <option value="인천">인천</option>
@@ -73,20 +73,20 @@
               </select>
             </div>
             <div>
-              <select>
-                <option value="t_minage" disabled selected>시작나이</option>
-                <option value="20">20</option>
+              <select name="tMinAge">
+                <option value=0 disabled selected>시작나이</option>
+                <option value=20>20</option>
               </select>
-              <select>
-                <option value="t_maxage" disabled selected>끝나이</option>
-                <option value="21">21</option>
+              <select name="tMaxAge">
+                <option value=0 disabled selected>끝나이</option>
+                <option value=21>21</option>
               </select>
             </div>
             <div>
-              <input type="text" name="t_phone" size="12" maxlength="12" placeholder="전화번호">
+              <input type="text" name="tPhone" size="12" maxlength="12" placeholder="전화번호">
             </div>
             <div>
-              <input type="text" name="t_info" size="20" maxlength="20" placeholder="팀 소개">
+              <input type="text" name="tInfo" size="20" maxlength="20" placeholder="팀 소개">
             </div>
             <div>
               <a href="myteam.html"> <input type="submit" value="팀 만들기"> </a>

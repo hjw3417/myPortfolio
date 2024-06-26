@@ -48,7 +48,7 @@ public class TeamInfoVO {
 	public String gettPhone() {
 		return tPhone;
 	}
-	public void setTphone(String tphone) {
+	public void settPhone(String tPhone) {
 		this.tPhone = tPhone;
 	}
 	public int gettRankScore() {
