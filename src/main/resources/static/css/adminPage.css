@@ -145,7 +145,7 @@ main{
 /*회원,팀, 경기관리 테이블 설정*/
 .list {
   height: auto;
-  width: 960px;
+  width: 1000px;
   border-collapse: collapse;
   margin: 10px 0 0 20px;
   font-size: 18px;
@@ -251,17 +251,6 @@ table.user-list th {
   background-color: rgb(218, 228, 203);
 }
 
-/*페이지번호*/
-.number{
-  border  : none;
-  width : 300px;
-  height : 30px;
-  position: absolute;
-  top : 640px;
-  left : 330px;
-  text-align: center;
-  padding-top : 10px;
-}
 
 /*회원 목록 - 회원 상세보기*/
 .userDetail{
@@ -282,6 +271,10 @@ table.user-list th {
     text-align: center;
     line-height: 30px;
   }
- 
 
+  /*페이징 처리*/
+.pagination{
+    width : 200px;
+    height : 100px;
 }
+

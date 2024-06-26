@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/adminPage.css">
-  <title>관리자페이지-회원 관리</title>
+  <title>관리자페이지-팀 관리</title>
 </head>
 <body>
   <header>
@@ -21,7 +21,7 @@
          <div> 관리자 페이지 </div>
       </div>
 
-      <h2> 회원 목록 </h2>
+      <h2> 팀 목록 </h2>
 
     <div>
       <div class="side">
@@ -44,34 +44,31 @@
     <table class="list">
       <thead>
           <tr>
-              <th>ID</th>
-              <th>이름</th>
-              <th>성별</th>
-              <th>생년월일 </th>
-              <th>도로명주소</th>
-              <th>이메일</th>
+              <th>팀ID</th>
+              <th>팀 명</th>
+              <th>지역</th>
+              <th>랭크</th>
+              <th>인원</th>
 
           </tr>
       </thead>
 
       <tbody>
-      <c:forEach items="${usersList}" var="user">
-			<tr>
-					<td> ${user.uID } </a></td>	<!-- 아이디 -->
-					<td width="130"> ${user.uName} </td> <!-- 이름  -->
-					<td width="80"> ${user.uGender }  </td>	<!-- 성별 -->
-					<td> ${user.uBday }  </td>	<!-- 생년월일 -->
-					<td width="260" >  ${user.uAddr1 }  </td>	<!-- 도로명 주소 -->
-					<td>  ${user.uEmail } </td>	<!-- 이메일 -->
-					<!--   <td> ${member.uPhone } </td>	<!-- 휴대폰 번호 -->
-					<!--  <td>${member.uPhone.substring(0, 3)}****${member.uPhone.substring(7)} --></td>
-			</tr>
-		</c:forEach>
+        <c:forEach items="${teamsList}" var="team">
+            <tr>
+              <td> ${team.tID} </td>  <!-- 팀아이디 -->
+              <td> ${team.tName}  </td>
+              <td> ${team.tRegion}  </td>
+              <td> ${team.tRankScore}    </td>
+              <td> ${team.tMember}  </td>
+            </tr>
+        </c:forEach>
+
       </tbody>
-  </table>
+    </table>
 
   </div>
- </div>
+</div>
 </main>
 </body>
 </html>

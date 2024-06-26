@@ -13,15 +13,18 @@ DATE     		NAME       DESCRIPTION
 
 package dc.human.whosthebest.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component("stadiumVO")
 public class StadiumVO {
 	private int sID;			//S_ID(경기장 ID)
 	private String sName;		//S_NAME(경기장 명)
 	private String sRegion;		//S_REGION(경기장 지역/광역자치단체 명 기준)
-	private String sAddr;		//S_ADDR(경기장 주소)	
+	private String sAddr;		//S_ADDR(경기장 주소)
 	private String sOwner;		//S_OWNER(경기장 소유 기관명)
 	private String sPhone;		//S_PHONE(경기장 관리자 번호)
 	private int sNum;			//S_NUM(경기장 내 번호)
-	
+
 	public StadiumVO(int sID, String sName, String sRegion, String sAddr, String sOwner, String sPhone, int sNum) {
 		this.sID = sID;
 		this.sName = sName;
@@ -31,7 +34,7 @@ public class StadiumVO {
 		this.sPhone = sPhone;
 		this.sNum = sNum;
 	}
-	
+
 	public StadiumVO() {
 
 	}
@@ -91,6 +94,6 @@ public class StadiumVO {
 	public void setsNum(int sNum) {
 		this.sNum = sNum;
 	}
-	
-	
+
+
 }

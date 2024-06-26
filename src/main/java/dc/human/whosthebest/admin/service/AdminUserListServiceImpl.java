@@ -21,8 +21,11 @@ public class AdminUserListServiceImpl implements AdminUserListService {
     @Override
     public List listUsers() throws Exception{
         System.out.println("서비스 돌아감");
-        List usersList = null;
-        usersList = adminUserListDAO.selectAllUserList();
-        return usersList;
+//        List usersList = null;
+//        usersList = adminUserListDAO.selectAllUserList();
+//        return usersList;
+        return adminUserListDAO.selectAllUserList();
     }
+//
+
 }

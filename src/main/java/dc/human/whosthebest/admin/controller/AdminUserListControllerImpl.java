@@ -27,7 +27,7 @@ public class AdminUserListControllerImpl implements  AdminUserListController{
     public ModelAndView listUsers(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List usersList = userListService.listUsers();
         ModelAndView mav = new ModelAndView("/admin/userList");
-        mav.addObject("usersList", usersList);  // usersList를 ModelAndView에 추가
+        mav.addObject("usersList", usersList);
         return mav;
     }
 
