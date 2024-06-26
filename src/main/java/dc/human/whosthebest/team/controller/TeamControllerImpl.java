@@ -8,10 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller("teamController")
@@ -25,8 +23,9 @@ public class TeamControllerImpl implements TeamController{
 
     @Override
     @RequestMapping(value="/addTeam" ,method = RequestMethod.POST)
-    public ModelAndView addTeam(@ModelAttribute("team") TeamInfoVO team,
-                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView addTeam(@RequestParam("tLogo") MultipartFile file,
+                                @ModelAttribute("team") TeamInfoVO team,
+                                HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
         int result = 0;
         result = teamService.addTeam(team);

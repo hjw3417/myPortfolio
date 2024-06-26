@@ -111,6 +111,19 @@ public class TeamInfoVO {
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "TeamVO{" +
+				"tID=" + tID +
+//                ", tLogo=" + Arrays.toString(tLogo) +
+				", tName='" + tName + '\'' +
+				", tRegion='" + tRegion + '\'' +
+				", tPhone='" + tPhone + '\'' +
+				", tRankScore=" + tRankScore +
+				", tMinAge=" + tMinAge +
+				", tMaxAge=" + tMaxAge +
+				", tInfo='" + tInfo + '\'' +
+				'}';
+	}
 }
