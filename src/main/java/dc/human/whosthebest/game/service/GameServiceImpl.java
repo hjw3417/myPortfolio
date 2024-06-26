@@ -10,10 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.service;
 
 import dc.human.whosthebest.game.dao.GameDAO;
-import dc.human.whosthebest.vo.StadiumResInfoVO;
-import dc.human.whosthebest.vo.StadiumResRawVO;
-import dc.human.whosthebest.vo.StadiumVO;
-import dc.human.whosthebest.vo.TeamInfoVO;
+import dc.human.whosthebest.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -38,6 +35,13 @@ public class GameServiceImpl implements  GameService {
     public List<TeamInfoVO> loadMyTeam(String uID) throws Exception {
         List<TeamInfoVO> teamNameList = null;
         teamNameList = gameDAO.loadMyTeam(uID);
+        // 리스트의 첫 번째 값의 tID 출력
+        if (!teamNameList.isEmpty()) {
+            int firstTeamTID = teamNameList.get(0).gettID();
+            System.out.println("service 첫 번째 팀의 tID: " + firstTeamTID);
+        } else {
+            System.out.println("팀 정보 리스트가 비어 있습니다.");
+        }
         return teamNameList;
     }
     /**
@@ -70,5 +74,11 @@ public class GameServiceImpl implements  GameService {
         System.out.println("service sID : " + sID);
         stadiumDetil = gameDAO.stadiumDetail(sID);
         return stadiumDetil;
+    }
+
+    @Override
+    public int createGame(GameVO gameVO) throws  Exception {
+        gameDAO.createGame(gameVO);
+        return 1;
     }
 }

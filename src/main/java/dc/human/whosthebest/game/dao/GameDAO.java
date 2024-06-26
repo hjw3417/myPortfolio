@@ -9,6 +9,7 @@ CREATED DATE    : 2024.06.21.
 */
 package dc.human.whosthebest.game.dao;
 
+import dc.human.whosthebest.vo.GameVO;
 import dc.human.whosthebest.vo.StadiumResInfoVO;
 import dc.human.whosthebest.vo.StadiumVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
@@ -47,4 +48,5 @@ public interface GameDAO {
      * @throws DataAccessException 데이터 액세스 중 예외가 발생한 경우
      */
     public StadiumVO stadiumDetail(int sID) throws DataAccessException;
+    public int createGame(GameVO gameVO) throws DataAccessException;
 }

@@ -127,6 +127,7 @@ $(document).ready(function() {
         }
 
         // 정수로 변환
+        sID = parseInt(sID, 10);
         sResSTime = parseInt(sResSTime, 10);
         sResETime = parseInt(sResETime, 10);
         var gTime = sResETime - sResSTime;

@@ -10,10 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.controller;
 
 import dc.human.whosthebest.game.service.GameService;
-import dc.human.whosthebest.vo.StadiumResInfoVO;
-import dc.human.whosthebest.vo.StadiumResRawVO;
-import dc.human.whosthebest.vo.StadiumVO;
-import dc.human.whosthebest.vo.TeamInfoVO;
+import dc.human.whosthebest.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -47,6 +44,13 @@ public class GameControllerImpl implements GameController {
         session.setAttribute("uID", "heo");
         String uID = (String) session.getAttribute("uID");
         List<TeamInfoVO> teamNameList = gameService.loadMyTeam(uID);
+        // 리스트의 첫 번째 값의 tID 출력
+        if (!teamNameList.isEmpty()) {
+            int firstTeamTID = teamNameList.get(0).gettID();
+            System.out.println("controller 첫 번째 팀의 tID: " + firstTeamTID);
+        } else {
+            System.out.println("팀 정보 리스트가 비어 있습니다.");
+        }
         ModelAndView mav = new ModelAndView("/game/gameMake");
         mav.addObject("teamNameList", teamNameList);
         return mav;
@@ -117,5 +121,34 @@ public class GameControllerImpl implements GameController {
         int sIDInt = Integer.parseInt(sID);
         StadiumVO stadiumDetail = gameService.stadiumDetail(sIDInt);
         return stadiumDetail;
+    }
+
+    @Override
+    @RequestMapping(value = "/createGame.do", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView createGame(@RequestParam("tID") String tID,
+                                   @RequestParam("gTitle") String gTitle,
+                                   @RequestParam("gTag") String gTag,
+                                   @RequestParam("gMinMember") int gMinMember,
+                                   @RequestParam("gInfo") String gInfo,
+                                   @RequestParam("sID") int sID,
+                                   @RequestParam("sNum") int sNum,
+                                   @RequestParam("gTime") int gTime,
+                                   @RequestParam("gResDate") String gResDate) throws Exception {
+        GameVO gameVO = new GameVO();
+        System.out.print("controller tID : " + tID);
+        int tIDInt = Integer.parseInt(tID);
+        gameVO.settID(tIDInt);
+        gameVO.setgTitle(gTitle);
+        gameVO.setgTag(gTag);
+        gameVO.setgMinMember(gMinMember);
+        gameVO.setgInfo(gInfo);
+        gameVO.setsID(sID);
+        gameVO.setsNum(sNum);
+        gameVO.setgTime(gTime);
+        gameVO.setgResDate(gResDate);
+        gameService.createGame(gameVO);
+        ModelAndView mav = new ModelAndView("redirect:/game/gameMake.do");
+        return mav;
     }
 }

@@ -32,10 +32,32 @@
 		<result property="updatedID" column="UPDATED_ID"/>
 		<result property="updatedDate" column="UPDATED_DATE"/>
 	</resultMap>
+	<!-- game ResultMap -->
+	<resultMap id="gameResultMap" type="GameVO">
+		<id property="gID" column="G_ID"/>
+		<result property="gTeamID" column="G_TEAMID"/>
+		<result property="gTitle" column="G_TITLE"/>
+		<result property="gTag" column="G_TAG"/>
+		<result property="gCreatedDate" column="G_CREATEDATE"/>
+		<result property="gTime" column="G_TIME"/>
+		<result property="gInfo" column="G_INFO"/>
+		<result property="gMinMember" column="G_MINMEMBER"/>
+		<result property="gResDate" column="G_RESDATE"/>
+		<result property="gStatus" column="G_STATUS"/>
+		<result property="tID" column="T_ID"/>
+		<result property="tAwayID" column="T_AWAYID"/>
+		<result property="sID" column="S_ID"/>
+		<result property="sNum" column="S_NUM"/>
+		<result property="createdID" column="CREATED_ID"/>
+		<result property="createdDate" column="CREATED_DATE"/>
+		<result property="updateID" column="UPDATED_ID"/>
+		<result property="updatedDate" column="UPDATED_DATE"/>
+		<result property="uID" column="U_ID"/>
+	</resultMap>
 
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
 		<![CDATA[
-        SELECT T_NAME
+        SELECT T_ID, T_NAME
         FROM TEAM
         WHERE T_ID IN (
         SELECT T_ID
@@ -80,4 +102,27 @@
 		WHERE S_ID = #{sID}
 		]]>
 	</select>
+	<insert id="createGame" parameterType="GameVO">
+		INSERT INTO GAME (
+			G_TITLE,
+			G_TAG,
+			G_TIME,
+			G_INFO,
+			G_MINMEMBER,
+			G_RESTIME,
+			T_ID,
+			S_ID,
+			S_NUM
+			) VALUES (
+			#{gTitle},
+			#{gTag},
+			#{gTime},
+			#{gInfo},
+			#{gMinMember},
+			#{gResTime},
+			#{tID},
+			#{sID},
+			#{sNum}
+		)
+	</insert>
 </mapper>
