@@ -44,7 +44,7 @@
           팀 만들기
         </div>
         <div>
-          <form name="maketeam" method="post" action="./addTeam" enctype="utf-8">
+          <form name="maketeam" method="post" action="/addTeam" enctype="utf-8">
             <div>
               <input type="file" name="t_logo">
             </div>
@@ -75,9 +75,11 @@
             <div>
               <select>
                 <option value="t_minage" disabled selected>시작나이</option>
+                <option value="20">20</option>
               </select>
               <select>
                 <option value="t_maxage" disabled selected>끝나이</option>
+                <option value="21">21</option>
               </select>
             </div>
             <div>
@@ -87,7 +89,7 @@
               <input type="text" name="t_info" size="20" maxlength="20" placeholder="팀 소개">
             </div>
             <div>
-              <a href="myteam.html"> <input type="button" value="팀 만들기"> </a>
+              <a href="myteam.html"> <input type="submit" value="팀 만들기"> </a>
               <!--submit또는 버튼 태그로 변경해야됨-->
               <input type="reset" value="취소">
               <!--reset또는 버튼 태그로 변경해야됨-->

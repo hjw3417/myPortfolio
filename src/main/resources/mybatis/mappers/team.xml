@@ -22,7 +22,7 @@
         <result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
-    <select id="selectAllTeamInfo" resultMap="teamInfoResultMap">
+    <select id="selectAllTeamInfo" resultMap="teamInfoResult">
         <![CDATA[
             SELECT * FROM TEAM_INFO
         ]]>
