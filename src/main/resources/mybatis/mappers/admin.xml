@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dc.human.whosthebest.admin.dao.AdminDAO">
+
+    <!--회원목록 페이지-회원 리스트-->
+    <resultMap id="userResult" type="userInfoVO">
+        <result property="uID" column="u_id" />
+        <result property="uName" column="u_name" />
+        <result property="uGender" column="u_gender" />
+        <result property="uBday" column="u_bday" />
+        <result property="uAddr1" column="u_addr1" />
+        <result property="uAddr2" column="u_addr2" />
+        <result property="uEmail" column="u_email" />
+    </resultMap>
+
+    <!--팀목록 페이지-팀 리스트-->
+    <resultMap id="teamList" type="teamInfoVO">
+        <result property="tID" column="t_id" />
+        <result property="tName" column="t_name" />
+        <result property="tRegion" column="t_region" />
+        <result property="tRankScore" column="rankscore" />
+        <result property="tMember" column="t_member" />
+    </resultMap>
+
+    <!--경기목록 페이지-경기 리스트-->
+    <resultMap id="gameList" type="dc.human.whosthebest.vo.GameStadiumVO">
+        <result property="gameId" column="g_id" />
+        <result property="gameTitle" column="g_title" />
+        <result property="gameResDate" column="g_resdate" />
+        <result property="stadiumName" column="s_name" />
+        <result property="gameStatus" column="g_status" />
+    </resultMap>
+
+    <!--회원목록 페이지-->
+    <select id="selectAllUserList" resultMap="userResult">
+        <![CDATA[
+            select U_ID,
+                   u_name,
+                   u_gender,
+                   u_bday,
+                   u_addr1,
+                   u_email
+            from users
+        ]]>
+    </select>
+
+    <!--팀목록 페이지-->
+    <select id="selectAllTeamList" resultMap="teamList">
+        <![CDATA[
+            select t_id,
+                   t_name,
+                   t_region,
+                   rankscore,
+                   t_member
+            from team
+        ]]>
+    </select>
+
+    <!--경기목록 페이지-->
+    <select id="selectGameList" resultMap="gameList">
+        <![CDATA[
+            select game.g_id,
+                   game.g_title,
+                   game.g_resdate,
+                   stadium.s_name,
+                   game.g_status
+
+            from game,stadium
+            where game.s_id=stadium.s_id
+            order by g_id
+        ]]>
+    </select>
+
+
+
+
+</mapper>
