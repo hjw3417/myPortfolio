@@ -261,8 +261,15 @@ table.user-list th {
   top : 160px;
   left : 212px;
   background-color: white; 
+  >div{
+    width : 140px;
+    height: 140px;
+    border  : 1px solid green;
+  }
   >table{
-   
+    position: absolute;
+    top : 100px;
+    left : 120px;
     width : 500px;
     height : 20px;
     margin : 10px 0 0 0px;
@@ -271,10 +278,6 @@ table.user-list th {
     text-align: center;
     line-height: 30px;
   }
-
-  /*페이징 처리*/
-.pagination{
-    width : 200px;
-    height : 100px;
-}
-
+  >tr,td{
+    border : 1px solid black;
+  }

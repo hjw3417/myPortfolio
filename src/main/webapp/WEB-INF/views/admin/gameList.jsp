@@ -16,7 +16,7 @@
   <main>
 
       <div class="admin">
-        <a href="adminMainPage.html">
+        <a href="/admin/main.do">
          <img src="../image/home.png" alt="홈으로">
         </a>
 
@@ -31,12 +31,12 @@
           <div> admin</div>
 
             <ul style="list-style-type: none;">
-                <li> <a href="adminMainPage.html"> 관리자 메인 </a> </li>
-                <li> <a href="adminUserPage.html">회원 관리 </a> </li>
-                <li><a href="adminTeamListPage.html">팀 관리 </a> </li>
-                <li><a href="adminGameListPage.html">경기 관리 </a></li>
+                 <li> <a href="/admin/main.do"> 관리자 메인 </a> </li>
+                  <li> <a href="/admin/userList.do">회원 관리 </a> </li>
+                  <li><a href="/admin/teamList.do">팀 관리 </a> </li>
+                  <li><a href="/admin/gameList.do">경기 관리 </a></li>
             </ul>
-        <a href="#">
+        <a href="/login">
         <img class="logoutimg" src="../image/logout.png" alt="로그아웃">
       </a>
 

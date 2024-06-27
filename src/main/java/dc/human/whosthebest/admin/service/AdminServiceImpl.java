@@ -1,6 +1,7 @@
 package dc.human.whosthebest.admin.service;
 
 import dc.human.whosthebest.admin.dao.AdminDAO;
+import dc.human.whosthebest.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,7 +19,6 @@ public class AdminServiceImpl implements  AdminService{
     //회원목록
     @Override
     public List listUsers() throws Exception{
-        System.out.println("서비스 돌아감");
         List usersList = null;
         usersList = adminDAO.selectAllUserList();
         return usersList;
@@ -35,9 +35,32 @@ public class AdminServiceImpl implements  AdminService{
     //경기목록
     @Override
     public List listGames() throws Exception{
-        System.out.println("게임 서비스 완료");
         List gamesList = null;
         gamesList = adminDAO.selectGameList();
         return gamesList;
     }
+
+    //관리자메인- 최근회원목록
+    @Override
+    public List newUserList() throws Exception{
+        List newUserList = null;
+        newUserList = adminDAO.selectNewUserList();
+        return newUserList;
+    }
+
+    //관리자메인-최근팀목록
+    @Override
+    public List newTeamList() throws Exception{
+        List newTeamList = null;
+        newTeamList = adminDAO.selectNewTeamList();
+        return newTeamList;
+    }
+
+    //회원 상세보기
+    @Override
+    public UserInfoVO getUserDetailById(String uID) throws Exception {
+        System.out.println("상세보기 서비스 성공");
+        return adminDAO.selectUserDetailById(uID);
+    }
+
 }

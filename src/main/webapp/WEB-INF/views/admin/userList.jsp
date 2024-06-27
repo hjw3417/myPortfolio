@@ -14,7 +14,7 @@
   <main>
 
       <div class="admin">
-        <a href="adminMainPage.html">
+        <a href="/admin/adminMain.do">
          <img src="../image/home.png" alt="홈으로">
         </a>
 
@@ -22,19 +22,18 @@
       </div>
 
       <h2> 회원 목록 </h2>
-
     <div>
       <div class="side">
         <img src="../image/user.png" alt="사용자">
           <div> admin</div>
 
             <ul style="list-style-type: none;">
-              <li> <a href="adminMainPage.html"> 관리자 메인 </a> </li>
-              <li> <a href="adminUserPage.html">회원 관리 </a> </li>
-              <li><a href="adminTeamListPage.html">팀 관리 </a> </li>
-              <li><a href="adminGameListPage.html">경기 관리 </a></li>
+              <li> <a href="/admin/main.do"> 관리자 메인 </a> </li>
+              <li> <a href="/admin/userList.do">회원 관리 </a> </li>
+              <li><a href="/admin/teamList.do">팀 관리 </a> </li>
+              <li><a href="/admin/gameList.do">경기 관리 </a></li>
             </ul>
-        <a href="#">
+        <a href="/login">
         <img class="logoutimg" src="../image/logout.png" alt="로그아웃">
       </a>
 
@@ -55,16 +54,14 @@
       </thead>
 
       <tbody>
-      <c:forEach items="${usersList}" var="user">
+      <c:forEach items= "${usersList}" var="user">
 			<tr>
-					<td> ${user.uID } </td>	<!-- 아이디 -->
+					<td><a href="/admin/userDetail/${user.uID}">${user.uID}</td>
 					<td width="130"> ${user.uName} </td> <!-- 이름  -->
 					<td width="80"> ${user.uGender }  </td>	<!-- 성별 -->
 					<td> ${user.uBday }  </td>	<!-- 생년월일 -->
 					<td width="260" >  ${user.uAddr1 }  </td>	<!-- 도로명 주소 -->
 					<td>  ${user.uEmail } </td>	<!-- 이메일 -->
-					<!--   <td> ${member.uPhone } </td>	<!-- 휴대폰 번호 -->
-					<!--  <td>${member.uPhone.substring(0, 3)}****${member.uPhone.substring(7)} --></td>
 			</tr>
 		</c:forEach>
       </tbody>

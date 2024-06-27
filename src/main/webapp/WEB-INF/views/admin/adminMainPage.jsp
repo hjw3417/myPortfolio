@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/adminPage.css">
+  <link rel="stylesheet" href="../css/adminPage.css">
   <title>관리자페이지-관리자 메인</title>
 </head>
 <body>
@@ -15,8 +15,8 @@
   <main>
 
       <div class="admin">
-        <a href="#">
-         <img src="img/home.png" alt="홈으로">
+        <a href="/admin/main.do">
+         <img src="../image/home.png" alt="홈으로">
         </a>
 
          <div> 관리자 페이지 </div>
@@ -24,17 +24,17 @@
 <!-- 사이드 바 -->
     <div>
       <div class="side">
-        <img src="img/user.png" alt="사용자">
+        <img src="../image/user.png" alt="사용자">
           <div> admin</div>
 
             <ul style="list-style-type: none;">
-              <li> <a href="adminMainPage.html"> 관리자 메인 </a> </li>
-              <li> <a href="adminUserPage.html">회원 관리 </a> </li>
-              <li><a href="adminTeamListPage.html">팀 관리 </a> </li>
-              <li><a href="adminGameListPage.html">경기 관리 </a></li>
+               <li> <a href="/admin/main.do"> 관리자 메인 </a> </li>
+               <li> <a href="/admin/userList.do">회원 관리 </a> </li>
+               <li><a href="/admin/teamList.do">팀 관리 </a> </li>
+               <li><a href="/admin/gameList.do">경기 관리 </a></li>
             </ul>
-        <a href="#">
-        <img class="logoutimg" src="img/logout.png" alt="로그아웃">
+        <a href="/login">
+        <img class="logoutimg" src="../image/logout.png" alt="로그아웃">
       </a>
 
     </div>
@@ -50,58 +50,26 @@
               <th>이름</th>
               <th>생년월일</th>
               <th>성별</th>
-              <th>도로명주소</th>
-              <th>상세주소</th>
               <th>이메일</th>
 
           </tr>
-
-
       </thead>
+
+
       <tbody>
+      <c:forEach items="${newUser}" var="user">
         <tr>
-          <td>  hong   </td>
-          <td>   홍*  </td>
-          <td>  19880811   </td>
-          <td>   남자  </td>
-          <td>  경기 평택시 고평로 50   </td>
-          <td>   101동 101호	  </td>
-          <td>   hong@test.com  </td>
+          <td>  ${user.uID}   </td>
+          <td>  ${user.uName}  </td>
+          <td>  ${user.uBday}   </td>
+          <td>   ${user.uGender} </td>
+          <td>   ${user.uEmail}  </td>
         </tr>
-
-        <tr>
-          <td>  hong   </td>
-          <td>   홍*  </td>
-          <td>  19880811   </td>
-          <td>   남자  </td>
-          <td>  경기 평택시 고평로 50   </td>
-          <td>   101동 101호	  </td>
-          <td>   hong@test.com  </td>
-        </tr>
-
-        <tr>
-          <td>  hong   </td>
-          <td>   홍*  </td>
-          <td>  19880811   </td>
-          <td>   남자  </td>
-          <td>  경기 평택시 고평로 50   </td>
-          <td>   101동 101호	  </td>
-          <td>   hong@test.com  </td>
-        </tr>
-        <tr>
-          <td>  hong   </td>
-          <td>   홍*  </td>
-          <td>  19880811   </td>
-          <td>   남자  </td>
-          <td>  경기 평택시 고평로 50   </td>
-          <td>   101동 101호	  </td>
-          <td>   hong@test.com  </td>
-      </tr>
+       </c:forEach>
 
       </tbody>
     </table>
-
-    <a href="adminUserPage.html"> <button> 회원 전체보기</button> </a>
+    <a href="/admin/userList.do"> <button> 회원 전체보기</button> </a>
   </div>
 </div>
 
@@ -119,48 +87,25 @@
         <th>인원</th>
 
       </tr>
-
-
   </thead>
+
   <tbody>
     <tr>
-      <td>  hong   </td>
-      <td>   홍*  </td>
-      <td>  19880811   </td>
-      <td>   남자  </td>
-      <td>  경기 평택시 고평로 50   </td>
+        <c:forEach items="${newTeam}" var="team">
+          <tr>
+            <td width="130"> ${team.tID} </td>  <!-- 팀아이디 -->
+            <td> ${team.tName}  </td>
+            <td> ${team.tRegion}  </td>
+            <td> ${team.tRankScore}    </td>
+            <td> ${team.tMember}  </td>
+          </tr>
+        </c:forEach>
 
     </tr>
-
-    <tr>
-      <td>  hong   </td>
-      <td>   홍*  </td>
-      <td>  19880811   </td>
-      <td>   남자  </td>
-      <td>  경기 평택시 고평로 50   </td>
-
-    </tr>
-
-    <tr>
-      <td>  hong   </td>
-      <td>   홍*  </td>
-      <td>  19880811   </td>
-      <td>   남자  </td>
-      <td>  경기 평택시 고평로 50   </td>
-
-    </tr>
-    <tr>
-      <td>  hong   </td>
-      <td>   홍*  </td>
-      <td>  19880811   </td>
-      <td>   남자  </td>
-      <td>  경기 평택시 고평로 50   </td>
-    </tr>
-
   </tbody>
 </table>
 
-<a href="adminTeamListPage.html"> <button> 팀 전체보기</button> </a>
+<a href="/admin/teamList.do"> <button> 팀 전체보기</button> </a>
   </div>
 </div>
 
