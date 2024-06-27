@@ -190,10 +190,11 @@ public class GameControllerImpl implements GameController {
     public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int defaultPageNum = 1;
         int defaultRowNum = 0;
+        String uID = null;
         String sRegion = request.getParameter("sRegion");
         String search = request.getParameter("search");
         List<GameListVO> gameList = null;
-        gameList = gameService.selectGameList(defaultPageNum, defaultRowNum, sRegion, search);
+        gameList = gameService.selectGameList(defaultPageNum, defaultRowNum, sRegion, search, uID);
         // 리스트의 첫 번째 값 가져오기
         if (!gameList.isEmpty()) {
             System.out.println("controller gameList 0 번째 gID : " + gameList.get(0).getgID());
@@ -203,7 +204,7 @@ public class GameControllerImpl implements GameController {
             System.out.println("controller 리스트가 비어 있습니다.");
         }
         ModelAndView mav = new ModelAndView();
-        mav.addObject("uID", "heo");
+        mav.addObject("uID", "df");
         mav.addObject("gameList", gameList);
         mav.addObject("defaultPageNum", defaultPageNum);
         mav.setViewName("/game/gameList");
@@ -216,13 +217,14 @@ public class GameControllerImpl implements GameController {
     public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                            @RequestParam(value = "rowNum", required = false, defaultValue = "0") int rowNum,
                                            @RequestParam(value = "sRegion", required = false) String sRegion,
-                                           @RequestParam(value = "search", required = false) String search
-    ) throws Exception {
+                                           @RequestParam(value = "search", required = false) String search,
+                                           @RequestParam(value = "uID", required = false) String uID
+                                           ) throws Exception {
         List<GameListVO> gameList = null;
         String validID = "heo";
         System.out.println("RESTfull controller parameter pageNum : " + pageNum);
         System.out.println("RESTfull controller parameter rowNum : " + rowNum);
-        gameList = gameService.selectGameList(pageNum, rowNum, sRegion, search);
+        gameList = gameService.selectGameList(pageNum, rowNum, sRegion, search, uID);
 
         // 리스트의 첫 번째 값 가져오기
         if (!gameList.isEmpty()) {

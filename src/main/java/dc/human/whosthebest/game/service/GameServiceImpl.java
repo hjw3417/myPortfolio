@@ -100,11 +100,12 @@ public class GameServiceImpl implements  GameService {
     public List<GameListVO> selectGameList(int pageNum,
                                            int rowNum,
                                            String sRegion,
-                                           String search
+                                           String search,
+                                           String uID
                                            ) throws Exception {
         System.out.println("Service parameter pageNum : " + pageNum);
         List<GameListVO> gameList = null;
-        gameList = gameDAO.selectGameList(pageNum, rowNum, sRegion, search);
+        gameList = gameDAO.selectGameList(pageNum, rowNum, sRegion, search, uID);
         if(!gameList.isEmpty()) {
             System.out.println("Service gameList 0 번째 gID : " + gameList.get(0).getgID());
             System.out.println("Service gameList의 길이 : " + gameList.size());

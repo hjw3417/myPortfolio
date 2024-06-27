@@ -58,6 +58,7 @@ public interface GameDAO {
     public List<GameListVO> selectGameList(@Param("pageNum") int pageNum,
                                            @Param("rowNum") int rowNum,
                                            @Param("sRegion") String sRegion,
-                                           @Param("search") String search
+                                           @Param("search") String search,
+                                           @Param("uID") String uID
                                            ) throws DataAccessException;
 }

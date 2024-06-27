@@ -22,6 +22,7 @@ public interface GameService {
     public List<GameListVO> selectGameList(int pageNum,
                                            int rowNum,
                                            String sRegion,
-                                           String search
+                                           String search,
+                                           String uID
                                            ) throws Exception;
 }

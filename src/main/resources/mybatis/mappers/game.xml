@@ -159,6 +159,9 @@
 			)
 			AND g.G_TAG||g.G_TITLE||t.T_NAME||S_REGION||S_ADDR LIKE '%' || #{search} || '%'
 		</if>
+		<if test="uID != null and uID != ''">
+			AND g.T_ID = #{uID}
+		</if>
 		)
 		WHERE rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5) + 5
 	</select>

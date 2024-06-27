@@ -45,6 +45,7 @@ public interface GameController {
     public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                            @RequestParam(value = "rowNum", required = false, defaultValue = "0") int rowNum,
                                            @RequestParam(value = "sRegion", required = false) String sRegion,
-                                           @RequestParam(value = "search", required = false) String search
+                                           @RequestParam(value = "search", required = false) String search,
+                                           @RequestParam(value = "uID", required = false) String uID
                                           ) throws Exception;
 }
