@@ -30,6 +30,9 @@ public class TeamControllerImpl implements TeamController{
         result = teamService.addTeam(team);
         ModelAndView mav = new ModelAndView("redirect:/team/teamMake");
         return mav;
+        //제대로 저장되는지 예외 처리 필요
+        //최소나이 최대나이 처리 필요
+        //중복 기능 따로 만들기 필요
     }
     @Override
     @GetMapping("/teamMake")
