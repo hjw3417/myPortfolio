@@ -2,10 +2,11 @@ package dc.human.whosthebest.vo;
 
 /*gameList.xml  처리 위한 VO라  DB에 생성 안합니다!!!!*/
 
+import dc.human.whosthebest.paging.Criteria;
 import org.springframework.stereotype.Component;
 
 @Component("gameStadiumVO")
-public class GameStadiumVO {
+public class GameStadiumVO extends Criteria {
     private int gameId;
     private String gameTitle;
     private String gameResDate;
@@ -13,7 +14,7 @@ public class GameStadiumVO {
     private String gameStatus;
 
     // 생성자
-    public GameStadiumVO(int gameId, String gameTitle, String gameResDate, String stadiumName ,String gameStatus) {
+    public GameStadiumVO (int gameId, String gameTitle, String gameResDate, String stadiumName ,String gameStatus) {
         this.gameId = gameId;
         this.gameTitle = gameTitle;
         this.gameResDate = gameResDate;

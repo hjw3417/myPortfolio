@@ -57,7 +57,7 @@
       <tbody>
       <c:forEach items="${usersList}" var="user">
 			<tr>
-					<td> ${user.uID } </a></td>	<!-- 아이디 -->
+					<td> ${user.uID } </td>	<!-- 아이디 -->
 					<td width="130"> ${user.uName} </td> <!-- 이름  -->
 					<td width="80"> ${user.uGender }  </td>	<!-- 성별 -->
 					<td> ${user.uBday }  </td>	<!-- 생년월일 -->
@@ -69,8 +69,8 @@
 		</c:forEach>
       </tbody>
   </table>
-
   </div>
+
  </div>
 </main>
 </body>
