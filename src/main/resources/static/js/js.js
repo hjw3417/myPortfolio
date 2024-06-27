@@ -1,7 +1,7 @@
-// 문서가 준비되면 실행될 코드를 정의합니다.
+//resStadium.do 문서가 준비되면 실행될 코드를 정의합니다.
 $(document).ready(function() {
     // 첫 번째 Ajax 요청: 경기장 목록 가져오기
-    $("#findForm").submit(function(event) {
+    $("#resStadium-findForm").submit(function(event) {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
 
         var sRegion = $("#sRegion").val(); // sRegion 입력 필드의 값을 가져옵니다.
@@ -178,7 +178,7 @@ function receiveData(stadiumResConFormDate) {
     $("#hidden1, #hidden2, #hidden3, #hidden4, #hidden5").hide()
 }
 
-// 팝업 창을 여는 함수
+//팝업 창을 여는 함수
 function openResStadium(contextPath) {
     var url = contextPath + '/game/resStadium.do';
     var popupWindow = window.open(url, 'resStadium', 'width=630,height=600,scrollbars=yes');
@@ -199,6 +199,8 @@ function validateForm(formData) {
     return true;
 }
 
+//1. gameMake.do에서 resStadium.do popup 여는 기능
+//2. create.do로 데이터 전송 및 유효성 검사 로직 수행
 $(document).ready(function() {
     // 팝업 버튼 이벤트 리스너 설정
     $('#hidden1, #popupBtn').on('click', function(event) {
@@ -238,4 +240,89 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    $('#gamList-pageNumForm').on('submit', function(event) {
+        event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+        var pageNum = $(event.originalEvent.submitter).val();
+        $.ajax({
+            url: '/game/filter/gameList.do',   //요청할 url 설정
+            type: 'POST',               //요청 방식 POST로 설정
+            data: {
+                pageNum: pageNum,
+                responseType: 'json' // 응답 형식을 JSON으로 설정
+            },
+            success: function(response) {
+                var gameList = response;
+                alert(gameList[0].gID);
+                var html ='<div class="nullMsg">경기 정보가 없습니다.</div>';
+                //gameList 가 null일 시 알림
+                if(gameList.length === 0) {
+                    $("#gameListContainer").hide();
+                    $("#gameList-content").html(html);
+                } else {
+                    var gameListContainer = $('#gameListContainer');
+                    gameListContainer.empty();      //기존 내용 제거
 
+                    //새로운 dom 업데이트
+                    $.each(gameList, function(i, gameListVO) {
+                        var cardHtml = `
+                        <!-- 카드 시작 -->
+                        <div class="cardContainer" id="cardContainer">
+                            <!-- 카드 몸체 시작 -->
+                            <div class="card">
+                                <!-- profile 시작 -->
+                                <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
+                                    <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
+                                    <div class="tName" id="tName" name="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
+                                </div>
+                                <!-- profile 종료 -->
+                                <!-- 프로필과 카드 본문 나누는 세로선 -->
+                                <div class="verticalLine"></div>
+                                <!-- 본문 테이블 시작-->
+                                <div class="tableContainer">
+                                    <table>
+                                        <tr>
+                                            <td>경기명 : </td>
+                                            <td>${gameListVO.gTitle}</td>
+                                            <td>경기 생성일 :</td>
+                                            <td>${gameListVO.gCreatedDate}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>경기장 : </td>
+                                            <td>${gameListVO.sName} ${gameListVO.sNum} 경기장</td>
+                                        </tr>
+                                        <tr>
+                                            <td>경기장 주소 : </td>
+                                            <td>${gameListVO.sAddr}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>경기일시 : </td>
+                                            <td>${gameListVO.gResDate} (${gameListVO.gTime} 시간)</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!-- 본문 테이블 종료-->
+                            </div>
+                            <!-- 카드 몸체 종료 -->
+                            <!-- 카드 submit 시작 -->
+                            <div>
+                                <!-- 임시 폼 -->
+                                <form action="gameInfo.html">
+                                    <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
+                                </form>
+                            </div>
+                            <!-- 카드 submit 종료 -->
+                        </div>
+                        <!-- 카드 시작 -->
+                        `;
+                        gameListContainer.append(cardHtml);
+                    });
+                }
+            },
+            error: function(error) {
+                //요청 실패 시 메세지 알림
+                alert("Error: ", error);
+            }
+        });
+    });
+});

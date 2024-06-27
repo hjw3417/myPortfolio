@@ -66,7 +66,7 @@ public class GameControllerImpl implements GameController {
      * @throws Exception 오류가 발생할 경우 예외를 던집니다
      */
     @Override
-    @RequestMapping(value = "/resStadium.do", method = RequestMethod.GET, params = "!responseType")
+    @RequestMapping(value = "/resStadium.do", method = RequestMethod.GET)
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String sRegion = request.getParameter("sRegion");
         String search = request.getParameter("search");
@@ -179,13 +179,27 @@ public class GameControllerImpl implements GameController {
     @Override
     @RequestMapping(value = "/gameList.do", method = RequestMethod.GET)
     public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int pageNum = 1;
+        int defaultPageNum = 1;
         List<GameListVO> gameList = null;
-        gameList = gameService.selectGameList(pageNum);
-        System.out.println("controller gameList 0 번째 gTitle : " + gameList.get(0).getgTitle());
+        gameList = gameService.selectGameList(defaultPageNum);
+        System.out.println("controller parameter pageNum : " + defaultPageNum);
+        System.out.println("controller gameList 0 번째 gID : " + gameList.get(0).getgID());
         ModelAndView mav = new ModelAndView();
         mav.addObject("gameList", gameList);
+        mav.addObject("defaultPageNum", defaultPageNum);
         mav.setViewName("/game/gameList");
         return mav;
+    }
+
+    @Override
+    @RequestMapping(value = "/filter/gameList.do", method = RequestMethod.POST, params = "responseType=json")
+    @ResponseBody
+    public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false) int pageNum) throws Exception {
+        List<GameListVO> gameList = null;
+        System.out.println("RESTfull controller parameter pageNum : " + pageNum);
+        gameList = gameService.selectGameList(pageNum);
+        System.out.println("RESTfull controller gameList 0 번째 gID : " + gameList.get(0).getgID());
+        System.out.println("RESTfull controller gameList의 길이 : " + gameList.size());
+        return gameList;
     }
 }

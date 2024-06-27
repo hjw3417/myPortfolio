@@ -48,10 +48,6 @@
 		<result property="tAwayID" column="T_AWAYID"/>
 		<result property="sID" column="S_ID"/>
 		<result property="sNum" column="S_NUM"/>
-		<result property="createdID" column="CREATED_ID"/>
-		<result property="createdDate" column="CREATED_DATE"/>
-		<result property="updateID" column="UPDATED_ID"/>
-		<result property="updatedDate" column="UPDATED_DATE"/>
 	</resultMap>
 
 	<!-- gameList resultMap -->
@@ -133,19 +129,25 @@
 	</insert>
 
 	<select id="selectGameList" parameterType="int" resultMap="gameListResultMap">
+		SELECT g_id, G_TEAMID, G_TITLE, G_TAG, G_CREATEDATE, G_TIME, G_MINMEMBER, G_RESDATE, G_STATUS,
+		G_USER_ID, S_ID, S_NUM,
+		T_NAME, T_LOGO, T_REGION, T_PHONE, RANKSCORE, T_MINAGE, T_MAXAGE, T_MAXMEMBER, T_MEMBER, T_INFO,
+		S_NAME, S_REGION, S_ADDR, S_OWNER, S_PHONE
+		FROM (
 		SELECT
 		g.G_ID, g.G_TEAMID, g.G_TITLE, g.G_TAG, g.G_CREATEDATE, g.G_TIME, g.G_MINMEMBER, g.G_RESDATE, g.G_STATUS,
 		g.T_ID AS G_USER_ID, g.S_ID, g.S_NUM,
 		t.T_NAME, t.T_LOGO, t.T_REGION, t.T_PHONE, t.RANKSCORE, t.T_MINAGE, t.T_MAXAGE, t.T_MAXMEMBER, t.T_MEMBER,
 		t.T_INFO, t.CREATED_ID, t.CREATED_DATE, t.UPDATED_ID, t.UPDATED_DATE,
-		s.S_NAME, s.S_REGION, s.S_ADDR, s.S_OWNER, s.S_PHONE, s.S_NUM
+		s.S_NAME, s.S_REGION, s.S_ADDR, s.S_OWNER, s.S_PHONE,
+		ROW_NUMBER() OVER (ORDER BY g.G_CREATEDATE) AS rn
 		FROM
 		GAME g
 		INNER JOIN
 		TEAM t ON g.G_TEAMID = t.T_ID
 		INNER JOIN
 		STADIUM s ON g.S_ID = s.S_ID
-		WHERE ROWNUM BETWEEN #{pageNum} AND #{pageNum}*10
-		ORDER BY g.G_CREATEDATE
+		)
+		WHERE rn BETWEEN #{pageNum} AND #{pageNum}+5
 	</select>
 </mapper>

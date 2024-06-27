@@ -23,7 +23,7 @@
 <body class="resStadiumBody">
         <div class="resStadium-content">
             <!-- 검색 바 시작 -->
-          <form class="findForm" id="findForm">
+          <form class="findForm" id="resStadium-findForm">
                 <select name="sRegion" id="sRegion">
                     <option value="">전체</option>
                     <option value="A">서울</option>

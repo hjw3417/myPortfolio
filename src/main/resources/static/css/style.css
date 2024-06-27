@@ -182,7 +182,7 @@ main{
       cursor: pointer;
     }
   }
-  >.cardContainer {
+  .cardContainer {
     display: flex;
     margin-bottom: 25px;
     >.card {
@@ -265,6 +265,16 @@ main{
           text-decoration: none;
           color: inherit;
         }
+        >form {
+            >button {
+                background-color: inherit;
+                border: 0pt;
+                color: inherit;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+
       }
       >li:first-child, li:last-child {
         font-size: 10pt;  

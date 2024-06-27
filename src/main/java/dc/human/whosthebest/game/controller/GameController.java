@@ -9,6 +9,7 @@ CREATED DATE    : 2024.06.21.
 */
 package dc.human.whosthebest.game.controller;
 
+import dc.human.whosthebest.vo.GameListVO;
 import dc.human.whosthebest.vo.StadiumResInfoVO;
 import dc.human.whosthebest.vo.StadiumResRawVO;
 import dc.human.whosthebest.vo.StadiumVO;
@@ -41,4 +42,5 @@ public interface GameController {
                                    @RequestParam("gTime") int gTime,
                                    @RequestParam("gResDate") String gResDate) throws Exception;
     public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false) int pageNum) throws Exception;
 }

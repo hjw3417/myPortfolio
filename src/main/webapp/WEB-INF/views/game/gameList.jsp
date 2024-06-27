@@ -19,7 +19,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/js.js"></script>
 <script>
-    alert('${gameList[0].gTitle}');
+    <!-- alert('${gameList[0].gTitle}'); -->
 </script>
 <title>경기 목록</title>
 </head>
@@ -62,7 +62,7 @@
           <div>내가 참여 중인 경기</div>
         </div>
       </div>
-      <div class="gameList-content">
+      <div class="gameList-content" id="gameList-content">
           <form class="findForm">
             <select name="sRegion">
                 <option value="">전체</option>
@@ -90,71 +90,75 @@
         <div class="makeGameBtnContainer">
           <a href="gameMake.html">경기 만들기</a>
         </div>
-        <!-- 카드 시작 -->
-        <c:forEach var="gameListVO" items="${gameList}">
-        <div class="cardContainer">
-          <!-- 카드 몸체 시작 -->
-          <div class="card">
-            <!-- profile 시작 -->
-            <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
-              <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-              <div class="tName" id="tName" name="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
+        <!-- 리스트 container 시작 -->
+        <div id="gameListContainer">
+            <!-- 카드 시작 -->
+            <c:forEach var="gameListVO" items="${gameList}">
+            <div class="cardContainer" id="cardContainer">
+              <!-- 카드 몸체 시작 -->
+              <div class="card">
+                <!-- profile 시작 -->
+                <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
+                  <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
+                  <div class="tName" id="tName" name="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
+                </div>
+                <!-- profile 종료 -->
+                <!-- 프로필과 카드 본문 나누는 세로선 -->
+                <div class="verticalLine"></div>
+                <!-- 본문 테이블 시작-->
+                <div class="tableContainer">
+                  <table>
+                    <tr>
+                      <td>경기명 : </td>
+                      <td>${gameListVO.gTitle}</td>
+                      <td>
+                        경기 생성일 :
+                      </td>
+                      <td>
+                        ${gameListVO.gCreatedDate}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>경기장 : </td>
+                      <td>${gameListVO.sName} ${gameListVO.sNum} 경기장</td>
+                    </tr>
+                    <tr>
+                      <td>경기장 주소 : </td>
+                      <td>${gameListVO.sAddr}</td>
+                    </tr>
+                    <tr>
+                      <td>경기일시 : </td>
+                      <td>${gameListVO.gResDate} (${gameListVO.gTime} 시간)</td>
+                    </tr>
+                  </table>
+                </div>
+                <!-- 본문 테이블 종료-->
+              </div>
+              <!-- 카드 몸체 종료 -->
+              <!-- 카드 submit 시작 -->
+              <div>
+                <!-- 임시 폼 -->
+                <form action="gameInfo.html">
+                  <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
+                </form>
+                <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
+              </div>
+              <!-- 카드 submit 종료 -->
             </div>
-            <!-- profile 종료 -->
-            <!-- 프로필과 카드 본문 나누는 세로선 -->
-            <div class="verticalLine"></div>
-            <!-- 본문 테이블 시작-->
-            <div class="tableContainer">
-              <table>
-                <tr>
-                  <td>경기명 : </td>
-                  <td>${gameListVO.gTitle}</td>
-                  <td>
-                    경기 생성일 :
-                  </td>
-                  <td>
-                    ${gameListVO.gCreatedDate}
-                  </td>
-                </tr>
-                <tr>
-                  <td>경기장 : </td>
-                  <td>${gameListVO.sName} ${gameListVO.sNum} 경기장</td>
-                </tr>
-                <tr>
-                  <td>경기장 주소 : </td>
-                  <td>${gameListVO.sAddr}</td>
-                </tr>
-                <tr>
-                  <td>경기일시 : </td>
-                  <td>${gameListVO.gResDate} (${gameListVO.gTime} 시간)</td>
-                </tr>
-              </table>
-            </div>
-            <!-- 본문 테이블 종료-->
-          </div>
-          <!-- 카드 몸체 종료 -->
-          <!-- 카드 submit 시작 -->
-          <div>
-            <!-- 임시 폼 -->
-            <form action="gameInfo.html">
-              <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
-            </form>
-            <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
-          </div>
-          <!-- 카드 submit 종료 -->
+            </c:forEach>
+            <!-- 카드 종료 -->
         </div>
-        </c:forEach>
-        <!-- 카드 종료 -->
+        <!-- 리스트 container 시작 -->
 
         <!-- pagination 시작 -->
         <div class="paginationContainer">
           <ul class="pagination">
             <li><a href="#">이전</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
+            <form id="gamList-pageNumForm">
+                <c:forEach var="i" begin="${defaultPageNum}" end="${defaultPageNum+4}">
+                    <input type="submit" class="pageNum" name="pageNum" value="${i}"></input>
+                </c:forEach>
+            </form>
             <li><a href="#">다음</a></li>
           </ul>
         </div>
