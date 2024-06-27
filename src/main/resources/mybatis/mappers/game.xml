@@ -147,7 +147,19 @@
 		TEAM t ON g.G_TEAMID = t.T_ID
 		INNER JOIN
 		STADIUM s ON g.S_ID = s.S_ID
+		WHERE 1=1
+		<if test="sRegion != null and sRegion != ''">
+			AND s.S_REGION = #{sRegion}
+		</if>
+		<if test="search != null and search != ''">
+			AND (
+			g.G_TAG = #{search} OR
+			g.G_TITLE = #{search} OR
+			t.T_NAME = #{search}
+			)
+			AND g.G_TAG||g.G_TITLE||t.T_NAME||S_REGION||S_ADDR LIKE '%' || #{search} || '%'
+		</if>
 		)
-		WHERE rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5)+5
+		WHERE rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5) + 5
 	</select>
 </mapper>

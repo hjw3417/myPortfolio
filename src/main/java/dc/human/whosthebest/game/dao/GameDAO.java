@@ -11,6 +11,7 @@ package dc.human.whosthebest.game.dao;
 
 import dc.human.whosthebest.vo.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -54,5 +55,9 @@ public interface GameDAO {
      * @throws DataAccessException 데이터 접근 중 오류가 발생한 경우.
      */
     public int createGame(GameVO gameVO) throws DataAccessException;
-    public List<GameListVO> selectGameList(int pageNum, int rowNum) throws DataAccessException;
+    public List<GameListVO> selectGameList(@Param("pageNum") int pageNum,
+                                           @Param("rowNum") int rowNum,
+                                           @Param("sRegion") String sRegion,
+                                           @Param("search") String search
+                                           ) throws DataAccessException;
 }

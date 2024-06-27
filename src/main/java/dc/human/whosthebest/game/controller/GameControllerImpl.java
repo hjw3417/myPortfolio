@@ -10,15 +10,22 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.controller;
 
 import dc.human.whosthebest.game.service.GameService;
-import dc.human.whosthebest.vo.*;
+import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.GameVO;
+import dc.human.whosthebest.vo.StadiumVO;
+import dc.human.whosthebest.vo.TeamInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -106,6 +113,7 @@ public class GameControllerImpl implements GameController {
         }
         return stadiumList;
     }
+
     /**
      * RESTful 컨트롤러 메서드로, 주어진 경기장 ID에 해당하는 경기장 세부 정보를 반환합니다.
      *
@@ -122,18 +130,19 @@ public class GameControllerImpl implements GameController {
         StadiumVO stadiumDetail = gameService.stadiumDetail(sIDInt);
         return stadiumDetail;
     }
+
     /**
      * 주어진 팀 ID를 기반으로 경기를 생성하는 메서드.
      *
-     * @param gTeamID 게임을 생성하는 팀의 ID (문자열 형태).
-     * @param gTitle 경기 제목.
-     * @param gTag 경기 태그.
+     * @param gTeamID    게임을 생성하는 팀의 ID (문자열 형태).
+     * @param gTitle     경기 제목.
+     * @param gTag       경기 태그.
      * @param gMinMember 경기 시작에 필요한 최소 인원.
-     * @param gInfo 경기 정보.
-     * @param sID 경기장이 열릴 경기장의 ID.
-     * @param sNum 경기장의 번호.
-     * @param gTime 경기 시간.
-     * @param gResDate 경기장 예약 날짜 (문자열 형태).
+     * @param gInfo      경기 정보.
+     * @param sID        경기장이 열릴 경기장의 ID.
+     * @param sNum       경기장의 번호.
+     * @param gTime      경기 시간.
+     * @param gResDate   경기장 예약 날짜 (문자열 형태).
      * @return 게임 생성 프로세스의 결과를 나타내는 ModelAndView 객체.
      * @throws Exception 게임 생성 과정에서 오류가 발생한 경우.
      */
@@ -166,11 +175,11 @@ public class GameControllerImpl implements GameController {
         int gameMakeresult = gameService.createGame(gameVO);
         System.out.println("controller gTeamIDINT : " + gameVO.getgTeamID());
         ModelAndView mav = new ModelAndView();
-        if(gameMakeresult < 0) {
+        if (gameMakeresult < 0) {
             mav.setViewName("redirect:/game/gameMake.do");
         } else {
-          mav.setViewName("redirect:/game/gameList.do");
-          //mav.setViewName("redirect:/game/gameMake.do");
+            mav.setViewName("redirect:/game/gameList.do");
+            //mav.setViewName("redirect:/game/gameMake.do");
         }
         mav.addObject("gameMakeresult", gameMakeresult);
         return mav;
@@ -180,12 +189,21 @@ public class GameControllerImpl implements GameController {
     @RequestMapping(value = "/gameList.do", method = RequestMethod.GET)
     public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int defaultPageNum = 1;
-        int defaultRowNum = 1;
+        int defaultRowNum = 0;
+        String sRegion = request.getParameter("sRegion");
+        String search = request.getParameter("search");
         List<GameListVO> gameList = null;
-        gameList = gameService.selectGameList(defaultPageNum, defaultRowNum);
-        System.out.println("controller parameter pageNum : " + defaultPageNum);
-        System.out.println("controller gameList 0 번째 gID : " + gameList.get(0).getgID());
+        gameList = gameService.selectGameList(defaultPageNum, defaultRowNum, sRegion, search);
+        // 리스트의 첫 번째 값 가져오기
+        if (!gameList.isEmpty()) {
+            System.out.println("controller gameList 0 번째 gID : " + gameList.get(0).getgID());
+            System.out.println("controller gameList의 길이 : " + gameList.size());
+            System.out.println("controller stadiumList : " + gameList.get(0).getsName());
+        } else {
+            System.out.println("controller 리스트가 비어 있습니다.");
+        }
         ModelAndView mav = new ModelAndView();
+        mav.addObject("uID", "heo");
         mav.addObject("gameList", gameList);
         mav.addObject("defaultPageNum", defaultPageNum);
         mav.setViewName("/game/gameList");
@@ -195,15 +213,25 @@ public class GameControllerImpl implements GameController {
     @Override
     @RequestMapping(value = "/filter/gameList.do", method = RequestMethod.POST, params = "responseType=json")
     @ResponseBody
-    public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false) int pageNum,
-                                           @RequestParam(value = "rowNum", required = false) int rowNum
+    public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                           @RequestParam(value = "rowNum", required = false, defaultValue = "0") int rowNum,
+                                           @RequestParam(value = "sRegion", required = false) String sRegion,
+                                           @RequestParam(value = "search", required = false) String search
     ) throws Exception {
         List<GameListVO> gameList = null;
+        String validID = "heo";
         System.out.println("RESTfull controller parameter pageNum : " + pageNum);
         System.out.println("RESTfull controller parameter rowNum : " + rowNum);
-        gameList = gameService.selectGameList(pageNum, rowNum);
-        System.out.println("RESTfull controller gameList 0 번째 gID : " + gameList.get(0).getgID());
-        System.out.println("RESTfull controller gameList의 길이 : " + gameList.size());
+        gameList = gameService.selectGameList(pageNum, rowNum, sRegion, search);
+
+        // 리스트의 첫 번째 값 가져오기
+        if (!gameList.isEmpty()) {
+            System.out.println("RESTfull controller gameList 0 번째 gID : " + gameList.get(0).getgID());
+            System.out.println("RESTfull controller gameList의 길이 : " + gameList.size());
+            System.out.println("RESTful controller stadiumList : " + gameList.get(0).getsName());
+        } else {
+            System.out.println("RESTfull controller 리스트가 비어 있습니다.");
+        }
         return gameList;
     }
 }

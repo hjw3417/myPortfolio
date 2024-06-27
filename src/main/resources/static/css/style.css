@@ -155,7 +155,7 @@ main{
   margin-left: 220px;
   box-sizing: border-box;
   height: 1000px;
-  >.findForm {
+  >.gameList-findForm {
     margin-bottom: 50px;
     text-align: center;
     display: flex;
@@ -182,7 +182,20 @@ main{
       cursor: pointer;
     }
   }
-  .cardContainer {
+}
+.cardContainer {
+    margin: 0 auto;
+    justify-content: center;
+}
+.nullMsg {
+    font-family: 'GmarketSansMedium';
+    font-size: 25pt;
+    margin-top: 50px;
+    margin-left: 150px;
+    margin-bottom: 300px;
+}
+
+.cardContainer {
     display: flex;
     margin-bottom: 25px;
     >.card {
@@ -205,7 +218,7 @@ main{
           > tr:nth-child(1), > tbody > tr:nth-child(1) {
             >td:nth-child(3), td:nth-child(4) {
               text-align: right;
-            } 
+            }
           }
         }
       }
@@ -236,20 +249,21 @@ main{
         cursor: pointer;
       }
     }
-    div>form>.cardSubmit {
-      width: 150px;
-      height: 100px;
-      background-color: rgb(146, 172, 101);
-      box-shadow: 2px 2px 5px rgb(146, 172, 101);
-      border-radius: 0px 10px 10px 0px;
-      border: 0px;
-      cursor: pointer;
-      font-size: 13pt;
-      font-weight: bold;
-      color: white;
-    }
+  div>form>.cardSubmit {
+    width: 150px;
+    height: 100px;
+    background-color: rgb(146, 172, 101);
+    box-shadow: 2px 2px 5px rgb(146, 172, 101);
+    border-radius: 0px 10px 10px 0px;
+    border: 0px;
+    cursor: pointer;
+    font-size: 13pt;
+    font-weight: bold;
+    color: white;
   }
-  >.paginationContainer {
+}
+
+  .paginationContainer {
     margin-left: -300px;
     margin-top: 50px;
     >.pagination {
@@ -262,9 +276,12 @@ main{
         font-size: 10pt;
         margin-right: 5px;
         color: rgb(146, 172, 101);
-        a {
-          text-decoration: none;
-          color: inherit;
+        button {
+            background-color: inherit;
+            border: 0pt;
+            color: inherit;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         input {
@@ -275,12 +292,16 @@ main{
         cursor: pointer;
       }
       >li:first-child, li:last-child {
-        font-size: 10pt;  
+        font-size: 10pt;
       }
       }
     }
   }
-}
+
+
+
+
+
 
 .gameInfo-content {
   display: bolck;

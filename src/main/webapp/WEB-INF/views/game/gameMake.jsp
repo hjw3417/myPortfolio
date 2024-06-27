@@ -52,7 +52,7 @@
             </ul>
           </div>
         </li>
-        <li><a href="gameList.html">경기 목록</a></li>
+        <li><a href="${contextPath}/game/gameList.do">경기 목록</a></li>
         <li><a href="../../../../../../../../../2차포트폴리오/웹페이지/html/stadiumList.html">경기장 목록</a></li>
         <li><a href="rankWatch.html">랭킹</a></li>
         <li><a href="#">게시판</a></li>

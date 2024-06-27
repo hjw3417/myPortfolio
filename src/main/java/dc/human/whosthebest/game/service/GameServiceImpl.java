@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service("gameService")
@@ -96,12 +97,22 @@ public class GameServiceImpl implements  GameService {
     }
 
     @Override
-    public List<GameListVO> selectGameList(int pageNum, int rowNum) throws DataAccessException {
+    public List<GameListVO> selectGameList(int pageNum,
+                                           int rowNum,
+                                           String sRegion,
+                                           String search
+                                           ) throws Exception {
         System.out.println("Service parameter pageNum : " + pageNum);
         List<GameListVO> gameList = null;
-        gameList = gameDAO.selectGameList(pageNum, rowNum);
-        System.out.println("Service gameList 0 번째 gID : " + gameList.get(0).getgID());
-        System.out.println("Service gameList의 길이 : " + gameList.size());
+        gameList = gameDAO.selectGameList(pageNum, rowNum, sRegion, search);
+        if(!gameList.isEmpty()) {
+            System.out.println("Service gameList 0 번째 gID : " + gameList.get(0).getgID());
+            System.out.println("Service gameList의 길이 : " + gameList.size());
+        } else {
+            System.out.println("Service gameList가 비어있습니다. ");
+            System.out.println("Service gameList의 길이 : " + gameList.size());
+        }
+
         return gameList;
     }
 }

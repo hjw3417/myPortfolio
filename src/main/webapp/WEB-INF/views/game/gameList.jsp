@@ -6,7 +6,7 @@
 
 <%
   request.setCharacterEncoding("UTF-8");
-%>    
+%>
 
 
 <!DOCTYPE html>
@@ -44,7 +44,7 @@
             </ul>
           </div>
         </li>
-        <li><a href="gameList.html">경기 목록</a></li>
+        <li><a href="${contextPath}/game/gameList.do">경기 목록</a></li>
         <li><a href="../../../../../../../../../2차포트폴리오/웹페이지/html/stadiumList.html">경기장 목록</a></li>
         <li><a href="rankWatch.html">랭킹</a></li>
         <li><a href="#">게시판</a></li>
@@ -57,14 +57,14 @@
       <div class="gameList-side">
         <div>
           <div>　</div>
-          <div>전체 경기</div>
-          <div>내가 만든 경기</div>
+          <button id="selectAllGame" name="selectAllGame">전체 경기</button>
+          <button value="${uID}">내가 만든 경기</button>
           <div>내가 참여 중인 경기</div>
         </div>
       </div>
       <div class="gameList-content" id="gameList-content">
-          <form class="findForm">
-            <select name="sRegion">
+          <form class="gameList-findForm" id="gameList-findForm">
+            <select name="sRegion" id="sRegion">
                 <option value="">전체</option>
                 <option value="A">서울</option>
                 <option value="B">경기</option>
@@ -83,15 +83,15 @@
                 <option value="O">전남</option>
                 <option value="P">제주</option>
             </select>
-            <input type="text" class="search" name="search" name="search" placeholder="경기장 이름 검색">
+            <input type="text" class="search" name="search" id="search" placeholder="경기장 이름 검색">
             <input type="submit" class="findFormSubmit" value="검색" >
           </form>
         <!-- 경기만들기 이동 링크 시작 -->
         <div class="makeGameBtnContainer">
-          <a href="gameMake.html">경기 만들기</a>
+          <a href="${contextPath}/game/gameMake.do">경기 만들기</a>
         </div>
         <!-- 리스트 container 시작 -->
-        <div id="gameListContainer">
+        <div id="gameListContainer" class="gameListContainer">
             <!-- 카드 시작 -->
             <c:forEach var="gameListVO" items="${gameList}">
             <div class="cardContainer" id="cardContainer">
@@ -148,7 +148,7 @@
             </c:forEach>
             <!-- 카드 종료 -->
         </div>
-        <!-- 리스트 container 시작 -->
+        <!-- 리스트 container 종료 -->
 
         <!-- pagination 시작 -->
         <div class="paginationContainer">
