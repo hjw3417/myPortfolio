@@ -76,15 +76,15 @@
             </div>
             <div>
               <select name="tMinAge">
-                <option value=0 disabled selected>시작나이</option>
+                <option value="0" disabled selected>시작나이</option>
                 <c:forEach var="i" begin="1" end="60">
-                    <option value="&{i}">${i}</option>
+                    <option value="${i}">${i}</option>
                 </c:forEach>
               </select>
               <select name="tMaxAge">
-                <option value=0 disabled selected>끝나이</option>
+                <option value="0" disabled selected>끝나이</option>
                 <c:forEach var="i" begin="1" end="60">
-                    <option value="&{i}">${i}</option>
+                    <option value="${i}">${i}</option>
                 </c:forEach>
               </select>
             </div>

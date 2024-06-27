@@ -23,8 +23,7 @@ public class TeamControllerImpl implements TeamController{
 
     @Override
     @RequestMapping(value="/addTeam" ,method = RequestMethod.POST)
-    public ModelAndView addTeam(@RequestParam("tLogo") MultipartFile file,
-                                @ModelAttribute("team") TeamInfoVO team,
+    public ModelAndView addTeam(@ModelAttribute("team") TeamInfoVO team,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
         int result = 0;
