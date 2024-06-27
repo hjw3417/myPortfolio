@@ -258,6 +258,7 @@ main{
       list-style-type: none;
       padding: 0;
       >li {
+        display: flex;
         font-size: 10pt;
         margin-right: 5px;
         color: rgb(146, 172, 101);
@@ -265,19 +266,17 @@ main{
           text-decoration: none;
           color: inherit;
         }
-        >form {
-            >button {
-                background-color: inherit;
-                border: 0pt;
-                color: inherit;
-                font-weight: bold;
-                cursor: pointer;
-            }
-        }
 
+        input {
+        background-color: inherit;
+        border: 0pt;
+        color: inherit;
+        font-weight: bold;
+        cursor: pointer;
       }
       >li:first-child, li:last-child {
         font-size: 10pt;  
+      }
       }
     }
   }

@@ -96,10 +96,10 @@ public class GameServiceImpl implements  GameService {
     }
 
     @Override
-    public List<GameListVO> selectGameList(int pageNum) throws DataAccessException {
+    public List<GameListVO> selectGameList(int pageNum, int rowNum) throws DataAccessException {
         System.out.println("Service parameter pageNum : " + pageNum);
         List<GameListVO> gameList = null;
-        gameList = gameDAO.selectGameList(pageNum);
+        gameList = gameDAO.selectGameList(pageNum, rowNum);
         System.out.println("Service gameList 0 번째 gID : " + gameList.get(0).getgID());
         System.out.println("Service gameList의 길이 : " + gameList.size());
         return gameList;

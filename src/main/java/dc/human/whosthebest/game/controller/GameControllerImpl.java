@@ -169,8 +169,8 @@ public class GameControllerImpl implements GameController {
         if(gameMakeresult < 0) {
             mav.setViewName("redirect:/game/gameMake.do");
         } else {
-//          mav.setViewName("game/gameList.do");
-            mav.setViewName("redirect:/game/gameMake.do");
+          mav.setViewName("redirect:/game/gameList.do");
+          //mav.setViewName("redirect:/game/gameMake.do");
         }
         mav.addObject("gameMakeresult", gameMakeresult);
         return mav;
@@ -180,8 +180,9 @@ public class GameControllerImpl implements GameController {
     @RequestMapping(value = "/gameList.do", method = RequestMethod.GET)
     public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int defaultPageNum = 1;
+        int defaultRowNum = 1;
         List<GameListVO> gameList = null;
-        gameList = gameService.selectGameList(defaultPageNum);
+        gameList = gameService.selectGameList(defaultPageNum, defaultRowNum);
         System.out.println("controller parameter pageNum : " + defaultPageNum);
         System.out.println("controller gameList 0 번째 gID : " + gameList.get(0).getgID());
         ModelAndView mav = new ModelAndView();
@@ -194,10 +195,13 @@ public class GameControllerImpl implements GameController {
     @Override
     @RequestMapping(value = "/filter/gameList.do", method = RequestMethod.POST, params = "responseType=json")
     @ResponseBody
-    public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false) int pageNum) throws Exception {
+    public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false) int pageNum,
+                                           @RequestParam(value = "rowNum", required = false) int rowNum
+    ) throws Exception {
         List<GameListVO> gameList = null;
         System.out.println("RESTfull controller parameter pageNum : " + pageNum);
-        gameList = gameService.selectGameList(pageNum);
+        System.out.println("RESTfull controller parameter rowNum : " + rowNum);
+        gameList = gameService.selectGameList(pageNum, rowNum);
         System.out.println("RESTfull controller gameList 0 번째 gID : " + gameList.get(0).getgID());
         System.out.println("RESTfull controller gameList의 길이 : " + gameList.size());
         return gameList;

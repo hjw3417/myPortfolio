@@ -42,5 +42,7 @@ public interface GameController {
                                    @RequestParam("gTime") int gTime,
                                    @RequestParam("gResDate") String gResDate) throws Exception;
     public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-    public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false) int pageNum) throws Exception;
+    public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false) int pageNum,
+                                           @RequestParam(value = "rowNum", required = false) int rowNum
+                                           ) throws Exception;
 }

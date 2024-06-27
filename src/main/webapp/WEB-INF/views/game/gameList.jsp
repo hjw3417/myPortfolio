@@ -153,13 +153,11 @@
         <!-- pagination 시작 -->
         <div class="paginationContainer">
           <ul class="pagination">
-            <li><a href="#">이전</a></li>
-            <form id="gamList-pageNumForm">
-                <c:forEach var="i" begin="${defaultPageNum}" end="${defaultPageNum+4}">
-                    <input type="submit" class="pageNum" name="pageNum" value="${i}"></input>
-                </c:forEach>
-            </form>
-            <li><a href="#">다음</a></li>
+            <li><button id="prevPage">이전</button></li>
+            <li id="pageNumBtnLI">
+
+            </li>
+            <li><button id="nextPage">다음</button></li>
           </ul>
         </div>
         <!-- pagination 종료 -->

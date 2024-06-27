@@ -148,6 +148,6 @@
 		INNER JOIN
 		STADIUM s ON g.S_ID = s.S_ID
 		)
-		WHERE rn BETWEEN #{pageNum} AND #{pageNum}+5
+		WHERE rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5)+5
 	</select>
 </mapper>

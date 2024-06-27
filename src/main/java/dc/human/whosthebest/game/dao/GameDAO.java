@@ -54,5 +54,5 @@ public interface GameDAO {
      * @throws DataAccessException 데이터 접근 중 오류가 발생한 경우.
      */
     public int createGame(GameVO gameVO) throws DataAccessException;
-    public List<GameListVO> selectGameList(int pageNum) throws DataAccessException;
+    public List<GameListVO> selectGameList(int pageNum, int rowNum) throws DataAccessException;
 }

@@ -241,13 +241,15 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('#gamList-pageNumForm').on('submit', function(event) {
+    $(document).on('submit', '#gamList-pageNumForm', function(event) {
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+        var rowNum = $(event.originalEvent.submitter).siblings('input[name="rowNum"]').val();
         var pageNum = $(event.originalEvent.submitter).val();
         $.ajax({
             url: '/game/filter/gameList.do',   //요청할 url 설정
             type: 'POST',               //요청 방식 POST로 설정
             data: {
+                rowNum: rowNum,
                 pageNum: pageNum,
                 responseType: 'json' // 응답 형식을 JSON으로 설정
             },
@@ -325,4 +327,19 @@ $(document).ready(function() {
             }
         });
     });
+    var defaultPageNum = 1; // 이 값을 JSP에서 받아올 수도 있습니다.
+    var currentPage = defaultPageNum;
+    var endPageNum = defaultPageNum + 4;
+
+
+
+    // defaultPageNum부터 endPageNum까지 반복합니다.
+    for (var i = defaultPageNum; i <= endPageNum; i++) {
+        $('#pageNumBtnLI').append(`
+            <form id="gamList-pageNumForm" class="gamList-pageNumForm">
+                <input type="hidden" class="rowNum" name="rowNum" value="${i - 1}">
+                <input type="submit" class="pageNum" name="pageNum" value="${i}">
+            </form>
+        `);
+    }
 });
