@@ -6,7 +6,7 @@
 
 <%
   request.setCharacterEncoding("UTF-8");
-%>    
+%>
 
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 <body>
   <header>
     <div class="logo">
-      <img src="../../../../../../../../../2차포트폴리오/웹페이지/image/logo.png">
+      <img src="../image/logo.png">
       <!-- <div>누가 잘차</div> -->
     </div>
     <div>
@@ -52,8 +52,8 @@
       <div class="gameInfo-content">
         <!-- 경기 제목 영역 시작 -->
         <div class="titeContainer">
-          <div>천안</div>
-          <div>진짜 뒤지고 싶은 사람~~!</div>
+          <div>${gameInfoVO.sRegion}</div>
+          <div>${gameInfoVO.gTitle}</div>
           <div>
             <a href="gameResult.html">경기 참여</a>
           </div>
@@ -62,13 +62,13 @@
         <!-- 사이 공간 영역 시작 -->
         <div class="intermediate">
           <div class="gTag" id="gTag" name="gTag">
-            #즐겜 #초보만 #두정동메시
+            ${gameInfoVO.gTag}
           </div>
           <div class="gMinmember" id="gMinmember" name="gMinmember">
-            9<span> <현재 참여 인원></span> / 22<span> <최소 참여 인원></span>
+            9<span> <현재 참여 인원></span> / ${gameInfoVO.gMinMember}<span> <최소 참여 인원></span>
           </div>
           <div>
-            2024-6-12 개설
+            ${gameInfoVO.gCreatedDate} 개설
           </div>
         </div>
         <!-- 사이 공간 영역 종료 -->
@@ -78,7 +78,7 @@
           <div class="teamMember">
             <div>
                 <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-                <div>문주군단</div>
+                <div>${gameInfoVO.tName}</div>
             </div>
             <div>
               <label>경기 참가 인원</label>
@@ -134,11 +134,11 @@
         <div class="stadiumInfoContainer">
           <div>
             경기 일시<br>
-            2024 - 6 -11 08 : 00 (2 시간)
+            ${gameInfoVO.gResDate} (${gameInfoVO.gTime} 시간)
           </div>
           <div>
-            천안 축구센터 2 경기장<br>
-           충청남도 천안 서북구 두정동 1975
+            ${gameInfoVO.sName} ${gameInfoVO.sNum} 경기장<br>
+           ${gameInfoVO.sAddr}
           </div>
         </div>
         <!-- 경기장 정보 영역 끝  -->
@@ -147,12 +147,7 @@
           <div class="gInfoContainer">
             <label>경기 안내 사항</label>
             <div class="gInfo" id="gInfo" name="gInfo">
-              모두 즐거운 경기 행복항 경기 하면 좋겠고 <br>
-              다치징 않고 매너 경기 부탁드립니다.<br>
-              기타 문의 사항 및 참가 여부 변동은 각 조 <br>
-              팀장 님을 통해서 소통 부탁 또는 우측 코멘트<br>
-              통해서 부탁드립니다.<br>
-              안전을 최우선으로 즐거운 게임 합시다.
+              ${gameInfoVO.gInfo}
             </div>
           </div>
           <div class="gComentContainer">

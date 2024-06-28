@@ -44,7 +44,7 @@
 		<result property="gMinMember" column="G_MINMEMBER"/>
 		<result property="gResDate" column="G_RESDATE"/>
 		<result property="gStatus" column="G_STATUS"/>
-		<result property="tID" column="T_ID"/>
+		<result property="tUserID" column="T_USERID"/>
 		<result property="tAwayID" column="T_AWAYID"/>
 		<result property="sID" column="S_ID"/>
 		<result property="sNum" column="S_NUM"/>
@@ -62,7 +62,7 @@
 		<result property="gMinMember" column="G_MINMEMBER"/>
 		<result property="gResDate" column="G_RESDATE"/>
 		<result property="gStatus" column="G_STATUS"/>
-		<result property="tID" column="G_USER_ID"/>
+		<result property="tUserID" column="G_USER_ID"/>
 		<result property="sID" column="S_ID"/>
 		<result property="sNum" column="S_NUM"/>
 
@@ -76,8 +76,7 @@
 		<result property="sAddr" column="S_ADDR"/>
 	</resultMap>
 
-	<!-- Result Map for GameInfoVO -->
-	<resultMap id="GameInfoResultMap" type="GameInfoVO">
+	<resultMap id="GameInfoResultMap" type="dc.human.whosthebest.vo.GameInfoVO">
 		<!-- Game table fields -->
 		<id property="gID" column="gID"/>
 		<result property="gTeamID" column="gTeamID"/>
@@ -89,7 +88,7 @@
 		<result property="gMinMember" column="gMinMember"/>
 		<result property="gResDate" column="gResDate"/>
 		<result property="gStatus" column="gStatus"/>
-		<result property="tID" column="tID"/>
+		<result property="tUserID" column="T_USERID"/>
 		<result property="tAwayID" column="tAwayID"/>
 		<result property="sID" column="sID"/>
 		<result property="sNum" column="sNum"/>
@@ -104,16 +103,6 @@
 		<result property="sAddr" column="sAddr"/>
 		<result property="sOwner" column="sOwner"/>
 		<result property="sPhone" column="sPhone"/>
-
-		<!-- Squad table fields -->
-		<result property="gamePatiMemNum" column="gamePatiMemNum"/>
-
-		<!-- User table fields -->
-		<result property="uID" column="uID"/>
-
-		<!-- Comment table fields -->
-		<result property="comwritename" column="comwritename"/>
-		<result property="gCommentContent" column="gCommentContent"/>
 	</resultMap>
 	<!-- SquadVO resultMap -->
 	<resultMap id="SquadResultMap" type="SquadVO">
@@ -158,7 +147,7 @@
 		G_INFO,
 		G_MINMEMBER,
 		G_RESDATE,
-		T_ID,
+		T_USERID,
 		S_ID,
 		S_NUM
 		) VALUES (
@@ -169,7 +158,7 @@
 		#{gInfo},
 		#{gMinMember},
 		#{gResDate},
-		#{tID},
+		#{tUserID},
 		#{sID},
 		#{sNum}
 		)
@@ -179,7 +168,7 @@
 		</selectKey>
 	</insert>
 	<select id="selectGameMaker" parameterType="int" resultMap="gameResultMap">
-		SELECT G_TEAMID, T_ID
+		SELECT G_TEAMID, T_USERID
 		FROM GAME
 		WHERE G_ID = #{gID}
 	</select>
@@ -187,7 +176,7 @@
 		INSERT INTO SQUAD
 		(G_ID, T_ID, U_ID, CREATED_ID)
 		VALUES
-		(#{gID}, #{gTeamID}, #{tID}, #{tID})
+		(#{gID}, #{gTeamID}, #{tUserID}, #{tUserID})
 	</insert>
 	<select id="selectGameList" parameterType="int" resultMap="gameListResultMap">
 		SELECT g_id, G_TEAMID, G_TITLE, G_TAG, G_CREATEDATE, G_TIME, G_MINMEMBER, G_RESDATE, G_STATUS,
@@ -197,7 +186,7 @@
 		FROM (
 		SELECT
 		g.G_ID, g.G_TEAMID, g.G_TITLE, g.G_TAG, g.G_CREATEDATE, g.G_TIME, g.G_MINMEMBER, g.G_RESDATE, g.G_STATUS,
-		g.T_ID AS G_USER_ID, g.S_ID, g.S_NUM,
+		g.T_USERID AS G_USER_ID, g.S_ID, g.S_NUM,
 		t.T_NAME, t.T_LOGO, t.T_REGION, t.T_PHONE, t.RANKSCORE, t.T_MINAGE, t.T_MAXAGE, t.T_MAXMEMBER, t.T_MEMBER,
 		t.T_INFO, t.CREATED_ID, t.CREATED_DATE, t.UPDATED_ID, t.UPDATED_DATE,
 		s.S_NAME, s.S_REGION, s.S_ADDR, s.S_OWNER, s.S_PHONE,
@@ -223,18 +212,13 @@
 			AND g.G_TAG||g.G_TITLE||t.T_NAME||S_REGION||S_ADDR LIKE '%' || #{search} || '%'
 		</if>
 		<if test="uID != null and uID != ''">
-			AND g.T_ID = #{uID}
+			AND g.T_USERID = #{uID}
 		</if>
 		)
 		WHERE rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5) + 5
 	</select>
 
 	<select id="selectGameInfo" resultMap="GameInfoResultMap" parameterType="int">
-		WITH ParticipantCount AS (
-		SELECT g_ID, COUNT(U_ID) AS gamePatiMemNum
-		FROM squad
-		GROUP BY g_ID
-		)
 		SELECT
 		g.G_ID AS gID,
 		g.G_TEAMID AS gTeamID,
@@ -246,7 +230,7 @@
 		g.G_MINMEMBER AS gMinMember,
 		g.G_RESDATE AS gResDate,
 		g.G_STATUS AS gStatus,
-		g.T_ID AS tID,
+		g.T_USERID AS tUserID,
 		g.T_AWAYID AS tAwayID,
 		g.S_ID AS sID,
 		g.S_NUM AS sNum,
@@ -256,28 +240,11 @@
 		s.S_REGION AS sRegion,
 		s.S_ADDR AS sAddr,
 		s.S_OWNER AS sOwner,
-		s.S_PHONE AS sPhone,
-		u.U_ID AS uID,
-		u.U_NAME AS comwritename,
-		c.G_COMMENT AS gCommentContent,
-		pc.gamePatiMemNum
-		FROM
-		game g
-		LEFT JOIN
-		team t ON g.T_ID = t.T_ID
-		LEFT JOIN
-		team t2 ON g.T_AWAYID = t2.T_ID
-		LEFT JOIN
-		stadium s ON g.S_ID = s.S_ID
-		LEFT JOIN
-		squad sq ON g.G_ID = sq.G_ID AND g.T_ID = sq.T_ID
-		LEFT JOIN
-		user u ON sq.U_ID = u.U_ID
-		LEFT JOIN
-		ParticipantCount pc ON g.G_ID = pc.g_ID
-		LEFT JOIN
-		comment c ON g.G_ID = c.G_ID
+		s.S_PHONE AS sPhone
+		FROM game g
+		LEFT JOIN team t ON g.G_TEAMID = t.T_ID
+		LEFT JOIN stadium s ON g.S_ID = s.S_ID
 		WHERE
-		g.G_ID = #{gID};
+		g.G_ID = #{gID}
 	</select>
 </mapper>

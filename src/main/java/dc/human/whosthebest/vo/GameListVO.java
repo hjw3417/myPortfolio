@@ -24,7 +24,7 @@ public class GameListVO {
 	private int gMinMember;				//G_MINMEMBER(경기 시작 최소 인원)
 	private String gResDate;			//G_RESDATE(경기장 예약 일자)
 	private int gStatus;				//G_STATUS(경기 상태)
-	private String tID;					//T_ID(경기 생성자 user ID)
+	private String tUserID;				//T_USERID(경기 생성자 user ID)
 	private int sID;					//S_ID(경기장 ID)
 	private int sNum;					//S_NUM(경기장 내 번호)
 
@@ -111,12 +111,12 @@ public class GameListVO {
 		this.gStatus = gStatus;
 	}
 
-	public String gettID() {
-		return tID;
+	public String gettUserID() {
+		return tUserID;
 	}
 
-	public void settID(String tID) {
-		this.tID = tID;
+	public void settUserID(String tUserID) {
+		this.tUserID = tUserID;
 	}
 
 	public int getsID() {

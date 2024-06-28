@@ -32,7 +32,7 @@ public interface GameController {
 
     public StadiumVO stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception;
 
-    public ModelAndView createGame(@RequestParam("tID") String tID,
+    public ModelAndView createGame(@RequestParam("gTeamID") String gTeamID,
                                    @RequestParam("gTitle") String gTitle,
                                    @RequestParam("gTag") String gTag,
                                    @RequestParam("gMinMember") int gMinMember,

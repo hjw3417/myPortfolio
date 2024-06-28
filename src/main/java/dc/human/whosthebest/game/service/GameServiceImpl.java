@@ -88,10 +88,10 @@ public class GameServiceImpl implements  GameService {
     @Override
     public int createGame(GameVO gameVO) throws  Exception {
         //gResDate 최종 formatting
-        gameVO.setGResDate(gameVO.getGResDate() + ":00");
+        gameVO.setgResDate(gameVO.getgResDate() + ":00");
         int createGameResult = gameDAO.createGame(gameVO);
 
-        int createdGID = gameVO.getGID();
+        int createdGID = gameVO.getgID();
         if(createdGID != 0) {
             System.out.println("createdGID : " + createdGID);
         } else {
@@ -100,7 +100,7 @@ public class GameServiceImpl implements  GameService {
 
         GameVO selectGameMaker = gameDAO.selectGameMaker(createdGID);
 
-        selectGameMaker.setGID(createdGID);
+        selectGameMaker.setgID(createdGID);
 
         int insertSquadResult = gameDAO.insertSquad(selectGameMaker);
 
@@ -143,7 +143,7 @@ public class GameServiceImpl implements  GameService {
     public GameInfoVO selectGameInfo(int gID) throws Exception {
         GameInfoVO gameInfoVO = gameDAO.selectGameInfo(gID);
         if(gameInfoVO != null) {
-            System.out.println("service gameInfo.gTitle" + gameInfoVO.getGTitle());
+            System.out.println("service gameInfo.gTitle" + gameInfoVO.getgTitle());
         }
         return gameInfoVO;
     }
