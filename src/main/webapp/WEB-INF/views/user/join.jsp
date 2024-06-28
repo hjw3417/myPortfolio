@@ -65,6 +65,32 @@
           }).open();
       };
 
+      function checkId(){
+              var uId =  $("#uID").val();
+
+        if (uId.trim() === ""){
+            alert("ID를 입력하세요.");
+            return;
+        }
+        $.ajax({
+            url : "${contextPath}/checkId",
+            type : "post",
+            async:true,
+            data : {uID : uId},
+            dataType:"json",
+            success:function(data, textStatus){
+                if(!data){
+                    alert("중복된 아이디입니다.");
+                } else {
+                    alert("사용 가능한 아이디입니다.");
+                }
+            },
+            error:function(data, textStatus){
+                alert("에러입니다");
+            }
+        });
+    };
+
 
 
   </script>
@@ -77,8 +103,8 @@
       <!-- <div>누가 잘차</div> -->
     </div>
     <div>
-      <span><a href="#">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="#">회원가입</a></span>
+      <span><a href="/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/join">회원가입</a></span>
     </div>
     <div>
       <ul></ul>
@@ -92,9 +118,10 @@
           회원가입
         </div>
         <div>
-          <form name="join" method="post" action="/user/join.do" modelAttribute="UserInfoVO">
+          <form name="join" method="post" action="/join.do" modelAttribute="UserInfoVO">
             <div>
-              <input type="text" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
+
+              <input type="text" id="uID" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
               <input type="button" value="아이디 중복" id="idCheck" onclick="checkId();">
             </div>
             <div>

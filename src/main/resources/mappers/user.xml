@@ -58,5 +58,12 @@
         <if test="uId != null and uId != ''"></if>
     </select>
 
+    <select id="loginUser" parameterType="String">
+        select count(*) from users where U_ID = #{uID}
+        <if test="uPW != null and uID != ''">
+            and U_PW = #{uPW}
+        </if>
+    </select>
+
 
 </mapper>
