@@ -115,6 +115,12 @@
 		<result property="comwritename" column="comwritename"/>
 		<result property="gCommentContent" column="gCommentContent"/>
 	</resultMap>
+	<!-- SquadVO resultMap -->
+	<resultMap id="SquadResultMap" type="SquadVO">
+		<id property="gId" column="g_id"/>
+		<result property="tId" column="t_id"/>
+		<result property="uId" column="u_id"/>
+	</resultMap>
 
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
 		SELECT t.t_id,
@@ -142,31 +148,41 @@
 		WHERE S_ID = #{sID}
 		]]>
 	</select>
+	<!-- INSERT 쿼리 -->
 	<insert id="createGame" parameterType="GameVO">
 		INSERT INTO GAME (
-			G_TEAMID,
-			G_TITLE,
-			G_TAG,
-			G_TIME,
-			G_INFO,
-			G_MINMEMBER,
-			G_RESDATE,
-			T_ID,
-			S_ID,
-			S_NUM
-			) VALUES (
-			#{gTeamID},
-			#{gTitle},
-			#{gTag},
-			#{gTime},
-			#{gInfo},
-			#{gMinMember},
-			#{gResDate},
-			#{tID},
-			#{sID},
-			#{sNum}
+		G_TEAMID,
+		G_TITLE,
+		G_TAG,
+		G_TIME,
+		G_INFO,
+		G_MINMEMBER,
+		G_RESDATE,
+		T_ID,
+		S_ID,
+		S_NUM
+		) VALUES (
+		#{gTeamID},
+		#{gTitle},
+		#{gTag},
+		#{gTime},
+		#{gInfo},
+		#{gMinMember},
+		#{gResDate},
+		#{tID},
+		#{sID},
+		#{sNum}
 		)
+		<!-- 시퀀스를 통해 기본 키 값 가져오기 -->
+		<selectKey keyProperty="gID" resultType="int" order="AFTER">
+			SELECT G_SEQUENCE.CURRVAL FROM dual
+		</selectKey>
 	</insert>
+	<select id="selectGameMaker" parameterType="int" resultMap="gameResultMap">
+		SELECT G_TEAMID, T_ID
+		FROM GAME
+		WHERE G_ID = #{gID}
+	</select>
 
 	<select id="selectGameList" parameterType="int" resultMap="gameListResultMap">
 		SELECT g_id, G_TEAMID, G_TITLE, G_TAG, G_CREATEDATE, G_TIME, G_MINMEMBER, G_RESDATE, G_STATUS,

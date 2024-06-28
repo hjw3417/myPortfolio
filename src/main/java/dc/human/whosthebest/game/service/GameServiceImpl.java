@@ -88,11 +88,21 @@ public class GameServiceImpl implements  GameService {
     @Override
     public int createGame(GameVO gameVO) throws  Exception {
         //gResDate 최종 formatting
-        gameVO.setgResDate(gameVO.getgResDate() + ":00");
-        gameDAO.createGame(gameVO);
-        return 1;
+        gameVO.setGResDate(gameVO.getGResDate() + ":00");
+        int createGameResult = gameDAO.createGame(gameVO);
+        int gameCreateResult = gameVO.getGID();
+        if(gameCreateResult != 0) {
+            System.out.println("gameCreateResult : " + gameCreateResult);
+        } else {
+            System.out.println("gameCreateResult : null 입니다.");
+        }
+        return createGameResult;
     }
-
+    @Override
+    public GameVO selectGameMaker(int gID) throws  Exception {
+        GameVO gameVO = gameDAO.selectGameMaker(gID);
+        return gameVO;
+    }
     @Override
     public List<GameListVO> selectGameList(int pageNum,
                                            int rowNum,

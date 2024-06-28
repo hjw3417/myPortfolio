@@ -15,13 +15,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Controller("gameController")
 @RequestMapping("/game")
@@ -155,19 +156,27 @@ public class GameControllerImpl implements GameController {
         GameVO gameVO = new GameVO();
         System.out.println("controller tID : " + gTeamID);
         int gTeamIDInt = Integer.parseInt(gTeamID);
-        gameVO.setgTeamID(gTeamIDInt);
-        gameVO.settID("heo");
+        gameVO.setGTeamID(gTeamIDInt);
+        gameVO.setTID("heo");
         gameVO.setCreatedID("heo");
-        gameVO.setgTitle(gTitle);
-        gameVO.setgTag(gTag);
-        gameVO.setgMinMember(gMinMember);
-        gameVO.setgInfo(gInfo);
-        gameVO.setsID(sID);
-        gameVO.setsNum(sNum);
-        gameVO.setgTime(gTime);
-        gameVO.setgResDate(gResDate);
+        gameVO.setGTitle(gTitle);
+        gameVO.setGTag(gTag);
+        gameVO.setGMinMember(gMinMember);
+        gameVO.setGInfo(gInfo);
+        gameVO.setSID(sID);
+        gameVO.setSNum(sNum);
+        gameVO.setGTime(gTime);
+        gameVO.setGResDate(gResDate);
+
         int gameMakeresult = gameService.createGame(gameVO);
-        System.out.println("controller gTeamIDINT : " + gameVO.getgTeamID());
+        int gameCreateResult = gameVO.getGID();
+        if(gameCreateResult != 0) {
+            System.out.println("gameCreateResult : " + gameCreateResult);
+        } else {
+            System.out.println("gameCreateResult : null 입니다.");
+        }
+
+        System.out.println("controller gTeamIDINT : " + gameVO.getGTeamID());
         ModelAndView mav = new ModelAndView();
         if (gameMakeresult < 0) {
             mav.setViewName("redirect:/game/gameMake.do");
@@ -232,7 +241,7 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    @PostMapping(value = "/gameInfo.do")
+    @GetMapping(value = "/gameInfo.do")
     public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int gID = 26;
 
