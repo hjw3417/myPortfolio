@@ -10,10 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.service;
 
 import dc.human.whosthebest.game.dao.GameDAO;
-import dc.human.whosthebest.vo.GameListVO;
-import dc.human.whosthebest.vo.GameVO;
-import dc.human.whosthebest.vo.StadiumVO;
-import dc.human.whosthebest.vo.TeamInfoVO;
+import dc.human.whosthebest.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -115,5 +112,13 @@ public class GameServiceImpl implements  GameService {
         }
 
         return gameList;
+    }
+    @Override
+    public GameInfoVO selectGameInfo(int gID) throws Exception {
+        GameInfoVO gameInfoVO = gameDAO.selectGameInfo(gID);
+        if(gameInfoVO != null) {
+            System.out.println("service gameInfo.gTitle" + gameInfoVO.getGTitle());
+        }
+        return gameInfoVO;
     }
 }

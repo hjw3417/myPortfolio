@@ -48,4 +48,5 @@ public interface GameController {
                                            @RequestParam(value = "search", required = false) String search,
                                            @RequestParam(value = "uID", required = false) String uID
                                           ) throws Exception;
+    public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

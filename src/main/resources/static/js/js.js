@@ -368,6 +368,7 @@ $(document).ready(function() {
         var pageNum = $(event.originalEvent?.submitter).val();
         var sRegion = null;
         var search = null;
+        var uID = null;
         selectGameAjax(rowNum, pageNum, sRegion, search, uID);
     });
     //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
@@ -378,6 +379,7 @@ $(document).ready(function() {
         var pageNum = 1;
         var sRegion = null;
         var search = null;
+        var uID = null;
         selectGameAjax(rowNum, pageNum, sRegion, search, uID);
     });
     $('#selectIMakeGame').on('click', function(event) {
@@ -397,6 +399,7 @@ $(document).ready(function() {
            var pageNum = 1;
            var sRegion = $("#sRegion").val();
            var search = $("#search").val();
+           var uID = null;
            selectGameAjax(rowNum, pageNum, sRegion, search, uID);
        });
     //검색 기능

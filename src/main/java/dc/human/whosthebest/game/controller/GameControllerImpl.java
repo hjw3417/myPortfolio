@@ -10,10 +10,7 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.controller;
 
 import dc.human.whosthebest.game.service.GameService;
-import dc.human.whosthebest.vo.GameListVO;
-import dc.human.whosthebest.vo.GameVO;
-import dc.human.whosthebest.vo.StadiumVO;
-import dc.human.whosthebest.vo.TeamInfoVO;
+import dc.human.whosthebest.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -21,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -204,7 +198,7 @@ public class GameControllerImpl implements GameController {
             System.out.println("controller 리스트가 비어 있습니다.");
         }
         ModelAndView mav = new ModelAndView();
-        mav.addObject("uID", "df");
+        mav.addObject("uID", "heo");
         mav.addObject("gameList", gameList);
         mav.addObject("defaultPageNum", defaultPageNum);
         mav.setViewName("/game/gameList");
@@ -235,5 +229,21 @@ public class GameControllerImpl implements GameController {
             System.out.println("RESTfull controller 리스트가 비어 있습니다.");
         }
         return gameList;
+    }
+
+    @Override
+    @PostMapping(value = "/gameInfo.do")
+    public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int gID = 26;
+
+        ModelAndView mav = new ModelAndView();
+        GameInfoVO gameInfoVO = new GameInfoVO();
+        gameInfoVO = gameService.selectGameInfo(gID);
+        if(gameInfoVO != null) {
+            System.out.println("controller gameInfo.gTitle" + gameInfoVO.getGTitle());
+            mav.addObject("gameInfoVO", gameInfoVO);
+        }
+        mav.setViewName("/game/gameInfo");
+        return mav;
     }
 }

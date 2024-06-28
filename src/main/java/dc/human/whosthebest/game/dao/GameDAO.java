@@ -61,4 +61,5 @@ public interface GameDAO {
                                            @Param("search") String search,
                                            @Param("uID") String uID
                                            ) throws DataAccessException;
+    public GameInfoVO selectGameInfo(int gID) throws DataAccessException;
 }

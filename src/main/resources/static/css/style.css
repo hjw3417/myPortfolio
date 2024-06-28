@@ -183,15 +183,12 @@ main{
     }
   }
 }
-.cardContainer {
-    margin: 0 auto;
-    justify-content: center;
-}
+
 .nullMsg {
     font-family: 'GmarketSansMedium';
     font-size: 25pt;
     margin-top: 50px;
-    margin-left: 150px;
+    margin-left: 80px;
     margin-bottom: 300px;
 }
 

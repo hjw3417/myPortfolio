@@ -13,6 +13,11 @@ HISTORY
 
 package dc.human.whosthebest.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class GameInfoVO {
 	//game table
 	private int gID;					//G_ID(경기 아이디/sequence)
@@ -33,15 +38,7 @@ public class GameInfoVO {
 	//team table
 	private String tName;				//T_NAME(팀 이름)
 	private byte[] tLogo;				//T_LOGO(팀 로고/image 파일)
-	private String tRegion;				//T_REGION(팀 지역)
-	private String tPhone;				//T_PHONE(팀 연락처)
-	private int tRankScore;				//RANKSCORE(팀 랭킹 점수)				
-	private int tMinAge;				//T_MINAGE(팀 참여 최소 나이)
-	private int tMaxAge;				//T_MAXAGE(팀 참여 최대 나이)
-	private int tMaxMember;				//T_MAXMEMBER(팀 최대 인원)
-	private int tMember;				//T_MEMBER(팀 멤버 ID)
-	private String tInfo;				//T_INFO(팀 정보)
-	
+
 	//stadium table
 	private String sName;				//S_NAME
 	private String sRegion;				//S_REGION
@@ -49,238 +46,16 @@ public class GameInfoVO {
 	private String sOwner;				//S_OWNER
 	private String sPhone;				//S_PHONE
 
+	//squad table
+	private int gamePatiMemNum;			//alias gpm, select count(*) from squad groub by  g_id, u_id;
+
+	//user table
+	private String uID;					//u_id
+
+	//gcommet table
+	private String comwritename;		//u_id(user table 과 조인)
+	private String gCommentContent;		//g_comment
+
 	public GameInfoVO() {
-	}
-
-	public int getgID() {
-		return gID;
-	}
-
-	public void setgID(int gID) {
-		this.gID = gID;
-	}
-
-	public int getgTeamID() {
-		return gTeamID;
-	}
-
-	public void setgTeamID(int gTeamID) {
-		this.gTeamID = gTeamID;
-	}
-
-	public String getgTitle() {
-		return gTitle;
-	}
-
-	public void setgTitle(String gTitle) {
-		this.gTitle = gTitle;
-	}
-
-	public String getgTag() {
-		return gTag;
-	}
-
-	public void setgTag(String gTag) {
-		this.gTag = gTag;
-	}
-
-	public String getgCreatedDate() {
-		return gCreatedDate;
-	}
-
-	public void setgCreatedDate(String gCreatedDate) {
-		this.gCreatedDate = gCreatedDate;
-	}
-
-	public int getgTime() {
-		return gTime;
-	}
-
-	public void setgTime(int gTime) {
-		this.gTime = gTime;
-	}
-
-	public String getgInfo() {
-		return gInfo;
-	}
-
-	public void setgInfo(String gInfo) {
-		this.gInfo = gInfo;
-	}
-
-	public int getgMinMember() {
-		return gMinMember;
-	}
-
-	public void setgMinMember(int gMinMember) {
-		this.gMinMember = gMinMember;
-	}
-
-	public String getgResDate() {
-		return gResDate;
-	}
-
-	public void setgResDate(String gResDate) {
-		this.gResDate = gResDate;
-	}
-
-	public int getgStatus() {
-		return gStatus;
-	}
-
-	public void setgStatus(int gStatus) {
-		this.gStatus = gStatus;
-	}
-
-	public String gettID() {
-		return tID;
-	}
-
-	public void settID(String tID) {
-		this.tID = tID;
-	}
-
-	public int gettAwayID() {
-		return tAwayID;
-	}
-
-	public void settAwayID(int tAwayID) {
-		this.tAwayID = tAwayID;
-	}
-
-	public int getsID() {
-		return sID;
-	}
-
-	public void setsID(int sID) {
-		this.sID = sID;
-	}
-
-	public int getsNum() {
-		return sNum;
-	}
-
-	public void setsNum(int sNum) {
-		this.sNum = sNum;
-	}
-
-	public String gettName() {
-		return tName;
-	}
-
-	public void settName(String tName) {
-		this.tName = tName;
-	}
-
-	public byte[] gettLogo() {
-		return tLogo;
-	}
-
-	public void settLogo(byte[] tLogo) {
-		this.tLogo = tLogo;
-	}
-
-	public String gettRegion() {
-		return tRegion;
-	}
-
-	public void settRegion(String tRegion) {
-		this.tRegion = tRegion;
-	}
-
-	public String gettPhone() {
-		return tPhone;
-	}
-
-	public void settPhone(String tPhone) {
-		this.tPhone = tPhone;
-	}
-
-	public int gettRankScore() {
-		return tRankScore;
-	}
-
-	public void settRankScore(int tRankScore) {
-		this.tRankScore = tRankScore;
-	}
-
-	public int gettMinAge() {
-		return tMinAge;
-	}
-
-	public void settMinAge(int tMinAge) {
-		this.tMinAge = tMinAge;
-	}
-
-	public int gettMaxAge() {
-		return tMaxAge;
-	}
-
-	public void settMaxAge(int tMaxAge) {
-		this.tMaxAge = tMaxAge;
-	}
-
-	public int gettMaxMember() {
-		return tMaxMember;
-	}
-
-	public void settMaxMember(int tMaxMember) {
-		this.tMaxMember = tMaxMember;
-	}
-
-	public int gettMember() {
-		return tMember;
-	}
-
-	public void settMember(int tMember) {
-		this.tMember = tMember;
-	}
-
-	public String gettInfo() {
-		return tInfo;
-	}
-
-	public void settInfo(String tInfo) {
-		this.tInfo = tInfo;
-	}
-
-	public String getsName() {
-		return sName;
-	}
-
-	public void setsName(String sName) {
-		this.sName = sName;
-	}
-
-	public String getsRegion() {
-		return sRegion;
-	}
-
-	public void setsRegion(String sRegion) {
-		this.sRegion = sRegion;
-	}
-
-	public String getsAddr() {
-		return sAddr;
-	}
-
-	public void setsAddr(String sAddr) {
-		this.sAddr = sAddr;
-	}
-
-	public String getsOwner() {
-		return sOwner;
-	}
-
-	public void setsOwner(String sOwner) {
-		this.sOwner = sOwner;
-	}
-
-	public String getsPhone() {
-		return sPhone;
-	}
-
-	public void setsPhone(String sPhone) {
-		this.sPhone = sPhone;
 	}
 }

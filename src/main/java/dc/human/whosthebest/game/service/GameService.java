@@ -25,4 +25,5 @@ public interface GameService {
                                            String search,
                                            String uID
                                            ) throws Exception;
+    public GameInfoVO selectGameInfo(int gID) throws Exception;
 }

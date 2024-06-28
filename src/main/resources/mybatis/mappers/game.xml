@@ -76,6 +76,46 @@
 		<result property="sAddr" column="S_ADDR"/>
 	</resultMap>
 
+	<!-- Result Map for GameInfoVO -->
+	<resultMap id="GameInfoResultMap" type="GameInfoVO">
+		<!-- Game table fields -->
+		<id property="gID" column="gID"/>
+		<result property="gTeamID" column="gTeamID"/>
+		<result property="gTitle" column="gTitle"/>
+		<result property="gTag" column="gTag"/>
+		<result property="gCreatedDate" column="gCreatedDate"/>
+		<result property="gTime" column="gTime"/>
+		<result property="gInfo" column="gInfo"/>
+		<result property="gMinMember" column="gMinMember"/>
+		<result property="gResDate" column="gResDate"/>
+		<result property="gStatus" column="gStatus"/>
+		<result property="tID" column="tID"/>
+		<result property="tAwayID" column="tAwayID"/>
+		<result property="sID" column="sID"/>
+		<result property="sNum" column="sNum"/>
+
+		<!-- Team table fields -->
+		<result property="tName" column="tName"/>
+		<result property="tLogo" column="tLogo"/>
+
+		<!-- Stadium table fields -->
+		<result property="sName" column="sName"/>
+		<result property="sRegion" column="sRegion"/>
+		<result property="sAddr" column="sAddr"/>
+		<result property="sOwner" column="sOwner"/>
+		<result property="sPhone" column="sPhone"/>
+
+		<!-- Squad table fields -->
+		<result property="gamePatiMemNum" column="gamePatiMemNum"/>
+
+		<!-- User table fields -->
+		<result property="uID" column="uID"/>
+
+		<!-- Comment table fields -->
+		<result property="comwritename" column="comwritename"/>
+		<result property="gCommentContent" column="gCommentContent"/>
+	</resultMap>
+
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
 		SELECT t.t_id,
 		       t.t_name
@@ -140,16 +180,18 @@
 		t.T_NAME, t.T_LOGO, t.T_REGION, t.T_PHONE, t.RANKSCORE, t.T_MINAGE, t.T_MAXAGE, t.T_MAXMEMBER, t.T_MEMBER,
 		t.T_INFO, t.CREATED_ID, t.CREATED_DATE, t.UPDATED_ID, t.UPDATED_DATE,
 		s.S_NAME, s.S_REGION, s.S_ADDR, s.S_OWNER, s.S_PHONE,
-		ROW_NUMBER() OVER (ORDER BY g.G_CREATEDATE) AS rn
+		ROW_NUMBER() OVER (ORDER BY g.G_CREATEDATE DESC) AS rn
 		FROM
 		GAME g
 		INNER JOIN
 		TEAM t ON g.G_TEAMID = t.T_ID
 		INNER JOIN
 		STADIUM s ON g.S_ID = s.S_ID
+		INNER JOIN
+		REGIONCODE r ON s.S_REGION = r.region_name
 		WHERE 1=1
 		<if test="sRegion != null and sRegion != ''">
-			AND s.S_REGION = #{sRegion}
+			AND r.REGION_CODE = #{sRegion}
 		</if>
 		<if test="search != null and search != ''">
 			AND (
@@ -164,5 +206,57 @@
 		</if>
 		)
 		WHERE rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5) + 5
+	</select>
+
+	<select id="selectGameInfo" resultMap="GameInfoResultMap" parameterType="int">
+		WITH ParticipantCount AS (
+		SELECT g_ID, COUNT(U_ID) AS gamePatiMemNum
+		FROM squad
+		GROUP BY g_ID
+		)
+		SELECT
+		g.G_ID AS gID,
+		g.G_TEAMID AS gTeamID,
+		g.G_TITLE AS gTitle,
+		g.G_TAG AS gTag,
+		g.G_CREATEDATE AS gCreatedDate,
+		g.G_TIME AS gTime,
+		g.G_INFO AS gInfo,
+		g.G_MINMEMBER AS gMinMember,
+		g.G_RESDATE AS gResDate,
+		g.G_STATUS AS gStatus,
+		g.T_ID AS tID,
+		g.T_AWAYID AS tAwayID,
+		g.S_ID AS sID,
+		g.S_NUM AS sNum,
+		t.T_NAME AS tName,
+		t.T_LOGO AS tLogo,
+		s.S_NAME AS sName,
+		s.S_REGION AS sRegion,
+		s.S_ADDR AS sAddr,
+		s.S_OWNER AS sOwner,
+		s.S_PHONE AS sPhone,
+		u.U_ID AS uID,
+		u.U_NAME AS comwritename,
+		c.G_COMMENT AS gCommentContent,
+		pc.gamePatiMemNum
+		FROM
+		game g
+		LEFT JOIN
+		team t ON g.T_ID = t.T_ID
+		LEFT JOIN
+		team t2 ON g.T_AWAYID = t2.T_ID
+		LEFT JOIN
+		stadium s ON g.S_ID = s.S_ID
+		LEFT JOIN
+		squad sq ON g.G_ID = sq.G_ID AND g.T_ID = sq.T_ID
+		LEFT JOIN
+		user u ON sq.U_ID = u.U_ID
+		LEFT JOIN
+		ParticipantCount pc ON g.G_ID = pc.g_ID
+		LEFT JOIN
+		comment c ON g.G_ID = c.G_ID
+		WHERE
+		g.G_ID = #{gID};
 	</select>
 </mapper>
