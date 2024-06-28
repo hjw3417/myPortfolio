@@ -141,7 +141,7 @@
            ${gameInfoVO.sAddr}
           </div>
         </div>
-        <!-- 경기장 정보 영역 끝  -->
+        <!-- 경기장 정보 영역  끝  -->
         <!-- 공지 사항 및 코멘트 영역 시작 -->
         <div class="comentContainer">
           <div class="gInfoContainer">
