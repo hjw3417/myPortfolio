@@ -60,20 +60,55 @@ public class UserControllerImpl implements UserController {
             int userCount = userService.loginUser(uID, uPW);
 
             if (userCount > 0) {
-                viewName = "serviceMain";
+                viewName = "main/serviceMain";
             } else {
                 msg = "일치하는 회원 정보가 없습니다";
-                viewName = "login";
+                viewName = "user/login";
             }
 
             mav.addObject("errorMsg",msg);
             mav.addObject("loginId",uID);
-            mav.setViewName("/serviceMain");
+            mav.setViewName(viewName);
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return mav;
+    }
+
+    @Override
+    @RequestMapping(value="/findId" , method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView findId(@RequestParam("uID") String uID,
+                               @RequestParam("uBday") String uBday,
+                               @RequestParam("uPhone") String uPhone, HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+        ModelAndView mav = new ModelAndView();
+
+        try{
+            String msgOk = "";
+            String msgNo = "";
+            String viewName = "";
+            int userCount = userService.findID(uID, uBday, uPhone);
+
+            if (userCount > 0) {
+                msgOk = "회원님의 아이디는 "+ uID + "입니다.";
+                viewName = "user/login";
+            } else {
+                msgNo = "아이디 또는 생년월일 또는 휴대폰 번호가 일치하지 않습니다.";
+                viewName = "user/findID";
+            }
+
+            mav.addObject("checkMsg",msgOk);
+            mav.addObject("errorMsg",msgNo);
+            mav.addObject("uId",uID);
+            mav.setViewName(viewName);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return mav;
+
     }
 
 

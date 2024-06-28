@@ -11,4 +11,7 @@ public interface UserController {
     public boolean idCheck(@RequestParam("uID") String uID, HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView login(@RequestParam("uID") String uID,
                               @RequestParam("uPW") String uPW,HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView findId(@RequestParam("uID") String uID,
+                              @RequestParam("uBday") String uPW,
+                              @RequestParam("uPhone") String uPhone, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

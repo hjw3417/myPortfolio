@@ -41,7 +41,7 @@
         <div>
           <form name="login" method="post" action="/login" enctype="utf-8">
             <div>
-              <input type="text" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
+              <input type="text" id="uID" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
             </div>
             <div>
               <input type="password" name="uPW" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요." required>

@@ -32,4 +32,9 @@ public class UserServiceImpl implements UserService {
     public int loginUser (String uID, String uPW) throws Exception{
         return userDAO.loginUser(uID, uPW);
     }
+
+    @Override
+    public int findID (String uID, String uBday, String uPhone) throws Exception{
+        return userDAO.findID(uID, uBday, uPhone);
+    }
 }

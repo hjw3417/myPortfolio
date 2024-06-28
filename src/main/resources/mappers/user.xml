@@ -65,5 +65,10 @@
         </if>
     </select>
 
+    <select id="findID" parameterType="String">
+        select count(*) from users where U_ID = #{uID} and U_BDAY = #{uBday} and U_PHONE = #{uPhone}
+        <if test = "uID != null and uID != '' and uBday != null and uBday != '' and uPhone != null and uPhone != ''"></if>
+    </select>
+
 
 </mapper>

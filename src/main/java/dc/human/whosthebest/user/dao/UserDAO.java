@@ -11,4 +11,5 @@ public interface UserDAO {
     public int insertJoin (UserInfoVO userInfoVO) throws DataAccessException;
     public int checkID (String uID) throws DataAccessException;
     public int loginUser (String uID, String uPW) throws DataAccessException;
+    public int findID (String uID, String uBday, String uPhone) throws DataAccessException;
 }
