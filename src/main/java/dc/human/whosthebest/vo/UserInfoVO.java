@@ -1,10 +1,13 @@
 package dc.human.whosthebest.vo;
 
+import java.util.Arrays;
+
 public class UserInfoVO {
 
 	private String uID;
 	private String uName;
 	private String uBday;
+	private String uGender;
 	private String uAddr1;
 	private String uAddr2;
 	private String uEmail;
@@ -15,6 +18,14 @@ public class UserInfoVO {
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
+
+	public String getuGender() {
+		return uGender;
+	}
+
+	public void setuGender(String uGender) {
+		this.uGender = uGender;
+	}
 
 	public String getuID() {
 		return uID;
@@ -118,5 +129,25 @@ public class UserInfoVO {
 
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	@Override
+	public String toString() {
+		return "UserInfoVO{" +
+				"uID='" + uID + '\'' +
+				", uName='" + uName + '\'' +
+				", uBday='" + uBday + '\'' +
+				", uGender='" + uGender + '\'' +
+				", uAddr1='" + uAddr1 + '\'' +
+				", uAddr2='" + uAddr2 + '\'' +
+				", uEmail='" + uEmail + '\'' +
+				", uPhone='" + uPhone + '\'' +
+				", uPW='" + uPW + '\'' +
+				", uPhoto=" + Arrays.toString(uPhoto) +
+				", createdID='" + createdID + '\'' +
+				", createdDate='" + createdDate + '\'' +
+				", updatedID='" + updatedID + '\'' +
+				", updatedDate='" + updatedDate + '\'' +
+				'}';
 	}
 }

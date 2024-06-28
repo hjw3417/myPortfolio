@@ -21,36 +21,42 @@
         <result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
-    <!--join xml-->
-    <insert id="insertJoin" parameterType="userInfoVO">
+    <!--회원가입 데이터 DB 전달-->
+    <insert id="insertJoin" parameterType="dc.human.whosthebest.vo.UserInfoVO">
         <![CDATA[
 		 insert into users(
 		    U_ID,
 		    U_NAME,
 		    U_BDAY,
+		    U_GENDER,
 		    U_ADDR1,
 		    U_ADDR2,
 		    U_EMAIL,
 		    U_PHONE,
 		    U_PW,
 		    CREATED_ID,
-            CREATED_DATE
+		    CREATED_DATE
 		 )
 		 values(
 		    #{uID},
 		    #{uName},
 		    #{uBday},
+		    #{uGender},
 		    #{uAddr1},
 		    #{uAddr2},
 		    #{uEmail},
 		    #{uPhone},
 		    #{uPW},
 		    #{uID},
-		    SYSDATE
+            #{createdDate}
 		    )
 		]]>
     </insert>
-
+    <!-- 아이디 중복체크 -->
+    <select id="checkID" parameterType="String" resultType="int">
+        select count(U_ID) from users where U_ID=#{uID}
+        <if test="uId != null and uId != ''"></if>
+    </select>
 
 
 </mapper>

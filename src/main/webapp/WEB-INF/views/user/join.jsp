@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <c:set var="contextPath" value="${pageContext.request.contextPath}" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/main.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
       //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -60,19 +63,22 @@
                   }
               }
           }).open();
-      }
+      };
+
+
+
   </script>
   <title>join</title>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="./logo.png">
+      <img src="./image/logo.png">
       <!-- <div>누가 잘차</div> -->
     </div>
     <div>
-      <span><a href="login.html">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="join.html">회원가입</a></span>
+      <span><a href="#">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="#">회원가입</a></span>
     </div>
     <div>
       <ul></ul>
@@ -86,13 +92,13 @@
           회원가입
         </div>
         <div>
-          <form name="join" method="post" action="/join.do" enctype="utf-8">
+          <form name="join" method="post" action="/user/join.do" modelAttribute="UserInfoVO">
             <div>
-              <input type="text" name="join_id" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
-              <input type="button" value="아이디 중복">
+              <input type="text" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
+              <input type="button" value="아이디 중복" id="idCheck" onclick="checkId();">
             </div>
             <div>
-              <input type="password" name="join_pw" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요." required>
+              <input type="password" name="uPW" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요." required>
               <div>
                 영문, 숫자, 특수문자 사용하여 9글자 이상 20글자 이내로 작성바랍니다.
               </div>
@@ -101,18 +107,18 @@
               <input type="password" name="join_pw_con" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 확인해주세요.">
             </div>
             <div>
-              <input type="text" name="join_name" placeholder="이름을 입력해주세요.">
+              <input type="text" name="uName" placeholder="이름을 입력해주세요.">
             </div>
             <div>
-              <input type="text" name="birth" placeholder="생년월일 8자리를 입력해주세요.">
+              <input type="text" name="uBday" placeholder="생년월일 8자리를 입력해주세요.">
             </div>
             <div>
               <div>
-                <input type="radio" id="man" name="gender" value="남자">
+                <input type="radio" id="man" name="uGender" value="남자">
                 <label for="man">남자</label>
               </div>
               <div>
-                <input type="radio" id="woman" name="gender" value="여자">
+                <input type="radio" id="woman" name="uGender" value="여자">
                 <label for="woman">여자</label>
               </div>
             </div>
@@ -122,21 +128,21 @@
               <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
             </div>
             <div>
-              <input type="text" name="join_roadAddress" id="roadAddress" placeholder="도로명주소">
+              <input type="text" name="uAddr1" id="roadAddress" placeholder="도로명주소">
               <input type="text" name="join_jibunAddress" id="jibunAddress" placeholder="지번주소">
             </div>
             <div>
-              <input type="text" name="join_detailAddress" id="detailAddress" placeholder="상세주소를 입력해주세요.">
+              <input type="text" name="uAddr2" id="detailAddress" placeholder="상세주소를 입력해주세요.">
             </div>
             <div>
-              <input type="email" name="join_email" placeholder="이메일 주소를 입력해주세요.">
+              <input type="email" name="uEmail" placeholder="이메일 주소를 입력해주세요.">
             </div>
             <div>
-              <input type="text" name="join_phone" size="11" maxlength="11" placeholder="휴대폰 번호를 입력해주세요.">
+              <input type="text" name="uPhone" size="11" maxlength="11" placeholder="휴대폰 번호를 입력해주세요.">
             </div>
             <div>
-              <a href="login.html"><input type="button" value="가입하기"></a>
-              <a href="login.html"><input type="button" value="취소"></a>
+              <input type="submit" value="가입하기">
+             <input type="reset" value="취소">
             </div>
           </form>
         </div>

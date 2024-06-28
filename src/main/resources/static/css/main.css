@@ -353,6 +353,14 @@ main{
     }
   }
 }
+.id_ok{
+    color : green;
+    display : none;
+}
+.id_no{
+    color : red;
+    display : none;
+}
 /*로그인 페이지 css*/
 .login{
   >div:first-child{
