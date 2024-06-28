@@ -183,7 +183,12 @@
 		FROM GAME
 		WHERE G_ID = #{gID}
 	</select>
-
+	<insert id="insertSquad" parameterType="GameVO">
+		INSERT INTO SQUAD
+		(G_ID, T_ID, U_ID, CREATED_ID)
+		VALUES
+		(#{gID}, #{gTeamID}, #{tID}, #{tID})
+	</insert>
 	<select id="selectGameList" parameterType="int" resultMap="gameListResultMap">
 		SELECT g_id, G_TEAMID, G_TITLE, G_TAG, G_CREATEDATE, G_TIME, G_MINMEMBER, G_RESDATE, G_STATUS,
 		G_USER_ID, S_ID, S_NUM,

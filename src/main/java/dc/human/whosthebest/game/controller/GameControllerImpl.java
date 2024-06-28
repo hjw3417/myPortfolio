@@ -169,12 +169,6 @@ public class GameControllerImpl implements GameController {
         gameVO.setGResDate(gResDate);
 
         int gameMakeresult = gameService.createGame(gameVO);
-        int gameCreateResult = gameVO.getGID();
-        if(gameCreateResult != 0) {
-            System.out.println("gameCreateResult : " + gameCreateResult);
-        } else {
-            System.out.println("gameCreateResult : null 입니다.");
-        }
 
         System.out.println("controller gTeamIDINT : " + gameVO.getGTeamID());
         ModelAndView mav = new ModelAndView();

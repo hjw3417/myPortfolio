@@ -56,6 +56,7 @@ public interface GameDAO {
      */
     public int createGame(GameVO gameVO) throws DataAccessException;
     public GameVO selectGameMaker(int gID) throws DataAccessException;
+    public int insertSquad(GameVO gameVO) throws  DataAccessException;
     public List<GameListVO> selectGameList(@Param("pageNum") int pageNum,
                                            @Param("rowNum") int rowNum,
                                            @Param("sRegion") String sRegion,

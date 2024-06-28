@@ -20,6 +20,7 @@ public interface GameService {
     public StadiumVO stadiumDetail(int sID) throws  Exception;
     public int createGame(GameVO gameVO) throws  Exception;
     public GameVO selectGameMaker(int gID) throws  Exception;
+    public int insertSquad(GameVO gameVO) throws  Exception;
     public List<GameListVO> selectGameList(int pageNum,
                                            int rowNum,
                                            String sRegion,
