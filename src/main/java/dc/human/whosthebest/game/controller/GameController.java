@@ -9,10 +9,7 @@ CREATED DATE    : 2024.06.21.
 */
 package dc.human.whosthebest.game.controller;
 
-import dc.human.whosthebest.vo.GameListVO;
-import dc.human.whosthebest.vo.StadiumResInfoVO;
-import dc.human.whosthebest.vo.StadiumResRawVO;
-import dc.human.whosthebest.vo.StadiumVO;
+import dc.human.whosthebest.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,4 +46,5 @@ public interface GameController {
                                            @RequestParam(value = "uID", required = false) String uID
                                           ) throws Exception;
     public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public List<GCommentVO> insertComments(@ModelAttribute("gCommentVO") GCommentVO gCommentVO)  throws Exception;
 }

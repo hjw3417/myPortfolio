@@ -28,4 +28,5 @@ public interface GameService {
                                            String uID
                                            ) throws Exception;
     public GameInfoVO selectGameInfo(int gID) throws Exception;
+    public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception;
 }

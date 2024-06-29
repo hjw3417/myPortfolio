@@ -263,6 +263,8 @@ ALTER TABLE SQUAD MODIFY (
     created_date DEFAULT TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 );
 
+
+
 ALTER TABLE game RENAME COLUMN t_id TO t_UserID;
 
 ALTER TABLE GAME ADD G_RESDATE VARCHAR2(20 BYTE);
@@ -280,14 +282,17 @@ MODIFY g_status NUMBER DEFAULT 0;
 
 ALTER TABLE game
 DROP COLUMN u_id;
-
+drop table g_comment;
 CREATE TABLE g_comment (
     u_id VARCHAR2(12) NOT NULL,
-    g_id VARCHAR2(10) NOT NULL,
+    g_id number NOT NULL,
     g_comment VARCHAR2(100),
     com_created_id VARCHAR2(12),
     com_created_date VARCHAR2(20),
     com_updated_id VARCHAR2(12),
-    com_updated_date VARCHAR2(20),
-    PRIMARY KEY (u_id, g_id)
+    com_updated_date VARCHAR2(20)
+);
+
+ALTER TABLE G_COMMENT MODIFY (
+    COM_CREATED_DATE DEFAULT TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 );

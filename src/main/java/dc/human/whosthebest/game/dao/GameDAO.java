@@ -66,4 +66,6 @@ public interface GameDAO {
                                            ) throws DataAccessException;
     public GameInfoVO selectGameInfo(int gID) throws DataAccessException;
     public  List<GameMemberListVO> selectGameTMemmber(int gID) throws DataAccessException;
+    public List<GCommentVO> selectComments(int gID) throws  DataAccessException;
+    public int insertComments(GCommentVO gCommentVO) throws DataAccessException;
 }

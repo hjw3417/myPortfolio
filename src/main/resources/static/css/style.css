@@ -523,25 +523,26 @@ main{
       display: flex;
       margin: 0 auto;
       padding-top: 10px;
-      >.gameComents {
-        width: 230px;
-        border: 1pt solid rgb(184, 206, 146);
-      }
-      >.gameComentsSumit {
-        width: 50px;
-        text-align: center;
-        font-family: bold;
-        color: rgb(146, 172, 101);
-        font-size: 12pt;
-        font-weight: bold;
-        border: 1pt solid rgb(184, 206, 146);
-        cursor: pointer;
-      }
-      >input:focus {
-        outline: none;
+      form {
+        >.gameComents {
+          width: 230px;
+          border: 1pt solid rgb(184, 206, 146);
+        }
+        >.gameComentsSumit {
+          width: 50px;
+          text-align: center;
+          font-family: bold;
+          color: rgb(146, 172, 101);
+          font-size: 12pt;
+          font-weight: bold;
+          border: 1pt solid rgb(184, 206, 146);
+          cursor: pointer;
+        }
+        >input:focus {
+          outline: none;
+        }
       }
     }
-    
   }
 }
 .maketeam {

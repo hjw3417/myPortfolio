@@ -1,5 +1,6 @@
 package dc.human.whosthebest.controller;
 
+import dc.human.whosthebest.vo.GCommentVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

@@ -1,4 +1,4 @@
-//resStadium.do 문서가 준비되면 실행될 코드를 정의합니다.
+//resStadium.do 관련 js 코드 시작
 $(document).ready(function() {
     // 첫 번째 Ajax 요청: 경기장 목록 가져오기
     $("#resStadium-findForm").submit(function(event) {
@@ -78,13 +78,14 @@ $(document).ready(function() {
         });
     });
 });
+//resStadium.do 관련 js 코드 끝
 
-
-//resStadium.do popup창 클로즈
-function closeWindow() {
-         window.close();
-     }
+//gameList.do 관련 js 코드 시작
 $(document).ready(function() {
+    //resStadium.do popup창 클로즈
+    function closeWindow() {
+             window.close();
+         }
     $('#stadiumResConForm').submit(function(event) {
         alert("전송 on")
         event.preventDefault();
@@ -151,6 +152,7 @@ $(document).ready(function() {
         window.close();
     });
 });
+//gameList.do 관련 js 코드 끝
 
 //gameMake.do에서 데이터 받는 메소드
 function receiveData(stadiumResConFormDate) {
@@ -405,3 +407,58 @@ $(document).ready(function() {
     //검색 기능
 });
 //gameMake.do 관련 js 끝
+
+//gameInfo.do 관련 js 시작
+$(document).ready(function() {
+
+    // insertCommentAjax 함수 정의
+    function insertCommentAjax(gameComments, gameInfoGID) {
+        alert("insertCommentAjax 실행 : " + gameComments + gameInfoGID);
+        $.ajax({
+            url: '/game/comment/gameInfo.do',   // 요청 URL
+            type: 'POST',
+            data: {
+                gComment: gameComments,
+                gID: gameInfoGID
+            },
+            success: function(response) {
+                var insertCommentsResult = response;
+                var html = '';
+                alert("insertCommentsResult.length: " + insertCommentsResult.length)
+                $("#gComentConent").hide();
+                if(insertCommentsResult.length === 0) {
+                    html ='<div class="nullMsg">경기 정보가 없습니다.</div>';
+                    $("#gComent").html(html);
+                } else {
+                    $.each(insertCommentsResult, function(index, gCommentList) {
+                        html = `
+                            <p><span>${gCommentList.uName} : </span>${gCommentList.gComment}</p>
+                        `;
+                        $("#gComent").append(html);
+                    });
+
+                }
+            },
+            error: function(error) {
+                // 요청 실패 시 메세지 알림
+                alert("Error: " + error);
+            }
+        });
+    }
+
+    // comment 제출 함수
+    $(document).on('submit', '#insertCommentForm', function(event) {
+        event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+        var gameComments = $('#gameComments').val();
+        var gameInfoGID = $('#gameInfoGID').val();
+        alert("insertCommentForm 실행" + gameComments);
+        if(gameComments === '') {
+            alert('코멘트를 입력해주세요.');
+        } else {
+            insertCommentAjax(gameComments, gameInfoGID);
+        }
+
+    });
+
+});
+//gameInfo.do 관련 js 끝

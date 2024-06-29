@@ -15,6 +15,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/js.js"></script>
   <title>경기 상세</title>
 </head>
 <body>
@@ -83,9 +86,16 @@
             <div>
               <label>경기 참가 인원</label>
               <ul>
-              <c:forEach var="gameMemberList" items="${gameInfoVO.gameMemberList}">
-                <li>${gameMemberList.uName}</li>
-              </c:forEach>
+              <c:choose>
+                  <c:when test="${not empty gameInfoVO.gameMemberList}">
+                      <c:forEach var="gameMember" items="${gameInfoVO.gameMemberList}">
+                          <li>${gameMember.uName}</li>
+                      </c:forEach>
+                  </c:when>
+                  <c:otherwise>
+                      <li>참여 인원이 없습니다.</li>
+                  </c:otherwise>
+              </c:choose>
               </ul>
             </div>
           </div>
@@ -142,22 +152,25 @@
           <div class="gComentContainer">
             <div>코멘트</div>
             <div class="gComent" id="gComent" name="gComent">
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
-              <p><span>공지 : </span>경기일 우천이 예고 되어있습니다.</p>
+                <div class="gComentConent" id="gComentConent" name="gComentConent">
+                  <c:choose>
+                    <c:when test="${not empty gameInfoVO.gCommentsList}">
+                        <c:forEach var="gCommentsList" items="${gameInfoVO.gCommentsList}">
+                            <p><span>${gCommentsList.uName} : </span>${gCommentsList.gComment}</p>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <p><span>공지 : </span>입력된 코멘트가 없습니다.</p>
+                    </c:otherwise>
+                  </c:choose>
+                </div>
             </div>
             <div class="comentsContainer">
-              <input type="text" class="gameComents">
-              <input type="submmit" value="입력" class="gameComentsSumit">
+                <form id="insertCommentForm">
+                  <input type="text" class="gameComments" id="gameComments">
+                  <input type="hidden" value="${gameInfoVO.gID}" id="gameInfoGID">
+                  <input type="submit" value="입력" class="gameComentsSumit">
+                </form>
             </div>
           </div>
         </div>

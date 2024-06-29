@@ -250,4 +250,19 @@ public class GameControllerImpl implements GameController {
         mav.setViewName("/game/gameInfo");
         return mav;
     }
+
+    @Override
+    @PostMapping(value="/comment/gameInfo.do")
+    @ResponseBody
+    public List<GCommentVO> insertComments(@ModelAttribute("gCommentVO") GCommentVO gCommentVO) throws Exception {
+        String uID = "heo";
+        gCommentVO.setuID(uID);
+        gCommentVO.setComCreatedID(uID);
+        List<GCommentVO> insertCommentsResult = null;
+        System.out.println("Controller 입력된 gCommentVO.getgID() : " + gCommentVO.getgID());
+        insertCommentsResult = gameService.insertComments(gCommentVO);
+        System.out.println("gCommentsList.get(0).getuName() : " + insertCommentsResult.get(0).getuName());
+        return insertCommentsResult;
+    }
+
 }

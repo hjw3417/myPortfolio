@@ -114,6 +114,14 @@
 		<id property="uID" column="U_ID"/>
 		<result property="uName" column="U_NAME"/>
 	</resultMap>
+	<!-- GCommentVO resultMap -->
+	<resultMap id="GCommentVOMap" type="GCommentVO">
+		<id property="uID" column="U_ID"/>
+		<result property="gID" column="G_ID"/>
+		<result property="gComment" column="g_comment"/>
+		<result property="comCreatedID" column="COM_CREATED_ID"/>
+		<result property="uName" column="U_NAME"/>
+	</resultMap>
 
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
 		SELECT t.t_id,
@@ -261,4 +269,15 @@
 		WHERE
 			sq.G_ID = #{gID}
 	</select>
+	<select id="selectComments" parameterType="int" resultMap="GCommentVOMap">
+		select cm.G_COMMENT, u.U_NAME
+		FROM G_COMMENT cm
+		LEFT JOIN
+		USERS u ON cm.U_ID = u.U_ID
+		WHERE cm.G_ID = #{gID}
+	</select>
+	<insert id="insertComments" parameterType="GCommentVO">
+		INSERT INTO G_COMMENT (U_ID, G_ID, G_COMMENT, COM_CREATED_ID)
+		VALUES (#{uID}, #{gID}, #{gComment}, #{comCreatedID})
+	</insert>
 </mapper>

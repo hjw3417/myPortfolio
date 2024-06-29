@@ -146,12 +146,24 @@ public class GameServiceImpl implements  GameService {
             System.out.println("service gameInfo.gTitle : " + gameInfoVO.getgTitle());
             System.out.println("service gameInfo.getuName: " + gameInfoVO.getuName());
             List<GameMemberListVO> gameMemberList = gameDAO.selectGameTMemmber(gameInfoVO.getgID());
-            if(gameMemberList != null) {
+            List<GCommentVO> gCommentsList = gameDAO.selectComments(gameInfoVO.getgID());
+            if(!gameMemberList.isEmpty()) {
                 gameInfoVO.setGameMemberList(gameMemberList);
                 System.out.println("Service gameMemberList 첫 번째 uName : " + gameMemberList.get(0).getuName());
+            }
+            if(!gCommentsList.isEmpty()) {
+                gameInfoVO.setgCommentsList(gCommentsList);
+                System.out.println("Service setgCommentsList 첫 번째 uName : " + gCommentsList.get(0).getuName());
             }
         }
         return gameInfoVO;
     }
 
+    @Override
+    public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception {
+        int insertCommentsResult =  gameDAO.insertComments(gCommentVO);
+        List<GCommentVO> gCommentsList = gameDAO.selectComments(gCommentVO.getgID());
+        System.out.println("gCommentsList.get(0).getuName() : " + gCommentsList.get(0).getuName());
+        return gCommentsList;
+    }
 }

@@ -13,9 +13,6 @@ HISTORY
 
 package dc.human.whosthebest.vo;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
 
@@ -60,6 +57,17 @@ public class GameInfoVO {
 
 	//List<GameMemberListVO>
 	private List<GameMemberListVO> gameMemberList;
+
+	//List<GComments>
+	private List<GCommentVO> gCommentsList;
+
+	public List<GCommentVO> getgCommentsList() {
+		return gCommentsList;
+	}
+
+	public void setgCommentsList(List<GCommentVO> gCommentsList) {
+		this.gCommentsList = gCommentsList;
+	}
 
 	public List<GameMemberListVO> getGameMemberList() {
 		return gameMemberList;
