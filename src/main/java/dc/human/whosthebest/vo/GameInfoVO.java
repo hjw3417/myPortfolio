@@ -16,6 +16,8 @@ package dc.human.whosthebest.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 public class GameInfoVO {
 	//game table
@@ -50,12 +52,33 @@ public class GameInfoVO {
 
 	//user table
 	private String uID;					//u_id
+	private String uName;				//U_ID
 
 	//gcommet table
 	private String comwritename;		//u_id(user table 과 조인)
 	private String gCommentContent;		//g_comment
 
+	//List<GameMemberListVO>
+	private List<GameMemberListVO> gameMemberList;
+
+	public List<GameMemberListVO> getGameMemberList() {
+		return gameMemberList;
+	}
+
+	public void setGameMemberList(List<GameMemberListVO> gameMemberList) {
+		this.gameMemberList = gameMemberList;
+	}
+
 	public GameInfoVO() {
+	}
+
+
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
 	}
 
 	public int getgID() {

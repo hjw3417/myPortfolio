@@ -237,13 +237,14 @@ public class GameControllerImpl implements GameController {
     @Override
     @GetMapping(value = "/gameInfo.do")
     public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int gID = 36;
+        int gID = 145;
 
         ModelAndView mav = new ModelAndView();
         GameInfoVO gameInfoVO = new GameInfoVO();
         gameInfoVO = gameService.selectGameInfo(gID);
         if(gameInfoVO != null) {
             System.out.println("controller gameInfo.getSRegion: " + gameInfoVO.getsRegion());
+            System.out.println("controller gameInfo.getuName: " + gameInfoVO.getuName());
             mav.addObject("gameInfoVO", gameInfoVO);
         }
         mav.setViewName("/game/gameInfo");

@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 @Mapper
@@ -64,4 +65,5 @@ public interface GameDAO {
                                            @Param("uID") String uID
                                            ) throws DataAccessException;
     public GameInfoVO selectGameInfo(int gID) throws DataAccessException;
+    public  List<GameMemberListVO> selectGameTMemmber(int gID) throws DataAccessException;
 }

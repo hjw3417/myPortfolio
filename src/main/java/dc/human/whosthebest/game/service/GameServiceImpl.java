@@ -143,8 +143,15 @@ public class GameServiceImpl implements  GameService {
     public GameInfoVO selectGameInfo(int gID) throws Exception {
         GameInfoVO gameInfoVO = gameDAO.selectGameInfo(gID);
         if(gameInfoVO != null) {
-            System.out.println("service gameInfo.gTitle" + gameInfoVO.getgTitle());
+            System.out.println("service gameInfo.gTitle : " + gameInfoVO.getgTitle());
+            System.out.println("service gameInfo.getuName: " + gameInfoVO.getuName());
+            List<GameMemberListVO> gameMemberList = gameDAO.selectGameTMemmber(gameInfoVO.getgID());
+            if(gameMemberList != null) {
+                gameInfoVO.setGameMemberList(gameMemberList);
+                System.out.println("Service gameMemberList 첫 번째 uName : " + gameMemberList.get(0).getuName());
+            }
         }
         return gameInfoVO;
     }
+
 }

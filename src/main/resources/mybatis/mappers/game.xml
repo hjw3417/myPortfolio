@@ -110,6 +110,10 @@
 		<result property="tId" column="t_id"/>
 		<result property="uId" column="u_id"/>
 	</resultMap>
+	<resultMap id="GameMemberListMap" type="GameMemberListVO">
+		<id property="uID" column="U_ID"/>
+		<result property="uName" column="U_NAME"/>
+	</resultMap>
 
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
 		SELECT t.t_id,
@@ -246,5 +250,15 @@
 		LEFT JOIN stadium s ON g.S_ID = s.S_ID
 		WHERE
 		g.G_ID = #{gID}
+	</select>
+	<select id="selectGameTMemmber" parameterType="int" resultMap="GameMemberListMap">
+		select
+			u.U_ID,
+			u.U_NAME
+		FROM
+			SQUAD sq
+		LEFT JOIN USERS u ON sq.U_ID = u.U_ID
+		WHERE
+			sq.G_ID = #{gID}
 	</select>
 </mapper>

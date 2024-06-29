@@ -83,20 +83,9 @@
             <div>
               <label>경기 참가 인원</label>
               <ul>
-                <li>허진욱<span>주장</span></li>
-                <li>홍성연</li>
-                <li>최연희</li>
-                <li>기성룡</li>
-                <li>정성룡</li>
-                <li>이을룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
+              <c:forEach var="gameMemberList" items="${gameInfoVO.gameMemberList}">
+                <li>${gameMemberList.uName}</li>
+              </c:forEach>
               </ul>
             </div>
           </div>
