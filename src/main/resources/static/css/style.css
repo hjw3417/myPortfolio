@@ -416,21 +416,35 @@ main{
           padding-left: 10px;
           box-sizing: border-box;
         }
-        >ul {
-          height: 170px;
-          overflow-y: auto;
-          list-style: none;
-          >li {
-            line-height: 15pt;
-            >span {
-              margin-left: 2px;
-              font-size: 8pt;
+        >.homeTeamMemberListContainer {
+            >ul {
+              height: 170px;
+              overflow-y: auto;
+              list-style: none;
+              >li {
+                line-height: 15pt;
+                >span {
+                  margin-left: 2px;
+                  font-size: 8pt;
+                }
+              }
             }
-          }
+        }
+        >.awayTeamMemberListContainer {
+            >ul {
+              height: 170px;
+              overflow-y: auto;
+              list-style: none;
+              >li {
+                line-height: 15pt;
+                >span {
+                  margin-left: 2px;
+                  font-size: 8pt;
+                }
+              }
+            }
         }
       }
-      
-
     }
   }
 }
@@ -475,7 +489,6 @@ main{
   >.gInfoContainer {
     width: 330px;
     height: 400px;
-    overflow-y: auto;
     box-sizing: border-box;
     padding: 20px;
     box-shadow: 2px 2px 5px gray;
@@ -490,6 +503,7 @@ main{
       height: 280px;
       margin-top: 20px;
       background-color: rgb(255, 255, 234);
+      overflow-y: auto;
     }
   }
   >.gComentContainer {
@@ -502,6 +516,7 @@ main{
     box-shadow: 2px 2px 5px gray;
     background-color: rgb(184, 206, 146);
     border-radius: 5px;
+    margin-left: 15px;
     >div:first-child {
       font-size: 15pt;
       margin: 0px;

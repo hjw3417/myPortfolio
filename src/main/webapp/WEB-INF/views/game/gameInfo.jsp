@@ -58,7 +58,10 @@
           <div>${gameInfoVO.sRegion}</div>
           <div>${gameInfoVO.gTitle}</div>
           <div>
-            <a href="gameResult.html">경기 참여</a>
+            <form id="startGameForm">
+                <input type="hidden" id="startGameGID" value="${gameInfoVO.gID}" />
+                <input type="submit" id="startGameBtn"/>
+            </form>
           </div>
         </div>
         <!-- 경기 제목 영역 종료 -->
@@ -82,21 +85,28 @@
             <div>
                 <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
                 <div>${gameInfoVO.tName}</div>
+                <form id="partiHomeTeamForm">
+                    <input type="hidden" id="gID" value="${gameInfoVO.gID}" />
+                    <input type="hidden" id="homeTeamID"  value="${gameInfoVO.gTeamID}" />
+                    <input type="submit" id="partiHomeTeamBtn" value="참가" />
+                </form>
             </div>
             <div>
               <label>경기 참가 인원</label>
-              <ul>
-              <c:choose>
-                  <c:when test="${not empty gameInfoVO.gameMemberList}">
-                      <c:forEach var="gameMember" items="${gameInfoVO.gameMemberList}">
-                          <li>${gameMember.uName}</li>
-                      </c:forEach>
-                  </c:when>
-                  <c:otherwise>
-                      <li>참여 인원이 없습니다.</li>
-                  </c:otherwise>
-              </c:choose>
-              </ul>
+              <div class="homeTeamMemberListContainer">
+                <ul class="homeTeamMemberList">
+                  <c:choose>
+                      <c:when test="${not empty gameInfoVO.gameMemberList}">
+                          <c:forEach var="gameMember" items="${gameInfoVO.gameMemberList}">
+                              <li>${gameMember.uName}</li>
+                          </c:forEach>
+                      </c:when>
+                      <c:otherwise>
+                          <li>참여 인원이 없습니다.</li>
+                      </c:otherwise>
+                  </c:choose>
+                  </ul>
+              </div>
             </div>
           </div>
           <!-- 나의 팀 끝 -->
@@ -105,25 +115,28 @@
             <div>
               <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
               <div>문주군단</div>
+              <form id="partiAwayTeamForm">
+                  <input type="hidden" id="startGameGID" value="${gameInfoVO.gID}" />
+                  <input type="hidden" id="aWayTeamID"  value="${gameInfoVO.tAwayID}" />
+                  <input type="submit" id="partiAwayTeamBtn" value="참가" />
+              <form>
             </div>
             <div>
               <label>경기 참가 인원</label>
-              <ul>
-                <li>허진욱<span>주장</span></li>
-                <li>홍성연</li>
-                <li>최연희</li>
-                <li>기성룡</li>
-                <li>정성룡</li>
-                <li>이을룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-                <li>이청룡</li>
-              </ul>
+              <div class="awayTeamMemberListContainer">
+                <ul class="awayTeamMemberList">
+                  <c:choose>
+                      <c:when test="${not empty gameInfoVO.gameMemberList}">
+                          <c:forEach var="gameMember" items="${gameInfoVO.gameMemberList}">
+                              <li>${gameMember.uName}</li>
+                          </c:forEach>
+                      </c:when>
+                      <c:otherwise>
+                          <li>참여 인원이 없습니다.</li>
+                      </c:otherwise>
+                  </c:choose>
+                  </ul>
+              </div>
             </div>
           </div>
           <!-- 상대 팀 끝 -->

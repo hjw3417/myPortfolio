@@ -264,5 +264,18 @@ public class GameControllerImpl implements GameController {
         System.out.println("gCommentsList.get(0).getuName() : " + insertCommentsResult.get(0).getuName());
         return insertCommentsResult;
     }
-
+    @Override
+    @PostMapping(value="/partiHome/gameInfo.do")
+    @ResponseBody
+    public  List<GameMemberListVO> partiHomeTeam(@RequestParam(value="gID", required = false, defaultValue = "1") int gID,
+                                                 @RequestParam(value="gTeamID", required = false, defaultValue = "1") int gTeamID
+                                                ) throws Exception {
+        SquadVO squadVO = new SquadVO();
+        squadVO.setgID(gID);
+        squadVO.settID(gTeamID);
+        squadVO.setuID("munn");
+        squadVO.setCreatedID("munn");
+        List<GameMemberListVO> gameMemberList = gameService.insertAndSelectHomeTeam(squadVO);
+        return gameMemberList;
+    }
 }

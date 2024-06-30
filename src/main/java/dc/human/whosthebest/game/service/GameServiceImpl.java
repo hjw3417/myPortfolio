@@ -13,10 +13,12 @@ import dc.human.whosthebest.game.dao.GameDAO;
 import dc.human.whosthebest.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -100,24 +102,18 @@ public class GameServiceImpl implements  GameService {
 
         GameVO selectGameMaker = gameDAO.selectGameMaker(createdGID);
 
-        selectGameMaker.setgID(createdGID);
+//        selectGameMaker.setgID(createdGID);
+        SquadVO squadVO = new SquadVO();
+        squadVO.setgID(createdGID);
+        squadVO.settID(selectGameMaker.getgTeamID());
+        squadVO.setuID(selectGameMaker.gettUserID());
+        squadVO.setCreatedID(selectGameMaker.gettUserID());
 
-        int insertSquadResult = gameDAO.insertSquad(selectGameMaker);
+        int insertSquadResult = gameDAO.insertSquad(squadVO);
 
         System.out.println("service insertSquadResult : " + insertSquadResult);
 
         return createGameResult;
-    }
-    @Override
-    public GameVO selectGameMaker(int gID) throws  Exception {
-        GameVO gameVO = gameDAO.selectGameMaker(gID);
-        return gameVO;
-    }
-    @Override
-    public int insertSquad(GameVO gameVO) throws  Exception {
-
-        int gameVOResult = gameDAO.insertSquad(gameVO);
-        return gameVOResult;
     }
     @Override
     public List<GameListVO> selectGameList(int pageNum,
@@ -145,7 +141,10 @@ public class GameServiceImpl implements  GameService {
         if(gameInfoVO != null) {
             System.out.println("service gameInfo.gTitle : " + gameInfoVO.getgTitle());
             System.out.println("service gameInfo.getuName: " + gameInfoVO.getuName());
-            List<GameMemberListVO> gameMemberList = gameDAO.selectGameTMemmber(gameInfoVO.getgID());
+            SquadVO squadVO = new SquadVO();
+            squadVO.setgID(gameInfoVO.getgID());
+            squadVO.settID(gameInfoVO.getgTeamID());
+            List<GameMemberListVO> gameMemberList = gameDAO.selectGameTMemmber(squadVO);
             List<GCommentVO> gCommentsList = gameDAO.selectComments(gameInfoVO.getgID());
             if(!gameMemberList.isEmpty()) {
                 gameInfoVO.setGameMemberList(gameMemberList);
@@ -165,5 +164,16 @@ public class GameServiceImpl implements  GameService {
         List<GCommentVO> gCommentsList = gameDAO.selectComments(gCommentVO.getgID());
         System.out.println("gCommentsList.get(0).getuName() : " + gCommentsList.get(0).getuName());
         return gCommentsList;
+    }
+    @Override
+    public List<GameMemberListVO> insertAndSelectHomeTeam(SquadVO squadVO) throws  Exception {
+        List<GameMemberListVO> gameMemberList = new ArrayList<>();
+        if(gameDAO.checkDuplicateSquad(squadVO) >= 1) {
+            return gameMemberList;
+        } else {
+            int insertSquadResult = gameDAO.insertSquad(squadVO);
+            gameMemberList = gameDAO.selectGameTMemmber(squadVO);
+            return gameMemberList;
+        }
     }
 }

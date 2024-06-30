@@ -109,6 +109,7 @@
 		<id property="gId" column="g_id"/>
 		<result property="tId" column="t_id"/>
 		<result property="uId" column="u_id"/>
+		<result property="createdID" column="CREATED_ID"/>
 	</resultMap>
 	<resultMap id="GameMemberListMap" type="GameMemberListVO">
 		<id property="uID" column="U_ID"/>
@@ -184,11 +185,11 @@
 		FROM GAME
 		WHERE G_ID = #{gID}
 	</select>
-	<insert id="insertSquad" parameterType="GameVO">
+	<insert id="insertSquad" parameterType="SquadVO">
 		INSERT INTO SQUAD
 		(G_ID, T_ID, U_ID, CREATED_ID)
 		VALUES
-		(#{gID}, #{gTeamID}, #{tUserID}, #{tUserID})
+		(#{gID}, #{tID}, #{uID}, #{createdID})
 	</insert>
 	<select id="selectGameList" parameterType="int" resultMap="gameListResultMap">
 		SELECT g_id, G_TEAMID, G_TITLE, G_TAG, G_CREATEDATE, G_TIME, G_MINMEMBER, G_RESDATE, G_STATUS,
@@ -259,7 +260,7 @@
 		WHERE
 		g.G_ID = #{gID}
 	</select>
-	<select id="selectGameTMemmber" parameterType="int" resultMap="GameMemberListMap">
+	<select id="selectGameTMemmber" parameterType="SquadVO" resultMap="GameMemberListMap">
 		select
 			u.U_ID,
 			u.U_NAME
@@ -267,7 +268,7 @@
 			SQUAD sq
 		LEFT JOIN USERS u ON sq.U_ID = u.U_ID
 		WHERE
-			sq.G_ID = #{gID}
+			sq.G_ID = #{gID} and sq.T_ID = #{tID}
 	</select>
 	<select id="selectComments" parameterType="int" resultMap="GCommentVOMap">
 		select cm.G_COMMENT, u.U_NAME
@@ -280,4 +281,9 @@
 		INSERT INTO G_COMMENT (U_ID, G_ID, G_COMMENT, COM_CREATED_ID)
 		VALUES (#{uID}, #{gID}, #{gComment}, #{comCreatedID})
 	</insert>
+	<select id="checkDuplicateSquad" parameterType="SquadVO" resultType="int">
+		SELECT COUNT(*)
+		FROM SQUAD
+		WHERE U_ID = #{uID}
+	</select>
 </mapper>

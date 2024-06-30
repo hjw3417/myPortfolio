@@ -19,8 +19,6 @@ public interface GameService {
     public List<StadiumVO> selectStadium(String sRegion, String search) throws  Exception;
     public StadiumVO stadiumDetail(int sID) throws  Exception;
     public int createGame(GameVO gameVO) throws  Exception;
-    public GameVO selectGameMaker(int gID) throws  Exception;
-    public int insertSquad(GameVO gameVO) throws  Exception;
     public List<GameListVO> selectGameList(int pageNum,
                                            int rowNum,
                                            String sRegion,
@@ -29,4 +27,5 @@ public interface GameService {
                                            ) throws Exception;
     public GameInfoVO selectGameInfo(int gID) throws Exception;
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception;
+    public List<GameMemberListVO> insertAndSelectHomeTeam(SquadVO squadVO) throws  Exception;
 }

@@ -47,4 +47,7 @@ public interface GameController {
                                           ) throws Exception;
     public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
     public List<GCommentVO> insertComments(@ModelAttribute("gCommentVO") GCommentVO gCommentVO)  throws Exception;
+    public  List<GameMemberListVO> partiHomeTeam(@RequestParam("gID") int gID,
+                                                 @RequestParam("gTeamID") int gTeamID
+                                                 ) throws Exception;
 }

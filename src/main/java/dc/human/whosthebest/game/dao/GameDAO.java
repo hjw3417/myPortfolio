@@ -57,7 +57,7 @@ public interface GameDAO {
      */
     public int createGame(GameVO gameVO) throws DataAccessException;
     public GameVO selectGameMaker(int gID) throws DataAccessException;
-    public int insertSquad(GameVO gameVO) throws  DataAccessException;
+    public int insertSquad(SquadVO squadVO) throws  DataAccessException;
     public List<GameListVO> selectGameList(@Param("pageNum") int pageNum,
                                            @Param("rowNum") int rowNum,
                                            @Param("sRegion") String sRegion,
@@ -65,7 +65,8 @@ public interface GameDAO {
                                            @Param("uID") String uID
                                            ) throws DataAccessException;
     public GameInfoVO selectGameInfo(int gID) throws DataAccessException;
-    public  List<GameMemberListVO> selectGameTMemmber(int gID) throws DataAccessException;
+    public  List<GameMemberListVO> selectGameTMemmber(SquadVO squadVO) throws DataAccessException;
     public List<GCommentVO> selectComments(int gID) throws  DataAccessException;
     public int insertComments(GCommentVO gCommentVO) throws DataAccessException;
+    public int checkDuplicateSquad(SquadVO squadVO) throws DataAccessException;
 }

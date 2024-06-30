@@ -410,7 +410,11 @@ $(document).ready(function() {
 
 //gameInfo.do 관련 js 시작
 $(document).ready(function() {
+    //경기 참여 Btn value 설정
+    $('#startGameBtn').hide();
 
+    var $gComent = $('#gComent');
+    $gComent.scrollTop($gComent.prop("scrollHeight"));
     // insertCommentAjax 함수 정의
     function insertCommentAjax(gameComments, gameInfoGID) {
         alert("insertCommentAjax 실행 : " + gameComments + gameInfoGID);
@@ -446,6 +450,38 @@ $(document).ready(function() {
         });
     }
 
+    //insert HomeTeam Squad Ajax
+    function insertHomeTeamSquadAjax(gID, gTeamID) {
+        $.ajax({
+            url: '/game/partiHome/gameInfo.do',
+            type: 'POST',
+            data: {
+                gID: gID,
+                gTeamID: gTeamID
+            },
+            success: function(response) {
+                var gameMemberList = response;
+                var html = '';
+                if(gameMemberList.length === 0) {
+                    alert("이미 참가하였습니다.")
+                } else {
+                    alert(gameMemberList[0].uID)
+                    $("#homeTeamMemberList").empty();
+                    $.each(gameMemberList, function(index, gameMember) {
+                        html = `
+                            <li>${gameMember.uName}</li>
+                        `;
+                        $("#homeTeamMemberList").appent(html);
+                    });
+                }
+            },
+            error: function(error) {
+                //요청 실패 시 메세지 알림
+                alert("Error: " + error);
+            }
+        });
+    }
+
     // comment 제출 함수
     $(document).on('submit', '#insertCommentForm', function(event) {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
@@ -456,8 +492,15 @@ $(document).ready(function() {
             alert('코멘트를 입력해주세요.');
         } else {
             insertCommentAjax(gameComments, gameInfoGID);
+            $gComent.scrollTop($gComent.prop("scrollHeight"));
         }
+    });
 
+    $(document).on('submit', '#partiHomeTeamForm', function(event) {
+        event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+        var gID = $('#gID').val();
+        var gTeamID = $('#homeTeamID').val();
+        insertHomeTeamSquadAjax(gID, gTeamID)
     });
 
 });
