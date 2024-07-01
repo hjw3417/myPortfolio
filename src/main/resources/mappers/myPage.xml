@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.myPage.dao.MyPageDAO">
+
+    <!--마이페이지 메인화면-->
+    <resultMap id="myPage" type="MypageInfoVO">
+        <result property="uID"          column="u_id" />
+        <result property="uName"        column="u_name" />
+        <result property="tID"          column="t_id" />
+        <result property="tName"        column="t_name"/>
+        <result property="tRankScore"   column="rankscore" />
+    </resultMap>
+
+
+    <!--마이페이지 메인화면-->
+    <select id="selectMyPageInfo" resultMap="myPage">
+        <![CDATA[
+             select  squad.u_id ,
+                     team.t_name,
+                     team.rankscore
+             from  team, squad
+             where squad.t_id=team.t_id
+                    and u_id=#{uID}
+
+        ]]>
+    </select>
+
+
+
+</mapper>

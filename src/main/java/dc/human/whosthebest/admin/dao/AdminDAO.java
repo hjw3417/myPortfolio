@@ -32,11 +32,11 @@ public interface AdminDAO {
     public List selectNewTeamList() throws DataAccessException;
     
     //회원 상세보기
-    UserInfoVO selectUserDetailById(@Param("uID") String uID);
+    UserInfoVO selectUserDetailById(@Param("uID") String uID) throws DataAccessException;
 
     //팀 상세보기
-    TeamInfoVO selectTeamDetailById(@Param("tID")String tID);
+    TeamInfoVO selectTeamDetailById(@Param("tID")String tID) throws DataAccessException;
 
     //게임 상세보기
-    AdminGameListVO selectGameDetailById(@Param("gID")String gID);
+    AdminGameListVO selectGameDetailById(@Param("gID")String gID) throws DataAccessException;
 }

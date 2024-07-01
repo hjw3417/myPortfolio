@@ -9,6 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/adminPage.css">
   <title>관리자페이지-관리자 메인</title>
+
+  <!-로그아웃 alert 함수-->
+
 </head>
 <body>
   <header>
@@ -34,7 +37,7 @@
                <li><a href="/admin/gameList.do">경기 관리 </a></li>
             </ul>
         <a href="/login">
-        <img class="logoutimg" src="../image/logout.png" alt="로그아웃">
+        <img class="logoutimg" src="../image/logout.png" alt="로그아웃" >
       </a>
 
     </div>
