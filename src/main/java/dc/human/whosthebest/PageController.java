@@ -16,4 +16,9 @@ public class PageController {
         return "user/join";
     }
 
+    @GetMapping("/findId")
+    public String findId() {
+        return "user/findID";
+    }
+
 }

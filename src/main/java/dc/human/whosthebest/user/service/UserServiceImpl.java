@@ -2,6 +2,7 @@ package dc.human.whosthebest.user.service;
 
 import dc.human.whosthebest.user.dao.UserDAO;
 import dc.human.whosthebest.vo.UserInfoVO;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int findID (String uID, String uBday, String uPhone) throws Exception{
-        return userDAO.findID(uID, uBday, uPhone);
+    public int findID (String uName, String uBday, String uPhone) throws Exception{
+        return userDAO.findID(uName, uBday, uPhone);
     }
+
+
+
 }

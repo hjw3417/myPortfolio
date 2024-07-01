@@ -17,6 +17,8 @@ public class UserControllerImpl implements UserController {
     @Autowired
     private UserService userService;
 
+
+
     @RequestMapping(value = "/join.do", method = RequestMethod.POST)
     public ModelAndView join (UserInfoVO userInfoVO) throws Exception {
 
@@ -76,20 +78,23 @@ public class UserControllerImpl implements UserController {
         return mav;
     }
 
+
     @Override
     @RequestMapping(value="/findId" , method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView findId(@RequestParam("uID") String uID,
+    public ModelAndView findId(@RequestParam("uName") String uName,
                                @RequestParam("uBday") String uBday,
                                @RequestParam("uPhone") String uPhone, HttpServletRequest request, HttpServletResponse response) throws Exception{
 
         ModelAndView mav = new ModelAndView();
+        String uID = request.getParameter("uID");
 
         try{
             String msgOk = "";
             String msgNo = "";
             String viewName = "";
-            int userCount = userService.findID(uID, uBday, uPhone);
+            int userCount = userService.findID(uName, uBday, uPhone);
+
 
             if (userCount > 0) {
                 msgOk = "회원님의 아이디는 "+ uID + "입니다.";
