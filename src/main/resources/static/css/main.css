@@ -350,13 +350,17 @@ main{
         padding: 10px 0;
         cursor: pointer;
       }
-      input:nth-child(2){
-        margin-left: 10px;
-      }
     }
   }
 }
-
+.id_ok{
+    color : green;
+    display : none;
+}
+.id_no{
+    color : red;
+    display : none;
+}
 /*로그인 페이지 css*/
 .login{
   >div:first-child{
@@ -425,17 +429,21 @@ main{
         border-radius: 100%;
         /* border: 1px solid gray; */
       }
-          margin: 20px 0 0 170px;
-          width: 100px;
-          height: 50px;
-          text-align: center;
-          line-height: 50px;
-          font-size: 16px;
-          font-family: 'GmarketSansMedium';
-          color: white;
-          border: 1px solid rgb(184, 206, 146);
-          background-color: rgb(184, 206, 146);
-          cursor: pointer;
+      >div>a{
+        text-decoration-line: none;
+          >div{
+            margin: 20px 0 0 170px;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 16px;
+            font-family: 'GmarketSansMedium';
+            color: white;
+            border: 1px solid rgb(184, 206, 146);
+            background-color: rgb(184, 206, 146);
+            cursor: pointer;
+          }
         }
       }
     >.board{
@@ -473,6 +481,7 @@ main{
         }
       }
     }
+  }
   >.sec2{
     width: 630px;
     margin-left: -100px;
@@ -563,7 +572,6 @@ main{
       padding-left: 10px;
       width: 370px;
       height: 50px;
-      font-family: 'GmarketSansMedium';
       margin-bottom: 5px;
       color: rgb(126, 148, 87);
       border: 1px solid rgb(184, 206, 146);
@@ -588,9 +596,6 @@ main{
       cursor: pointer;
     }
   }
-  >div:nth-child(2)>form>div:nth-child(4)>input:nth-child(2){
-    margin-left : 10px;
-  }
 }
 /*pw 찾기 css*/
 .pwFind{
@@ -605,7 +610,6 @@ main{
       padding-left: 10px;
       width: 370px;
       height: 50px;
-      font-family: 'GmarketSansMedium';
       margin-bottom: 5px;
       color: rgb(126, 148, 87);
       border: 1px solid rgb(184, 206, 146);
@@ -941,6 +945,30 @@ main{
     border: 1px solid black;
     margin-bottom: 30px;
     line-height: 85px;
+  }
+}
+
+/*idPopup css*/
+.idPop{
+  text-align: center;
+  >hr{
+    width: 100%;
+    height: 60px;
+    margin-bottom: 20px;
+    background-color: rgb(146, 172, 101);
+  }
+  >div{
+    text-align: center;
+    margin-bottom: 130px;
+  }
+  >input{
+    text-align: center;
+    width: 60px;
+    height: 40px;
+    font-family: 'GmarketSansMedium';
+    background-color: rgb(146, 172, 101);
+    color: white;
+    border: none;
   }
 }
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.main.dao.MainDAO">
+
+    <resultMap id="gameList" type="GameListVO">
+        <result property="gTitle" column="G_TITLE" />
+    </resultMap>
+
+    <resultMap id="ranking" type="rankVO">
+        <result property="rankName" column="RANK_NAME" />
+    </resultMap>
+
+    <select id="gameTitle" parameterType="String">
+        SELECT G_TITLE FROM GAME ORDER BY G_TITLE DESC;
+    </select>
+
+    <select id="rankTeam" parameterType="String">
+        SELECT RANK_NAME FROM RANK ORDER BY (RANK_NAME) DESC
+    </select>
+
+
+</mapper>

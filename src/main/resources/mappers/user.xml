@@ -66,8 +66,12 @@
     </select>
     <!-- 아이디 찾기 -->
     <select id="findID" parameterType="String">
-        select count(*) from users where U_NAME = #{uName} and U_BDAY = #{uBday} and U_PHONE = #{uPhone}
-        <if test = "uName != null and uName != '' and uBday != null and uBday != '' and uPhone != null and uPhone != '' and uID != null and uID != ''"></if>
+        select U_ID from users where U_NAME = #{uName} and U_BDAY = #{uBday} and U_PHONE = #{uPhone}
+
+    </select>
+    <!-- 아이디 DB가져오기 -->
+    <select id="getUserId" parameterType="String">
+        select count(*) from users where U_ID = #{uID}
     </select>
 
 

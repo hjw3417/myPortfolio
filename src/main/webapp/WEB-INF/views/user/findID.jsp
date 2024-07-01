@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <c:set var="contextPath" value="${pageContext.request.contextPath}" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/main.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript">
-        function checkLogin() {
-        alert(${uId});
-            var errorMsg = '${errorMsg}';
-            if (errorMsg != null && errorMsg != "") {
-                alert(errorMsg);
-            }
-        }
-  </script>
-  <title>login</title>
+
+    $('#find_id_btn').on("submit", function(e){
+
+        e.preventDefault();
+
+        let popUrl = "/user/idPop";
+        let popOption = "width=650, height=550, top=300, left=300";
+
+        window = window.open(popUrl,"_blank",popOption);
+
+    });
+    </script>
+  <title>idFind</title>
 </head>
-<body onload="checkLogin();">
+<body>
   <header>
     <div class="logo">
       <img src="./image/logo.png">
-      <!-- <div>누가 잘차</div> -->
     </div>
     <div>
       <span><a href="/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
@@ -35,27 +38,26 @@
   <main style="text-align: center; height: 750px;">
     <div>　</div>
     <div>
-      <section class="login">
+      <section class="idFind">
         <div>
-          로그인
+          아이디 찾기
         </div>
         <div>
-          <form name="login" method="post" action="/login" enctype="utf-8">
+          <form name="find" method="post" action="/findId" enctype="utf-8">
             <div>
-              <input type="text" id="uID" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
+              <input type="text" name="uName" placeholder="이름을 입력해주세요." required>
             </div>
             <div>
-              <input type="password" name="uPW" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요." required>
+              <input type="text" name="uBday" placeholder="생년월일 8자리를 입력해주세요." required>
             </div>
             <div>
-              <input type="submit" value="로그인">
+              <input type="text" name="uPhone" size="11" maxlength="11" placeholder="휴대폰 번호를 입력해주세요." required>
+            </div>
+            <div>
+              <input type="submit" value="확인" id="find_id_btn">
               <input type="reset" value="취소">
             </div>
           </form>
-        </div>
-        <div>
-          <span><a href="/findPw">비밀번호 찾기</a></span>
-          <span><a href="/findId">아이디 찾기 &nbsp|&nbsp</a></span>
         </div>
       </section>
     </div>

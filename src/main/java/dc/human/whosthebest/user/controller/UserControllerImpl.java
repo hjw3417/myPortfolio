@@ -4,6 +4,7 @@ import dc.human.whosthebest.user.service.UserService;
 import dc.human.whosthebest.vo.UserInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +57,8 @@ public class UserControllerImpl implements UserController {
     public ModelAndView login(@RequestParam("uID") String uID,
                               @RequestParam("uPW") String uPW,HttpServletRequest request, HttpServletResponse response) throws Exception{
         ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+
         try{
             String msg = "";
             String viewName = "";
@@ -63,6 +66,7 @@ public class UserControllerImpl implements UserController {
 
             if (userCount > 0) {
                 viewName = "main/serviceMain";
+                session.setAttribute("loginId", uID); // 세션에 사용자 ID 저장
             } else {
                 msg = "일치하는 회원 정보가 없습니다";
                 viewName = "user/login";
@@ -79,6 +83,7 @@ public class UserControllerImpl implements UserController {
     }
 
 
+
     @Override
     @RequestMapping(value="/findId" , method = RequestMethod.POST)
     @ResponseBody
@@ -87,18 +92,20 @@ public class UserControllerImpl implements UserController {
                                @RequestParam("uPhone") String uPhone, HttpServletRequest request, HttpServletResponse response) throws Exception{
 
         ModelAndView mav = new ModelAndView();
-        String uID = request.getParameter("uID");
 
         try{
             String msgOk = "";
             String msgNo = "";
             String viewName = "";
-            int userCount = userService.findID(uName, uBday, uPhone);
 
+            System.out.println("uName :"+uName + "uBday: " +  uBday + "uPhone: "+ uPhone);
+            String uID = userService.findID(uName, uBday, uPhone);
 
-            if (userCount > 0) {
-                msgOk = "회원님의 아이디는 "+ uID + "입니다.";
-                viewName = "user/login";
+            System.out.println(uID);
+            if (uID != null) {
+
+//                msgOk = "회원정보가 확인됐습니다.";
+                viewName = "user/idPop";
             } else {
                 msgNo = "아이디 또는 생년월일 또는 휴대폰 번호가 일치하지 않습니다.";
                 viewName = "user/findID";
