@@ -10,6 +10,7 @@ public class TeamInfoVO {
 	private String tRegion;
 	private String tPhone;
 	private int tRankScore;
+	private String rankName;
 	private int tMinAge;
 	private int tMaxAge;
 	private int tMaxMember;
@@ -56,6 +57,12 @@ public class TeamInfoVO {
 	}
 	public void settRankScore(int tRankScore) {
 		this.tRankScore = tRankScore;
+	}
+	public String getRankName() {
+		return rankName;
+	}
+	public void setRankName(String rankName) {
+		this.rankName = rankName;
 	}
 	public int gettMinAge() {
 		return tMinAge;

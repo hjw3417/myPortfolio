@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface TeamController {
 
+    public ModelAndView listTeams(HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView addTeam(@ModelAttribute("info") TeamInfoVO teamInfoVO,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception;
     public String index();

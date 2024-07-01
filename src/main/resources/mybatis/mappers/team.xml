@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dc.human.whosthebest.team.dao.TeamDAO">
+    <!-- TeamInfoVO resultMap-->
     <resultMap id="teamInfoResult" type="dc.human.whosthebest.vo.TeamInfoVO">
         <id property="tID" column="T_ID" />
         <result property="tName" column="T_NAME" />
@@ -11,6 +12,7 @@
         <result property="tRegion" column="T_REGION" />
         <result property="tPhone" column="T_PHONE" />
         <result property="tRankScore" column="RANKSCORE" />
+        <result property="rankName" column="RANKNAME" />
         <result property="tMinAge" column="T_MINAGE" />
         <result property="tMaxAge" column="T_MAXAGE" />
         <result property="tMaxMember" column="T_MAXMEMBER" />
@@ -28,14 +30,52 @@
         ]]>
     </select>
 
+    <select id="selectTeamList" resultMap="teamInfoResult">
+        <![CDATA[
+        SELECT
+            T.T_NAME,
+            T.T_REGION,
+            CASE
+                WHEN T.RANKSCORE IS NULL THEN 'unranked'
+                WHEN R.MINSCORE IS NULL OR R.MAXSCORE IS NULL THEN 'unranked'
+                ELSE R.RANK_NAME
+            END AS RANKNAME,
+            T.T_MINAGE,
+            T.T_MAXAGE,
+            T.T_MEMBER,
+            T.T_MAXMEMBER,
+            T.T_INFO
+        FROM
+            TEAM T
+        LEFT JOIN
+            RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+    ]]>
+    </select>
+
     <insert id="insertTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
         <![CDATA[
-            INSERT INTO TEAM (T_NAME, T_LOGO, T_REGION, T_PHONE, T_MINAGE,
-                                   T_MAXAGE, T_INFO)
-            VALUES (#{tName}, #{tLogo}, #{tRegion}, #{tPhone}, #{tMinAge},
-                    #{tMaxAge}, #{tInfo})
+            INSERT INTO TEAM (
+            T_NAME,
+            T_LOGO,
+            T_REGION,
+            T_PHONE,
+            T_MINAGE,
+            T_MAXAGE,
+            T_INFO
+            ) VALUES (
+            #{tName},
+            #{tLogo},
+            #{tRegion},
+            #{tPhone},
+            #{tMinAge},
+            #{tMaxAge},
+            #{tInfo})
         ]]>
+        <selectKey keyProperty="tID" resultType="int" order="AFTER">
+            SELECT SEQ_TEAM.CURRVAL FROM dual
+        </selectKey>
     </insert>
+
 
     <update id="updateTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
         <![CDATA[
