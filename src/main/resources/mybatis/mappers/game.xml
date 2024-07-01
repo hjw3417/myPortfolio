@@ -286,4 +286,19 @@
 		FROM SQUAD
 		WHERE U_ID = #{uID} and G_ID = #{gID}
 	</select>
+	<update id="updateAwayTeamID" parameterType="int">
+		UPDATE GAME
+		SET T_AWAYID = #{tID}
+		WHERE G_ID = #{gID}
+	</update>
+	<select id="checkAwayTeamExist" parameterType="GameVO" resultType="int">
+		SELECT COUNT(*)
+		FROM GAME
+		WHERE G_ID = #{gID} and T_AWAYID = #{tAwayID}
+	</select>
+	<select id="selectAwayTeamName" parameterType="SquadVO" resultType="String">
+		select T_NAME
+		FROM TEAM
+		WHERE T_ID = #{tID}
+	</select>
 </mapper>

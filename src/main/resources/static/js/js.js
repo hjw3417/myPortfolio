@@ -481,7 +481,39 @@ $(document).ready(function() {
             }
         });
     }
-
+    //insert AwayTeam Squad Ajax
+    function insertAwayTeamSquadAjax(gID, gTeamID) {
+        $.ajax({
+            url: '/game/partiAway/gameInfo.do',
+            type: 'POST',
+            data: {
+                gID: gID,
+                tAwayID: gTeamID
+            },
+            success: function(response) {
+                var awayTeamName = response.key;
+                var awayTeamMemberList = response.value;
+                var html = '';
+                if(response.size === 0) {
+                    alert("이미 참가하였습니다.")
+                } else {
+                    alert(awayTeamMemberList[0].uID)
+                    $("#awayTeamName").html(awayTeamName);
+                    $("#awayTeamMemberList").empty();
+                    $.each(awayTeamMemberList, function(index, awayTeamMember) {
+                        var html = `
+                            <li>${awayTeamMember.uName}</li>
+                        `;
+                        $("#awayTeamMemberList").append(html);
+                    });
+                }
+            },
+            error: function(error) {
+                //요청 실패 시 메세지 알림
+                alert("Error: " + error);
+            }
+        });
+    }
     // comment 제출 함수
     $(document).on('submit', '#insertCommentForm', function(event) {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
@@ -502,6 +534,22 @@ $(document).ready(function() {
         alert("gID : " + gID)
         insertHomeTeamSquadAjax(gID, gTeamID);
     });
+
+    $('#partiAwayTeamForm').on('submit', function(event) {
+            event.preventDefault();     // 폼의 기본 제출 동작을 막습니다.
+            var gID = $('#awayGID').val();
+            var gTeamID = $('#awayTeamID').val();
+            alert("gID : " + gID)
+            insertAwayTeamSquadAjax(gID, gTeamID);
+        });
+
+    $('.partiAwayTeamLeaderForm').on('submit', function(event) {
+            event.preventDefault();     // 폼의 기본 제출 동작을 막습니다.
+            var gID = $('.awayLeaderGID').val();
+            var gTeamID = $('.awayLeaderTeamID').val();
+            alert("gID : " + gID)
+            insertAwayTeamSquadAjax(gID, gTeamID);
+        });
 
 });
 //gameInfo.do 관련 js 끝

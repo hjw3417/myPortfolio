@@ -13,6 +13,7 @@ import dc.human.whosthebest.vo.*;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GameService {
     public List<TeamInfoVO> loadMyTeam(String uID) throws Exception;
@@ -25,7 +26,8 @@ public interface GameService {
                                            String search,
                                            String uID
                                            ) throws Exception;
-    public GameInfoVO selectGameInfo(int gID) throws Exception;
+    public GameInfoVO selectGameInfo(int gID, String uID) throws Exception;
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception;
     public List<GameMemberListVO> insertAndSelectHomeTeam(SquadVO squadVO) throws  Exception;
+    public Map<String, List<GameMemberListVO>> insertAndSelectAwayTeam(SquadVO squadVO) throws  Exception;
 }

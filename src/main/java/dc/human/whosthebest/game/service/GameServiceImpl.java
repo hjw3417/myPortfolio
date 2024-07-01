@@ -18,9 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service("gameService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -136,19 +134,29 @@ public class GameServiceImpl implements  GameService {
         return gameList;
     }
     @Override
-    public GameInfoVO selectGameInfo(int gID) throws Exception {
+    public GameInfoVO selectGameInfo(int gID, String uID) throws Exception {
         GameInfoVO gameInfoVO = gameDAO.selectGameInfo(gID);
+        String tAwayName = null;
+        List<TeamInfoVO> myTeamList = new ArrayList<>();
         if(gameInfoVO != null) {
             System.out.println("service gameInfo.gTitle : " + gameInfoVO.getgTitle());
             System.out.println("service gameInfo.getuName: " + gameInfoVO.getuName());
             SquadVO squadVO = new SquadVO();
             squadVO.setgID(gameInfoVO.getgID());
             squadVO.settID(gameInfoVO.getgTeamID());
-            List<GameMemberListVO> gameMemberList = gameDAO.selectGameTMemmber(squadVO);
+            List<GameMemberListVO> gameHomeMemberList = gameDAO.selectGameTMemmber(squadVO);
             List<GCommentVO> gCommentsList = gameDAO.selectComments(gameInfoVO.getgID());
-            if(!gameMemberList.isEmpty()) {
-                gameInfoVO.setGameMemberList(gameMemberList);
-                System.out.println("Service gameMemberList 첫 번째 uName : " + gameMemberList.get(0).getuName());
+
+            if(gameInfoVO.gettAwayID() != 0) {
+                tAwayName = gameDAO.selectAwayTeamName(gameInfoVO.gettAwayID());
+            } else {
+                myTeamList = gameDAO.loadMyTeam(uID);
+                gameInfoVO.setMyTeamList(myTeamList);
+            }
+            gameInfoVO.settAwayName(tAwayName);
+            if(!gameHomeMemberList.isEmpty()) {
+                gameInfoVO.setGameMemberList(gameHomeMemberList);
+                System.out.println("Service gameMemberList 첫 번째 uName : " + gameHomeMemberList.get(0).getuName());
             }
             if(!gCommentsList.isEmpty()) {
                 gameInfoVO.setgCommentsList(gCommentsList);
@@ -157,7 +165,6 @@ public class GameServiceImpl implements  GameService {
         }
         return gameInfoVO;
     }
-
     @Override
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception {
         int insertCommentsResult =  gameDAO.insertComments(gCommentVO);
@@ -179,5 +186,28 @@ public class GameServiceImpl implements  GameService {
             }
             return gameMemberList;
         }
+    }
+
+    @Override
+    public Map<String, List<GameMemberListVO>> insertAndSelectAwayTeam(SquadVO squadVO) throws  Exception {
+        List<GameMemberListVO> awayTeamMember = new ArrayList<>();
+        Map<String, List<GameMemberListVO>> awayTeamMemberMap = new HashMap<>();
+        String awayTeamName = null;
+        int updateAwayTeamIDResult = 0;
+        int checkAwayTeamExistResult = 0;
+        System.out.println("service insertAndSelectAwayTeam : " + squadVO.gettID());
+        GameVO gameVO = new GameVO();
+        gameVO.setgID(squadVO.getgID());
+        gameVO.settAwayID(squadVO.gettID());
+        System.out.println(squadVO.gettID());
+
+        updateAwayTeamIDResult = gameDAO.updateAwayTeamID(squadVO);
+        System.out.println("updateAwayTeamIDResult : " + updateAwayTeamIDResult);
+        if(updateAwayTeamIDResult >= 1) {
+            awayTeamName = gameDAO.selectAwayTeamName(squadVO.gettID());
+            awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
+        }
+        awayTeamMemberMap.put(awayTeamName, awayTeamMember);
+        return awayTeamMemberMap;
     }
 }

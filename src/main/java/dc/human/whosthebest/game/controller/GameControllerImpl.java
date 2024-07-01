@@ -19,7 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -237,11 +239,11 @@ public class GameControllerImpl implements GameController {
     @Override
     @GetMapping(value = "/gameInfo.do")
     public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int gID = 144;
-
+        int gID = 147;
+        String uID = "heo";
         ModelAndView mav = new ModelAndView();
         GameInfoVO gameInfoVO = new GameInfoVO();
-        gameInfoVO = gameService.selectGameInfo(gID);
+        gameInfoVO = gameService.selectGameInfo(gID, uID);
         if(gameInfoVO != null) {
             System.out.println("controller gameInfo.getSRegion: " + gameInfoVO.getsRegion());
             System.out.println("controller gameMemberList 첫 번째 uName : " + gameInfoVO.getGameMemberList().get(0).getuName());
@@ -278,5 +280,24 @@ public class GameControllerImpl implements GameController {
         List<GameMemberListVO> gameMemberList = gameService.insertAndSelectHomeTeam(squadVO);
         System.out.println("gameMemberList.isEmpty() : " + gameMemberList.isEmpty());
         return gameMemberList;
+    }
+    @Override
+    @PostMapping(value="/partiAway/gameInfo.do")
+    @ResponseBody
+    public Map<String, List<GameMemberListVO>> insertAndSelectAwayTeam(@RequestParam("gID") int gID,
+                                                                       @RequestParam("tAwayID") int tAwayID
+                                                         ) throws Exception {
+        Map<String, List<GameMemberListVO>> awayTeamMemberMap = new HashMap<>();
+
+
+        SquadVO squadVO = new SquadVO();
+        squadVO.setgID(gID);
+        squadVO.settID(tAwayID);
+        squadVO.setuID("insi");
+        squadVO.setCreatedID("insi");
+
+        awayTeamMemberMap = gameService.insertAndSelectAwayTeam(squadVO);
+
+        return awayTeamMemberMap;
     }
 }

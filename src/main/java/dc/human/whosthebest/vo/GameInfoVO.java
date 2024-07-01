@@ -36,6 +36,7 @@ public class GameInfoVO {
 	//team table
 	private String tName;				//T_NAME(팀 이름)
 	private byte[] tLogo;				//T_LOGO(팀 로고/image 파일)
+	private  String tAwayName;
 
 	//stadium table
 	private String sName;				//S_NAME
@@ -61,6 +62,17 @@ public class GameInfoVO {
 	//List<GComments>
 	private List<GCommentVO> gCommentsList;
 
+	//List<teamVO>
+	List<TeamInfoVO> myTeamList;
+
+	public List<TeamInfoVO> getMyTeamList() {
+		return myTeamList;
+	}
+
+	public void setMyTeamList(List<TeamInfoVO> myTeamList) {
+		this.myTeamList = myTeamList;
+	}
+
 	public List<GCommentVO> getgCommentsList() {
 		return gCommentsList;
 	}
@@ -78,6 +90,14 @@ public class GameInfoVO {
 	}
 
 	public GameInfoVO() {
+	}
+
+	public String gettAwayName() {
+		return tAwayName;
+	}
+
+	public void settAwayName(String tAwayName) {
+		this.tAwayName = tAwayName;
 	}
 
 

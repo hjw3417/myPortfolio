@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GameController {
     public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -50,4 +51,7 @@ public interface GameController {
     public  List<GameMemberListVO> partiHomeTeam(@RequestParam("gID") int gID,
                                                  @RequestParam("gTeamID") int gTeamID
                                                  ) throws Exception;
+    public Map<String, List<GameMemberListVO>> insertAndSelectAwayTeam(@RequestParam("gID") int gID,
+                                                                       @RequestParam("tAwayID") int tAwayID
+                                                          ) throws Exception;
 }
