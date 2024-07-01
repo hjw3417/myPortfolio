@@ -76,7 +76,7 @@ public class TeamControllerImpl implements TeamController{
                 mav.addObject("errorMsg", "팀 가입 실패");
                 viewName = "team/teamList";
             } else {
-                viewName = "redirect:/teamMake";
+                viewName = "redirect:/teamMake"; //redirect 수정 핋요
             }
             mav.setViewName(viewName);
         } catch(Exception e) {

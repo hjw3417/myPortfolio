@@ -95,6 +95,7 @@
             TEAM T
         LEFT JOIN
             RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+
     ]]>
     </select>
 

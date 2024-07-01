@@ -12,14 +12,14 @@
   <title>팀 만들기</title>
   <script type="text/javascript">
   <!--팀만들기 실행결과 에러 확인-->
-    function checkResult() {
+    function checkInsertTeamResult() {
       var errorMsg = '${errorMsg}';
       if (errorMsg != NULL && errorMsg != "") {
         alert(errorMsg);
     }
   </script>
 </head>
-<body onload="checkResult();">
+<body onload="checkInsertTeamResult();">
   <header>
     <div class="logo">
       <img src="${contextPath}/image/logo.png">
