@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.team.dao.TeamDAO">
+    <!-- TeamInfoVO resultMap-->
+    <resultMap id="teamInfoResult" type="dc.human.whosthebest.vo.TeamInfoVO">
+        <id property="tID" column="T_ID" />
+        <result property="tName" column="T_NAME" />
+        <result property="tLogo" column="T_LOGO" />
+        <result property="tRegion" column="T_REGION" />
+        <result property="tPhone" column="T_PHONE" />
+        <result property="tRankScore" column="RANKSCORE" />
+        <result property="rankName" column="RANKNAME" />
+        <result property="tMinAge" column="T_MINAGE" />
+        <result property="tMaxAge" column="T_MAXAGE" />
+        <result property="tMaxMember" column="T_MAXMEMBER" />
+        <result property="tMember" column="T_MEMBER" />
+        <result property="tInfo" column="T_INFO" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+    <resultMap id="teamMemberResult" type="dc.human.whosthebest.vo.TeamMemberVO">
+        <id property="tID" column="T_ID" />
+        <result property="uID" column="U_ID" />
+        <result property="uStatus" column="U_STATUS" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+
+    <insert id="insertTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
+        <![CDATA[
+            INSERT INTO TEAM (
+            T_NAME,
+            T_LOGO,
+            T_REGION,
+            T_PHONE,
+            T_MINAGE,
+            T_MAXAGE,
+            T_INFO,
+            CREATED_ID
+            ) VALUES (
+            #{tName},
+            #{tLogo},
+            #{tRegion},
+            #{tPhone},
+            #{tMinAge},
+            #{tMaxAge},
+            #{tInfo},
+            #{createdID})
+        ]]>
+        <selectKey keyProperty="tID" resultType="int" order="AFTER">
+            SELECT SEQ_TEAM.CURRVAL FROM dual
+        </selectKey>
+    </insert>
+
+    <insert id="insertTeamMember" parameterType="dc.human.whosthebest.vo.TeamMemberVO">
+        <![CDATA[
+            INSERT INTO TEAM_MEMBER (
+            T_ID,
+            U_ID,
+            CREATED_ID
+            ) VALUES (
+            #{tID},
+            #{uID},
+            #{createdID})
+        ]]>
+
+    </insert>
+
+    <select id="selectTeamList" resultMap="teamInfoResult">
+        <![CDATA[
+        SELECT
+            T.T_ID,
+            T.T_NAME,
+            T.T_REGION,
+            CASE
+                WHEN T.RANKSCORE IS NULL THEN 'unranked'
+                WHEN R.MINSCORE IS NULL OR R.MAXSCORE IS NULL THEN 'unranked'
+                ELSE R.RANK_NAME
+            END AS RANKNAME,
+            T.T_MINAGE,
+            T.T_MAXAGE,
+            T.T_MEMBER,
+            T.T_MAXMEMBER,
+            T.T_INFO
+        FROM
+            TEAM T
+        LEFT JOIN
+            RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+    ]]>
+    </select>
+
+
+
+    <select id="selectAllTeamInfo" resultMap="teamInfoResult">
+        <![CDATA[
+            SELECT * FROM TEAM
+        ]]>
+    </select>
+
+    <update id="updateTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
+        <![CDATA[
+            UPDATE TEAM
+            SET T_NAME = #{tName}, T_LOGO = #{tLogo}, T_REGION = #{tRegion}, T_PHONE = #{tPhone},
+                RANKSCORE = #{tRankScore}, T_MINAGE = #{tMinAge}, T_MAXAGE = #{tMaxAge},
+                T_MAXMEMBER = #{tMaxMember}, T_MEMBER = #{tMember}, T_INFO = #{tInfo},
+                UPDATED_ID = #{updatedID}, UPDATED_DATE = #{updatedDate}
+            WHERE T_ID = #{tID}
+        ]]>
+    </update>
+
+    <delete id="deleteTeamInfo" parameterType="int">
+        <![CDATA[
+            DELETE FROM TEAM
+            WHERE T_ID = #{tID}
+        ]]>
+    </delete>
+</mapper>
