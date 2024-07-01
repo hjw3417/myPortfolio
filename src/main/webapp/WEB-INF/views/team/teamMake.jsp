@@ -54,7 +54,7 @@
           팀 만들기
         </div>
         <div>
-          <form name="maketeam" method="post" action="/addTeam" enctype="utf-8">
+          <form name="maketeam" method="post" action="/insertTeamInfo" enctype="utf-8">
             <div>
               <input type="file" name="tLogo">
             </div>
@@ -103,7 +103,7 @@
               <input type="text" name="tInfo" size="20" maxlength="20" placeholder="팀 소개">
             </div>
             <div>
-              <a href="myteam.html"> <input type="submit" value="팀 만들기"> </a>
+              <input type="submit" value="팀 만들기">
               <!--submit또는 버튼 태그로 변경해야됨-->
               <input type="reset" value="취소">
               <!--reset또는 버튼 태그로 변경해야됨-->

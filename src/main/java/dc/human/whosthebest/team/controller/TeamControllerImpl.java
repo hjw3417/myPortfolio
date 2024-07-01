@@ -21,8 +21,6 @@ public class TeamControllerImpl implements TeamController{
     @Autowired
     private TeamService teamService;
 
-    @Autowired
-    private TeamInfoVO temaInfoVO;
 
     //팀 만들기 페이지 단순 매핑
     @Override
@@ -41,9 +39,11 @@ public class TeamControllerImpl implements TeamController{
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
         ModelAndView mav = new ModelAndView();
-        teamInfo.setCreatedID("HONG");
+        String userID = "HONG";
+        //실제 userID 가져오는 로직으로 대체
+
         try {
-            int result = teamService.insertTeamInfo(teamInfo);
+            int result = teamService.createTeamAndAddMember(teamInfo, userID);
             String viewName = "";
 
             if (result < 1) {
@@ -54,6 +54,8 @@ public class TeamControllerImpl implements TeamController{
             }
             mav.setViewName(viewName);
         } catch (Exception ex) {
+            mav.addObject("errorMsg", "정상적으로 입력이 되지 않았습니다");
+            mav.setViewName("team/teamList");
             System.out.println(ex.getMessage());
         }
         return mav;
@@ -73,9 +75,10 @@ public class TeamControllerImpl implements TeamController{
 
         try {
             String viewName = "";
+            String userID = "MOON";
             TeamMemberVO teamMember = new TeamMemberVO();
-            teamMember.setCreatedID("MOON");
-            teamMember.setuID("MOON");
+            teamMember.setCreatedID(userID);
+            teamMember.setuID(userID);
             teamMember.settID(tID);
             int insertTeamMemberResult = teamService.insertTeamMember(teamMember);
 
@@ -84,7 +87,8 @@ public class TeamControllerImpl implements TeamController{
                 mav.addObject("errorMsg", "팀 가입 실패");
                 viewName = "team/teamList";
             } else {
-                viewName = "redirect:/teamMake"; //redirect 수정 핋요
+                viewName = "redirect:/temaList";
+                //redirect 수정 핋요
             }
             mav.setViewName(viewName);
         } catch(Exception e) {
