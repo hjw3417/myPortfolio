@@ -9,9 +9,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="${contextPath}/css/maketeam.css">
-  <title>maketeam</title>
+  <title>팀 만들기</title>
+  <script type="text/javascript">
+  <!--팀만들기 실행결과 에러 확인-->
+    function checkResult() {
+      var errorMsg = '${errorMsg}';
+      if (errorMsg != NULL && errorMsg != "") {
+        alert(errorMsg);
+    }
+  </script>
 </head>
-<body>
+<body onload="checkResult();">
   <header>
     <div class="logo">
       <img src="${contextPath}/image/logo.png">

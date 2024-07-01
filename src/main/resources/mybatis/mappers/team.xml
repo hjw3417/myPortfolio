@@ -24,15 +24,61 @@
         <result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
-    <select id="selectAllTeamInfo" resultMap="teamInfoResult">
+    <resultMap id="teamMemberResult" type="dc.human.whosthebest.vo.TeamMemberVO">
+        <id property="tID" column="T_ID" />
+        <result property="uID" column="U_ID" />
+        <result property="uStatus" column="U_STATUS" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+
+    <insert id="insertTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
         <![CDATA[
-            SELECT * FROM TEAM
+            INSERT INTO TEAM (
+            T_NAME,
+            T_LOGO,
+            T_REGION,
+            T_PHONE,
+            T_MINAGE,
+            T_MAXAGE,
+            T_INFO,
+            CREATED_ID
+            ) VALUES (
+            #{tName},
+            #{tLogo},
+            #{tRegion},
+            #{tPhone},
+            #{tMinAge},
+            #{tMaxAge},
+            #{tInfo},
+            #{createdID})
         ]]>
-    </select>
+        <selectKey keyProperty="tID" resultType="int" order="AFTER">
+            SELECT SEQ_TEAM.CURRVAL FROM dual
+        </selectKey>
+    </insert>
+
+    <insert id="insertTeamMember" parameterType="dc.human.whosthebest.vo.TeamMemberVO">
+        <![CDATA[
+            INSERT INTO TEAM_MEMBER (
+            T_ID,
+            U_ID,
+            CREATED_ID
+            ) VALUES (
+            #{tID},
+            #{uID},
+            #{createdID})
+        ]]>
+
+    </insert>
 
     <select id="selectTeamList" resultMap="teamInfoResult">
         <![CDATA[
         SELECT
+            T.T_ID,
             T.T_NAME,
             T.T_REGION,
             CASE
@@ -52,30 +98,13 @@
     ]]>
     </select>
 
-    <insert id="insertTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
-        <![CDATA[
-            INSERT INTO TEAM (
-            T_NAME,
-            T_LOGO,
-            T_REGION,
-            T_PHONE,
-            T_MINAGE,
-            T_MAXAGE,
-            T_INFO
-            ) VALUES (
-            #{tName},
-            #{tLogo},
-            #{tRegion},
-            #{tPhone},
-            #{tMinAge},
-            #{tMaxAge},
-            #{tInfo})
-        ]]>
-        <selectKey keyProperty="tID" resultType="int" order="AFTER">
-            SELECT SEQ_TEAM.CURRVAL FROM dual
-        </selectKey>
-    </insert>
 
+
+    <select id="selectAllTeamInfo" resultMap="teamInfoResult">
+        <![CDATA[
+            SELECT * FROM TEAM
+        ]]>
+    </select>
 
     <update id="updateTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
         <![CDATA[

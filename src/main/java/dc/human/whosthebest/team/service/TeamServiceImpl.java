@@ -2,6 +2,7 @@ package dc.human.whosthebest.team.service;
 
 import dc.human.whosthebest.team.dao.TeamDAO;
 import dc.human.whosthebest.vo.TeamInfoVO;
+import dc.human.whosthebest.vo.TeamMemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,7 +24,13 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public int addTeam(TeamInfoVO team) throws Exception {
+    public int insertTeamInfo(TeamInfoVO team) throws Exception {
         return teamDAO.insertTeamInfo(team);
     }
+
+    @Override
+    public int insertTeamMember(TeamMemberVO teamMemberVO) throws Exception {
+        return teamDAO.insertTeamMember(teamMemberVO);
+    };
+
 }

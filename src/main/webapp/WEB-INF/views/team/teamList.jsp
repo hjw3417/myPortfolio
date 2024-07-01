@@ -108,7 +108,12 @@
                 <td>${team.tMinAge} - ${team.tMaxAge}</td>
                 <td>${team.tMember} / ${team.tMaxMember}</td>
                 <td>${team.tInfo}</td>
-                <td><button>가입</button></td>
+                <td>
+                  <form method="post" action="${contextPath}/insertTeamMember">
+                    <input type="hidden" name="tID" value="${team.tID}">
+                    <button type="submit">가입</button>
+                  </form>
+                </td>
               </tr>
             </c:forEach>
           </tbody>
