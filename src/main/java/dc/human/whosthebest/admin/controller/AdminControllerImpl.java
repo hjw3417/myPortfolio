@@ -22,8 +22,6 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminControllerImpl implements AdminController {
 
-    @Autowired
-    private UserInfoVO userVO;
 
     @Autowired
     private AdminService adminService;
@@ -70,6 +68,7 @@ public class AdminControllerImpl implements AdminController {
         mav.addObject("newTeam", newTeamList);
         return mav;
     }
+
 
     //회원목록- 회원 상세보기
     @Override

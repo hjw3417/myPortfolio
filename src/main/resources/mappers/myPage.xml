@@ -6,7 +6,7 @@
 <mapper namespace="dc.human.whosthebest.myPage.dao.MyPageDAO">
 
     <!--마이페이지 메인화면-->
-    <resultMap id="myPage" type="MypageInfoVO">
+    <resultMap id="myPageInfo" type="MypageInfoVO">
         <result property="uID"          column="u_id" />
         <result property="uName"        column="u_name" />
         <result property="tID"          column="t_id" />
@@ -16,14 +16,18 @@
 
 
     <!--마이페이지 메인화면-->
-    <select id="selectMyPageInfo" resultMap="myPage">
+    <select id="selectMyPageInfo" resultMap="myPageInfo">
         <![CDATA[
              select  squad.u_id ,
                      team.t_name,
-                     team.rankscore
-             from  team, squad
+                     team.rankscore,
+                     users.u_name
+
+             from  team, squad , users
              where squad.t_id=team.t_id
-                    and u_id=#{uID}
+                    and squad.u_id=users.u_id
+                    and users.u_id='hong'
+
 
         ]]>
     </select>

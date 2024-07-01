@@ -18,20 +18,15 @@ public class MyPageImplController {
     @Autowired
     private MyPageService myPageService;
 
-    @RequestMapping(value= "/myPage.do", method = RequestMethod.GET)
+    @RequestMapping(value= "/myPage", method = RequestMethod.GET)
     public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView mav = new ModelAndView();
+
         HttpSession session = request.getSession();
-        String uID = (String) session.getAttribute("uID");
-
-        if (uID != null) {
-            MyPageInfoVO myPageInfo = myPageService.getUserinfo(uID);
-            mav.addObject("myPageInfo", myPageInfo);
-            mav.setViewName("/myPage/myPage");
-
-        } else {
-            mav.setViewName("redirect:/admin/main.do");
-        }
+        String uID = (String) session.getAttribute("hong");
+        MyPageInfoVO myPageInfo = myPageService.getUserinfo(uID);
+        ModelAndView mav = new ModelAndView("/myPage/myPage");
+        mav.addObject("myPageInfo", myPageInfo);
+        System.out.println("마이페이지컨트롤러 성공");
         return mav;
     }
 }

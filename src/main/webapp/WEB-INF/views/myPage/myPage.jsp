@@ -58,29 +58,34 @@
         </div>
 
         <div class="myInfoContainer">
-          <img src="img/user.png" class="profile">  </img>
+          <img src="../image/user.png" class="profile">  </img>
           <div class="profileUpdate"> 프로필 수정 </div>
-          <div class="name"> ${myPageInfo.uName} </div>
+          <div class="name"> ${myPageInfo.uName} </div>  <!--이름 -->
           <div>
             <table>
+             <!-- 소속팀1-->
               <tr>
                 <td> 소속팀</td>
-                <td> </td>
-                <td> <img src="img/rank.png"  width="34px"  height="28px"> </img> </td>
-                <td width="120"> ${myPageInfo.t_name} </td>
+                <td>${myPageInfo.tName} </td> <!--소속팀 이름 -->
+                <td> <img src="../image/rank.png"  width="34px"  height="28px"> </img> </td>
+                <td width="120"> ${myPageInfo.tRankScore} </td> <!-- 랭크 -->
               </tr>
-              <tr>
-                <td> 소속팀</td>
-                <td> </td>
-                <td> <img src="img/rank.png"  width="34px"  height="28px"> </img> </td>
-                <td width="120"> </td>
-              </tr>
-              <tr>
-                <td> 소속팀</td>
-                <td> </td>
-                <td> <img src="img/rank.png"  width="34px"  height="28px"> </img> </td>
-                <td width="120"> </td>
-              </tr>
+
+               <!-- 소속팀2-->
+               <tr>
+                  <td> 소속팀</td>
+                  <td>${myPageInfo.tName} </td> <!--소속팀 이름 -->
+                  <td> <img src="../image/rank.png"  width="34px"  height="28px"> </img> </td>
+                  <td width="120"> ${myPageInfo.tRankScore} </td> <!-- 랭크 -->
+                </tr>
+
+               <!-- 소속팀3-->
+                <tr>
+                   <td> 소속팀</td>
+                   <td>${myPageInfo.tName} </td> <!--소속팀 이름 -->
+                   <td> <img src="../image/rank.png"  width="34px"  height="28px"> </img> </td>
+                   <td width="120"> ${myPageInfo.tRankScore} </td> <!-- 랭크 -->
+                 </tr>
 
             </table>
 
@@ -104,7 +109,7 @@
             <tr>
               <td width="140">  </td>
               <td width="200">  </td>
-              <td width="20"> : </td>
+              <td width="20">  </td>
               <td  width="200">  </td>
               <td width="200">  </td>
               <td width="70">  </td>
