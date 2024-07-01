@@ -1,12 +1,11 @@
 package dc.human.whosthebest.vo;
 
-/*gameList.xml  처리 위한 VO라  DB에 생성 안합니다!!!!*/
+/*xml  처리 위한 VO라  DB에 생성 안합니다!!!!*/
 
-import dc.human.whosthebest.paging.Criteria;
 import org.springframework.stereotype.Component;
 
 @Component("gameStadiumVO")
-public class GameStadiumVO extends Criteria {
+public class GameStadiumVO {
     private int gameId;
     private String gameTitle;
     private String gameResDate;
@@ -23,7 +22,7 @@ public class GameStadiumVO extends Criteria {
     }
 
     public GameStadiumVO() {
-        System.out.println("게임스타디움VO 성공");
+
     }
 
     public int getGameId() {

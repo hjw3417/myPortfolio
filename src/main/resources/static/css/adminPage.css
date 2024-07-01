@@ -34,7 +34,7 @@ main{
     position: absolute;
     top : 65px;
     left : 220px;
-    
+
   }
 }
 
@@ -65,7 +65,7 @@ main{
     font-size: 13pt;
     font-weight: bold;
     margin-left : 230px;
- 
+
   }
 }
 
@@ -93,19 +93,18 @@ main{
     font-weight: bold;
     font-size : 25pt;
     margin : 0 0 60px 50px;
-    
+
   }
   >ul{
     list-style: none; /* 기본 스타일 제거 */
     padding-left: 47px;
     font-size: 15pt; /* 여백 제거 */
-    
-    
+
+
   }
 
   >ul>li{
     padding-bottom: 50px;
-  
   >a{
     text-decoration: none;
     color : black;
@@ -113,23 +112,23 @@ main{
   }
   >ul>li:nth-child(2){
     padding-left: 10px;
-  } 
+  }
   >ul>li:nth-child(3){
     padding-left: 18px;
   }
   >ul>li:nth-child(4){
     padding-left: 10px;
-  } 
+  }
   >ul>li:nth-child(5){
     padding-left: 20px;
-  } 
-  
+  }
+
   >a>.logoutimg{
     width: 25px;
     height: 25px;
     margin : 50px 0 0 80px;
   }
-  
+
 }
 
 /*회원,팀, 경기관리 테이블 담는 div*/
@@ -149,7 +148,7 @@ main{
   border-collapse: collapse;
   margin: 10px 0 0 20px;
   font-size: 18px;
-  border: 1px solid rgb(203, 216, 184); 
+  border: 1px solid rgb(203, 216, 184);
   background-color: white;
 }
 
@@ -165,10 +164,9 @@ table.list th {
 /*회원 ID a태그 설정*/
 a{
   text-decoration-line: none;
+  color: black;
 }
-a:visited{
-  color : black;
-}
+
 a:hover{
   color : blue;
 
@@ -176,10 +174,10 @@ a:hover{
 
 /*관리자 메인- 최근 회원 목록*/
 .usertablecontainer {
- 
+
   background-color: white;
   border-radius: 15px 15px 15px 15px;
- 
+
   width: 1000px;
   height: 360px;
   position: absolute;
@@ -260,7 +258,7 @@ table.user-list th {
   position: absolute;
   top : 160px;
   left : 212px;
-  background-color: white; 
+  background-color: white;
   >div{
     width : 140px;
     height: 140px;

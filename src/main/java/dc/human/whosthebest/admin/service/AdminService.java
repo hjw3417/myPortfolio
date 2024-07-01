@@ -1,5 +1,8 @@
 package dc.human.whosthebest.admin.service;
 
+import dc.human.whosthebest.vo.AdminGameListVO;
+import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.UserInfoVO;
 
 import java.util.List;
@@ -24,4 +27,10 @@ public interface AdminService {
 
     //회원 상세보기
     public UserInfoVO getUserDetailById(String uID) throws Exception;
+
+    //팀 상세보기
+    public TeamInfoVO getTeamById(String tID) throws  Exception;
+
+    //게임 상세보기
+    public AdminGameListVO getGameById(String gID) throws  Exception;
 }

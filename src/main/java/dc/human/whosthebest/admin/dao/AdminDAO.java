@@ -1,5 +1,8 @@
 package dc.human.whosthebest.admin.dao;
 
+import dc.human.whosthebest.vo.AdminGameListVO;
+import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.UserInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -29,7 +32,11 @@ public interface AdminDAO {
     public List selectNewTeamList() throws DataAccessException;
     
     //회원 상세보기
-    //public List selectUserDetailList() throws  DataAccessException;
-
     UserInfoVO selectUserDetailById(@Param("uID") String uID);
+
+    //팀 상세보기
+    TeamInfoVO selectTeamDetailById(@Param("tID")String tID);
+
+    //게임 상세보기
+    AdminGameListVO selectGameDetailById(@Param("gID")String gID);
 }

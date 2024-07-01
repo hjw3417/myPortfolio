@@ -56,7 +56,7 @@
       <tbody>
         <c:forEach items="${teamsList}" var="team">
             <tr>
-              <td width="130"> ${team.tID} </td>  <!-- 팀아이디 -->
+              <td width="130"><a href="/admin/teamDetail/${team.tID}"> ${team.tID} </td>  <!-- 팀아이디 -->
               <td> ${team.tName}  </td>
               <td> ${team.tRegion}  </td>
               <td> ${team.tRankScore}    </td>

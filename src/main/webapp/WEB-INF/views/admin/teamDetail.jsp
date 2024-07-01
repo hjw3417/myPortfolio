@@ -22,7 +22,7 @@
          <div> 관리자 페이지 </div>
       </div>
 
-      <h2> 회원 상세보기</h2>
+      <h2> 팀 상세보기</h2>
 
     <div>
       <div class="side">
@@ -45,48 +45,53 @@
       </div>
       <table>
             <tr>
-              <td> 이름 </td>
-              <td>${userInfo.uName}</td>
+              <td> 팀 이름 </td>
+              <td>${teamInfo.tName}</td>
             </tr>
 
             <tr>
-              <td> 아이디</td>
-              <td>${userInfo.uID}</td>
+              <td> 팀 ID </td>
+              <td>${teamInfo.tID}</td>
             </tr>
 
             <tr>
-              <td> 생년월일</td>
-              <td> ${userInfo.uBday} </td>
+              <td> 지역 </td>
+              <td> ${teamInfo.tRegion} </td>
             </tr>
 
             <tr>
-              <td> 성별 </td>
-              <td> ${userInfo.uGender} </td>
+              <td> 랭크 </td>
+              <td> ${teamInfo.tRankScore} </td>
             </tr>
 
             <tr>
-              <td> 도로명 주소 </td>
-              <td>  ${userInfo.uAddr1} </td>
+              <td> 팀가입 최소나이 </td>
+              <td>  ${teamInfo.tMinAge} </td>
             </tr>
 
             <tr>
-              <td> 상세 주소 </td>
-              <td>   ${userInfo.uAddr2} </td>
+              <td> 팀가입 최대나이 </td>
+              <td>   ${teamInfo.tMaxAge} </td>
             </tr>
 
             <tr>
-              <td> 이메일 </td>
-              <td>  ${userInfo.uEmail}</td>
+              <td> 팀 최대인원 </td>
+              <td>  ${teamInfo.tMaxMember}</td>
             </tr>
 
             <tr>
-              <td>전화번호</td>
-              <td>  ${userInfo.uPhone} </td>
+              <td>팀 인원</td>
+              <td>  ${teamInfo.tMember} </td>
             </tr>
 
             <tr>
-              <td> 가입일자 </td>
-              <td> ${userInfo.createdDate}</td>
+              <td>팀 소개 </td>
+              <td>  ${teamInfo.tInfo} </td>
+            </tr>
+
+            <tr>
+              <td> 개설일자 </td>
+              <td> ${teamInfo.createdDate}</td>
             </tr>
 
       </table>
