@@ -24,6 +24,7 @@
         <result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
+    <!-- TeamMemberVO resultMap-->
     <resultMap id="teamMemberResult" type="dc.human.whosthebest.vo.TeamMemberVO">
         <id property="tID" column="T_ID" />
         <result property="uID" column="U_ID" />
@@ -35,6 +36,7 @@
     </resultMap>
 
 
+    <!--팀 생성-->
     <insert id="insertTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
         <![CDATA[
             INSERT INTO TEAM (
@@ -61,6 +63,7 @@
         </selectKey>
     </insert>
 
+    <!--팀 가입하기(유저)-->
     <insert id="insertTeamMember" parameterType="dc.human.whosthebest.vo.TeamMemberVO">
         <![CDATA[
             INSERT INTO TEAM_MEMBER (
@@ -75,6 +78,7 @@
 
     </insert>
 
+    <!--팀리스트 select-->
     <select id="selectTeamList" resultMap="teamInfoResult">
         <![CDATA[
         SELECT
@@ -95,6 +99,38 @@
             TEAM T
         LEFT JOIN
             RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+
+    ]]>
+    </select>
+
+    <!-- 랭킹 select-->
+    <select id="selectRanking" resultMap="teamInfoResult">
+        <![CDATA[
+        SELECT
+            T.T_ID,
+            T.T_NAME,
+            T.T_REGION,
+            T.RANKSCORE,
+            CASE
+                WHEN T.RANKSCORE IS NULL THEN 'unranked'
+                WHEN R.MINSCORE IS NULL OR R.MAXSCORE IS NULL THEN 'unranked'
+                ELSE R.RANK_NAME
+            END AS RANKNAME,
+            T.T_MINAGE,
+            T.T_MAXAGE,
+            T.T_MEMBER,
+            T.T_MAXMEMBER
+        FROM
+            TEAM T
+        LEFT JOIN
+            RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+        ORDER BY
+        CASE
+            WHEN T.RANKSCORE IS NULL THEN -1
+            ELSE T.RANKSCORE
+        END DESC,
+        T.RANKSCORE DESC,
+        T.CREATED_DATE ASC
 
     ]]>
     </select>

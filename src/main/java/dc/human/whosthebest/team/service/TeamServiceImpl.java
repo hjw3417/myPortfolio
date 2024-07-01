@@ -33,4 +33,11 @@ public class TeamServiceImpl implements TeamService {
         return teamDAO.insertTeamMember(teamMemberVO);
     };
 
+    @Override
+    public List ranking() throws Exception {
+        List ranking = null;
+        ranking = teamDAO.selectRanking();
+        return ranking;
+    };
+
 }

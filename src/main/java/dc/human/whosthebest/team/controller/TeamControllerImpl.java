@@ -96,6 +96,15 @@ public class TeamControllerImpl implements TeamController{
         return mav;
     }
 
+    @Override
+    @GetMapping("/ranking")
+    public ModelAndView Ranking(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        List ranking = teamService.ranking();
+        ModelAndView mav = new ModelAndView("/team/ranking");
+        mav.addObject("ranking", ranking);
+        return mav;
+    }
+
 
 
 }
