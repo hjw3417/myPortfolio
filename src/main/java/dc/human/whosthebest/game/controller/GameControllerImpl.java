@@ -237,14 +237,14 @@ public class GameControllerImpl implements GameController {
     @Override
     @GetMapping(value = "/gameInfo.do")
     public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int gID = 145;
+        int gID = 144;
 
         ModelAndView mav = new ModelAndView();
         GameInfoVO gameInfoVO = new GameInfoVO();
         gameInfoVO = gameService.selectGameInfo(gID);
         if(gameInfoVO != null) {
             System.out.println("controller gameInfo.getSRegion: " + gameInfoVO.getsRegion());
-            System.out.println("controller gameInfo.getuName: " + gameInfoVO.getuName());
+            System.out.println("controller gameMemberList 첫 번째 uName : " + gameInfoVO.getGameMemberList().get(0).getuName());
             mav.addObject("gameInfoVO", gameInfoVO);
         }
         mav.setViewName("/game/gameInfo");
@@ -273,9 +273,10 @@ public class GameControllerImpl implements GameController {
         SquadVO squadVO = new SquadVO();
         squadVO.setgID(gID);
         squadVO.settID(gTeamID);
-        squadVO.setuID("munn");
-        squadVO.setCreatedID("munn");
+        squadVO.setuID("insi");
+        squadVO.setCreatedID("insi");
         List<GameMemberListVO> gameMemberList = gameService.insertAndSelectHomeTeam(squadVO);
+        System.out.println("gameMemberList.isEmpty() : " + gameMemberList.isEmpty());
         return gameMemberList;
     }
 }

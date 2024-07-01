@@ -94,7 +94,7 @@
             <div>
               <label>경기 참가 인원</label>
               <div class="homeTeamMemberListContainer">
-                <ul class="homeTeamMemberList">
+                <ul class="homeTeamMemberList" id="homeTeamMemberList">
                   <c:choose>
                       <c:when test="${not empty gameInfoVO.gameMemberList}">
                           <c:forEach var="gameMember" items="${gameInfoVO.gameMemberList}">
@@ -119,7 +119,7 @@
                   <input type="hidden" id="startGameGID" value="${gameInfoVO.gID}" />
                   <input type="hidden" id="aWayTeamID"  value="${gameInfoVO.tAwayID}" />
                   <input type="submit" id="partiAwayTeamBtn" value="참가" />
-              <form>
+              </form>
             </div>
             <div>
               <label>경기 참가 인원</label>

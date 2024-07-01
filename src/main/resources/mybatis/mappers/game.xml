@@ -284,6 +284,6 @@
 	<select id="checkDuplicateSquad" parameterType="SquadVO" resultType="int">
 		SELECT COUNT(*)
 		FROM SQUAD
-		WHERE U_ID = #{uID}
+		WHERE U_ID = #{uID} and G_ID = #{gID}
 	</select>
 </mapper>

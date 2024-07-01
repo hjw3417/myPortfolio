@@ -168,11 +168,15 @@ public class GameServiceImpl implements  GameService {
     @Override
     public List<GameMemberListVO> insertAndSelectHomeTeam(SquadVO squadVO) throws  Exception {
         List<GameMemberListVO> gameMemberList = new ArrayList<>();
-        if(gameDAO.checkDuplicateSquad(squadVO) >= 1) {
+        int checkDuplicateSquadResult = gameDAO.checkDuplicateSquad(squadVO);
+        if(checkDuplicateSquadResult >= 1) {
             return gameMemberList;
         } else {
             int insertSquadResult = gameDAO.insertSquad(squadVO);
-            gameMemberList = gameDAO.selectGameTMemmber(squadVO);
+            if(!(insertSquadResult < 1)) {
+                gameMemberList = gameDAO.selectGameTMemmber(squadVO);
+                System.out.println("Serviece gameMemberList의 첫 번째 uNmae : " + gameMemberList.get(0).getuName());
+            }
             return gameMemberList;
         }
     }

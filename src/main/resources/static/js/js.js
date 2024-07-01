@@ -440,8 +440,8 @@ $(document).ready(function() {
                         `;
                         $("#gComent").append(html);
                     });
-
                 }
+                $gComent.scrollTop($gComent.prop("scrollHeight"));
             },
             error: function(error) {
                 // 요청 실패 시 메세지 알림
@@ -468,10 +468,10 @@ $(document).ready(function() {
                     alert(gameMemberList[0].uID)
                     $("#homeTeamMemberList").empty();
                     $.each(gameMemberList, function(index, gameMember) {
-                        html = `
+                        var html = `
                             <li>${gameMember.uName}</li>
                         `;
-                        $("#homeTeamMemberList").appent(html);
+                        $("#homeTeamMemberList").append(html);
                     });
                 }
             },
@@ -492,15 +492,15 @@ $(document).ready(function() {
             alert('코멘트를 입력해주세요.');
         } else {
             insertCommentAjax(gameComments, gameInfoGID);
-            $gComent.scrollTop($gComent.prop("scrollHeight"));
         }
     });
 
-    $(document).on('submit', '#partiHomeTeamForm', function(event) {
-        event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+    $('#partiHomeTeamForm').on('submit', function(event) {
+        event.preventDefault();     // 폼의 기본 제출 동작을 막습니다.
         var gID = $('#gID').val();
         var gTeamID = $('#homeTeamID').val();
-        insertHomeTeamSquadAjax(gID, gTeamID)
+        alert("gID : " + gID)
+        insertHomeTeamSquadAjax(gID, gTeamID);
     });
 
 });
