@@ -356,6 +356,7 @@ main{
     }
   }
 }
+
 /*로그인 페이지 css*/
 .login{
   >div:first-child{
@@ -366,6 +367,7 @@ main{
   }
   >div:nth-child(2)>form>div:nth-child(-n+2){
     input{
+      font-family: 'GmarketSansMedium';
       padding-left: 10px;
       width: 370px;
       height: 50px;
@@ -379,8 +381,7 @@ main{
       margin: -20px 0 0 10px;
     }
   }
-  >div:nth-child(2)>form>div:nth-child(3){
-    input{
+  >div:nth-child(2)>form>div:nth-child(3)>input{
       width: 185px;
       height: 50px;
       font-size: 20px;
@@ -389,20 +390,16 @@ main{
       color: white;
       font-family: 'GmarketSansMedium';
       border: 1px solid rgb(184, 206, 146);
-      padding: 10px 0;
       cursor: pointer;
-      margin: 20px 0;
-      line-height: 30px;
     }
-    input:nth-child(2){
-      margin-left: 10px;
-    }
+  >div:nth-child(2)>form>div:nth-child(3)>input:nth-child(2){
+      margin : 0 0 0 10px
   }
-  >div:nth-child(3){
+  >div:nth-child(3)>span{
     font-size: 13px;
     float: right;
-    padding-bottom: 20px;
-    >span>a{
+    padding-top: 20px;
+    >a{
       text-decoration-line: none;
       color: black;
     }
@@ -428,21 +425,19 @@ main{
         border-radius: 100%;
         /* border: 1px solid gray; */
       }
-      >div>div{
-        margin: 20px 0 0 170px;
-        width: 100px;
-        height: 50px;
-        text-align: center;
-        line-height: 50px;
-        font-size: 16px;
-        /* font-weight: bold; */
-        font-family: 'GmarketSansMedium';
-        color: white;
-        border: 1px solid rgb(184, 206, 146);
-        background-color: rgb(184, 206, 146);
-        cursor: pointer;
+          margin: 20px 0 0 170px;
+          width: 100px;
+          height: 50px;
+          text-align: center;
+          line-height: 50px;
+          font-size: 16px;
+          font-family: 'GmarketSansMedium';
+          color: white;
+          border: 1px solid rgb(184, 206, 146);
+          background-color: rgb(184, 206, 146);
+          cursor: pointer;
+        }
       }
-    }
     >.board{
       width: 450px;
       height: 300px;
@@ -478,7 +473,6 @@ main{
         }
       }
     }
-  }
   >.sec2{
     width: 630px;
     margin-left: -100px;
@@ -569,6 +563,7 @@ main{
       padding-left: 10px;
       width: 370px;
       height: 50px;
+      font-family: 'GmarketSansMedium';
       margin-bottom: 5px;
       color: rgb(126, 148, 87);
       border: 1px solid rgb(184, 206, 146);
@@ -591,11 +586,10 @@ main{
       font-family: 'GmarketSansMedium';
       padding: 10px 0;
       cursor: pointer;
-      margin: 20px 0;
     }
-    input:nth-child(2){
-      margin-left: 10px;
-    }
+  }
+  >div:nth-child(2)>form>div:nth-child(4)>input:nth-child(2){
+    margin-left : 10px;
   }
 }
 /*pw 찾기 css*/
@@ -611,6 +605,7 @@ main{
       padding-left: 10px;
       width: 370px;
       height: 50px;
+      font-family: 'GmarketSansMedium';
       margin-bottom: 5px;
       color: rgb(126, 148, 87);
       border: 1px solid rgb(184, 206, 146);
@@ -633,10 +628,6 @@ main{
       font-family: 'GmarketSansMedium';
       padding: 10px 0;
       cursor: pointer;
-      margin: 20px 0;
-    }
-    input:nth-child(2){
-      margin-left: 10px;
     }
   }
 }
@@ -647,7 +638,6 @@ main{
   /* display: block; */
   display: flex;
   margin: 0 auto;
-  justify-content: center;
   >.sec1{
     width: 630px;
     margin-left: 20px;

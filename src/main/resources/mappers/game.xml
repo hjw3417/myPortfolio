@@ -107,6 +107,16 @@
 		<result property="updatedID" column="UPDATED_ID"/>
 		<result property="updatedDate" column="UPDATED_DATE"/>
 	</resultMap>
+	<!--  StadiumReservationInfo ResultMap	-->
+	<resultMap id="StadiumResInfoResultMap" type="StadiumResInfoVO">
+		<result property="sResDate" column="SRES_DATE"/>
+		<result property="sResGameTime" column="SRES_GAMETIME"/>
+		<result property="sResNum" column="SRES_NUM"/>
+		<result property="sResCreatedId" column="SRES_CREATED_ID"/>
+		<result property="sResCreatedDate" column="SRES_CREATED_DATE"/>
+		<result property="sResUpdatedId" column="SRES_UPDATED_ID"/>
+		<result property="sResUpdatedDate" column="SRES_UPDATED_DATE"/>
+	</resultMap>
 
 	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
 		<![CDATA[
@@ -149,8 +159,26 @@
 		</where>
 	</select>
 	<select id="stadiumDetail" parameterType="int" resultMap="stadiumResultMap">
-		SELECT S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_PHONES_NUM
+		<![CDATA[
+		SELECT S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_PHONE, S_NUM
 		FROM STADIUM
 		WHERE S_ID = #{sID}
+		]]>
 	</select>
+	<insert id="insertSRes" parameterType="StadiumResInfoVO">
+		<![CDATA[
+		 INSERT INTO stadium_res_info (
+			S_ID,
+			SRES_DATE,
+			SRES_GAMETIME,
+			sRes_created_id
+		) VALUES (
+			#{sId},
+			#{sResDate},
+			#{sResGameTime},
+			#{sResCreatedId}
+		)
+		]]>
+	</insert>
+
 </mapper>

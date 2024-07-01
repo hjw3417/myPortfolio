@@ -18,73 +18,7 @@
     <title>경기 만들기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // 첫 번째 Ajax 요청: 경기장 목록 가져오기
-            $("#findForm").submit(function(event) {
-                event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
-
-                var sRegion = $("#sRegion").val(); // sRegion 입력 필드의 값을 가져옵니다.
-                var search = $("#search").val(); // search 입력 필드의 값을 가져옵니다.
-
-                $.ajax({
-                    url: '/game/search/resStadium.do', // 요청할 URL을 설정합니다.
-                    type: 'GET', // 요청 방식을 GET으로 설정합니다.
-                    data: {
-                        sRegion: sRegion, // sRegion 값을 데이터로 전송합니다.
-                        search: search, // search 값을 데이터로 전송합니다.
-                        responseType: 'json' // 응답 형식을 JSON으로 설정합니다.
-                    },
-                    success: function(response) {
-                        // 요청이 성공하면 실행될 함수를 정의합니다.
-                        var stadiumList = response;
-                        var html = '';
-                        for(var i = 0; i < stadiumList.length; i++) {
-                            // 각 경기장을 목록 항목으로 추가합니다.
-                            html += '<input type="hidden" name="sID" value="' + stadiumList[i].sID + '" />' +
-                                    '<button type="submit">' + (i + 1) + '. ' + stadiumList[i].sName + '</button><br>';
-                        }
-                        $("#stadiumDetailForm").html(html); // HTML 목록에 경기장 목록을 추가합니다.
-                    },
-                    error: function(error) {
-                        // 요청이 실패하면 실행될 함수를 정의합니다.
-                        console.log("Error:", error); // 에러 메시지를 콘솔에 출력합니다.
-                    }
-                });
-            });
-
-            // 이벤트 위임을 사용하여 동적으로 생성된 폼에 이벤트 핸들러를 바인딩합니다.
-            $(document).on('submit', '#stadiumDetailForm', function(event) {
-                event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
-                var sID = $(this).find("input[name='sID']").val(); // sID 값을 가져옵니다.
-
-                $.ajax({
-                    url: '/game/stadiumDetail.do',  // 요청할 URL을 설정
-                    type: 'GET',                    // 요청 방식을 GET으로 설정
-                    data: { sID: sID },             // sID 값을 데이터로 전송
-                    success: function(response) {
-                        // 요청이 성공하면 실행될 함수를 정의
-                        var stadiumDetail = response;
-                        $('#sName').html(stadiumDetail.sName);
-                        $('#sAddr').html(stadiumDetail.sAddr);
-                        $('#sOwner').html(stadiumDetail.sOwner);
-                        $('#sPhone').html(stadiumDetail.sPhone);
-
-                        var html = "";
-                        for(var i = 0; i < stadiumDetail.sNum.length; i++) {
-                            // 각 경기장 세부 경기장 번호 목록 추가
-                            html += stadiumDetail.sNum[i] + " 경기장<br>";
-                        }
-                        $("#sNum").html(html);
-                    },
-                    error: function(error) {
-                        // 요청이 실패하면 실행될 함수를 정의
-                        console.log("Error:", error); // 에러 메시지를 콘솔에 출력합니다.
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="../js/js.js"></script>
 </head>
 <body>
 <header>
@@ -152,8 +86,8 @@
                     <ul id="stadiumList">
                         <!-- game/resStadium.do 에서 전달 받은 stadiumList.sName 표시(ajax, mav 모두 같은 값 반환 -->
                         <c:forEach var="stadiumVO" items="${stadiumList}" varStatus="status">
-                            <li>
-                                <form id="stadiumDetailForm">
+                            <li >
+                                <form id="stadiumDetailForm" class="stadiumDetailForm">
                                     <input type="hidden" name="sID" id="sID" value="${stadiumVO.sID}" />
                                     <button id="sName">${status.index + 1}. ${stadiumVO.sName}</button>
                                 </form>
@@ -163,23 +97,24 @@
                 </div>
                 <!-- 경기장 List 끝 -->
                 <!-- 경기장 form 시작 -->
-                <form method="get" action="commitstadium">
+                <form method="post" action="${contextPath}/game/StadiumRes.do">
                     <!-- 경기장 디테일 시작 -->
                     <div class="stadiumDetail">
                         <label><상세정보></label>
-                        <ul>
-                            <li>경기장을 선택해주세요.</li>
-                            <input type="hidden" name="sName" value="1">
-                            <li>경기장 명 : <span id="sName"></span></li>
+                        <div id="message">경기장을 선택해주세요.</div>
+                        <ul id="stadiumDetailInfo">
+                            <input type="hidden" name="sId" id="sIDInput">
+                            <input type="hidden" name="sName" id="sNameInput">
+                            <li>경기장 명 : <span id="sNameDetail"></span></li>
 
-                            <input type="hidden" name="sAddr" value="1">
-                            <li>주소 : <span id="sAddr"></span></li>
+                            <input type="hidden" name="sAddr" id="sAddrInput">
+                            <li>주소 : <span id="sAddrDetail"></span></li>
 
-                            <input type="hidden" name="sOwner" value="1">
-                            <li>관리자 : <span id="sOwner"></span></li>
+                            <input type="hidden" name="sOwner" id="sOwnerInput">
+                            <li>관리자 : <span id="sOwnerDetail"></span></li>
 
-                            <input type="hidden" name="sPhone" value="1">
-                            <li>연락처 : <span id="sPhone"></span></li>
+                            <input type="hidden" name="sPhone" id="sPhoneInput">
+                            <li>연락처 : <span id="sPhoneDetail"></span></li>
                         </ul>
                     </div>
                     <!-- 경기장 디테일 끝 -->
@@ -189,12 +124,12 @@
             <table class="resInfoContainer">
                 <tr>
                     <td>예약일 : </td>
-                    <td><input type="date" name="gResDate"></td>
+                    <td><input type="date" name="sResDate"></td>
                 </tr>
                 <tr>
                     <td>시작 시작 : </td>
                     <td>
-                        <select  name="sTime">
+                        <select  name="sResSTime">
                             <option selected disabled>시작 시간 선택</option>
                             <option value="8">08 : 00</option>
                             <option value="9">09 : 00</option>
@@ -212,7 +147,7 @@
                 <tr>
                     <td>종료 시작 : </td>
                     <td>
-                        <select name="eTime">
+                        <select name="sResETime">
                             <option selected disabled>종료 시간 선택</option>
                             <option value="8">08 : 00</option>
                             <option value="9">09 : 00</option>
@@ -230,9 +165,8 @@
                 <tr>
                     <td>경기장 선택 : </td>
                     <td>
-                        <select name="sNum">
+                        <select name="sNum" id="sResNum">
                             <option disabled selected>경기장 선택하기</option>
-                            <option id="sNum" value="1"></option>
                         </select>
                     </td>
                 </tr>
@@ -241,7 +175,7 @@
             <!-- 버튼 영역 시작 -->
             <div class="buttonContainer">
                 <a href="gameMake.html">취소하기</a>
-                <a href="gameMake.html">선택 완료</a>
+                <input type="submit" value="다시입력">
             </div>
             <!-- 버튼 영역 끝 -->
             </form>
