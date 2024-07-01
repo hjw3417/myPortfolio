@@ -309,7 +309,6 @@ main{
   }
   >div:nth-child(3) { /*테이블*/
     width : 973px;
-    height: 400px;
     text-align: center;
     background-color: white;
     
@@ -329,6 +328,22 @@ main{
       >tbody tr{
         height : 60px;
         border : 1px solid rgb(184, 206, 146);
+
+        >td:last-child {
+          width : 90px;
+          padding : 0px;
+          text-align: left;
+          >button{
+            color : white;
+            font-size: 16px;
+            font-family: 'GmarketSansMedium';
+            height : 35px;
+            line-height: 37px;
+            width : 80px;
+            background-color: rgb(184, 206, 146);
+            border : none;
+          }
+        }
       }
       >tbody td{
         padding : 10px 0px;
@@ -345,6 +360,7 @@ main{
       margin : 20px 0;
       border : none;
       font-family: 'GmarketSansMedium';
+      cursor : pointer;
     }
   }
   >div:nth-child(4){
