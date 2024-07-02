@@ -501,7 +501,7 @@ $(document).ready(function() {
                 } else {
                     alert(awayTeamMemberList[0].uID)
                     $("#awayTeamName").html(awayTeamName);
-//                    $("#awayTeamMemberList").hide();
+                    $("#awayTeamMemberList").hide();
                     $.each(awayTeamMemberList, function(index, awayTeamMember) {
                         var html = `
                             <li>${awayTeamMember.uName}</li>

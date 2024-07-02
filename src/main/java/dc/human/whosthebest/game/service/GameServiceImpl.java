@@ -201,24 +201,26 @@ public class GameServiceImpl implements  GameService {
 
     @Override
     public int updateAndInsertAwayTeam(SquadVO squadVO) throws  Exception {
-        int updateAwayTeamIDResult;
+        int updateAwayTeamIDResult = 0;
         int updateAndInsertAwayTeamResult = 0;
         System.out.println("service updateAndInsertAwayTeam : " + squadVO.gettID());
         GameVO gameVO = new GameVO();
         gameVO.setgID(squadVO.getgID());
         gameVO.settAwayID(squadVO.gettID());
         System.out.println(squadVO.gettID());
-
-        updateAwayTeamIDResult = gameDAO.updateAwayTeamID(squadVO);
-        System.out.println("updateAwayTeamIDResult : " + updateAwayTeamIDResult);
-        if(updateAwayTeamIDResult >= 1) {
-            int insertSquad = gameDAO.insertSquad(squadVO);
-            System.out.println("insertSquad : " + insertSquad);
-            if(insertSquad >= 1) {
-                updateAndInsertAwayTeamResult = 1;
-                System.out.println("updateAndInsertAwayTeamResult : " + updateAndInsertAwayTeamResult);
-            }
+        int checkAwayTeamExistResult = gameDAO.checkAwayTeamExist(gameVO);
+        if(checkAwayTeamExistResult < 1) {
+            updateAwayTeamIDResult = gameDAO.updateAwayTeamID(squadVO);
+            System.out.println("updateAwayTeamIDResult : " + updateAwayTeamIDResult);
         }
+
+        int insertSquad = gameDAO.insertSquad(squadVO);
+        System.out.println("insertSquad : " + insertSquad);
+        if(insertSquad >= 1) {
+            updateAndInsertAwayTeamResult = 1;
+            System.out.println("updateAndInsertAwayTeamResult : " + updateAndInsertAwayTeamResult);
+        }
+
         return updateAndInsertAwayTeamResult;
     }
 }

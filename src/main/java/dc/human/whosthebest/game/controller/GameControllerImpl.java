@@ -237,7 +237,7 @@ public class GameControllerImpl implements GameController {
     @Override
     @GetMapping(value = "/gameInfo.do")
     public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int gID = 177;
+        int gID = 181;
         String uID = "heo";
         ModelAndView mav = new ModelAndView();
         GameInfoVO gameInfoVO = new GameInfoVO();
@@ -299,8 +299,8 @@ public class GameControllerImpl implements GameController {
         SquadVO squadVO = new SquadVO();
         squadVO.setgID(gID);
         squadVO.settID(tAwayID);
-        squadVO.setuID("insi");
-        squadVO.setCreatedID("insi");
+        squadVO.setuID("aaaaa");
+        squadVO.setCreatedID("aaaaa");
 
         int updateAndInsertAwayTeamResult = gameService.updateAndInsertAwayTeam(squadVO);
         System.out.println("controller updateAndInsertAwayTeamResult : " + updateAndInsertAwayTeamResult);
