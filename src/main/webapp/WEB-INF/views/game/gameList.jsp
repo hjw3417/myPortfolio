@@ -20,6 +20,7 @@
 <script src="${pageContext.request.contextPath}/js/js.js"></script>
 <script>
     <!-- alert('${gameList[0].gTitle}'); -->
+    var contextPath = '${contextPath}'; // JavaScript 변수로 설정
 </script>
 <title>경기 목록</title>
 </head>
@@ -137,13 +138,14 @@
               <!-- 카드 몸체 종료 -->
               <!-- 카드 submit 시작 -->
               <div>
-                <!-- 임시 폼 -->
-                <form action="gameInfo.html">
+                <form method="get" action="${contextPath}/game/gameInfo.do">
+                  <input type="hidden" name="gID" value="${gameListVO.gID}" />
                   <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
                 </form>
                 <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
               </div>
               <!-- 카드 submit 종료 -->
+
             </div>
             </c:forEach>
             <!-- 카드 종료 -->

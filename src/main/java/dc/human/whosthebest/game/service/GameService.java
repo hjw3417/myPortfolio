@@ -31,5 +31,5 @@ public interface GameService {
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception;
     public List<GameMemberListVO> insertAndSelectHomeTeam(SquadVO squadVO) throws  Exception;
     public int updateAndInsertAwayTeam(SquadVO squadVO) throws  Exception;
-    public AbstractMap.SimpleEntry<String, List<GameMemberListVO>> selectAwayTeam(int gID, int tID) throws  Exception;
+    public GameAwayTeamInfoVO selectAwayTeam(int gID, int tID) throws  Exception;
 }

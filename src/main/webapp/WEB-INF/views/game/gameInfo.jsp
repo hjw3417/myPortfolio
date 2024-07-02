@@ -60,7 +60,7 @@
           <div>
             <form id="startGameForm">
                 <input type="hidden" id="startGameGID" value="${gameInfoVO.gID}" />
-                <input type="submit" id="startGameBtn"/>
+                <input type="submit" id="startGameBtn" value="게임 시작"/>
             </form>
           </div>
         </div>
@@ -71,7 +71,7 @@
             ${gameInfoVO.gTag}
           </div>
           <div class="gMinmember" id="gMinmember" name="gMinmember">
-            9<span> <현재 참여 인원></span> / ${gameInfoVO.gMinMember}<span> <최소 참여 인원></span>
+            <span id="nowPartiMemberNum">${gameInfoVO.nowPartiMemberNum}</span><span> <현재 참여 인원></span> / ${gameInfoVO.gMinMember}<span> <최소 참여 인원></span>
           </div>
           <div>
             ${gameInfoVO.gCreatedDate} 개설
@@ -120,7 +120,7 @@
                   </c:when>
                   <c:otherwise>
                       <image class="tLogo" id="awayTeamLogo" name="awayTeamLogo" src="image/teamLogo.png"></image>
-                      <div id="awayTeamName">${awayTeamName}</div>
+                      <div id="awayTeamName">${gameAwayTeamInfoVO.awayTeamName}</div>
                   </c:otherwise>
               </c:choose>
               <form id="partiAwayTeamForm">
@@ -145,7 +145,7 @@
                          </c:forEach>
                       </c:when>
                       <c:otherwise>
-                         <c:forEach var="awayTeamMember" items="${awayTeamMemberList}">
+                         <c:forEach var="awayTeamMember" items="${gameAwayTeamInfoVO.awayTeamMemberList}">
                               <li>${awayTeamMember.uName}</li>
                          </c:forEach>
                       </c:otherwise>

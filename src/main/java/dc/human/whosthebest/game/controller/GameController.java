@@ -47,12 +47,12 @@ public interface GameController {
                                            @RequestParam(value = "search", required = false) String search,
                                            @RequestParam(value = "uID", required = false) String uID
                                           ) throws Exception;
-    public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView selectGameInfo(@RequestParam("gID") int gID) throws Exception;
     public List<GCommentVO> insertComments(@ModelAttribute("gCommentVO") GCommentVO gCommentVO)  throws Exception;
     public  List<GameMemberListVO> partiHomeTeam(@RequestParam("gID") int gID,
                                                  @RequestParam("gTeamID") int gTeamID
                                                  ) throws Exception;
-    public AbstractMap.SimpleEntry<String, List<GameMemberListVO>> insertAndSelectAwayTeam(@RequestParam("gID") int gID,
-                                                                                           @RequestParam("tAwayID") int tAwayID
-                                                          ) throws Exception;
+    public GameAwayTeamInfoVO insertAndSelectAwayTeam(@RequestParam("gID") int gID,
+                                                       @RequestParam("tAwayID") int tAwayID
+                                                      ) throws Exception;
 }

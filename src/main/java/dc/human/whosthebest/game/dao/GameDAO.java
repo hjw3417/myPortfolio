@@ -68,6 +68,7 @@ public interface GameDAO {
     public  List<GameMemberListVO> selectGameTMemmber(SquadVO squadVO) throws DataAccessException;
     public List<GCommentVO> selectComments(int gID) throws  DataAccessException;
     public int insertComments(GCommentVO gCommentVO) throws DataAccessException;
+    public int nowPartiMemberNum(int gID) throws DataAccessException;
     public int checkDuplicateSquad(SquadVO squadVO) throws DataAccessException;
     public int checkAwayTeamExist(GameVO gameVO) throws DataAccessException;
     public String selectAwayTeamName(int tID) throws DataAccessException;

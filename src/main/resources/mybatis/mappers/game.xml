@@ -277,6 +277,11 @@
 		USERS u ON cm.U_ID = u.U_ID
 		WHERE cm.G_ID = #{gID}
 	</select>
+	<select id="nowPartiMemberNum" parameterType="int" resultType="int">
+		select count(*)
+		from squad
+		where g_id = #{gID}
+	</select>
 	<insert id="insertComments" parameterType="GCommentVO">
 		INSERT INTO G_COMMENT (U_ID, G_ID, G_COMMENT, COM_CREATED_ID)
 		VALUES (#{uID}, #{gID}, #{gComment}, #{comCreatedID})

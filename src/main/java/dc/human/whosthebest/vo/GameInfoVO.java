@@ -64,6 +64,26 @@ public class GameInfoVO {
 	//List<teamVO>
 	List<TeamInfoVO> myTeamList;
 
+	//nowPartiMemberNum
+	private int nowPartiMemberNum;
+
+	private GameAwayTeamInfoVO gameAwayTeamInfoVO;
+
+	public GameAwayTeamInfoVO getGameAwayTeamInfoVO() {
+		return gameAwayTeamInfoVO;
+	}
+
+	public void setGameAwayTeamInfoVO(GameAwayTeamInfoVO gameAwayTeamInfoVO) {
+		this.gameAwayTeamInfoVO = gameAwayTeamInfoVO;
+	}
+
+	public int getNowPartiMemberNum() {
+		return nowPartiMemberNum;
+	}
+
+	public void setNowPartiMemberNum(int nowPartiMemberNum) {
+		this.nowPartiMemberNum = nowPartiMemberNum;
+	}
 
 	public List<TeamInfoVO> getMyTeamList() {
 		return myTeamList;

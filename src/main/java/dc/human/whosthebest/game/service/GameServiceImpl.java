@@ -158,22 +158,32 @@ public class GameServiceImpl implements  GameService {
                 gameInfoVO.setgCommentsList(gCommentsList);
                 System.out.println("Service setgCommentsList 첫 번째 uName : " + gCommentsList.get(0).getuName());
             }
+            gameInfoVO.setNowPartiMemberNum(gameDAO.nowPartiMemberNum(gID));
         }
         return gameInfoVO;
     }
 
     @Override
-    public AbstractMap.SimpleEntry<String, List<GameMemberListVO>> selectAwayTeam(int gID, int tID) throws  Exception {
-        AbstractMap.SimpleEntry<String, List<GameMemberListVO>> awayTeamMap = new AbstractMap.SimpleEntry<>(null, Collections.emptyList());
+    public GameAwayTeamInfoVO selectAwayTeam(int gID, int tID) throws  Exception {
+        GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
+        List<GameMemberListVO> awayTeamMember = new ArrayList<>();
         SquadVO squadVO = new SquadVO();
         squadVO.setgID(gID);
         squadVO.settID(tID);
         String awayTeamName = gameDAO.selectAwayTeamName(tID);
         System.out.println("service awayTeamName : " + awayTeamName);
-        List<GameMemberListVO> awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
+        awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
         System.out.println("service awayTeamMember.get(0).getuName() : " + awayTeamMember.get(0).getuName());
-        awayTeamMap = new AbstractMap.SimpleEntry<>(awayTeamName, awayTeamMember);
-        return awayTeamMap;
+
+        if(awayTeamName != null) {
+            gameAwayTeamInfoVO.setAwayTeamName(awayTeamName);
+        }
+        if(!awayTeamMember.isEmpty()) {
+            gameAwayTeamInfoVO.setAwayTeamMemberList(awayTeamMember);
+        }
+        int nowPartiMemberNum = gameDAO.nowPartiMemberNum(squadVO.getgID());
+        gameAwayTeamInfoVO.setNowPartiMemberNum(nowPartiMemberNum);
+        return gameAwayTeamInfoVO;
     }
 
     @Override
@@ -203,23 +213,29 @@ public class GameServiceImpl implements  GameService {
     public int updateAndInsertAwayTeam(SquadVO squadVO) throws  Exception {
         int updateAwayTeamIDResult = 0;
         int updateAndInsertAwayTeamResult = 0;
+        int insertSquad = 0;
         System.out.println("service updateAndInsertAwayTeam : " + squadVO.gettID());
         GameVO gameVO = new GameVO();
         gameVO.setgID(squadVO.getgID());
         gameVO.settAwayID(squadVO.gettID());
         System.out.println(squadVO.gettID());
         int checkAwayTeamExistResult = gameDAO.checkAwayTeamExist(gameVO);
+        int checkDuplicateSquadResult = gameDAO.checkDuplicateSquad(squadVO);
+
         if(checkAwayTeamExistResult < 1) {
             updateAwayTeamIDResult = gameDAO.updateAwayTeamID(squadVO);
             System.out.println("updateAwayTeamIDResult : " + updateAwayTeamIDResult);
         }
+        if(checkDuplicateSquadResult < 1) {
+            insertSquad = gameDAO.insertSquad(squadVO);
+            System.out.println("insertSquad : " + insertSquad);
+        }
 
-        int insertSquad = gameDAO.insertSquad(squadVO);
-        System.out.println("insertSquad : " + insertSquad);
         if(insertSquad >= 1) {
             updateAndInsertAwayTeamResult = 1;
             System.out.println("updateAndInsertAwayTeamResult : " + updateAndInsertAwayTeamResult);
         }
+
 
         return updateAndInsertAwayTeamResult;
     }

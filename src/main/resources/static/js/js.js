@@ -259,73 +259,74 @@ $(document).ready(function() {
             },
             success: function(response) {
                 var gameList = response;
-
-                var html ='';
-                //gameList 가 null일 시 알림
-                if(gameList.length === 0) {
-                    html ='<div class="nullMsg">경기 정보가 없습니다.</div>';
-                    $("#cardContainer").hide();
+                var html = '';
+                // gameList가 null일 시 알림
+                alert(gameList.length);
+                if (gameList.length === 0) {
+                    $("#gameListContainer").empty();
+                    html = '<div class="nullMsg">경기 정보가 없습니다.</div>';
                     $("#gameListContainer").html(html);
                 } else {
-//                    alert(gameList[0].gID);
-                    var gameListContainer = $('#gameListContainer');
-                    gameListContainer.empty();      //기존 내용 제거
-
-                    //새로운 dom 업데이트
-                    $.each(gameList, function(i, gameListVO) {
-                        var cardHtml = `
-                        <!-- 카드 시작 -->
-                        <div class="cardContainer" id="cardContainer">
-                            <!-- 카드 몸체 시작 -->
-                            <div class="card">
-                                <!-- profile 시작 -->
-                                <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
-                                    <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
-                                    <div class="tName" id="tName" name="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
+                    alert("else : " + gameList[0].gID);
+                    $("#gameListContainer").empty();
+                    // 새로운 DOM 업데이트
+                    for (var i = 0; i < gameList.length; i++) {
+                        var gameListVO = gameList[i];
+//                        html += i;
+                        html += `
+                            <!-- 카드 시작 -->
+                            <div class="cardContainer">
+                                <!-- 카드 몸체 시작 -->
+                                <div class="card">
+                                    <!-- profile 시작 -->
+                                    <div onclick="openModal()" class="teamProfileContainer">
+                                        <img class="tLogo" src="image/teamLogo.png">
+                                        <div class="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
+                                    </div>
+                                    <!-- profile 종료 -->
+                                    <!-- 프로필과 카드 본문 나누는 세로선 -->
+                                    <div class="verticalLine"></div>
+                                    <!-- 본문 테이블 시작-->
+                                    <div class="tableContainer">
+                                        <table>
+                                            <tr>
+                                                <td>경기명 : </td>
+                                                <td>${gameListVO.gTitle}</td>
+                                                <td>경기 생성일 :</td>
+                                                <td>${gameListVO.gCreatedDate}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>경기장 : </td>
+                                                <td>${gameListVO.sName} ${gameListVO.sNum} 경기장</td>
+                                            </tr>
+                                            <tr>
+                                                <td>경기장 주소 : </td>
+                                                <td>${gameListVO.sAddr}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>경기일시 : </td>
+                                                <td>${gameListVO.gResDate} (${gameListVO.gTime} 시간)</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!-- 본문 테이블 종료-->
                                 </div>
-                                <!-- profile 종료 -->
-                                <!-- 프로필과 카드 본문 나누는 세로선 -->
-                                <div class="verticalLine"></div>
-                                <!-- 본문 테이블 시작-->
-                                <div class="tableContainer">
-                                    <table>
-                                        <tr>
-                                            <td>경기명 : </td>
-                                            <td>${gameListVO.gTitle}</td>
-                                            <td>경기 생성일 :</td>
-                                            <td>${gameListVO.gCreatedDate}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>경기장 : </td>
-                                            <td>${gameListVO.sName} ${gameListVO.sNum} 경기장</td>
-                                        </tr>
-                                        <tr>
-                                            <td>경기장 주소 : </td>
-                                            <td>${gameListVO.sAddr}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>경기일시 : </td>
-                                            <td>${gameListVO.gResDate} (${gameListVO.gTime} 시간)</td>
-                                        </tr>
-                                    </table>
+                                <!-- 카드 몸체 종료 -->
+                                <!-- 카드 submit 시작 -->
+                                <div>
+                                    <form method="get" action="${contextPath}/game/gameInfo.do">
+                                        <input type="hidden" name="gID" value="${gameListVO.gID}" />
+                                        <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
+                                    </form>
+                                    <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
                                 </div>
-                                <!-- 본문 테이블 종료-->
+                                <!-- 카드 submit 종료 -->
                             </div>
-                            <!-- 카드 몸체 종료 -->
-                            <!-- 카드 submit 시작 -->
-                            <div>
-                                <!-- 임시 폼 -->
-                                <form action="gameInfo.html">
-                                    <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
-                                </form>
-                            </div>
-                            <!-- 카드 submit 종료 -->
-                        </div>
-                        <!-- 카드 시작 -->
+                            <!-- 카드 시작 -->
                         `;
-                        gameListContainer.append(cardHtml);
-                    });
-                    //새로운 dom 업데이트
+                    }
+                    $("#gameListContainer").append(html); // 최종 HTML을 한 번에 추가
+                    alert("sdfsdf");
                 }
             },
             error: function(error) {
@@ -492,22 +493,23 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                var awayTeamName = response.key;
-                var awayTeamMemberList = response.value;
+                var awayTeamName = response.awayTeamName;
+                var awayTeamMemberList = response.awayTeamMemberList;
+                var nowPartiMemberNum = response.nowPartiMemberNum;
                 var html = '';
-                alert(awayTeamName);
-                if(awayTeamMemberList.length === 0) {
+                if(awayTeamName == null) {
                     alert("이미 참가하였습니다.")
                 } else {
                     alert(awayTeamMemberList[0].uID)
                     $("#awayTeamName").html(awayTeamName);
-                    $("#awayTeamMemberList").hide();
+                    $("#awayTeamMemberList").empty();
                     $.each(awayTeamMemberList, function(index, awayTeamMember) {
                         var html = `
                             <li>${awayTeamMember.uName}</li>
                         `;
                         $("#awayTeamMemberList").append(html);
                     });
+                    $("#nowPartiMemberNum").html(nowPartiMemberNum);
                 }
             },
             error: function(error) {
