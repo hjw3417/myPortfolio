@@ -43,7 +43,7 @@
         <section class="sec1">
           <div class="profile">
             <div>
-              <img src="./우사기.jpg">
+              <img src="./image/우사기.jpg">
               <a href="/myPage"><div>프로필 수정</div></a>
             </div>
           </div>
