@@ -2,6 +2,7 @@ package dc.human.whosthebest.myPage.serivce;
 
 import dc.human.whosthebest.myPage.dao.MyPageDAO;
 import dc.human.whosthebest.vo.MyPageInfoVO;
+import dc.human.whosthebest.vo.RecentGameVO;
 import dc.human.whosthebest.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,11 @@ public class MyPageServiceImpl implements MyPageService{
     public List getUserinfo(String uID) throws Exception{
         return myPageDAO.selectMyPageInfo(uID);
 
+    }
 
+    @Override
+    public List<RecentGameVO> getRecentGame(String uID) throws Exception{
+        return myPageDAO.selectRecentGame(uID);
     }
 
 }

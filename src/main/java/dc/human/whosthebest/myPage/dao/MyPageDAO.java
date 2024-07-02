@@ -12,6 +12,7 @@ import java.util.List;
 public interface MyPageDAO {
 
    public List selectMyPageInfo(String uID) throws DataAccessException;
+   public List selectRecentGame(String uID) throws  DataAccessException;
 
 
 }

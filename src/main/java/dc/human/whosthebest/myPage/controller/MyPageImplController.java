@@ -3,6 +3,7 @@ package dc.human.whosthebest.myPage.controller;
 import dc.human.whosthebest.myPage.serivce.MyPageService;
 
 import dc.human.whosthebest.vo.MyPageInfoVO;
+import dc.human.whosthebest.vo.RecentGameVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -24,14 +25,15 @@ public class MyPageImplController {
     public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
-
         String uID = (String) session.getAttribute("hong");
         session.setAttribute("hong", uID);
-        System.out.println("마이페이지컨트롤러 성공" + uID);
+        System.out.println("마이페이지컨트롤러 성공" );
         List<MyPageInfoVO> myPageInfo = myPageService.getUserinfo(uID);
+        List<RecentGameVO> recentGame = myPageService.getRecentGame(uID);
         ModelAndView mav = new ModelAndView("/myPage/myPage");
         mav.addObject("myPageInfo", myPageInfo);
-
+        mav.addObject("recentGame" , recentGame);
         return mav;
     }
+
 }

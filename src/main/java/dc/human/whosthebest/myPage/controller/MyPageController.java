@@ -8,4 +8,5 @@ public interface MyPageController {
 
     public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+
 }
