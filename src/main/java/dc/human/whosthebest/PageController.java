@@ -21,4 +21,9 @@ public class PageController {
         return "user/findID";
     }
 
+    @GetMapping("/findPw")
+    public String findPw(){
+        return "user/findPW";
+    }
+
 }

@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/main.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <title>idPop</title>
+  <title>pwPop</title>
 </head>
 <body>
-    <div class="idPage">
+    <div class="pwPage">
         <hr>
-        <div>회원님의 아이디는 ${uId}입니다.</div>
+        <div>회원님의 비밀번호는 ${uPW}입니다.</div>
         <button type="button" onclick="location.href='/login'">확인</button>
     </div>
 </body>

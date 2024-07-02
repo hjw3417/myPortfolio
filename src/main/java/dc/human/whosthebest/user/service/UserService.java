@@ -9,4 +9,5 @@ public interface UserService {
     public int checkId (String uID) throws Exception;
     public int loginUser (String uID, String uPW) throws Exception;
     public String findID (String uName, String uBday, String uPhone) throws Exception;
+    public String findPW (String uName, String uBday, String uPhone, String uID) throws Exception;
 }

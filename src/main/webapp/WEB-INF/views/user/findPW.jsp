@@ -2,12 +2,12 @@
 <html lang="ko">
 <head>
   <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-  <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/main.css">
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <title>idFind</title>
+    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <title>pwFind</title>
 </head>
 <body>
   <header>
@@ -16,7 +16,7 @@
     </div>
     <div>
       <span><a href="/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="/join">회원가입</a></span>
+            <span><a href="/join">회원가입</a></span>
     </div>
     <div>
       <ul></ul>
@@ -25,12 +25,12 @@
   <main style="text-align: center; height: 750px;">
     <div>　</div>
     <div>
-      <section class="idFind">
+      <section class="pwFind">
         <div>
-          아이디 찾기
+          비밀번호 찾기
         </div>
         <div>
-          <form name="findI" method="post" action="/findId" enctype="utf-8">
+          <form name="findP" method="post" action="/findPw" enctype="utf-8">
             <div>
               <input type="text" name="uName" placeholder="이름을 입력해주세요." required>
             </div>
@@ -41,7 +41,10 @@
               <input type="text" name="uPhone" size="11" maxlength="11" placeholder="휴대폰 번호를 입력해주세요." required>
             </div>
             <div>
-              <input type="submit" value="확인" id="find_Id_Btn">
+              <input type="text" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
+            </div>
+            <div>
+              <input type="submit" value="확인" id="find_Pw_Btn">
               <input type="reset" value="취소">
             </div>
           </form>

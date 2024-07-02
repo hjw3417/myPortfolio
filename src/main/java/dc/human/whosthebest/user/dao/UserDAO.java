@@ -14,4 +14,5 @@ public interface UserDAO {
     int checkID (String uID) throws DataAccessException;
     int loginUser (String uID, String uPW) throws DataAccessException;
     String findID (String uName, String uBday, String uPhone) throws DataAccessException;
+    String findPW (String uName, String uBday, String uPhone, String uID) throws DataAccessException;
 }

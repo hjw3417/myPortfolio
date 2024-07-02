@@ -69,9 +69,9 @@
         select U_ID from users where U_NAME = #{uName} and U_BDAY = #{uBday} and U_PHONE = #{uPhone}
 
     </select>
-    <!-- 아이디 DB가져오기 -->
-    <select id="getUserId" parameterType="String">
-        select count(*) from users where U_ID = #{uID}
+    <!-- 비밀번호 찾기 -->
+    <select id="findPW" parameterType="String">
+        select U_PW from users where U_NAME = #{uName} and U_BDAY = #{uBday} and U_PHONE = #{uPhone} and U_ID = #{uID}
     </select>
 
 

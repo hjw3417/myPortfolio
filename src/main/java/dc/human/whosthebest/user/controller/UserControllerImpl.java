@@ -105,15 +105,55 @@ public class UserControllerImpl implements UserController {
             if (uID != null) {
 
 //                msgOk = "회원정보가 확인됐습니다.";
-                viewName = "user/idPop";
+                viewName = "user/idPage";
             } else {
-                msgNo = "아이디 또는 생년월일 또는 휴대폰 번호가 일치하지 않습니다.";
+                msgNo = "입력하신 정보가 일치하지 않습니다.";
                 viewName = "user/findID";
             }
 
             mav.addObject("checkMsg",msgOk);
             mav.addObject("errorMsg",msgNo);
             mav.addObject("uId",uID);
+            mav.setViewName(viewName);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return mav;
+
+    }
+
+    @Override
+    @RequestMapping(value="/findPw" , method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView findPw(@RequestParam("uName") String uName,
+                               @RequestParam("uBday") String uBday,
+                               @RequestParam("uPhone") String uPhone,
+                               @RequestParam("uID")String uID, HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+        ModelAndView mav = new ModelAndView();
+
+        try{
+            String msgOk = "";
+            String msgNo = "";
+            String viewName = "";
+
+            System.out.println("uName :"+uName + " uBday: " +  uBday + " uPhone: "+ uPhone + " uID: " + uID);
+            String uPW = userService.findPW(uName, uBday, uPhone, uID);
+
+            System.out.println(uPW);
+            if (uPW != null) {
+
+//                msgOk = "회원정보가 확인됐습니다.";
+                viewName = "user/pwPage";
+            } else {
+                msgNo = "입력하신 정보가 일치하지 않습니다.";
+                viewName = "user/findPW";
+            }
+
+            mav.addObject("checkMsg",msgOk);
+            mav.addObject("errorMsg",msgNo);
+            mav.addObject("uPW",uPW);
             mav.setViewName(viewName);
 
         } catch (Exception ex) {
