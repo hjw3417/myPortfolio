@@ -33,4 +33,5 @@ public interface GameService {
     public GameAwayTeamInfoVO selectAwayTeam(int gID, int tID) throws  Exception;
     public GameAwayTeamInfoVO awayTeamIntoGame(SquadVO squadVO) throws  Exception;
     public GameAwayTeamInfoVO insertawayTeamMembr(SquadVO squadVO) throws Exception;
+    public String selectAwayTeamName(int tID) throws Exception;
 }

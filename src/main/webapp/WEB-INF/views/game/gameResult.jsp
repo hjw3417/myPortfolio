@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../../../../resources/static/js/js.js""></script>
+    <script src="${pageContext.request.contextPath}/js/js.js"></script>
     <title>경기 결과 입력</title>
 </head>
 <body>
@@ -55,8 +55,8 @@
         <div class="gameResult-content">
             <!-- 경기 제목 영역 시작 -->
             <div class="titeContainer">
-                <div>천안</div>
-                <div>진짜 뒤지고 싶은 사람~~!</div>
+                <div>${sRegion}</div>
+                <div>${gTitle}</div>
                 <div>
                     <a>경기 종료</a>
                 </div>
@@ -66,20 +66,21 @@
             <div class="resultInputContainer">
                 <div class="teamNameContainer">
                     <button class="teamName" id="homeTeam" onclick="changeButtons('homeTeam', 'oppanentTeam')">
-                        문주군단
+                        ${homeTeamName}
                     </button>
                     <button class="teamName" id="oppanentTeam" onclick="changeButtons('oppanentTeam', 'homeTeam')">
-                        개발냥발
+                        ${awayTeamName}
                     </button>
                 </div>
                 <div class="scoreInputContianer">
-                    <input type="text" placeholder="Score" maxlength="2">
-                    <input type="text" placeholder="Score" maxlength="2">
+                    <input type="text" name="homeTeamScore" placeholder="Score" maxlength="2">
+                    <input type="text" name="awayTeamScore" placeholder="Score" maxlength="2">
                 </div>
                 <div class="submitContainer">
                     <form action="gameList.html">
-                        <input type="submit" value="결과 제출">
-                    </form>
+                    <input type="hidden" name="gID" value="${gameinfoVO.gID}"
+                    <input type="submit" value="결과 제출">
+                </form>
                 </div>
             </div>
             <!-- 경기 평가 영역 종료 -->

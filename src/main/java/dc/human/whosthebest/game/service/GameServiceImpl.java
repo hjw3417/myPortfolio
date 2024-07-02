@@ -290,4 +290,11 @@ public class GameServiceImpl implements  GameService {
             return gameMemberList;
         }
     }
+
+    @Override
+    public String selectAwayTeamName(int tID) throws Exception {
+        String tName = null;
+        tName = gameDAO.selectAwayTeamName(tID);
+        return tName;
+    }
 }

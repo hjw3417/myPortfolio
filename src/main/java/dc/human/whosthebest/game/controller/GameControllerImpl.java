@@ -18,11 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.*;
-
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
 
 @Controller("gameController")
 @RequestMapping("/game")
@@ -144,15 +142,15 @@ public class GameControllerImpl implements GameController {
     @Override
     @RequestMapping(value = "/createGame.do", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView createGame(@RequestParam("gTeamID") String gTeamID,
-                                   @RequestParam("gTitle") String gTitle,
-                                   @RequestParam("gTag") String gTag,
-                                   @RequestParam("gMinMember") int gMinMember,
-                                   @RequestParam("gInfo") String gInfo,
-                                   @RequestParam("sID") int sID,
-                                   @RequestParam("sNum") int sNum,
-                                   @RequestParam("gTime") int gTime,
-                                   @RequestParam("gResDate") String gResDate) throws Exception {
+    public ModelAndView createGame(@RequestParam(value="gTeamID", required = false) String gTeamID,
+                                   @RequestParam(value="gTitle", required = false) String gTitle,
+                                   @RequestParam(value="gTag", required = false) String gTag,
+                                   @RequestParam(value="gMinMember", required = false, defaultValue = "1") int gMinMember,
+                                   @RequestParam(value="gInfo", required = false) String gInfo,
+                                   @RequestParam(value="sID", required = false, defaultValue = "1") int sID,
+                                   @RequestParam(value="sNum", required = false, defaultValue = "1") int sNum,
+                                   @RequestParam(value="gTime", required = false, defaultValue = "1") int gTime,
+                                   @RequestParam(value="gResDate", required = false) String gResDate) throws Exception {
         GameVO gameVO = new GameVO();
         System.out.println("controller tID : " + gTeamID);
         int gTeamIDInt = Integer.parseInt(gTeamID);
@@ -236,7 +234,7 @@ public class GameControllerImpl implements GameController {
 
     @Override
     @GetMapping(value = "/gameInfo.do")
-    public ModelAndView selectGameInfo(@RequestParam("gID") int gID) throws Exception {
+    public ModelAndView selectGameInfo(@RequestParam(value="gID", required = false, defaultValue = "1") int gID) throws Exception {
         String uID = "heo";
         ModelAndView mav = new ModelAndView();
         GameInfoVO gameInfoVO = new GameInfoVO();
@@ -290,8 +288,8 @@ public class GameControllerImpl implements GameController {
     @Override
     @PostMapping(value="/partiAway/gameInfo.do")
     @ResponseBody
-    public GameAwayTeamInfoVO insertAndSelectAwayTeam(@RequestParam("gID") int gID,
-                                                       @RequestParam("tAwayID") int tAwayID
+    public GameAwayTeamInfoVO insertAndSelectAwayTeam(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                                      @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID
                                                          ) throws Exception {
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
 
@@ -314,8 +312,8 @@ public class GameControllerImpl implements GameController {
     @Override
     @PostMapping(value="/partiAwayMember/gameInfo.do")
     @ResponseBody
-    public GameAwayTeamInfoVO insertawayTeamMembr(@RequestParam("gID") int gID,
-                                                  @RequestParam("tAwayID") int tAwayID
+    public GameAwayTeamInfoVO insertawayTeamMembr(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                                  @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID
                                                  ) throws Exception {
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
 
@@ -329,5 +327,43 @@ public class GameControllerImpl implements GameController {
             gameAwayTeamInfoVO = gameService.insertawayTeamMembr(squadVO);
         }
         return gameAwayTeamInfoVO;
+    }
+
+    @Override
+    @PostMapping(value = "/gameResult.do")
+    public String  intoGameResult(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                       @RequestParam(value="sRegion", required = false) String sRegion,
+                                       @RequestParam(value="gTitle", required = false)  String gTitle,
+                                       @RequestParam(value="gTeamID", required = false, defaultValue = "0") int gTeamID,
+                                       @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID,
+                                        RedirectAttributes redirectAttributes) throws Exception {
+        String uID = "heo";
+        ModelAndView mav = new ModelAndView();
+        String homeTeamName = gameService.selectAwayTeamName(gTeamID);
+        String awayTeamName = gameService.selectAwayTeamName(tAwayID);
+
+        redirectAttributes.addAttribute("gID", gID);
+        redirectAttributes.addAttribute("sRegion", sRegion);
+        redirectAttributes.addAttribute("gTitle", gTitle);
+        redirectAttributes.addAttribute("homeTeamName", homeTeamName);
+        redirectAttributes.addAttribute("awayTeamName", awayTeamName);
+
+        return "redirect:/game/gameResultView";
+    }
+    @Override
+    @GetMapping("/gameResultView")
+    public ModelAndView intoGameResultHadler(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                             @RequestParam(value="sRegion", required = false) String sRegion,
+                                             @RequestParam(value="gTitle", required = false)String gTitle,
+                                             @RequestParam(value="homeTeamName", required = false) String homeTeamName,
+                                             @RequestParam(value="awayTeamName", required = false) String awayTeamName
+                                                ) throws Exception {
+        ModelAndView mav = new ModelAndView("/game/gameResult");
+        mav.addObject("gID", gID);
+        mav.addObject("sRegion", sRegion);
+        mav.addObject("gTitle", gTitle);
+        mav.addObject("homeTeamName", homeTeamName);
+        mav.addObject("awayTeamName", awayTeamName);
+        return mav;
     }
 }

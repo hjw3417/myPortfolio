@@ -58,8 +58,12 @@
           <div>${gameInfoVO.sRegion}</div>
           <div>${gameInfoVO.gTitle}</div>
           <div>
-            <form id="startGameForm">
-                <input type="hidden" id="startGameGID" value="${gameInfoVO.gID}" />
+            <form method="post" action="${contextPath}/game/gameResult.do">
+                <input type="hidden" id="startGameGID" name="sRegion" value="${gameInfoVO.sRegion}" />
+                <input type="hidden" id="startGameGID" name="gTitle" value="${gameInfoVO.gTitle}" />
+                <input type="hidden" id="startGameGID" name="gID" value="${gameInfoVO.gID}" />
+                <input type="hidden" id="startGameGID" name="gTeamID" value="${gameInfoVO.gTeamID}" />
+                <input type="hidden" id="startGameGID" name="tAwayID" value="${gameInfoVO.tAwayID}" />
                 <input type="submit" id="startGameBtn"/>
             </form>
           </div>

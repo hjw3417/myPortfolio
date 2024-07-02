@@ -58,4 +58,17 @@ public interface GameController {
     public GameAwayTeamInfoVO insertawayTeamMembr(@RequestParam("gID") int gID,
                                                    @RequestParam("tAwayID") int tAwayID
                                                     ) throws Exception;
+
+    public String intoGameResult(@RequestParam("gID") int gID,
+                                       @RequestParam("sRegion") String sRegion,
+                                       @RequestParam("gTitle") String gTitle,
+                                       @RequestParam("tID") int tID,
+                                       @RequestParam("tAwayID") int tAwayID,
+                                      RedirectAttributes redirectAttributes) throws Exception;
+    public ModelAndView intoGameResultHadler(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                             @RequestParam(value="sRegion", required = false) String sRegion,
+                                             @RequestParam(value="gTitle", required = false)String gTitle,
+                                             @RequestParam(value="homeTeamName", required = false) String homeTeamName,
+                                             @RequestParam(value="awayTeamName", required = false) String awayTeamName
+                                             ) throws Exception;
 }
