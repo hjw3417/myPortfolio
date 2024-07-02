@@ -297,14 +297,13 @@ public class GameControllerImpl implements GameController {
         SquadVO squadVO = new SquadVO();
         squadVO.setgID(gID);
         squadVO.settID(tAwayID);
-        squadVO.setuID("aaaaa");
-        squadVO.setCreatedID("aaaaa");
+        squadVO.setuID("baba");
+        squadVO.setCreatedID("baba");
 
-        int updateAndInsertAwayTeamResult = gameService.updateAndInsertAwayTeam(squadVO);
-        System.out.println("controller updateAndInsertAwayTeamResult : " + updateAndInsertAwayTeamResult);
-        if(updateAndInsertAwayTeamResult >= 1) {
-            gameAwayTeamInfoVO = gameService.selectAwayTeam(gID, tAwayID);
+        if(tAwayID != 0) {
+            gameAwayTeamInfoVO = gameService.awayTeamIntoGame(squadVO);
         }
+
         System.out.println("controller gameAwayTeamInfoVO : " + gameAwayTeamInfoVO.getAwayTeamName());
 
 

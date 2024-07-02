@@ -60,7 +60,7 @@
           <div>
             <form id="startGameForm">
                 <input type="hidden" id="startGameGID" value="${gameInfoVO.gID}" />
-                <input type="submit" id="startGameBtn" value="게임 시작"/>
+                <input type="submit" id="startGameBtn"/>
             </form>
           </div>
         </div>

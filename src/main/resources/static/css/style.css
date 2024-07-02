@@ -312,6 +312,13 @@ main{
     background-color: rgb(146, 172, 101);
     color: white;
     box-shadow: 5px 5px 10px gray;
+    >form {
+        input {
+            width: 150px;
+            height: 150px;
+            background-color: mint;
+        }
+    }
     >div:first-child {
       font-size: 25px;
       font-weight: bold;

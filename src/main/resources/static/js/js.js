@@ -412,7 +412,7 @@ $(document).ready(function() {
 //gameInfo.do 관련 js 시작
 $(document).ready(function() {
     //경기 참여 Btn value 설정
-    $('#startGameBtn').hide();
+    $('#startGameBtn').val("경기 참여");
 
     var $gComent = $('#gComent');
     $gComent.scrollTop($gComent.prop("scrollHeight"));

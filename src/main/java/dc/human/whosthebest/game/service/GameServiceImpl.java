@@ -162,7 +162,6 @@ public class GameServiceImpl implements  GameService {
         }
         return gameInfoVO;
     }
-
     @Override
     public GameAwayTeamInfoVO selectAwayTeam(int gID, int tID) throws  Exception {
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
@@ -174,6 +173,48 @@ public class GameServiceImpl implements  GameService {
         System.out.println("service awayTeamName : " + awayTeamName);
         awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
         System.out.println("service awayTeamMember.get(0).getuName() : " + awayTeamMember.get(0).getuName());
+
+        if(awayTeamName != null) {
+            gameAwayTeamInfoVO.setAwayTeamName(awayTeamName);
+        }
+        if(!awayTeamMember.isEmpty()) {
+            gameAwayTeamInfoVO.setAwayTeamMemberList(awayTeamMember);
+        }
+        int nowPartiMemberNum = gameDAO.nowPartiMemberNum(squadVO.getgID());
+        gameAwayTeamInfoVO.setNowPartiMemberNum(nowPartiMemberNum);
+        return gameAwayTeamInfoVO;
+    }
+    @Override
+    public GameAwayTeamInfoVO awayTeamIntoGame(SquadVO squadVO) throws  Exception {
+        GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
+        List<GameMemberListVO> awayTeamMember = new ArrayList<>();
+        String awayTeamName = null;
+        int updateAwayTeamIDResult = 0;
+        int updateAndInsertAwayTeamResult = 0;
+        int insertSquad = 0;
+        System.out.println("service updateAndInsertAwayTeam : " + squadVO.gettID());
+        GameVO gameVO = new GameVO();
+        gameVO.setgID(squadVO.getgID());
+        gameVO.settAwayID(squadVO.gettID());
+        System.out.println(squadVO.gettID());
+
+        int checkAwayTeamExistResult = gameDAO.checkAwayTeamExist(gameVO);
+        System.out.println("before checkAwayTeamExistResult : " + checkAwayTeamExistResult);
+        if(checkAwayTeamExistResult < 1) {
+            updateAwayTeamIDResult = gameDAO.updateAwayTeamID(squadVO);
+            System.out.println("updateAwayTeamIDResult : " + updateAwayTeamIDResult);
+            checkAwayTeamExistResult = gameDAO.checkAwayTeamExist(gameVO);
+            System.out.println("after checkAwayTeamExistResult : " + checkAwayTeamExistResult);
+        }
+
+        if(checkAwayTeamExistResult >= 1) {
+            insertSquad = gameDAO.insertSquad(squadVO);
+            System.out.println("insertSquad : " + insertSquad);
+            awayTeamName = gameDAO.selectAwayTeamName(squadVO.gettID());
+            System.out.println("service awayTeamName : " + awayTeamName);
+            awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
+            System.out.println("service awayTeamMember.get(0).getuName() : " + awayTeamMember.get(0).getuName());
+        }
 
         if(awayTeamName != null) {
             gameAwayTeamInfoVO.setAwayTeamName(awayTeamName);
@@ -207,36 +248,5 @@ public class GameServiceImpl implements  GameService {
             }
             return gameMemberList;
         }
-    }
-
-    @Override
-    public int updateAndInsertAwayTeam(SquadVO squadVO) throws  Exception {
-        int updateAwayTeamIDResult = 0;
-        int updateAndInsertAwayTeamResult = 0;
-        int insertSquad = 0;
-        System.out.println("service updateAndInsertAwayTeam : " + squadVO.gettID());
-        GameVO gameVO = new GameVO();
-        gameVO.setgID(squadVO.getgID());
-        gameVO.settAwayID(squadVO.gettID());
-        System.out.println(squadVO.gettID());
-        int checkAwayTeamExistResult = gameDAO.checkAwayTeamExist(gameVO);
-        int checkDuplicateSquadResult = gameDAO.checkDuplicateSquad(squadVO);
-
-        if(checkAwayTeamExistResult < 1) {
-            updateAwayTeamIDResult = gameDAO.updateAwayTeamID(squadVO);
-            System.out.println("updateAwayTeamIDResult : " + updateAwayTeamIDResult);
-        }
-        if(checkDuplicateSquadResult < 1) {
-            insertSquad = gameDAO.insertSquad(squadVO);
-            System.out.println("insertSquad : " + insertSquad);
-        }
-
-        if(insertSquad >= 1) {
-            updateAndInsertAwayTeamResult = 1;
-            System.out.println("updateAndInsertAwayTeamResult : " + updateAndInsertAwayTeamResult);
-        }
-
-
-        return updateAndInsertAwayTeamResult;
     }
 }

@@ -30,6 +30,6 @@ public interface GameService {
     public GameInfoVO selectGameInfo(int gID, String uID) throws Exception;
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception;
     public List<GameMemberListVO> insertAndSelectHomeTeam(SquadVO squadVO) throws  Exception;
-    public int updateAndInsertAwayTeam(SquadVO squadVO) throws  Exception;
     public GameAwayTeamInfoVO selectAwayTeam(int gID, int tID) throws  Exception;
+    public GameAwayTeamInfoVO awayTeamIntoGame(SquadVO squadVO) throws  Exception;
 }
