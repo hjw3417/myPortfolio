@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("myPageService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class MyPageServiceImpl implements MyPageService{
@@ -16,7 +18,7 @@ public class MyPageServiceImpl implements MyPageService{
     private MyPageDAO myPageDAO;
 
     @Override
-    public  MyPageInfoVO getUserinfo(String uID) throws Exception{
+    public List getUserinfo(String uID) throws Exception{
         return myPageDAO.selectMyPageInfo(uID);
 
 

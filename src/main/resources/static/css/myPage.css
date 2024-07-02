@@ -131,17 +131,7 @@ main{
     top : 30px;
     left  : 30px;
   }
-  >.profileUpdate{
-    width  : 100px;
-    height : 30px;
-    top : 180px;
-    left : 59px;
-    margin-top : 7px;
-    text-align: center;
-    padding-top : 8px;
-    background-color: rgb(178, 196, 149);
-    border-radius: 10px 10px 10px 10px;
-    }
+
   >.name{
     border : none;
     width : 200px;
@@ -154,38 +144,42 @@ main{
     padding-top : 5px;
 
   }
+
   /*소속팀.랭크 정보 */
-  >div{
-    border-left: 1px solid rgb(184, 206, 146);
-    width : 500px;
-    height: 229px;
-    position: absolute;
-    left : 499px;
-  }
-  >div>table{
-    margin-top : 13px;
-    width : 500px;
-    height : 200px;
-    border : none;
-    border-collapse: collapse;
-    text-align: center;
-    font-size : 14pt;
+   >.infoTable{
+     border-left : 1px solid rgb(184, 206, 146);
+     width : 500px;
+     height: 229px;
+     position: absolute;
+     left : 499px;
+     top: 0px;
+   }
+   >.infoTable table{
+     position : absolute;
+     top : 1px;
+     margin-top : 13px;
+     width : 500px;
+     height : 200px;
+     border-collapse: collapse;
+     text-align: center;
+     font-size : 14pt;
 
-  }
+   }
 
-  >div>table tr:first-child td:first-child,
-              tr:nth-child(2) td:first-child,
-              tr:nth-child(3) td:first-child{
-      width : 70px;
-      font-size :11pt;
-      color : gray;
-  }
+   >.infoTable table tr:first-child td:first-child,
+               tr:nth-child(2) td:first-child,
+               tr:nth-child(3) td:first-child{
+       width : 70px;
+       font-size :11pt;
+       color : gray;
+   }
 
-  >div>table tr:first-child td:nth-child(3),
-             tr:nth-child(2) td:nth-child(3),
-             tr:nth-child(3), td:nth-child(3)>img{
-    margin-top : 9px;
-  }
+   >.infoTable table tr:first-child td:nth-child(3),
+              tr:nth-child(2) td:nth-child(3),
+              tr:nth-child(3), td:nth-child(3)>img{
+     margin-top : 9px;
+   }
+
 
 }
 

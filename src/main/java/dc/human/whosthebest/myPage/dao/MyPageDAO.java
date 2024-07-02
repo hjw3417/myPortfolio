@@ -5,11 +5,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository("myPageDAO")
 public interface MyPageDAO {
 
-    MyPageInfoVO selectMyPageInfo(String uID) throws DataAccessException;
+   public List selectMyPageInfo(String uID) throws DataAccessException;
 
 
 }

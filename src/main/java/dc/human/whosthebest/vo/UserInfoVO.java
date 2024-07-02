@@ -1,7 +1,11 @@
 package dc.human.whosthebest.vo;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
 import java.util.Arrays;
 
+@Component("userVO")
 public class UserInfoVO {
 
 	private String uID;

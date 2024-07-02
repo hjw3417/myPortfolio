@@ -8,7 +8,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/myPage.css">
+
   <title>마이페이지</title>
+
 </head>
 <body>
   <header>
@@ -53,41 +55,30 @@
   <!---메인화면 -->
 
         <h1> 마이페이지 </h1>
-
         <div class="divide-line">
         </div>
-
         <div class="myInfoContainer">
           <img src="../image/user.png" class="profile">  </img>
-          <div class="profileUpdate"> 프로필 수정 </div>
-          <div class="name"> ${myPageInfo.uName} </div>  <!--이름 -->
-          <div>
+
+          <c:if test="${not empty myPageInfo}">
+              <div class="name">${myPageInfo[0].uName}</div> <!-- 첫 번째 요소의 이름 출력 -->
+          </c:if>
+
+
+          <div class="infoTable">
             <table>
-             <!-- 소속팀1-->
-              <tr>
-                <td> 소속팀</td>
-                <td>${myPageInfo.tName} </td> <!--소속팀 이름 -->
-                <td> <img src="../image/rank.png"  width="34px"  height="28px"> </img> </td>
-                <td width="120"> ${myPageInfo.tRankScore} </td> <!-- 랭크 -->
-              </tr>
-
-               <!-- 소속팀2-->
-               <tr>
-                  <td> 소속팀</td>
-                  <td>${myPageInfo.tName} </td> <!--소속팀 이름 -->
-                  <td> <img src="../image/rank.png"  width="34px"  height="28px"> </img> </td>
-                  <td width="120"> ${myPageInfo.tRankScore} </td> <!-- 랭크 -->
-                </tr>
-
-               <!-- 소속팀3-->
-                <tr>
-                   <td> 소속팀</td>
-                   <td>${myPageInfo.tName} </td> <!--소속팀 이름 -->
-                   <td> <img src="../image/rank.png"  width="34px"  height="28px"> </img> </td>
-                   <td width="120"> ${myPageInfo.tRankScore} </td> <!-- 랭크 -->
-                 </tr>
-
+              <tbody>
+                <c:forEach items="${myPageInfo}" var="myInfo">
+                  <tr>
+                    <td>소속팀</td>
+                    <td>${myInfo.tName}</td> <!-- 소속팀 이름 -->
+                    <td><img src="../image/rank.png" width="34px" height="28px"></td>
+                     <td> ${myInfo.tRankScore} </td> <!-- 랭크를 출력할 위치 -->
+                  </tr>
+                </c:forEach>
+              </tbody>
             </table>
+
 
           </div>
         </div>
@@ -114,11 +105,8 @@
               <td width="200">  </td>
               <td width="70">  </td>
              </tr>
-
           </table>
-
         </div>
-
   </main>
 
 

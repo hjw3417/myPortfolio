@@ -17,28 +17,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
 
-    @Override
-    public int insertJoin(UserInfoVO userInfoVO){
-        userInfoVO.setCreatedID(userInfoVO.getuID());
-        userInfoVO.setCreatedDate(sqlDate.toString());
-        return userDAO.insertJoin(userInfoVO);
-    }
 
     @Override
-    public int checkId (String uID) throws Exception{
-        return userDAO.checkID(uID);
-    }
-
-    @Override
-    public int loginUser (String uID, String uPW) throws Exception{
+    public int loginUser(String uID, String uPW) throws Exception {
         return userDAO.loginUser(uID, uPW);
     }
-
-    @Override
-    public int findID (String uName, String uBday, String uPhone) throws Exception{
-        return userDAO.findID(uName, uBday, uPhone);
-    }
-
 
 
 }

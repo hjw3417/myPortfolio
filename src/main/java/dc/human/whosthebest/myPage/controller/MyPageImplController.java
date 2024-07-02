@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller("myPageController")
 public class MyPageImplController {
 
@@ -22,11 +24,14 @@ public class MyPageImplController {
     public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
+
         String uID = (String) session.getAttribute("hong");
-        MyPageInfoVO myPageInfo = myPageService.getUserinfo(uID);
+        session.setAttribute("hong", uID);
+        System.out.println("마이페이지컨트롤러 성공" + uID);
+        List<MyPageInfoVO> myPageInfo = myPageService.getUserinfo(uID);
         ModelAndView mav = new ModelAndView("/myPage/myPage");
         mav.addObject("myPageInfo", myPageInfo);
-        System.out.println("마이페이지컨트롤러 성공");
+
         return mav;
     }
 }
