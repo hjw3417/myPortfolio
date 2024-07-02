@@ -115,12 +115,12 @@
             <div>
 
               <c:choose>
-                  <c:when test="${gameInfoVO.tAwayName == null}">
+                  <c:when test="${gameInfoVO.tAwayID == 0}">
                       <div id="awayTeamName">경기 참가하기</div>
                   </c:when>
                   <c:otherwise>
                       <image class="tLogo" id="awayTeamLogo" name="awayTeamLogo" src="image/teamLogo.png"></image>
-                      <div id="awayTeamName">${gameInfoVO.tAwayName}</div>
+                      <div id="awayTeamName">${awayTeamName}</div>
                   </c:otherwise>
               </c:choose>
               <form id="partiAwayTeamForm">
@@ -132,15 +132,25 @@
             <div>
               <label>경기 참가 인원</label>
               <div class="awayTeamMemberListContainer">
-                 <ul name="gTeamID" id="gTeamID">
-                 <c:forEach var="tName" items="${gameInfoVO.myTeamList}">
-                      <form class="partiAwayTeamLeaderForm">
-                          <input type="hidden" class="awayLeaderGID" value="${gameInfoVO.gID}" />
-                          <input type="hidden" class="awayLeaderTeamID"  value="${tName.tID}" />
-                          <li>${tName.tName}</li>
-                          <input type="submit" class="partiAwayLeaderTeamBtn" value="참가" />
-                      </form>
-                 </c:forEach>
+                 <ul name="awayTeamMemberList" id="awayTeamMemberList">
+                  <c:choose>
+                      <c:when test="${gameInfoVO.tAwayID == 0}">
+                         <c:forEach var="tName" items="${gameInfoVO.myTeamList}">
+                              <form class="partiAwayTeamLeaderForm">
+                                  <input type="hidden" name="awayLeaderGID" class="awayLeaderGID" value="${gameInfoVO.gID}" />
+                                  <input type="hidden" name="awayLeaderTeamID" class="awayLeaderTeamID"  value="${tName.tID}" />
+                                  <li>${tName.tName}</li>
+                                  <input type="submit" class="partiAwayLeaderTeamBtn" value="참가" />
+                              </form>
+                         </c:forEach>
+                      </c:when>
+                      <c:otherwise>
+                         <c:forEach var="awayTeamMember" items="${awayTeamMemberList}">
+                              <li>${awayTeamMember.uName}</li>
+                         </c:forEach>
+                      </c:otherwise>
+                  </c:choose>
+
                  </select>
               </div>
             </div>

@@ -12,6 +12,7 @@ package dc.human.whosthebest.game.service;
 import dc.human.whosthebest.vo.*;
 import org.springframework.dao.DataAccessException;
 
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,5 +30,6 @@ public interface GameService {
     public GameInfoVO selectGameInfo(int gID, String uID) throws Exception;
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception;
     public List<GameMemberListVO> insertAndSelectHomeTeam(SquadVO squadVO) throws  Exception;
-    public Map<String, List<GameMemberListVO>> insertAndSelectAwayTeam(SquadVO squadVO) throws  Exception;
+    public int updateAndInsertAwayTeam(SquadVO squadVO) throws  Exception;
+    public AbstractMap.SimpleEntry<String, List<GameMemberListVO>> selectAwayTeam(int gID, int tID) throws  Exception;
 }

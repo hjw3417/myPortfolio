@@ -296,7 +296,7 @@
 		FROM GAME
 		WHERE G_ID = #{gID} and T_AWAYID = #{tAwayID}
 	</select>
-	<select id="selectAwayTeamName" parameterType="SquadVO" resultType="String">
+	<select id="selectAwayTeamName" parameterType="int" resultType="String">
 		select T_NAME
 		FROM TEAM
 		WHERE T_ID = #{tID}

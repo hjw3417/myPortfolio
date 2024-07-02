@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public interface GameController {
     public  List<GameMemberListVO> partiHomeTeam(@RequestParam("gID") int gID,
                                                  @RequestParam("gTeamID") int gTeamID
                                                  ) throws Exception;
-    public Map<String, List<GameMemberListVO>> insertAndSelectAwayTeam(@RequestParam("gID") int gID,
-                                                                       @RequestParam("tAwayID") int tAwayID
+    public AbstractMap.SimpleEntry<String, List<GameMemberListVO>> insertAndSelectAwayTeam(@RequestParam("gID") int gID,
+                                                                                           @RequestParam("tAwayID") int tAwayID
                                                           ) throws Exception;
 }

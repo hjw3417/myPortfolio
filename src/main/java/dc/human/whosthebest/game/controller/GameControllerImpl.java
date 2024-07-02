@@ -19,9 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -239,15 +237,24 @@ public class GameControllerImpl implements GameController {
     @Override
     @GetMapping(value = "/gameInfo.do")
     public ModelAndView selectGameInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int gID = 147;
+        int gID = 177;
         String uID = "heo";
         ModelAndView mav = new ModelAndView();
         GameInfoVO gameInfoVO = new GameInfoVO();
+        AbstractMap.SimpleEntry<String, List<GameMemberListVO>> awayTeamMap = new AbstractMap.SimpleEntry<>(null, Collections.emptyList());
+        SquadVO squadVO = new SquadVO();
         gameInfoVO = gameService.selectGameInfo(gID, uID);
         if(gameInfoVO != null) {
             System.out.println("controller gameInfo.getSRegion: " + gameInfoVO.getsRegion());
             System.out.println("controller gameMemberList 첫 번째 uName : " + gameInfoVO.getGameMemberList().get(0).getuName());
             mav.addObject("gameInfoVO", gameInfoVO);
+        }
+        if(gameInfoVO.gettAwayID() != 0) {
+            awayTeamMap = gameService.selectAwayTeam(gID, gameInfoVO.gettAwayID());
+            System.out.println("gID : " + gID + "gameInfoVO.gettAwayID() : " + gameInfoVO.gettAwayID());
+            mav.addObject("awayTeamName", awayTeamMap.getKey());
+            mav.addObject("awayTeamMemberList", awayTeamMap.getValue());
+            System.out.println("awayTeamName : " + awayTeamMap.getKey());
         }
         mav.setViewName("/game/gameInfo");
         return mav;
@@ -284,11 +291,10 @@ public class GameControllerImpl implements GameController {
     @Override
     @PostMapping(value="/partiAway/gameInfo.do")
     @ResponseBody
-    public Map<String, List<GameMemberListVO>> insertAndSelectAwayTeam(@RequestParam("gID") int gID,
+    public AbstractMap.SimpleEntry<String, List<GameMemberListVO>> insertAndSelectAwayTeam(@RequestParam("gID") int gID,
                                                                        @RequestParam("tAwayID") int tAwayID
                                                          ) throws Exception {
-        Map<String, List<GameMemberListVO>> awayTeamMemberMap = new HashMap<>();
-
+        AbstractMap.SimpleEntry<String, List<GameMemberListVO>> awayTeamMemberMap = new AbstractMap.SimpleEntry<>(null, Collections.emptyList());
 
         SquadVO squadVO = new SquadVO();
         squadVO.setgID(gID);
@@ -296,8 +302,13 @@ public class GameControllerImpl implements GameController {
         squadVO.setuID("insi");
         squadVO.setCreatedID("insi");
 
-        awayTeamMemberMap = gameService.insertAndSelectAwayTeam(squadVO);
-
+        int updateAndInsertAwayTeamResult = gameService.updateAndInsertAwayTeam(squadVO);
+        System.out.println("controller updateAndInsertAwayTeamResult : " + updateAndInsertAwayTeamResult);
+        if(updateAndInsertAwayTeamResult >= 1) {
+            awayTeamMemberMap = gameService.selectAwayTeam(gID, tAwayID);
+        }
+        System.out.println("controller awayTeamMemberMap.getKey() : " + awayTeamMemberMap.getKey());
+        System.out.println("controller awayTeamMember.get(0).getuName() : " + awayTeamMemberMap.getValue().get(0).getuName());
         return awayTeamMemberMap;
     }
 }

@@ -490,16 +490,18 @@ $(document).ready(function() {
                 gID: gID,
                 tAwayID: gTeamID
             },
+            dataType: 'json',
             success: function(response) {
                 var awayTeamName = response.key;
                 var awayTeamMemberList = response.value;
                 var html = '';
-                if(response.size === 0) {
+                alert(awayTeamName);
+                if(awayTeamMemberList.length === 0) {
                     alert("이미 참가하였습니다.")
                 } else {
                     alert(awayTeamMemberList[0].uID)
                     $("#awayTeamName").html(awayTeamName);
-                    $("#awayTeamMemberList").empty();
+//                    $("#awayTeamMemberList").hide();
                     $.each(awayTeamMemberList, function(index, awayTeamMember) {
                         var html = `
                             <li>${awayTeamMember.uName}</li>
@@ -545,9 +547,14 @@ $(document).ready(function() {
 
     $('.partiAwayTeamLeaderForm').on('submit', function(event) {
             event.preventDefault();     // 폼의 기본 제출 동작을 막습니다.
-            var gID = $('.awayLeaderGID').val();
-            var gTeamID = $('.awayLeaderTeamID').val();
+            // 이벤트가 발생한 제출 버튼의 폼을 참조
+            var submitter = $(event.originalEvent.submitter);
+
+            // 현재 폼의 데이터 가져오기
+            var gID = submitter.siblings('input[name="awayLeaderGID"]').val();
+            var gTeamID = submitter.siblings('input[name="awayLeaderTeamID"]').val();
             alert("gID : " + gID)
+            alert("gTeamID : " + gTeamID)
             insertAwayTeamSquadAjax(gID, gTeamID);
         });
 

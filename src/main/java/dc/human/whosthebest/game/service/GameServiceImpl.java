@@ -136,7 +136,6 @@ public class GameServiceImpl implements  GameService {
     @Override
     public GameInfoVO selectGameInfo(int gID, String uID) throws Exception {
         GameInfoVO gameInfoVO = gameDAO.selectGameInfo(gID);
-        String tAwayName = null;
         List<TeamInfoVO> myTeamList = new ArrayList<>();
         if(gameInfoVO != null) {
             System.out.println("service gameInfo.gTitle : " + gameInfoVO.getgTitle());
@@ -146,14 +145,11 @@ public class GameServiceImpl implements  GameService {
             squadVO.settID(gameInfoVO.getgTeamID());
             List<GameMemberListVO> gameHomeMemberList = gameDAO.selectGameTMemmber(squadVO);
             List<GCommentVO> gCommentsList = gameDAO.selectComments(gameInfoVO.getgID());
-
-            if(gameInfoVO.gettAwayID() != 0) {
-                tAwayName = gameDAO.selectAwayTeamName(gameInfoVO.gettAwayID());
-            } else {
+            if(gameInfoVO.gettAwayID() == 0) {
                 myTeamList = gameDAO.loadMyTeam(uID);
                 gameInfoVO.setMyTeamList(myTeamList);
+                System.out.println("myTeamList.size()" + myTeamList.size());
             }
-            gameInfoVO.settAwayName(tAwayName);
             if(!gameHomeMemberList.isEmpty()) {
                 gameInfoVO.setGameMemberList(gameHomeMemberList);
                 System.out.println("Service gameMemberList 첫 번째 uName : " + gameHomeMemberList.get(0).getuName());
@@ -165,6 +161,21 @@ public class GameServiceImpl implements  GameService {
         }
         return gameInfoVO;
     }
+
+    @Override
+    public AbstractMap.SimpleEntry<String, List<GameMemberListVO>> selectAwayTeam(int gID, int tID) throws  Exception {
+        AbstractMap.SimpleEntry<String, List<GameMemberListVO>> awayTeamMap = new AbstractMap.SimpleEntry<>(null, Collections.emptyList());
+        SquadVO squadVO = new SquadVO();
+        squadVO.setgID(gID);
+        squadVO.settID(tID);
+        String awayTeamName = gameDAO.selectAwayTeamName(tID);
+        System.out.println("service awayTeamName : " + awayTeamName);
+        List<GameMemberListVO> awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
+        System.out.println("service awayTeamMember.get(0).getuName() : " + awayTeamMember.get(0).getuName());
+        awayTeamMap = new AbstractMap.SimpleEntry<>(awayTeamName, awayTeamMember);
+        return awayTeamMap;
+    }
+
     @Override
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception {
         int insertCommentsResult =  gameDAO.insertComments(gCommentVO);
@@ -189,13 +200,10 @@ public class GameServiceImpl implements  GameService {
     }
 
     @Override
-    public Map<String, List<GameMemberListVO>> insertAndSelectAwayTeam(SquadVO squadVO) throws  Exception {
-        List<GameMemberListVO> awayTeamMember = new ArrayList<>();
-        Map<String, List<GameMemberListVO>> awayTeamMemberMap = new HashMap<>();
-        String awayTeamName = null;
-        int updateAwayTeamIDResult = 0;
-        int checkAwayTeamExistResult = 0;
-        System.out.println("service insertAndSelectAwayTeam : " + squadVO.gettID());
+    public int updateAndInsertAwayTeam(SquadVO squadVO) throws  Exception {
+        int updateAwayTeamIDResult;
+        int updateAndInsertAwayTeamResult = 0;
+        System.out.println("service updateAndInsertAwayTeam : " + squadVO.gettID());
         GameVO gameVO = new GameVO();
         gameVO.setgID(squadVO.getgID());
         gameVO.settAwayID(squadVO.gettID());
@@ -204,10 +212,13 @@ public class GameServiceImpl implements  GameService {
         updateAwayTeamIDResult = gameDAO.updateAwayTeamID(squadVO);
         System.out.println("updateAwayTeamIDResult : " + updateAwayTeamIDResult);
         if(updateAwayTeamIDResult >= 1) {
-            awayTeamName = gameDAO.selectAwayTeamName(squadVO.gettID());
-            awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
+            int insertSquad = gameDAO.insertSquad(squadVO);
+            System.out.println("insertSquad : " + insertSquad);
+            if(insertSquad >= 1) {
+                updateAndInsertAwayTeamResult = 1;
+                System.out.println("updateAndInsertAwayTeamResult : " + updateAndInsertAwayTeamResult);
+            }
         }
-        awayTeamMemberMap.put(awayTeamName, awayTeamMember);
-        return awayTeamMemberMap;
+        return updateAndInsertAwayTeamResult;
     }
 }
