@@ -7,9 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/main.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    function findID() {
+      var msgNo = '${errorMsg}';
+
+      if (msgNo != null && msgNo != "") {
+          alert(msgNo);
+      }
+    }
+
+  </script>
   <title>idFind</title>
 </head>
-<body>
+<body onload="findID();">
   <header>
     <div class="logo">
       <img src="./image/logo.png">
@@ -41,7 +51,7 @@
               <input type="text" name="uPhone" size="11" maxlength="11" placeholder="휴대폰 번호를 입력해주세요." required>
             </div>
             <div>
-              <input type="submit" value="확인" id="find_Id_Btn">
+              <input type="submit" value="확인">
               <input type="reset" value="취소">
             </div>
           </form>

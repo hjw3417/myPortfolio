@@ -471,6 +471,7 @@ main{
         >ul{
           list-style-type: none;
           color: rgb(94, 94, 94);
+          line-height: 30px;
           >li:hover{
             text-decoration-line: underline;
           }
@@ -511,6 +512,7 @@ main{
         >ul{
           list-style-type: none;
           color: rgb(94, 94, 94);
+          line-height: 30px;
           >li:hover{
             text-decoration-line: underline;
           }
@@ -547,6 +549,7 @@ main{
         >ul{
           list-style-type: none;
           color: rgb(94, 94, 94);
+          line-height: 30px;
           >li:hover{
             text-decoration-line: underline;
           }

@@ -7,9 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    function findPW() {
+      var msgNo = '${errorMsg}';
+
+      if (msgNo != null && msgNo != "") {
+          alert(msgNo);
+      }
+    }
+
+  </script>
+
   <title>pwFind</title>
 </head>
-<body>
+<body onload="findPW();">
   <header>
     <div class="logo">
       <img src="./image/logo.png">

@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <c:set var="contextPath" value="${pageContext.request.contextPath}" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="./css/main.css">
@@ -15,13 +16,13 @@
       <img src="./image/logo.png">
     </div>
     <div>
-      <span><a href="/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
-            <span><a href="/join">회원가입</a></span>
+      <span><a href="/login">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
       <ul>
         <li>
-          <a href="/team">팀</a>
+          <a href="/teamList">팀</a>
           <div>
             <ul>
               <li><a href="/teamList">팀 목록</a></li>
@@ -70,24 +71,22 @@
             </div>
             <div>
               <ul>
-                <li>가</li>
-                <li>나</li>
-                <li>다</li>
-                <li>라</li>
+                <c:forEach var ="game" items="${mGameList}" end="5">
+                    <li>${game}</li>
+                </c:forEach>
               </ul>
             </div>
           </div>
           <div class="rank">
             <div>
               <span>전체 랭킹 정보</span>
-              <span><a href="/rankWatch">+ 더보기</a></span>
+              <span><a href="/ranking">+ 더보기</a></span>
             </div>
             <div>
               <ul>
-                <li>문주 군단</li>
-                <li>문주 갱스터즈</li>
-                <li>개발 냥발</li>
-                <li>김반박이</li>
+                <c:forEach var ="rank" items="${mRanking}" end="5">
+                    <li>${rank}</li>
+                </c:forEach>
               </ul>
             </div>
           </div>

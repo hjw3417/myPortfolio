@@ -13,10 +13,10 @@ public interface UserController {
     public ModelAndView login(@RequestParam("uID") String uID,
                               @RequestParam("uPW") String uPW,HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView findId(@RequestParam("uName") String uName,
-                              @RequestParam("uBday") String uPW,
+                              @RequestParam("uBday") String uBday,
                               @RequestParam("uPhone") String uPhone, HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView findPw(@RequestParam("uName") String uName,
-                               @RequestParam("uBday") String uPW,
+                               @RequestParam("uBday") String uBday,
                                @RequestParam("uPhone") String uPhone,
                                @RequestParam("uID") String uId, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
