@@ -286,6 +286,7 @@ public class GameControllerImpl implements GameController {
         System.out.println("gameMemberList.isEmpty() : " + gameMemberList.isEmpty());
         return gameMemberList;
     }
+
     @Override
     @PostMapping(value="/partiAway/gameInfo.do")
     @ResponseBody
@@ -300,13 +301,33 @@ public class GameControllerImpl implements GameController {
         squadVO.setuID("baba");
         squadVO.setCreatedID("baba");
 
-        if(tAwayID != 0) {
-            gameAwayTeamInfoVO = gameService.awayTeamIntoGame(squadVO);
-        }
+
+        gameAwayTeamInfoVO = gameService.awayTeamIntoGame(squadVO);
+
 
         System.out.println("controller gameAwayTeamInfoVO : " + gameAwayTeamInfoVO.getAwayTeamName());
 
 
+        return gameAwayTeamInfoVO;
+    }
+
+    @Override
+    @PostMapping(value="/partiAwayMember/gameInfo.do")
+    @ResponseBody
+    public GameAwayTeamInfoVO insertawayTeamMembr(@RequestParam("gID") int gID,
+                                                  @RequestParam("tAwayID") int tAwayID
+                                                 ) throws Exception {
+        GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
+
+        SquadVO squadVO = new SquadVO();
+        squadVO.setgID(gID);
+        squadVO.settID(tAwayID);
+        squadVO.setuID("baba");
+        squadVO.setCreatedID("baba");
+
+        if(tAwayID != 0) {
+            gameAwayTeamInfoVO = gameService.insertawayTeamMembr(squadVO);
+        }
         return gameAwayTeamInfoVO;
     }
 }

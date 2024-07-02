@@ -518,6 +518,43 @@ $(document).ready(function() {
             }
         });
     }
+
+    //insert AwayTeam Member Parti ajax
+    function insertAwayTeamMemberAjax(gID, gTeamID) {
+        $.ajax({
+            url: '/game/partiAwayMember/gameInfo.do',
+            type: 'POST',
+            data: {
+                gID: gID,
+                tAwayID: gTeamID
+            },
+            dataType: 'json',
+            success: function(response) {
+                var awayTeamName = response.awayTeamName;
+                var awayTeamMemberList = response.awayTeamMemberList;
+                var nowPartiMemberNum = response.nowPartiMemberNum;
+                var html = '';
+                if(awayTeamName == null) {
+                    alert("이미 참가하였습니다.")
+                } else {
+                    alert(awayTeamMemberList[0].uID)
+                    $("#awayTeamName").html(awayTeamName);
+                    $("#awayTeamMemberList").empty();
+                    $.each(awayTeamMemberList, function(index, awayTeamMember) {
+                        var html = `
+                            <li>${awayTeamMember.uName}</li>
+                        `;
+                        $("#awayTeamMemberList").append(html);
+                    });
+                    $("#nowPartiMemberNum").html(nowPartiMemberNum);
+                }
+            },
+            error: function(error) {
+                //요청 실패 시 메세지 알림
+                alert("Error: " + error);
+            }
+        });
+    }
     // comment 제출 함수
     $(document).on('submit', '#insertCommentForm', function(event) {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
@@ -536,7 +573,7 @@ $(document).ready(function() {
         var gID = $('#gID').val();
         var gTeamID = $('#homeTeamID').val();
         alert("gID : " + gID)
-        insertHomeTeamSquadAjax(gID, gTeamID);
+        insertAwayTeamMemberAjax(gID, gTeamID);
     });
 
     $('#partiAwayTeamForm').on('submit', function(event) {
@@ -544,7 +581,7 @@ $(document).ready(function() {
             var gID = $('#awayGID').val();
             var gTeamID = $('#awayTeamID').val();
             alert("gID : " + gID)
-            insertAwayTeamSquadAjax(gID, gTeamID);
+            insertAwayTeamMemberAjax(gID, gTeamID);
         });
 
     $('.partiAwayTeamLeaderForm').on('submit', function(event) {

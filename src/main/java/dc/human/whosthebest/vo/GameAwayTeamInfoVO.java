@@ -5,9 +5,19 @@ import java.util.List;
 public class GameAwayTeamInfoVO {
     private String awayTeamName;
     private List<GameMemberListVO> awayTeamMemberList;
-    private int nowPartiMemberNum;          //nowPartiMemberNum
+    private int nowPartiMemberNum;
+    private boolean checkDuplicateSquadResult;//nowPartiMemberNum
 
     public GameAwayTeamInfoVO() {
+    }
+
+    public boolean isCheckDuplicateSquadResult() {
+
+        return checkDuplicateSquadResult;
+    }
+
+    public void setCheckDuplicateSquadResult(boolean checkDuplicateSquadResult) {
+        this.checkDuplicateSquadResult = checkDuplicateSquadResult;
     }
 
     public int getNowPartiMemberNum() {

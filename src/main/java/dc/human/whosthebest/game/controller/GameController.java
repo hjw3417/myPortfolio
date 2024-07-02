@@ -55,4 +55,7 @@ public interface GameController {
     public GameAwayTeamInfoVO insertAndSelectAwayTeam(@RequestParam("gID") int gID,
                                                        @RequestParam("tAwayID") int tAwayID
                                                       ) throws Exception;
+    public GameAwayTeamInfoVO insertawayTeamMembr(@RequestParam("gID") int gID,
+                                                   @RequestParam("tAwayID") int tAwayID
+                                                    ) throws Exception;
 }
