@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="${contextPath}/css/maketeam.css">
-  <title>팀 리스트</title>
+  <title>랭킹</title>
   <script type="text/javascript">
     <!--팀만들기 실행결과 에러 확인-->
     function checkInsertTeamMemberResult() {
@@ -64,7 +64,7 @@
       </div>
       <div class="teamlist">
         <div>
-          팀 목록
+          랭킹
         </div>
         <div> <!--searchteam 이름은 변경할 수 있음-->
           <form name="searchteam" method="post" action="searchteam" enctype="utf-8">
@@ -98,35 +98,29 @@
         <table>
           <thead>
             <tr>
+              <th>순위</th>
               <th>팀명</th>
               <th>지역</th>
               <th>랭크</th>
+              <th>점수</th>
               <th>나이제한</th>
               <th>인원</th>
-              <th>팀소개</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
-            <c:forEach var="team" items="${teamsList}">
+            <c:forEach var="team" items="${ranking}">
               <tr>
+                <td>${loop.index+1}</td>
                 <td>${team.tName}</td>
                 <td>${team.tRegion}</td>
                 <td>${team.rankName}</td>
+                <td>${team.tRankScore}</td>
                 <td>${team.tMinAge} - ${team.tMaxAge}</td>
                 <td>${team.tMember} / ${team.tMaxMember}</td>
-                <td>${team.tInfo}</td>
-                <td class="teamjoinform">
-                  <form method="post" action="${contextPath}/insertTeamMember">
-                    <input type="hidden" name="tID" value="${team.tID}">
-                    <button type="submit">가입</button>
-                  </form>
-                </td>
               </tr>
             </c:forEach>
           </tbody>
         </table>
-        <a href="${contextPath}/teamMake"><button>팀만들기</button></a>
       </div>
       <div>
         <a href="#">1</a>

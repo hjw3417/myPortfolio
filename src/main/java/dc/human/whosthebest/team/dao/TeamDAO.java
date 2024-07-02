@@ -15,4 +15,5 @@ public interface TeamDAO {
     public List selectTeamList() throws DataAccessException;
     public int insertTeamInfo(TeamInfoVO teamInfoVO) throws DataAccessException;
     public int insertTeamMember(TeamMemberVO teamMemberVo) throws DataAccessException;
+    public List selectRanking() throws DataAccessException;
 }

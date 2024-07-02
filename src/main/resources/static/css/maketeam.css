@@ -252,7 +252,7 @@ main{
   }
 }
 /*팀목록 페이지 */
-.teamlist {
+.teamlist, .ranking {
   width : 1013px;
   padding : 0 20px;
   box-sizing: border-box;
@@ -329,11 +329,11 @@ main{
         height : 60px;
         border : 1px solid rgb(184, 206, 146);
 
-        >td:last-child {
+        >.teamjoinform {
           width : 90px;
           padding : 0px;
           text-align: left;
-          >button{
+          >form>button{
             color : white;
             font-size: 16px;
             font-family: 'GmarketSansMedium';

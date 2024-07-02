@@ -21,6 +21,8 @@ public interface TeamController {
 
     public ModelAndView listTeams(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+    public ModelAndView Ranking(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 
 
 }
