@@ -633,7 +633,6 @@ $(document).ready(function() {
 
 //stadiumList.do 관련 js 시작
 $(document).ready(function() {
-    alert("시작");
     function stadiumListSearchAjax(sRegion, search) {
         console.log("AJAX 요청 시작");
         $.ajax({

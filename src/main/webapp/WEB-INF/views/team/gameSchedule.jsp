@@ -14,7 +14,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/js.js"></script>
@@ -23,7 +23,7 @@
 <body>
   <header>
     <div class="logo">
-      <img src="../../../../../../../../../2차포트폴리오/웹페이지/image/logo.png">
+      <img src="../image/logo.png">
       <!-- <div>누가 잘차</div> -->
     </div>
     <div>
@@ -50,7 +50,7 @@
   </header>
   <main>
     <div>　</div>
-    <div>
+    <div class="gameSchedule-content">
       <div class="side">
         <div>
           <div>　</div>
@@ -63,20 +63,9 @@
           </ul>
         </div>
       </div>
-      <div class="gamerecord">
+      <div class="gameSchedule">
         <div>
-          전적
-        </div>
-        <div>
-          <span>전체 전적&emsp;</span>
-          <span>(</span>
-          <span>몇&nbsp;</span>
-          <span>전&emsp;</span>
-          <span>몇&nbsp;</span>
-          <span>승&emsp;</span>
-          <span>몇&nbsp;</span>
-          <span>패</span>
-          <span>)</span>
+          경기 일정
         </div>
         <div>
           <form action="#">
@@ -87,38 +76,59 @@
             </select>
           </form>
         </div>
-        <div>
-          <div>
-            <span>팀 이름&nbsp;</span>
-            <span>팀 점수&emsp;</span>
-            <span>:</span>
-            <span>상대팀 점수&nbsp;</span>
-            <span>상대팀 이름&nbsp;</span>
-            <span>경기 일시&nbsp;</span>
-            <span>장소</span>
-            <span>승패</span>
-          </div>
-          <div>
-            <span>팀 이름&nbsp;</span>
-            <span>팀 점수&emsp;</span>
-            <span>:</span>
-            <span>상대팀 점수&nbsp;</span>
-            <span>상대팀 이름&nbsp;</span>
-            <span>경기 일시&nbsp;</span>
-            <span>장소</span>
-            <span>승패</span>
-          </div>
-          <div>
-            <span>팀 이름&nbsp;</span>
-            <span>팀 점수&emsp;</span>
-            <span>:</span>
-            <span>상대팀 점수&nbsp;</span>
-            <span>상대팀 이름&nbsp;</span>
-            <span>경기 일시&nbsp;</span>
-            <span>장소</span>
-            <span>승패</span>
-          </div>
+        <!-- 카드 시작 -->
+        <c:forEach var="gameList" items="${gameListVO}">
+        <div class="tableContainer">
+          <table>
+            <tr>
+              <td>경기명 : </td>
+              <td>${gameList.gTitle}</td>
+              <td>
+                경기 생성일 :
+              </td>
+              <td>
+                ${gameList.gCreatedDate}
+              </td>
+            </tr>
+            <tr>
+              <td>경기장 : </td>
+              <td>${gameList.sName} ${gameList.sNum} 경기장</td>
+            </tr>
+            <tr>
+              <td>경기장 주소 : </td>
+              <td>${gameList.sAddr}</td>
+            </tr>
+            <tr>
+              <td>경기일시 : </td>
+              <td>${gameList.gResDate} (${gameList.gTime} 시간)</td>
+            </tr>
+          </table>
+          <!-- 카드 submit 시작 -->
+        <div class="cardSubmitContainer">
+          <!-- 임시 폼 -->
+          <form action="gameInfo.html">
+            <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
+          </form>
+          <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
         </div>
+        <!-- 카드 submit 종료 -->
+        </div>
+        </c:forEach>
+        <!-- 카드 끝 -->
+
+        <!-- pagination 시작 -->
+      <div class="paginationContainer">
+        <ul class="pagination">
+          <li><a href="#">이전</a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#">다음</a></li>
+        </ul>
+      </div>
+      <!-- pagination 종료 -->
       </div>
     </div>
   </main>
