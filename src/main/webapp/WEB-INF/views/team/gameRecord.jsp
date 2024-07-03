@@ -23,7 +23,7 @@
 <body>
   <header>
     <div class="logo">
-      <img src="../../../../../../../../../2차포트폴리오/웹페이지/image/logo.png">
+      <img src="../image/logo.png">
       <!-- <div>누가 잘차</div> -->
     </div>
     <div>
@@ -69,14 +69,14 @@
         </div>
         <div>
           <span>전체 전적&emsp;</span>
-          <span>(</span>
-          <span>몇&nbsp;</span>
+          <span></span>
+          <span>${gameRecordVO.totalMatchCount}&nbsp;</span>
           <span>전&emsp;</span>
           <span>몇&nbsp;</span>
           <span>승&emsp;</span>
           <span>몇&nbsp;</span>
           <span>패</span>
-          <span>)</span>
+          <span></span>
         </div>
         <div>
           <form action="#">

@@ -48,6 +48,7 @@
         <result property="sAddr" column="S_ADDR"/>
     </resultMap>
 
+
     <select id="selectGameSchedule" parameterType="int" resultMap="gameListResultMap">
         SELECT g_id, G_TEAMID, G_TITLE, G_TAG, G_CREATEDATE, G_TIME, G_MINMEMBER, G_RESDATE, G_STATUS,
         G_USER_ID, S_ID, S_NUM,
@@ -69,5 +70,15 @@
         AND g.G_TEAMID = #{tID}
         )
         WHERE rn BETWEEN 1 AND 5
+    </select>
+    <select id="getTotalMatchCount" parameterType="int">
+        SELECT COUNT(*)
+        FROM g_result
+        WHERE T_HOMEID = #{tID} OR T_AWAYID = #{tID}
+    </select>
+    <select id="selectGResultInfo" parameterType="int" resultMap="GameRecord">
+        SELECT COUNT(*)
+        FROM g_result
+        WHERE T_HOMEID = #{tID} OR T_AWAYID = #{tID}
     </select>
 </mapper>

@@ -11,4 +11,5 @@ import java.util.List;
 @Repository("TeamDAO")
 public interface TeamDAO {
     public List<GameListVO> selectGameSchedule(int tID) throws DataAccessException;
+    public int getTotalMatchCount(int tID) throws DataAccessException;
 }
