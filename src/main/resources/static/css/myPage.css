@@ -181,7 +181,6 @@ main{
      margin-top : 9px;
    }
 
-
 }
 
 /*최근 경기결과 글씨*/
@@ -277,8 +276,94 @@ h2{
 
 }
 
-/**/
+/*----------------------------------------------------------------*/
 /*정보 수정 전 비밀번호 확인*/
+
+.pwCheck{
+  position: absolute;
+  top : 100px;
+  left : 500px;
+  >div:nth-child(2)>form{
+    >div:first-child{
+      margin-bottom: 10px;
+      input:first-child{
+        padding-left: 10px;
+        width: 370px;
+        height: 35px;
+        margin: 50px 0 0 0;
+        color: rgb(126, 148, 87);
+        border: 1px solid rgb(184, 206, 146);
+      }
+      >input:nth-child(2){
+        width: 120px;
+        height: 39px;
+        position: relative;
+        top: -1px;
+        margin-left: -7px;
+        border: 1px solid rgb(184, 206, 146);
+        background-color:rgb(184, 206, 146);
+        color: white;
+        font-size: 13px;
+        /* font-weight: bold; */
+        font-family: 'GmarketSansMedium';
+      }
+      >input:nth-child(1){
+        margin-bottom: 30px;
+      }
+      >input:focus {outline: none;}
+      >input::placeholder{color: rgb(126, 148, 87);}
+    }
+    >div:nth-child(2){
+      margin-bottom: 10px;
+      input{
+        padding-left: 10px;
+        width: 370px;
+        height: 35px;
+        margin-bottom: 20px;
+        color: rgb(126, 148, 87);
+        border: 1px solid rgb(184, 206, 146);
+      }
+
+      >input:focus {outline: none;}
+      >input:focus~div{
+        display: block;
+      }
+      >input::placeholder{color: rgb(126, 148, 87);}
+      >div{
+        display: none;
+        font-size: 12px;
+        color: rgb(116, 113, 113);
+      }
+    }
+    >div:nth-child(3){
+      button:first-child{
+        width: 185px;
+        height: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        background-color: rgb(184, 206, 146);
+        font-family: 'GmarketSansMedium';
+        color: white;
+        border: 1px solid rgb(184, 206, 146);
+        padding: 10px 0;
+        cursor: pointer;
+      }
+      button:nth-child(2){
+        width: 185px;
+        height: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        background-color: rgb(184, 206, 146);
+        font-family: 'GmarketSansMedium';
+        color: white;
+        border: 1px solid rgb(184, 206, 146);
+        padding: 10px 0;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+    }
+  }
+}
 
 
 /*---------------------------------------------------------------*/
