@@ -5,5 +5,5 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface MainController {
-    public ModelAndView mainInfo(String tName, String gTitle, HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView mainInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

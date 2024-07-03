@@ -445,7 +445,8 @@ main{
     >.board{
       width: 450px;
       height: 300px;
-      background-color: rgb(237, 255, 227);
+      box-shadow: 5px 5px 10px 0px rgb(228, 228, 228);
+      background-color: rgb(233, 248, 207);
       border-radius: 10%;
       box-sizing: border-box;
       padding: 20px 20px 0 20px;
@@ -485,7 +486,8 @@ main{
     >.gamelist{
       width: 450px;
       height: 300px;
-      background-color: rgb(237, 255, 227);
+      box-shadow: 5px 5px 10px 0px rgb(228, 228, 228);
+      background-color: rgb(233, 248, 207);
       border-radius: 10%;
       box-sizing: border-box;
       padding: 20px 20px 0 20px;
@@ -508,22 +510,43 @@ main{
           }
         }
       }
-      >div:nth-child(2){
-        >ul{
-          list-style-type: none;
-          color: rgb(94, 94, 94);
-          line-height: 30px;
-          >li:hover{
-            text-decoration-line: underline;
-          }
+      >div:nth-child(2)>table{
+        margin-left: 15px;
+        /*border: 1px solid red;*/
+        color: rgb(94, 94, 94);
+        width: 370px;
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 0px 5px;
+        >tr, td{
+          /*border: 1px solid red;*/
+          white-space: nowrap;
+          overflow:hidden;
+          text-overflow: ellipsis;
         }
+      }
+      >div:nth-child(2)>table td:first-child{
+        width: 280px;
+        height: 30px;
+        padding-left: 10px;
+        background-color: white;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+      >div:nth-child(2)>table td:nth-child(2){
+        width: 80px;
+        height: 30px;
+        text-align: center;
+        background-color: white;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
       }
     }
     >.rank{
       width: 450px;
       height: 300px;
-      /* box-shadow: 5px 5px 30px 0px gray; */
-      background-color: rgb(237, 255, 227);
+      box-shadow: 5px 5px 10px 0px rgb(228, 228, 228);
+      background-color: rgb(233, 248, 207);
       border-radius: 10%;
       box-sizing: border-box;
       padding: 20px 20px 0 20px;
@@ -545,14 +568,42 @@ main{
           }
         }
       }
-      >div:nth-child(2){
-        >ul{
-          list-style-type: none;
+      >div:nth-child(2)>table{
+          margin-left: 15px;
+          /* border: 1px solid red; */
           color: rgb(94, 94, 94);
-          line-height: 30px;
-          >li:hover{
-            text-decoration-line: underline;
-          }
+          width: 370px;
+          table-layout: fixed;
+          border-collapse: separate;
+          border-spacing: 0px 5px;
+        }
+        >div:nth-child(2)>table td:first-child{
+          width: 92.5px;
+          text-align: center;
+          height: 30px;
+          background-color: white;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+        }
+        >div:nth-child(2)>table td:nth-child(2){
+          width: 92.5px;
+          text-align: center;
+          height: 30px;
+          background-color: white;
+        }
+        >div:nth-child(2)>table td:nth-child(3){
+          width: 92.5px;
+          text-align: center;
+          height: 30px;
+          background-color: white;
+        }
+        >div:nth-child(2)>table td:nth-child(4){
+          width: 92.5px;
+          text-align: center;
+          height: 30px;
+          background-color: white;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
         }
       }
     }

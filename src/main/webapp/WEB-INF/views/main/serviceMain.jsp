@@ -70,11 +70,18 @@
               <span><a href="/gameList">+ 더보기</a></span>
             </div>
             <div>
-              <ul>
-                <c:forEach var ="game" items="${mGameList}" end="5">
-                    <li>${game}</li>
-                </c:forEach>
-              </ul>
+              <table>
+                <c:forEach var ="game" items="${mGameList}" end="4">
+                  <tr>
+                    <td>
+                        ${game.gTitle}
+                    </td>
+                    <td>
+                        ${game.uID}
+                    </td>
+                  <tr>
+               </c:forEach>
+              </table>
             </div>
           </div>
           <div class="rank">
@@ -83,11 +90,24 @@
               <span><a href="/ranking">+ 더보기</a></span>
             </div>
             <div>
-              <ul>
-                <c:forEach var ="rank" items="${mRanking}" end="5">
-                    <li>${rank}</li>
-                </c:forEach>
-              </ul>
+              <table>
+                 <c:forEach var ="rank" items="${mRanking}" end="4" varStatus="loop">
+                   <tr>
+                     <td>
+                       ${loop.index+1}
+                     </td>
+                     <td>
+                       ${rank.tName}
+                     </td>
+                     <td>
+                       ${rank.rankName}
+                     </td>
+                     <td>
+                       ${rank.tRankScore}
+                     </td>
+                   <tr>
+                 </c:forEach>
+              </table>
             </div>
           </div>
         </section>

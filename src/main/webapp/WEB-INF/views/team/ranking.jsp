@@ -10,14 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="${contextPath}/css/maketeam.css">
   <title>랭킹</title>
-  <script type="text/javascript">
-    <!--팀만들기 실행결과 에러 확인-->
-    function checkInsertTeamMemberResult() {
-      var errorMsg = '${errorMsg}';
-      if (errorMsg != NULL && errorMsg != "") {
-        alert(errorMsg);
-    }
-  </script>
 </head>
 <body onload="checkInsertTeamMemberResult();">
   <header>
@@ -108,7 +100,7 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach var="team" items="${ranking}">
+            <c:forEach var="team" items="${ranking}" varStatus="loop">
               <tr>
                 <td>${loop.index+1}</td>
                 <td>${team.tName}</td>

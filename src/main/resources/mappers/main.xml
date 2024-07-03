@@ -7,6 +7,7 @@
 
     <resultMap id="gameListResult" type="dc.human.whosthebest.vo.GameListVO">
         <result property="gTitle" column="G_TITLE"/>
+        <result property="uID" column="T_USERID"/>
         <result property="gCreatedDate" column="G_CREATEDATE"/>
     </resultMap>
 
@@ -40,14 +41,20 @@
         <result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
-    <select id="mainGameList" resultType="String">
-        SELECT G_TITLE FROM GAME ORDER BY G_CREATEDATE DESC
+    <select id="mainGameList" resultMap="gameListResult">
+        SELECT G_TITLE, T_USERID FROM GAME ORDER BY G_CREATEDATE DESC
     </select>
 
-    <select id="mainRanking" resultType="String">
+    <select id="mainRanking" resultMap="teamInfoResult">
         <![CDATA[
         SELECT
-            T.T_NAME
+            T.T_NAME,
+            T.RANKSCORE,
+            CASE
+                WHEN T.RANKSCORE IS NULL THEN 'unranked'
+                WHEN R.MINSCORE IS NULL OR R.MAXSCORE IS NULL THEN 'unranked'
+                ELSE R.RANK_NAME
+            END AS RANKNAME
         FROM
             TEAM T
         LEFT JOIN

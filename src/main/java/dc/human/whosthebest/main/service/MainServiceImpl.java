@@ -1,6 +1,8 @@
 package dc.human.whosthebest.main.service;
 
 import dc.human.whosthebest.main.dao.MainDAO;
+import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.TeamInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +15,17 @@ public class MainServiceImpl implements MainService {
     private MainDAO mainDAO;
 
     @Override
-    public List<String> mainRanking(String tName) throws Exception{
-        List<String> mainRanking;
-        mainRanking = mainDAO.mainRanking(tName);
+    public List<TeamInfoVO> mainRanking() throws Exception{
+        List<TeamInfoVO> mainRanking;
+        mainRanking = mainDAO.mainRanking();
+        System.out.println("메인랭킹 서비스 시스아웃"+mainRanking);
         return mainRanking;
     }
 
     @Override
-    public List<String> mainGameList(String gTitle) throws Exception{
-        List<String> mainGameList;
-        mainGameList = mainDAO.mainGameList(gTitle);
+    public List<GameListVO> mainGameList() throws Exception{
+        List<GameListVO> mainGameList;
+        mainGameList = mainDAO.mainGameList();
         return  mainGameList;
     }
 }
