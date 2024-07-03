@@ -67,15 +67,6 @@
         <div>
           경기 일정
         </div>
-        <div>
-          <form action="#">
-            <select>
-              <option>전체</option>
-              <option>승</option>
-              <option>패</option>
-            </select>
-          </form>
-        </div>
         <!-- 카드 시작 -->
         <c:forEach var="gameList" items="${gameListVO}">
         <div class="tableContainer">
@@ -106,7 +97,8 @@
           <!-- 카드 submit 시작 -->
         <div class="cardSubmitContainer">
           <!-- 임시 폼 -->
-          <form action="gameInfo.html">
+          <form method="get" action="${contextPath}/game/gameInfo.do">
+            <input type="hidden" class="gID" name="gID" id="gID" value="${gameList.gID}"/>
             <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
           </form>
           <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
