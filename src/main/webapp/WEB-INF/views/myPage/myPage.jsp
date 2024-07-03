@@ -103,23 +103,23 @@
         <div class="recentlyPlay">
           <table>
             <tr>
-                 <th width="140"> 경기 일시 </th>
+                 <th width="110"> 경기 일시 </th>
                  <th width="190"> 나의팀</th>
                  <th width="50" colspan="3"> 득점 </th>
                  <th width="190"> 상대팀 </th>
-                 <th width="200"> 경기 장소</th>
+                 <th width="220"> 경기 장소</th>
                  <th width="70"> 경기 결과</td>
             </tr>
 
            <c:forEach items="${recentGame}" var="recent">
              <tr>
-                  <td width="140"> ${recent.gResDate}   </td>
-                  <td width="200"> ${recent.myTeam} </td>
+                  <td width="110" height="50"> ${recent.gResDate}   </td>
+                  <td width="190"> ${recent.myTeam} </td>
                   <td width="20"> ${recent.homeGoal} </td>
                   <td width="10"> : </td>
                   <td width="20"> ${recent.awayGoal} </td>
                   <td  width="200"> ${recent.awayTeam}  </td>
-                  <td width="200">  ${recent.sName} </td>
+                  <td width="220">  ${recent.sName} </td>
                   <td width="70">
                        <c:choose>
                            <c:when test="${recent.homeGoal > recent.awayGoal}">
