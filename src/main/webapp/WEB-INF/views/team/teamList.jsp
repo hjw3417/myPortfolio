@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="${contextPath}/css/maketeam.css">
   <title>팀 리스트</title>
   <script type="text/javascript">
-    <!--팀만들기 실행결과 에러 확인-->
+    <!--팀 가입하기 실행결과 에러 확인-->
     function checkInsertTeamMemberResult() {
       var errorMsg = '${errorMsg}';
       if (errorMsg != NULL && errorMsg != "") {
@@ -53,12 +53,11 @@
       <div class="side">
         <div>
           <div>　</div>
-          <div>나의 팀</div>
-          <ul>문주 군단
-            <li><a href="teammemberlist.html">팀원 목록</a></li>
-            <li><a href="#">팀 경기 일정</a></li>
-            <li><a href="teamrecord.html">전적</a></li>
-            <li><a href="#">팀 게시판</a></li>
+          <div>팀</div>
+          <ul>
+            <li><a href="${contextPath}/teamList">팀 목록</a></li>
+            <li><a href="#">나의 팀</a></li>
+            <li><a href="${contextPath}/teamMake">팀 만들기</a></li>
           </ul>
         </div>
       </div>

@@ -13,6 +13,8 @@ public interface TeamController {
 
     public String teamMakePage();
 
+    public String myTeamPage();
+
     public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception;
 

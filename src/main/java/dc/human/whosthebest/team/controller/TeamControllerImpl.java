@@ -29,7 +29,15 @@ public class TeamControllerImpl implements TeamController{
         return "/team/teamMake";
     }
 
+    //팀 만들기 페이지 단순 매핑
+    @Override
+    @GetMapping("/myTeam")
+    public String myTeamPage() {
+        return "/team/myTeam";
+    }
+
     //팀 만들기 insert
+    //팀원 목록에 추가하는 것과 동시에 시행
         //해당지역 이미 생성되있는 팀이름 검사 필요
         //가입한 팀 3개 검사 필요
         //팀 만들때 팀장도 team_member 테이블에 저장 필요
@@ -43,6 +51,7 @@ public class TeamControllerImpl implements TeamController{
         //실제 userID 가져오는 로직으로 대체
 
         try {
+            //팀생성과 동시에 팀원 목록에도 팀장 추가
             int result = teamService.createTeamAndAddMember(teamInfo, userID);
             String viewName = "";
 

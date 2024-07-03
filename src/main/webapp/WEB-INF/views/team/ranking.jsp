@@ -10,14 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="${contextPath}/css/maketeam.css">
   <title>랭킹</title>
-  <script type="text/javascript">
-    <!--팀만들기 실행결과 에러 확인-->
-    function checkInsertTeamMemberResult() {
-      var errorMsg = '${errorMsg}';
-      if (errorMsg != NULL && errorMsg != "") {
-        alert(errorMsg);
-    }
-  </script>
+
 </head>
 <body onload="checkInsertTeamMemberResult();">
   <header>
@@ -53,8 +46,8 @@
       <div class="side">
         <div>
           <div>　</div>
-          <div>나의 팀</div>
-          <ul>문주 군단
+          <div>팀</div>
+          <ul>팀목록
             <li><a href="teammemberlist.html">팀원 목록</a></li>
             <li><a href="#">팀 경기 일정</a></li>
             <li><a href="teamrecord.html">전적</a></li>
@@ -108,7 +101,7 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach var="team" items="${ranking}">
+            <c:forEach var="team" items="${ranking}" varStatus="loop">
               <tr>
                 <td>${loop.index+1}</td>
                 <td>${team.tName}</td>
