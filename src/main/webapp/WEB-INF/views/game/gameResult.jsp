@@ -19,6 +19,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/js.js"></script>
     <title>경기 결과 입력</title>
+    <script>
+        alert("gID : " + ${gameinfoVO.gID});
+    </script>
 </head>
 <body>
 <header>
@@ -41,8 +44,8 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="gameList.html">경기 목록</a></li>
-            <li><a href="stadiumList.html">경기장 목록</a></li>
+            <li><a href="${contextPath}/game/gameList.do">경기 목록</a></li>
+            <li><a href="${contextPath}/stadium/stadiumList.do">경기장 목록</a></li>
             <li><a href="rankWatch.html">랭킹</a></li>
             <li><a href="#">게시판</a></li>
         </ul>
@@ -73,14 +76,19 @@
                     </button>
                 </div>
                 <div class="scoreInputContianer">
-                    <input type="text" name="homeTeamScore" placeholder="Score" maxlength="2">
-                    <input type="text" name="awayTeamScore" placeholder="Score" maxlength="2">
+                    <input type="text" name="homeTeamScore" id="homeTeamScore" placeholder="Score" maxlength="2">
+                    <input type="text" name="awayTeamScore" id="awayTeamScore" placeholder="Score" maxlength="2">
                 </div>
                 <div class="submitContainer">
-                    <form action="gameList.html">
-                    <input type="hidden" name="gID" value="${gameinfoVO.gID}"
-                    <input type="submit" value="결과 제출">
-                </form>
+                    <form method="post" action="${contextPath}/game/insert/gameResult.do">
+                        <input type="hidden" name="homeTeamScoreHidden" id="homeTeamScoreHidden">
+                        <input type="hidden" name="awayTeamScoreHidden" id="awayTeamScoreHidden">
+                        <input type="hidden" name="gTeamID" id="gTeamID" value="${gTeamID}">
+                        <input type="hidden" name="tAwayID" id="tAwayID" value="${tAwayID}">
+                        <input type="hidden" name="uID" id="uID" value="${uID}">
+                        <input type="hidden" name="gID" value="${gID}"/>
+                        <input type="submit" value="결과 제출" />
+                    </form>
                 </div>
             </div>
             <!-- 경기 평가 영역 종료 -->

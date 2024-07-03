@@ -34,4 +34,6 @@ public interface GameService {
     public GameAwayTeamInfoVO awayTeamIntoGame(SquadVO squadVO) throws  Exception;
     public GameAwayTeamInfoVO insertawayTeamMembr(SquadVO squadVO) throws Exception;
     public String selectAwayTeamName(int tID) throws Exception;
+    public int insertGameResult(GResultVO gResultVO) throws Exception;
+    public List<StadiumVO> selectStadiumInfo(String sRegion, String search) throws  Exception;
 }

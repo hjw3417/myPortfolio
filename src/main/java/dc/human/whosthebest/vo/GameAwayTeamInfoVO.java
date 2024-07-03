@@ -5,10 +5,19 @@ import java.util.List;
 public class GameAwayTeamInfoVO {
     private String awayTeamName;
     private List<GameMemberListVO> awayTeamMemberList;
+    private int tAwayID;
     private int nowPartiMemberNum;
     private boolean checkDuplicateSquadResult;//nowPartiMemberNum
 
     public GameAwayTeamInfoVO() {
+    }
+
+    public int gettAwayID() {
+        return tAwayID;
+    }
+
+    public void settAwayID(int tAwayID) {
+        this.tAwayID = tAwayID;
     }
 
     public boolean isCheckDuplicateSquadResult() {

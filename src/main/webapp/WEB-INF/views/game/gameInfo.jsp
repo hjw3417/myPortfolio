@@ -41,8 +41,8 @@
             </ul>
           </div>
         </li>
-        <li><a href="gameList.html">경기 목록</a></li>
-        <li><a href="../../../../../../../../../2차포트폴리오/웹페이지/html/stadiumList.html">경기장 목록</a></li>
+        <li><a href="${contextPath}/game/gameList.do">경기 목록</a></li>
+        <li><a href="${contextPath}/stadium/stadiumList.do">경기장 목록</a></li>
         <li><a href="rankWatch.html">랭킹</a></li>
         <li><a href="#">게시판</a></li>
       </ul>
@@ -59,11 +59,11 @@
           <div>${gameInfoVO.gTitle}</div>
           <div>
             <form method="post" action="${contextPath}/game/gameResult.do">
-                <input type="hidden" id="startGameGID" name="sRegion" value="${gameInfoVO.sRegion}" />
-                <input type="hidden" id="startGameGID" name="gTitle" value="${gameInfoVO.gTitle}" />
-                <input type="hidden" id="startGameGID" name="gID" value="${gameInfoVO.gID}" />
-                <input type="hidden" id="startGameGID" name="gTeamID" value="${gameInfoVO.gTeamID}" />
-                <input type="hidden" id="startGameGID" name="tAwayID" value="${gameInfoVO.tAwayID}" />
+                <input type="hidden" id="startGamesRegion" name="sRegion" value="${gameInfoVO.sRegion}" />
+                <input type="hidden" id="startGamegTitle" name="gTitle" value="${gameInfoVO.gTitle}" />
+                <input type="hidden" id="startGamegID" name="gID" value="${gameInfoVO.gID}" />
+                <input type="hidden" id="startGamegTeamID" name="gTeamID" value="${gameInfoVO.gTeamID}" />
+                <input type="hidden" id="startGametAwayID" name="tAwayID" value="${gameInfoVO.tAwayID}" />
                 <input type="submit" id="startGameBtn"/>
             </form>
           </div>

@@ -496,6 +496,8 @@ $(document).ready(function() {
                 var awayTeamName = response.awayTeamName;
                 var awayTeamMemberList = response.awayTeamMemberList;
                 var nowPartiMemberNum = response.nowPartiMemberNum;
+                var tAwayID = response.tAwayID;
+                alert("tAwayID : " + tAwayID);
                 var html = '';
                 if(awayTeamName == null) {
                     alert("이미 참가하였습니다.")
@@ -510,6 +512,7 @@ $(document).ready(function() {
                         $("#awayTeamMemberList").append(html);
                     });
                     $("#nowPartiMemberNum").html(nowPartiMemberNum);
+                    $("#startGametAwayID").val(tAwayID);
                 }
             },
             error: function(error) {
@@ -617,6 +620,68 @@ function changeButtons(clickedButtonId, otherButtonId) {
 }
 //gameResult.do 관련 js 시작
 $(document).ready(function() {
-
+    $('#homeTeamScore').on('input', function() {
+        var homeTeamScoreValue = $(this).val();
+        $('#homeTeamScoreHidden').val(homeTeamScoreValue);
+    });
+    $('#awayTeamScore').on('input', function() {
+        var awayTeamScoreValue = $(this).val();
+        $('#awayTeamScoreHidden').val(awayTeamScoreValue);
+    });
 })
 //gameResult.do 관련 js 끝
+
+//stadiumList.do 관련 js 시작
+$(document).ready(function() {
+    alert("시작");
+    function stadiumListSearchAjax(sRegion, search) {
+        console.log("AJAX 요청 시작");
+        $.ajax({
+            url: '/game/search/stadiumList.do',
+            type: 'POST',
+            data: {
+                sRegion: sRegion,
+                search: search
+            },
+            dataType: 'json',
+            success: function(response) {
+                var html = "";
+                var stadiumListVO = response;
+                alert(stadiumListVO.length);
+                if (stadiumListVO.length == 0) {
+                    alert("검색 정보가 없습니다.")
+                } else {
+                    alert(stadiumListVO[0].sName);
+                    $("#stadiumListTBody").empty();
+                    for (var i = 0; i < stadiumListVO.length; i++) {
+                        var stadium = stadiumListVO[i];
+                        html += `
+                            <tr>
+                              <td>${i + 1}</td>
+                              <td>${stadium.sName}</td>
+                              <td>${stadium.sAddr}</td>
+                              <td>${stadium.sNum}</td>
+                              <td>${stadium.sOwner}</td>
+                            </tr>
+                        `;
+                    }
+                    $("#stadiumListTBody").html(html);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX 요청 실패", status, error);
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    $(document).on("submit", "#stadiumList-findForm", function(event) {
+        event.preventDefault();
+        var sRegion = $("#sRegion").val();
+        var search = $("#search").val();
+        alert("sRegion: " + sRegion);
+        alert("search: " + search);
+        stadiumListSearchAjax(sRegion, search);
+    });
+});
+//stadiumList.do 관련 js 끝

@@ -73,4 +73,8 @@ public interface GameDAO {
     public int checkAwayTeamExist(GameVO gameVO) throws DataAccessException;
     public String selectAwayTeamName(int tID) throws DataAccessException;
     public int updateAwayTeamID(SquadVO squadVO) throws DataAccessException;
+    public int insertGameResult(GResultVO gResultVO) throws DataAccessException;
+    public List<StadiumVO> selectStadiumInfo(@Param("sRegion") String sRegion,
+                                             @Param("search") String search
+                                             ) throws DataAccessException;
 }

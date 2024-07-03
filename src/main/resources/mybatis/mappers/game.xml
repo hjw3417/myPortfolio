@@ -306,4 +306,32 @@
 		FROM TEAM
 		WHERE T_ID = #{tID}
 	</select>
+	<insert id="insertGameResult" parameterType="GResultVO">
+		INSERT INTO G_RESULT
+		(G_ID, T_HOMEID, T_AWAYID, HOME_GOAL, AWAY_GOAL, U_ID, UPDATED_ID)
+		VALUES
+		(#{gID}, #{tHomeID}, #{tAwayID}, #{homeGoal}, #{awayGoal}, #{uID}, #{createdID})
+	</insert>
+	<select id="selectStadiumInfo" resultMap="stadiumResultMap">
+		SELECT *
+		FROM (
+		SELECT
+		S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_NUM,
+		ROW_NUMBER() OVER (ORDER BY S_ID) AS rn
+		FROM STADIUM
+		)
+		WHERE rn BETWEEN 1 AND 10
+		<if test="sRegion != null and sRegion != ''">
+			AND  S_REGION = #{sRegion}
+		</if>
+		<if test="search != null and search != ''">
+			AND (
+			S_REGION = #{search} OR
+			S_NAME = #{search} OR
+			S_OWNER = #{search}
+			)
+			AND S_REGION||S_NAME||S_OWNER LIKE '%' || #{search} || '%'
+		</if>
+	</select>
+
 </mapper>

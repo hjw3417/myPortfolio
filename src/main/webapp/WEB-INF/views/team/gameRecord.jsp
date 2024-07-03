@@ -15,6 +15,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
   <link rel="stylesheet" href="../css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/js.js"></script>
   <title>game record</title>
 </head>
 <body>
@@ -38,8 +41,8 @@
             </ul>
           </div>
         </li>
-        <li><a href="gameList.html">경기 목록</a></li>
-        <li><a href="../../../../../../../../../2차포트폴리오/웹페이지/html/stadiumList.html">경기장 목록</a></li>
+        <li><a href="${contextPath}/game/gameList.do">경기 목록</a></li>
+        <li><a href="${contextPath}/stadium/stadiumList.do">경기장 목록</a></li>
         <li><a href="rankWatch.html">랭킹</a></li>
         <li><a href="#">게시판</a></li>
       </ul>

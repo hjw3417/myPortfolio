@@ -297,4 +297,17 @@ public class GameServiceImpl implements  GameService {
         tName = gameDAO.selectAwayTeamName(tID);
         return tName;
     }
+
+    @Override
+    public int insertGameResult(GResultVO gResultVO) throws Exception {
+        int insertGameResultResult = 0;
+        insertGameResultResult = gameDAO.insertGameResult(gResultVO);
+        return insertGameResultResult;
+    }
+
+    @Override
+    public List<StadiumVO> selectStadiumInfo(String sRegion, String search) throws Exception {
+        List<StadiumVO> stadiumVO = gameDAO.selectStadiumInfo(sRegion, search);
+        return stadiumVO;
+    }
 }

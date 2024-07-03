@@ -68,7 +68,18 @@ public interface GameController {
     public ModelAndView intoGameResultHadler(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
                                              @RequestParam(value="sRegion", required = false) String sRegion,
                                              @RequestParam(value="gTitle", required = false)String gTitle,
-                                             @RequestParam(value="homeTeamName", required = false) String homeTeamName,
-                                             @RequestParam(value="awayTeamName", required = false) String awayTeamName
+                                             @RequestParam(value="tID", required = false) int tID,
+                                             @RequestParam(value="tAwayID", required = false) int tAwayID
                                              ) throws Exception;
+    public ModelAndView insertGameResult(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                         @RequestParam(value="gTeamID", required = false, defaultValue = "0") int gTeamID,
+                                         @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID,
+                                         @RequestParam(value="homeTeamScoreHidden", required = false, defaultValue = "0") int homeTeamScoreHidden,
+                                         @RequestParam(value="awayTeamScoreHidden", required = false, defaultValue = "0") int awayTeamScoreHidden,
+                                         @RequestParam(value="uID", required = false) String uID
+                                         ) throws Exception;
+    public ModelAndView selectStadiumInfo() throws Exception;
+    public List<StadiumVO> searchStadiumInfo(@RequestParam(value="sRegion", required = false) String sRegion,
+                                             @RequestParam(value="search", required = false) String search
+                                              ) throws Exception;
 }
