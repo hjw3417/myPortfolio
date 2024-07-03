@@ -44,7 +44,7 @@
       <div class="side">
         <div>
           <div>　</div>
-          <div>팀</div>
+          <div>나의 팀</div>
           <ul>
             <li><a href="${contextPath}/teamList">팀 목록</a></li>
             <li><a href="#">나의 팀</a></li>

@@ -15,15 +15,14 @@ public interface TeamController {
 
     public String myTeamPage();
 
-    public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo,
-                                HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception;
 
-    public ModelAndView insertTeamMember(@RequestParam("tID") int tID,
-                                         HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView insertTeamMember(@RequestParam("tID") int tID) throws Exception;
 
-    public ModelAndView listTeams(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView listTeams() throws Exception;
 
-    public ModelAndView Ranking(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+    public ModelAndView Ranking() throws Exception;
 
 
 

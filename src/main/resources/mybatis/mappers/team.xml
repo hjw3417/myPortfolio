@@ -136,7 +136,6 @@
     </select>
 
 
-
     <select id="selectAllTeamInfo" resultMap="teamInfoResult">
         <![CDATA[
             SELECT * FROM TEAM

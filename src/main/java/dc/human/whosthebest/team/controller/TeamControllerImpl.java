@@ -29,7 +29,8 @@ public class TeamControllerImpl implements TeamController{
         return "/team/teamMake";
     }
 
-    //팀 만들기 페이지 단순 매핑
+    //나의팀 페이지 단순 매핑
+    //임시
     @Override
     @GetMapping("/myTeam")
     public String myTeamPage() {
@@ -43,9 +44,7 @@ public class TeamControllerImpl implements TeamController{
         //팀 만들때 팀장도 team_member 테이블에 저장 필요
     @Override
     @RequestMapping(value="/insertTeamInfo" ,method = RequestMethod.POST)
-    public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo,
-                                HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.setCharacterEncoding("utf-8");
+    public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception {
         ModelAndView mav = new ModelAndView();
         String userID = "HONG";
         //실제 userID 가져오는 로직으로 대체
@@ -77,9 +76,7 @@ public class TeamControllerImpl implements TeamController{
         //3개이상 가입 금지
     @Override
     @RequestMapping(value="/insertTeamMember" ,method = RequestMethod.POST)
-    public ModelAndView insertTeamMember(@RequestParam("tID") int tID,
-                                         HttpServletRequest request, HttpServletResponse response) throws Exception{
-        request.setCharacterEncoding("utf-8");
+    public ModelAndView insertTeamMember(@RequestParam("tID") int tID) throws Exception{
         ModelAndView mav = new ModelAndView();
 
         try {
@@ -112,19 +109,21 @@ public class TeamControllerImpl implements TeamController{
         //검색 기능 지역 필터링 메소드 추가 필요
     @Override
     @GetMapping("/teamList")
-    public ModelAndView listTeams(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public ModelAndView listTeams() throws Exception{
         List teamsList = teamService.listTeams();
         ModelAndView mav = new ModelAndView("/team/teamList");
         mav.addObject("teamsList", teamsList);
         return mav;
     }
 
+
+
     //랭킹 페이지 매핑
         //페이징 처리 필요
         //검색 기능 지역 필터링 메소드 추가 필요
     @Override
     @GetMapping("/ranking")
-    public ModelAndView Ranking(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public ModelAndView Ranking() throws Exception{
         List ranking = teamService.ranking();
         ModelAndView mav = new ModelAndView("/team/ranking");
         mav.addObject("ranking", ranking);
