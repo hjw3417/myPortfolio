@@ -684,3 +684,56 @@ $(document).ready(function() {
     });
 });
 //stadiumList.do 관련 js 끝
+//gameRecord.do 관련 js 시작
+$(document).ready(function() {
+
+    function resultTypeFilterAjax(resultType) {
+        alert("ajax 시작");
+        $.ajax({
+            url: "/team/filter/gameRecord.do",
+            type: 'POST',
+            data: {
+                resultType: resultType
+            },
+            dataType: 'json',
+            success: function(response) {
+                alert("resultTypeFilterAjax response 성공");
+                alert(response.totalCount);
+                var gameRecordVO = response;
+                alert(gameRecordVO.gameRecordInfoListVO.length);
+                var html = "";
+                if(gameRecordVO.gameRecordInfoListVO.length == 0) {
+                    alert("조회 결과가 없습니다.")
+                } else {
+                    alert("조회 결과 출력.")
+                    $("#gameRecordContainer").empty();
+                    $.each(gameRecordVO.gameRecordInfoListVO, function(index, gameRecord) {
+                        html += `
+                            <div>
+                                <span>${gameRecord.tHomeName}&nbsp;</span>
+                                <span>${gameRecord.homeGoal}</span>
+                                <span>:</span>
+                                <span>${gameRecord.awayGoal}</span>
+                                <span>&nbsp;</span>
+                                <span>${gameRecord.tAwayName}</span>
+                                <span>${gameRecord.gResDate}</span>
+                                <span>${gameRecord.resultType}</span>
+                            </div>
+                        `;
+                    });
+                    $('#gameRecordContainer').html(html);
+                }
+            },
+            error: function(error) {
+                alert("Error: " + error);
+            }
+        });
+    }
+
+    $(document).on("change", "#resultType", function(event) {
+        event.preventDefault();
+        var resultType = $("#resultType").val();
+        resultTypeFilterAjax(resultType)
+    });
+});
+//gameRecord.do 관련 js 끝

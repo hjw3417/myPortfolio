@@ -14,7 +14,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/js.js"></script>
@@ -51,7 +51,7 @@
   <main>
     <div>　</div>
     <div>
-      <div class="side">
+      <div class="gameRecord-side">
         <div>
           <div>　</div>
           <div>나의 팀</div>
@@ -82,45 +82,43 @@
         </div>
         <div>
           <form action="#">
-            <select>
-              <option>전체</option>
-              <option>승</option>
-              <option>패</option>
+            <select id="resultType">
+              <option value="">전체</option>
+              <option value="승">승</option>
+              <option value="무">패</option>
+              <option value="패">무</option>
             </select>
           </form>
         </div>
-        <div>
-          <div>
-            <span>팀 이름&nbsp;</span>
-            <span>팀 점수&emsp;</span>
-            <span>:</span>
-            <span>상대팀 점수&nbsp;</span>
-            <span>상대팀 이름&nbsp;</span>
-            <span>경기 일시&nbsp;</span>
-            <span>장소</span>
-            <span>승패</span>
-          </div>
-          <div>
-            <span>팀 이름&nbsp;</span>
-            <span>팀 점수&emsp;</span>
-            <span>:</span>
-            <span>상대팀 점수&nbsp;</span>
-            <span>상대팀 이름&nbsp;</span>
-            <span>경기 일시&nbsp;</span>
-            <span>장소</span>
-            <span>승패</span>
-          </div>
-          <div>
-            <span>팀 이름&nbsp;</span>
-            <span>팀 점수&emsp;</span>
-            <span>:</span>
-            <span>상대팀 점수&nbsp;</span>
-            <span>상대팀 이름&nbsp;</span>
-            <span>경기 일시&nbsp;</span>
-            <span>장소</span>
-            <span>승패</span>
-          </div>
+        <div id="gameRecordContainer">
+        <c:forEach var="gameRecord" items="${gameRecordVO.gameRecordInfoListVO}">
+            <div>
+                <span>${gameRecord.tHomeName}&nbsp;</span>
+                <span>${gameRecord.homeGoal}</span>
+                <span>:</span>
+                <span>${gameRecord.awayGoal}</span>
+                <span>&nbsp;</span>
+                <span>${gameRecord.tAwayName}</span>
+                <span>${gameRecord.gResDate}</span>
+                <span>${gameRecord.resultType}</span>
+            </div>
+        </c:forEach>
         </div>
+        <!-- pagination 시작 -->
+        <div class="paginationContainer">
+          <ul class="pagination">
+
+            <li>
+            <button id="prevPage" type="button" onclick="#">이전</button>
+            </li>
+            <li id="pageNumBtnLI" name="pageNumBtnLI">
+            </li>
+            <li>
+                <button id="nextPage" type="button" onclick="#">다음</button>
+            </li>
+          </ul>
+        </div>
+        <!-- pagination 종료 -->
       </div>
     </div>
   </main>

@@ -49,6 +49,14 @@
     </resultMap>
 
     <resultMap id="GameRecordResultMap" type="GameRecordVO">
+        <result property="totalCount" column="totalCount"/>
+        <result property="winCount" column="winCount"/>
+        <result property="loseCount" column="loseCount"/>
+        <result property="drawCount" column="drawCount"/>
+    </resultMap>
+
+    <resultMap id="GameRecordInfoResultMap" type="GameRecordInfoListVO">
+        <!-- G_RESULT TABLE -->
         <id property="gID" column="G_ID"/>
         <result property="tHomeID" column="T_HOMEID"/>
         <result property="tAwayID" column="T_AWAYID"/>
@@ -59,10 +67,13 @@
         <result property="createdDate" column="CREATED_DATE"/>
         <result property="updatedID" column="UPDATED_ID"/>
         <result property="updatedDate" column="UPDATED_DATE"/>
-        <result property="totalCount" column="totalCount"/>
-        <result property="winCount" column="winCount"/>
-        <result property="loseCount" column="loseCount"/>
-        <result property="drawCount" column="drawCount"/>
+        <!-- GAME TABLE -->
+        <result property="gResDate" column="G_RESDATE"/>
+
+        <result property="tHomeName" column="tHomeName"/>
+        <result property="tAwayName" column="tAwayName"/>
+
+        <result property="resultType" column="resultType"/>
     </resultMap>
 
 
@@ -113,7 +124,54 @@
             T_HOMEID = #{tID} OR T_AWAYID = #{tID}
         ]]>
     </select>
-<!--    <select id="selectGResultInfo" parameterType="int" resultMap="GameRecordResultMap">-->
+    <select id="selectGResultInfo" resultMap="GameRecordInfoResultMap">
+        <![CDATA[
+        SELECT
+            gr.G_ID,
+            gr.T_HOMEID,
+            gr.T_AWAYID,
+            gr.HOME_GOAL,
+            gr.AWAY_GOAL,
+            gr.U_ID,
+            g.G_RESDATE,
+            th.T_NAME AS tHomeName,
+            ta.T_NAME AS tAwayName,
+            CASE
+                WHEN gr.T_HOMEID = #{tID} AND (gr.HOME_GOAL - gr.AWAY_GOAL) > 0 THEN '승'
+                WHEN gr.T_HOMEID = #{tID} AND (gr.HOME_GOAL - gr.AWAY_GOAL) < 0 THEN '패'
+                WHEN gr.T_HOMEID = #{tID} AND (gr.HOME_GOAL - gr.AWAY_GOAL) = 0 THEN '무'
+                WHEN gr.T_AWAYID = #{tID} AND (gr.AWAY_GOAL - gr.HOME_GOAL) > 0 THEN '승'
+                WHEN gr.T_AWAYID = #{tID} AND (gr.AWAY_GOAL - gr.HOME_GOAL) < 0 THEN '패'
+                WHEN gr.T_AWAYID = #{tID} AND (gr.AWAY_GOAL - gr.HOME_GOAL) = 0 THEN '무'
+                ELSE NULL
+            END AS resultType
+        FROM
+            G_RESULT gr
+        LEFT JOIN
+            GAME g ON gr.G_ID = g.G_ID
+        LEFT JOIN
+            TEAM th ON gr.T_HOMEID = th.T_ID
+        LEFT JOIN
+            TEAM ta ON gr.T_AWAYID = ta.T_ID
+        WHERE
+            (gr.T_HOMEID = #{tID} OR gr.T_AWAYID = #{tID})
+        ]]>
+            <if test="resultType != null">
+        <![CDATA[
+                AND (
+                    (gr.T_HOMEID = #{tID} AND CASE
+                        WHEN (gr.HOME_GOAL - gr.AWAY_GOAL) > 0 THEN '승'
+                        WHEN (gr.HOME_GOAL - gr.AWAY_GOAL) < 0 THEN '패'
+                        WHEN (gr.HOME_GOAL - gr.AWAY_GOAL) = 0 THEN '무'
+                    END = #{resultType}) OR
+                    (gr.T_AWAYID = #{tID} AND CASE
+                        WHEN (gr.AWAY_GOAL - gr.HOME_GOAL) > 0 THEN '승'
+                        WHEN (gr.AWAY_GOAL - gr.HOME_GOAL) < 0 THEN '패'
+                        WHEN (gr.AWAY_GOAL - gr.HOME_GOAL) = 0 THEN '무'
+                    END = #{resultType})
+                )
+        ]]>
+            </if>
 
-<!--    </select>-->
+    </select>
 </mapper>
