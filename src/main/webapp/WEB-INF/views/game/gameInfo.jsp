@@ -53,6 +53,11 @@
     <div>
       <!-- content 영역 시작 -->
       <div class="gameInfo-content">
+        <!-- 경기 생성자만 보이는 수정/삭제 영역 시작-->
+        <div>
+            경기방 수정 | 경기방 삭제
+        </div>
+        <!-- 경기 생성자만 보이는 수정/삭제 영역 끝-->
         <!-- 경기 제목 영역 시작 -->
         <div class="titeContainer">
           <div>${gameInfoVO.sRegion}</div>

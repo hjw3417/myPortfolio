@@ -396,6 +396,8 @@ $(document).ready(function() {
         var search = null;
         var IMakeGameuID = $("#selectIMakeGame").val();
         var IPartiGameuID = null;
+        alert("IMakeGameuID" + IMakeGameuID);
+        alert("IPartiGameuID" + IPartiGameuID);
         selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
     $('#selectIPartiGame').on('click', function(event) {
@@ -406,6 +408,8 @@ $(document).ready(function() {
         var search = null;
         var IMakeGameuID = null;
         var IPartiGameuID = $("#selectIPartiGame").val();
+        alert("IMakeGameuID" + IMakeGameuID);
+        alert("IPartiGameuID" + IPartiGameuID);
         selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
     //side바 필터링 기능
@@ -426,7 +430,7 @@ $(document).ready(function() {
 //gameInfo.do 관련 js 시작
 $(document).ready(function() {
     //경기 참여 Btn value 설정
-    $('#startGameBtn').val("경기 참여");
+    $('#startGameBtn').val("경기 종료");
 
     var $gComent = $('#gComent');
     $gComent.scrollTop($gComent.prop("scrollHeight"));

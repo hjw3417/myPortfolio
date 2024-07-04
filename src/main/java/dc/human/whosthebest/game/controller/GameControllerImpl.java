@@ -155,8 +155,8 @@ public class GameControllerImpl implements GameController {
         System.out.println("controller tID : " + gTeamID);
         int gTeamIDInt = Integer.parseInt(gTeamID);
         gameVO.setgTeamID(gTeamIDInt);
-        gameVO.settUserID("MOON");
-        gameVO.setCreatedID("MOON");
+        gameVO.settUserID("hong");
+        gameVO.setCreatedID("hong");
         gameVO.setgTitle(gTitle);
         gameVO.setgTag(gTag);
         gameVO.setgMinMember(gMinMember);
@@ -200,7 +200,7 @@ public class GameControllerImpl implements GameController {
             System.out.println("controller 리스트가 비어 있습니다.");
         }
         ModelAndView mav = new ModelAndView();
-        mav.addObject("uID", "hong");
+        mav.addObject("uID", "MOON");
         mav.addObject("gameList", gameList);
         mav.addObject("defaultPageNum", defaultPageNum);
         mav.setViewName("/game/gameList");

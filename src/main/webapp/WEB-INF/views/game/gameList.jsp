@@ -59,8 +59,8 @@
         <div>
           <div>　</div>
           <button id="selectAllGame" name="selectAllGame">전체 경기</button>
-          <button id="selectIMakeGame" name="selectIMakeGame" value="${uID}">내가 만든 경기</button>
-          <button id="selectIPartiGame" name="selectIPartiGame" value="${uID}">내가 참여 중인 경기</button>
+          <button id="selectIMakeGame" name="selectIMakeGame" value="${uID}">내가 만든 경기</a>
+          <button id="selectIPartiGame" name="selectIPartiGame" value="${uID}">내가 참여 중인 경기</a>
         </div>
       </div>
       <div class="gameList-content" id="gameList-content">
