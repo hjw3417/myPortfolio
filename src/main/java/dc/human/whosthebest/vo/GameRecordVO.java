@@ -13,14 +13,47 @@ public class GameRecordVO {
     private String updatedID;		//UPDATED_ID(업데이트 ID/DB에서 생성)
     private String updatedDate;		//UPDATED_DATE(업데이트 날짜/DB에서 생성)
 
-    private int totalMatchCount;
-//    //homeGoal과 awayGoal의 차
-//    private int isWinner(int homeGoal, int awayGoal) {
-//        int isWinnerResult = homeGoal - awayGoal;
-//    }
+
+    private int totalCount;
+    private int winCount;
+    private int loseCount;
+    private int drawCount;
+
 
 
     public GameRecordVO() {}
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public int getWinCount() {
+        return winCount;
+    }
+
+    public void setWinCount(int winCount) {
+        this.winCount = winCount;
+    }
+
+    public int getLoseCount() {
+        return loseCount;
+    }
+
+    public void setLoseCount(int loseCount) {
+        this.loseCount = loseCount;
+    }
+
+    public int getDrawCount() {
+        return drawCount;
+    }
+
+    public void setDrawCount(int drawCount) {
+        this.drawCount = drawCount;
+    }
 
     public int getgID() {
         return gID;
@@ -100,13 +133,5 @@ public class GameRecordVO {
 
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
-    }
-
-    public int getTotalMatchCount() {
-        return totalMatchCount;
-    }
-
-    public void setTotalMatchCount(int totalMatchCount) {
-        this.totalMatchCount = totalMatchCount;
     }
 }

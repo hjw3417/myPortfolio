@@ -70,12 +70,14 @@
         <div>
           <span>전체 전적&emsp;</span>
           <span></span>
-          <span>${gameRecordVO.totalMatchCount}&nbsp;</span>
+          <span>${gameRecordVO.totalCount}&nbsp;</span>
           <span>전&emsp;</span>
-          <span>몇&nbsp;</span>
+          <span>${gameRecordVO.winCount}&nbsp;</span>
           <span>승&emsp;</span>
-          <span>몇&nbsp;</span>
-          <span>패</span>
+          <span>${gameRecordVO.loseCount}&nbsp;</span>
+          <span>패&emsp;</span>
+          <span>${gameRecordVO.drawCount}&nbsp;</span>
+          <span>무</span>
           <span></span>
         </div>
         <div>

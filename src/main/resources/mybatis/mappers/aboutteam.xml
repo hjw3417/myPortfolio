@@ -48,6 +48,23 @@
         <result property="sAddr" column="S_ADDR"/>
     </resultMap>
 
+    <resultMap id="GameRecordResultMap" type="GameRecordVO">
+        <id property="gID" column="G_ID"/>
+        <result property="tHomeID" column="T_HOMEID"/>
+        <result property="tAwayID" column="T_AWAYID"/>
+        <result property="homeGoal" column="HOME_GOAL"/>
+        <result property="awayGoal" column="AWAY_GOAL"/>
+        <result property="uID" column="U_ID"/>
+        <result property="createdID" column="CREATED_ID"/>
+        <result property="createdDate" column="CREATED_DATE"/>
+        <result property="updatedID" column="UPDATED_ID"/>
+        <result property="updatedDate" column="UPDATED_DATE"/>
+        <result property="totalCount" column="totalCount"/>
+        <result property="winCount" column="winCount"/>
+        <result property="loseCount" column="loseCount"/>
+        <result property="drawCount" column="drawCount"/>
+    </resultMap>
+
 
     <select id="selectGameSchedule" parameterType="int" resultMap="gameListResultMap">
         SELECT g_id, G_TEAMID, G_TITLE, G_TAG, G_CREATEDATE, G_TIME, G_MINMEMBER, G_RESDATE, G_STATUS,
@@ -71,14 +88,32 @@
         )
         WHERE rn BETWEEN 1 AND 5
     </select>
-    <select id="getTotalMatchCount" parameterType="int">
-        SELECT COUNT(*)
-        FROM g_result
-        WHERE T_HOMEID = #{tID} OR T_AWAYID = #{tID}
+    <select id="getMatchCount" parameterType="int" resultMap="GameRecordResultMap">
+        <![CDATA[
+        SELECT
+            SUM(CASE
+                    WHEN (T_HOMEID = #{tID} AND (HOME_GOAL - AWAY_GOAL) > 0) OR
+                        (T_AWAYID = #{tID} AND (AWAY_GOAL - HOME_GOAL) > 0) THEN 1
+                    ELSE 0
+                END) AS winCount,
+            SUM(CASE
+                    WHEN (T_HOMEID = #{tID} AND (HOME_GOAL - AWAY_GOAL) = 0) OR
+                        (T_AWAYID = #{tID} AND (AWAY_GOAL - HOME_GOAL) = 0) THEN 1
+                    ELSE 0
+                END) AS drawCount,
+            SUM(CASE
+                    WHEN (T_HOMEID = #{tID} AND (HOME_GOAL - AWAY_GOAL) < 0) OR
+                        (T_AWAYID = #{tID} AND (AWAY_GOAL - HOME_GOAL) < 0) THEN 1
+                    ELSE 0
+                END) AS loseCount,
+            COUNT(*) AS totalCount
+        FROM
+            G_RESULT
+        WHERE
+            T_HOMEID = #{tID} OR T_AWAYID = #{tID}
+        ]]>
     </select>
-    <select id="selectGResultInfo" parameterType="int" resultMap="GameRecord">
-        SELECT COUNT(*)
-        FROM g_result
-        WHERE T_HOMEID = #{tID} OR T_AWAYID = #{tID}
-    </select>
+<!--    <select id="selectGResultInfo" parameterType="int" resultMap="GameRecordResultMap">-->
+
+<!--    </select>-->
 </mapper>

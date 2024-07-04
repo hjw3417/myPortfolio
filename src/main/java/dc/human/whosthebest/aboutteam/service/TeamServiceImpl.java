@@ -25,8 +25,7 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public GameRecordVO selectGaameRecordInfo(int tID) throws Exception {
         GameRecordVO gameRecordVO = new GameRecordVO();
-        int getTotalMatchCountResult = teamDAO.getTotalMatchCount(tID);
-        gameRecordVO.setTotalMatchCount(getTotalMatchCountResult);
+        gameRecordVO = teamDAO.getMatchCount(tID);
         return gameRecordVO;
     }
 }
