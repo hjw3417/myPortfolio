@@ -20,29 +20,32 @@ public class MyPageServiceImpl implements MyPageService{
 
     //마이페이지 메인
     @Override
-    public List getUserinfo(String uID) throws Exception{
-        return myPageDAO.selectMyPageInfo(uID);
+    public List getUserinfo() throws Exception{
+        return myPageDAO.selectMyPageInfo();
 
     }
 
     @Override
-    public List<RecentGameVO> getRecentGame(String uID) throws Exception{
-        return myPageDAO.selectRecentGame(uID);
+    public List<RecentGameVO> getRecentGame() throws Exception{
+        return myPageDAO.selectRecentGame();
     }
 
     //마이페이지 - 회원정보수정 전 비밀번호 확인
 /*    public  int checkPwRight(String uID, String uPW) throws  Exception{
         return myPageDAO.selectCheckPW(uID,uPW);
     }*/
-
+    @Override
     public List<UserInfoVO> loadUserInfo() throws Exception{
         return myPageDAO.selectAllMyInfo();
     }
 
+    @Override
     public void updateInfo(String uID, String uName, String uBday,
                         String uAddr1, String uAddr2, String uEmail,
-                        String uPhone) throws Exception{
-         myPageDAO.updateInfo(uID,uName,uBday,uAddr1,uAddr2, uEmail, uPhone);
+                        String uPhone) throws Exception {
+        myPageDAO.updateInfo(uID, uName, uBday, uAddr1, uAddr2, uEmail, uPhone);
     }
+
+
 
 }

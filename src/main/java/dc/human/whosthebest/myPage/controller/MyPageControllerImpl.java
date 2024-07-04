@@ -29,12 +29,11 @@ public class MyPageControllerImpl implements  MyPageController {
     @RequestMapping(value = "/myPage", method = RequestMethod.GET)
     public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        HttpSession session = request.getSession();
-        String uID = (String) session.getAttribute("loginId");
+//        HttpSession session = request.getSession();
+//        String uID = (String) session.getAttribute("loginId");
 
-        System.out.println("세션에 넣음" + uID);
-        List<MyPageInfoVO> myPageInfo = myPageService.getUserinfo(uID);
-        List<RecentGameVO> recentGame = myPageService.getRecentGame(uID);
+        List<MyPageInfoVO> myPageInfo = myPageService.getUserinfo();
+        List<RecentGameVO> recentGame = myPageService.getRecentGame();
         ModelAndView mav = new ModelAndView("/myPage/myPage");
         mav.addObject("myPageInfo", myPageInfo);
         mav.addObject("recentGame", recentGame);
@@ -42,47 +41,21 @@ public class MyPageControllerImpl implements  MyPageController {
     }
 
     //마이페이지 - 내가 참여한 경기결과
+    @Override
+    @RequestMapping(value = "/myPage/myGameRecord")
+    public ModelAndView myGameRecord(HttpServletRequest request,
+                                     HttpServletResponse response) throws Exception{
+        List<RecentGameVO> myGameRecord = myPageService.getRecentGame();
+        ModelAndView mav = new ModelAndView("/myPage/myGameRecord");
+        mav.addObject("recentGame", myGameRecord);
+        return  mav;
+    }
 
 
   /*  마이페이지 - 회원정보수정 전 비밀번호 확인 */
- /* @Override
-  @RequestMapping(value = "/myPage/updatePwCheck" ,method = RequestMethod.GET )
-  public ModelAndView checkPW( @RequestParam(value = "id", defaultValue = "hong") String uID,
-                              @RequestParam("pw") String uPW,
-                              HttpServletRequest request,
-                              HttpServletResponse response) throws  Exception{
-
-       uID = "hong";
-
-      ModelAndView mav = new ModelAndView();
-
-      mav.setViewName("myPage/updatePwCheck");
-
-      try{
-          String msg = "";
-          String viewName = "";
-          int userCount = myPageService.checkPwRight(uID, uPW);
-
-          if (userCount > 0) {
-              viewName = "myPage/updateMyInfo";
-
-          } else {
-              msg = "일치하는 회원 정보가 없습니다";
-              viewName = "myPage/updatePwCheck";
-          }
-
-          mav.addObject("errorMsg",msg);
-
-          mav.setViewName(viewName);
-          mav.addObject("userID", uID);
-
-      } catch (Exception ex) {
-          System.out.println(ex.getMessage());
-      }
-      return mav;
-  }*/
-
-
+ 
+    
+    /*마이페이지  - 회원정보수정*/
     @Override
     @RequestMapping(value = "/myPage/updateMyInfo" ,method=RequestMethod.GET)
     public  ModelAndView loadInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{

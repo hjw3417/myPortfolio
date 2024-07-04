@@ -111,7 +111,7 @@
                  <th width="70"> 경기 결과</td>
             </tr>
 
-           <c:forEach items="${recentGame}" var="recent">
+           <c:forEach items="${recentGame}" var="recent" end="3">
              <tr>
                   <td width="110" height="50"> ${recent.gResDate}   </td>
                   <td width="190"> ${recent.myTeam} </td>

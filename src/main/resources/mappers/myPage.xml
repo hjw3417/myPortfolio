@@ -81,7 +81,6 @@
                 INNER JOIN SQUAD sq
                 on sq.t_id = r.t_homeid
              where sq.u_id = 'hong'
-                   and rownum <=4
              order by g.g_resdate desc
         ]]>
     </select>

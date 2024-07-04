@@ -11,8 +11,8 @@ import java.util.List;
 @Repository("myPageDAO")
 public interface MyPageDAO {
 
-   public List selectMyPageInfo(String uID) throws DataAccessException;
-   public List selectRecentGame(String uID) throws  DataAccessException;
+   public List selectMyPageInfo() throws DataAccessException;
+   public List selectRecentGame() throws  DataAccessException;
    //public int selectCheckPW(String uID, String uPW) throws  DataAccessException;
 
    public List selectAllMyInfo() throws DataAccessException;
@@ -20,4 +20,6 @@ public interface MyPageDAO {
    public void updateInfo(String uID, String uName, String uBday,
                           String uAddr1, String uAddr2, String uEmail,
                           String uPhone) throws DataAccessException;
-}
+
+
+ }
