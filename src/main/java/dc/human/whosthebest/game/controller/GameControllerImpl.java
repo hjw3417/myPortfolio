@@ -256,7 +256,13 @@ public class GameControllerImpl implements GameController {
         mav.setViewName("/game/gameInfo");
         return mav;
     }
-
+    @Override
+    @PostMapping(value="/delGame.do")
+    public ModelAndView deleteGame(@RequestParam(value="gID") int gID) throws Exception {
+        ModelAndView mav = new ModelAndView("redirect:/game/gameList.do");
+        gameService.deleteGame(gID);
+        return mav;
+    }
     @Override
     @PostMapping(value="/comment/gameInfo.do")
     @ResponseBody

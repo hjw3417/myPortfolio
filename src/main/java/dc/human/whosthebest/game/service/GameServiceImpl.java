@@ -311,4 +311,9 @@ public class GameServiceImpl implements  GameService {
         List<StadiumVO> stadiumVO = gameDAO.selectStadiumInfo(sRegion, search);
         return stadiumVO;
     }
+    @Override
+    public int deleteGame(int gID) throws Exception {
+        int deleteGameResult =  gameDAO.deleteGame(gID);
+        return deleteGameResult;
+    }
 }

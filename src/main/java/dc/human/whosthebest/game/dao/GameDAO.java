@@ -78,4 +78,5 @@ public interface GameDAO {
     public List<StadiumVO> selectStadiumInfo(@Param("sRegion") String sRegion,
                                              @Param("search") String search
                                              ) throws DataAccessException;
+    public int deleteGame(int gID) throws DataAccessException;
 }

@@ -315,10 +315,20 @@ main{
 
 
 .gameInfo-content {
-  display: bolck;
   width: 900px;
   height: 1050px;
   margin: 0 auto;
+  >.modGameContainer {
+    display: flex;
+    justify-content: flex-end;
+    >form {
+      input {
+        font-family: 'GmarketSansMedium';
+        background-color: inherit;
+        border: 0pt;
+      }
+    }
+  }
   >.titeContainer {
     display: flex;
     width: 600;

@@ -341,5 +341,9 @@
 			AND S_REGION||S_NAME||S_OWNER LIKE '%' || #{search} || '%'
 		</if>
 	</select>
+	<delete id="deleteGame" parameterType="int">
+		DELETE FROM GAME
+		WHERE G_ID = #{gID}
+	</delete>
 
 </mapper>

@@ -618,6 +618,11 @@ $(document).ready(function() {
             insertAwayTeamSquadAjax(gID, gTeamID);
         });
 
+    $('#delGameForm').on('submit', function(event) {
+        if (!confirm('정말로 경기방을 삭제하시겠습니까?')) {
+            event.preventDefault(); // 폼 제출 중단
+        }
+    });
 });
 //gameInfo.do 관련 js 끝
 

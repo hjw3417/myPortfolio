@@ -83,4 +83,5 @@ public interface GameController {
     public List<StadiumVO> searchStadiumInfo(@RequestParam(value="sRegion", required = false) String sRegion,
                                              @RequestParam(value="search", required = false) String search
                                               ) throws Exception;
+    public ModelAndView deleteGame(@RequestParam(value="gID") int gID) throws Exception;
 }
