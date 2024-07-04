@@ -25,7 +25,8 @@ public interface GameService {
                                            int rowNum,
                                            String sRegion,
                                            String search,
-                                           String uID
+                                           String IMakeGameuID,
+                                           String IPartiGameuID
                                            ) throws Exception;
     public GameInfoVO selectGameInfo(int gID, String uID) throws Exception;
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception;

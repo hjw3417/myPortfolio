@@ -45,7 +45,8 @@ public interface GameController {
                                            @RequestParam(value = "rowNum", required = false, defaultValue = "0") int rowNum,
                                            @RequestParam(value = "sRegion", required = false) String sRegion,
                                            @RequestParam(value = "search", required = false) String search,
-                                           @RequestParam(value = "uID", required = false) String uID
+                                           @RequestParam(value = "IMakeGameuID", required = false) String IMakeGameuID,
+                                           @RequestParam(value = "IPartiGameuID", required = false) String IPartiGameuID
                                           ) throws Exception;
     public ModelAndView selectGameInfo(@RequestParam("gID") int gID) throws Exception;
     public List<GCommentVO> insertComments(@ModelAttribute("gCommentVO") GCommentVO gCommentVO)  throws Exception;

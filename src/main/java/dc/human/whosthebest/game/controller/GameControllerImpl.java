@@ -41,7 +41,7 @@ public class GameControllerImpl implements GameController {
     @RequestMapping(value = "/gameMake.do", method = RequestMethod.GET)
     public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
-        session.setAttribute("uID", "heo");
+        session.setAttribute("uID", "MOON");
         String uID = (String) session.getAttribute("uID");
         List<TeamInfoVO> teamNameList = gameService.loadMyTeam(uID);
         // 리스트의 첫 번째 값의 tID 출력
@@ -155,8 +155,8 @@ public class GameControllerImpl implements GameController {
         System.out.println("controller tID : " + gTeamID);
         int gTeamIDInt = Integer.parseInt(gTeamID);
         gameVO.setgTeamID(gTeamIDInt);
-        gameVO.settUserID("heo");
-        gameVO.setCreatedID("heo");
+        gameVO.settUserID("MOON");
+        gameVO.setCreatedID("MOON");
         gameVO.setgTitle(gTitle);
         gameVO.setgTag(gTag);
         gameVO.setgMinMember(gMinMember);
@@ -185,11 +185,12 @@ public class GameControllerImpl implements GameController {
     public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int defaultPageNum = 1;
         int defaultRowNum = 0;
-        String uID = null;
+        String IMakeGameuID = null;
+        String IPartiGameuID = null;
         String sRegion = request.getParameter("sRegion");
         String search = request.getParameter("search");
         List<GameListVO> gameList = null;
-        gameList = gameService.selectGameList(defaultPageNum, defaultRowNum, sRegion, search, uID);
+        gameList = gameService.selectGameList(defaultPageNum, defaultRowNum, sRegion, search, IMakeGameuID, IPartiGameuID);
         // 리스트의 첫 번째 값 가져오기
         if (!gameList.isEmpty()) {
             System.out.println("controller gameList 0 번째 gID : " + gameList.get(0).getgID());
@@ -199,7 +200,7 @@ public class GameControllerImpl implements GameController {
             System.out.println("controller 리스트가 비어 있습니다.");
         }
         ModelAndView mav = new ModelAndView();
-        mav.addObject("uID", "heo");
+        mav.addObject("uID", "hong");
         mav.addObject("gameList", gameList);
         mav.addObject("defaultPageNum", defaultPageNum);
         mav.setViewName("/game/gameList");
@@ -213,13 +214,13 @@ public class GameControllerImpl implements GameController {
                                            @RequestParam(value = "rowNum", required = false, defaultValue = "0") int rowNum,
                                            @RequestParam(value = "sRegion", required = false) String sRegion,
                                            @RequestParam(value = "search", required = false) String search,
-                                           @RequestParam(value = "uID", required = false) String uID
-                                           ) throws Exception {
+                                           @RequestParam(value = "IMakeGameuID", required = false) String IMakeGameuID,
+                                           @RequestParam(value = "IPartiGameuID", required = false) String IPartiGameuID
+                                            ) throws Exception{
         List<GameListVO> gameList = null;
-        String validID = "heo";
         System.out.println("RESTfull controller parameter pageNum : " + pageNum);
         System.out.println("RESTfull controller parameter rowNum : " + rowNum);
-        gameList = gameService.selectGameList(pageNum, rowNum, sRegion, search, uID);
+        gameList = gameService.selectGameList(pageNum, rowNum, sRegion, search, IMakeGameuID, IPartiGameuID);
 
         // 리스트의 첫 번째 값 가져오기
         if (!gameList.isEmpty()) {

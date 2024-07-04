@@ -62,7 +62,8 @@ public interface GameDAO {
                                            @Param("rowNum") int rowNum,
                                            @Param("sRegion") String sRegion,
                                            @Param("search") String search,
-                                           @Param("uID") String uID
+                                           @Param("IMakeGameuID") String IMakeGameuID,
+                                           @Param("IPartiGameuID") String IPartiGameuID
                                            ) throws DataAccessException;
     public GameInfoVO selectGameInfo(int gID) throws DataAccessException;
     public  List<GameMemberListVO> selectGameTMemmber(SquadVO squadVO) throws DataAccessException;

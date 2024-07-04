@@ -245,7 +245,7 @@ $(document).ready(function() {
 //gameList.do 관련 js 시작
 $(document).ready(function() {
     //game 조회 ajax 모듈
-    function selectGameAjax(rowNum, pageNum, sRegion, search, uID) {
+    function selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID) {
         $.ajax({
             url: '/game/filter/gameList.do',   //요청할 url 설정
             type: 'POST',               //요청 방식 POST로 설정
@@ -254,7 +254,8 @@ $(document).ready(function() {
                 pageNum: pageNum,
                 sRegion: sRegion,
                 search: search,
-                uID: uID,
+                IMakeGameuID: IMakeGameuID,
+                IPartiGameuID: IPartiGameuID,
                 responseType: 'json' // 응답 형식을 JSON으로 설정
             },
             success: function(response) {
@@ -371,8 +372,9 @@ $(document).ready(function() {
         var pageNum = $(event.originalEvent?.submitter).val();
         var sRegion = null;
         var search = null;
-        var uID = null;
-        selectGameAjax(rowNum, pageNum, sRegion, search, uID);
+        var IMakeGameuID = null;
+        var IPartiGameuID = null;
+        selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
     //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
     //side바 필터링 기능
@@ -382,8 +384,9 @@ $(document).ready(function() {
         var pageNum = 1;
         var sRegion = null;
         var search = null;
-        var uID = null;
-        selectGameAjax(rowNum, pageNum, sRegion, search, uID);
+        var IMakeGameuID = null;
+        var IPartiGameuID = null;
+        selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
     $('#selectIMakeGame').on('click', function(event) {
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
@@ -391,8 +394,19 @@ $(document).ready(function() {
         var pageNum = 1;
         var sRegion = null;
         var search = null;
-        var uID = $("#selectIMakeGame").val();
-        selectGameAjax(rowNum, pageNum, sRegion, search, uID);
+        var IMakeGameuID = $("#selectIMakeGame").val();
+        var IPartiGameuID = null;
+        selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
+    });
+    $('#selectIPartiGame').on('click', function(event) {
+        event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+        var rowNum = 0;
+        var pageNum = 1;
+        var sRegion = null;
+        var search = null;
+        var IMakeGameuID = null;
+        var IPartiGameuID = $("#selectIPartiGame").val();
+        selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
     //side바 필터링 기능
     //검색 기능
@@ -618,6 +632,7 @@ function changeButtons(clickedButtonId, otherButtonId) {
         $otherButton.removeClass("teamName").addClass("looser").text("패");
     }
 }
+
 //gameResult.do 관련 js 시작
 $(document).ready(function() {
     $('#homeTeamScore').on('input', function() {
