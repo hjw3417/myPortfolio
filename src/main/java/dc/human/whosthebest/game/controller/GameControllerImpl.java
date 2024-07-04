@@ -332,9 +332,7 @@ public class GameControllerImpl implements GameController {
         squadVO.setuID("baba");
         squadVO.setCreatedID("baba");
 
-        if(tAwayID != 0) {
-            gameAwayTeamInfoVO = gameService.insertawayTeamMembr(squadVO);
-        }
+        gameAwayTeamInfoVO = gameService.insertawayTeamMembr(squadVO);
         return gameAwayTeamInfoVO;
     }
 

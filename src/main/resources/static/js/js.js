@@ -578,11 +578,15 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 var awayTeamName = response.awayTeamName;
+                var checkDuplicateSquadResult = response.checkDuplicateSquadResult;
+                var isAwayTeamExist = response.isAwayTeamExist;
                 var awayTeamMemberList = response.awayTeamMemberList;
                 var nowPartiMemberNum = response.nowPartiMemberNum;
                 var html = '';
-                if(awayTeamName == null) {
-                    alert("이미 참가하였습니다.")
+                if(isAwayTeamExist == false || awayTeamName == null) {
+                    alert("팀장의 가입 이후 참여가 가능합니다.")
+                } else if(checkDuplicateSquadResult == false) {
+                    alert("이미 참여하셨습니다.")
                 } else {
                     alert(awayTeamMemberList[0].uID)
                     $("#awayTeamName").html(awayTeamName);

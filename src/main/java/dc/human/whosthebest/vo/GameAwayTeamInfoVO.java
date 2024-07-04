@@ -8,8 +8,17 @@ public class GameAwayTeamInfoVO {
     private int tAwayID;
     private int nowPartiMemberNum;
     private boolean checkDuplicateSquadResult;//nowPartiMemberNum
+    private boolean isAwayTeamExist;
 
     public GameAwayTeamInfoVO() {
+    }
+
+    public boolean getIsAwayTeamExist() {
+        return isAwayTeamExist;
+    }
+
+    public void setIsAwayTeamExist(boolean isAwayTeamExist) {
+        this.isAwayTeamExist = isAwayTeamExist;
     }
 
     public int gettAwayID() {

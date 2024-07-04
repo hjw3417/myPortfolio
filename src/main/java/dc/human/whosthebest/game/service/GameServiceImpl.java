@@ -210,6 +210,7 @@ public class GameServiceImpl implements  GameService {
 
         if(checkAwayTeamExistResult >= 1) {
             checkDuplicateSquadResult = gameDAO.checkDuplicateSquad(squadVO);
+            gameAwayTeamInfoVO.setIsAwayTeamExist(true);
             if(checkDuplicateSquadResult < 1) {
                 insertSquad = gameDAO.insertSquad(squadVO);
                 System.out.println("insertSquad : " + insertSquad);
@@ -245,19 +246,26 @@ public class GameServiceImpl implements  GameService {
         System.out.println(squadVO.gettID());
 
         int checkAwayTeamExistResult = gameDAO.checkAwayTeamExist(gameVO);
+        System.out.println("checkAwayTeamExistResult : " + checkAwayTeamExistResult);
         if(checkAwayTeamExistResult >= 1) {
+            gameAwayTeamInfoVO.setIsAwayTeamExist(true);
+            awayTeamName = gameDAO.selectAwayTeamName(squadVO.gettID());
+            System.out.println("service awayTeamName : " + awayTeamName);
+            awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
+            System.out.println("service awayTeamMember.get(0).getuName() : " + awayTeamMember.get(0).getuName());
             checkDuplicateSquadResult = gameDAO.checkDuplicateSquad(squadVO);
             if(checkDuplicateSquadResult < 1) {
                 insertSquad = gameDAO.insertSquad(squadVO);
                 System.out.println("insertSquad : " + insertSquad);
+                gameAwayTeamInfoVO.setCheckDuplicateSquadResult(true);
+            } else {
+                gameAwayTeamInfoVO.setCheckDuplicateSquadResult(false);
             }
-            return gameAwayTeamInfoVO;
+        } else {
+            gameAwayTeamInfoVO.setIsAwayTeamExist(false);
         }
 
-        awayTeamName = gameDAO.selectAwayTeamName(squadVO.gettID());
-        System.out.println("service awayTeamName : " + awayTeamName);
-        awayTeamMember = gameDAO.selectGameTMemmber(squadVO);
-        System.out.println("service awayTeamMember.get(0).getuName() : " + awayTeamMember.get(0).getuName());
+
         if(awayTeamName != null) {
             gameAwayTeamInfoVO.setAwayTeamName(awayTeamName);
         }
