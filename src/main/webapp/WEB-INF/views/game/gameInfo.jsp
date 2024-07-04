@@ -55,7 +55,7 @@
       <div class="gameInfo-content">
         <!-- 경기 생성자만 보이는 수정/삭제 영역 시작-->
         <div class="modGameContainer">
-            <form>
+            <form id="goTomodPageForm" method="post" action="/game/goToModPage.do">
               <input type="hidden" name="gID" value="${gameInfoVO.gID}"/>
               <input type="submit" id="modGame" value="경기방 수정">
             </form>

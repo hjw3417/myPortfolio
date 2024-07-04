@@ -312,8 +312,19 @@ public class GameServiceImpl implements  GameService {
         return stadiumVO;
     }
     @Override
+    public GameVO selectForModGame(int gID) throws Exception {
+        GameVO selectForModGameResult = gameDAO.selectForModGame(gID);
+        return selectForModGameResult;
+    }
+    @Override
     public int deleteGame(int gID) throws Exception {
         int deleteGameResult =  gameDAO.deleteGame(gID);
         return deleteGameResult;
+    }
+
+    @Override
+    public int modGame(GameVO gameVO) throws  Exception {
+        int modGameResult = gameDAO.modGame(gameVO);
+        return modGameResult;
     }
 }

@@ -77,15 +77,10 @@ $(document).ready(function() {
             }
         });
     });
-});
-//resStadium.do 관련 js 코드 끝
-
-//gameList.do 관련 js 코드 시작
-$(document).ready(function() {
-    //resStadium.do popup창 클로즈
-    function closeWindow() {
-             window.close();
-         }
+        //resStadium.do popup창 클로즈
+        function closeWindow() {
+                 window.close();
+             }
     $('#stadiumResConForm').submit(function(event) {
         alert("전송 on")
         event.preventDefault();
@@ -107,10 +102,6 @@ $(document).ready(function() {
               'Start Time: ' + sResSTime + '\n' +
               'End Time: ' + sResETime + '\n' +
               'Reservation Number: ' + sResNum);
-        // null 또는 빈 문자열인지 확인하는 함수
-        function isEmpty(value) {
-            return value === null || value.trim() === '';
-        }
 
         // 값이 null인지 또는 빈 문자열인지 확인
         if (isEmpty(sID) || isEmpty(sName) || isEmpty(sAddr) || isEmpty(sResSTime) || isEmpty(sResETime) || isEmpty(sResNum)) {
@@ -152,7 +143,12 @@ $(document).ready(function() {
         window.close();
     });
 });
-//gameList.do 관련 js 코드 끝
+//resStadium.do 관련 js 코드 끝
+
+// null 또는 빈 문자열인지 확인하는 함수
+function isEmpty(value) {
+return value === null || value.trim() === '';
+}
 
 //gameMake.do에서 데이터 받는 메소드
 function receiveData(stadiumResConFormDate) {
@@ -210,8 +206,38 @@ $(document).ready(function() {
         openResStadium(contextPath);
     });
 
-    // 폼 제출 시 입력값 검증
+    // gameMakeForm 제출 시 입력값 검증
     $('#gameMakeForm').on('submit', function(event) {
+        var formDataArray = $(this).serializeArray();
+        var formData = {};
+        $.each(formDataArray, function(_, field) {
+            formData[field.name] = field.value;
+        });
+
+        // 유효성 검사 함수 호출
+        if (!validateForm(formData)) {
+            alert('입력되지 않은 사항이 있습니다.');
+            event.preventDefault(); // form 제출 중지
+            return;
+        }
+
+        // 특정 name 값을 가진 요소 찾기
+        var gMinMemberField = formDataArray.find(function(field) {
+            return field.name === 'gMinMember';
+        });
+
+        // gMinMember 유효성 검사
+        if (gMinMemberField && (isNaN(Number(gMinMemberField.value)) ||
+         !Number.isInteger(Number(gMinMemberField.value)) ||
+          Number(gMinMemberField.value) < 0 ||
+          Number(gMinMemberField.value) > 99
+          )) {
+            alert('게임 인원 설정을 다시 해주세요.(최대 인원 99명)');
+            event.preventDefault(); // form 제출 중지
+        }
+    });
+    // modGameForm 제출 시 입력값 검증
+    $('#modGameForm').on('submit', function(event) {
         var formDataArray = $(this).serializeArray();
         var formData = {};
         $.each(formDataArray, function(_, field) {

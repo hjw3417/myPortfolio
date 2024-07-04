@@ -48,6 +48,8 @@
 		<result property="tAwayID" column="T_AWAYID"/>
 		<result property="sID" column="S_ID"/>
 		<result property="sNum" column="S_NUM"/>
+		<result property="sName" column="S_NAME"/>
+		<result property="sAddr" column="S_ADDR"/>
 	</resultMap>
 
 	<!-- gameList resultMap -->
@@ -162,7 +164,8 @@
 		G_RESDATE,
 		T_USERID,
 		S_ID,
-		S_NUM
+		S_NUM,
+		CREATED_ID
 		) VALUES (
 		#{gTeamID},
 		#{gTitle},
@@ -173,7 +176,8 @@
 		#{gResDate},
 		#{tUserID},
 		#{sID},
-		#{sNum}
+		#{sNum},
+		#{createdID}
 		)
 		<!-- 시퀀스를 통해 기본 키 값 가져오기 -->
 		<selectKey keyProperty="gID" resultType="int" order="AFTER">
@@ -316,7 +320,7 @@
 	</select>
 	<insert id="insertGameResult" parameterType="GResultVO">
 		INSERT INTO G_RESULT
-		(G_ID, T_HOMEID, T_AWAYID, HOME_GOAL, AWAY_GOAL, U_ID, UPDATED_ID)
+		(G_ID, T_HOMEID, T_AWAYID, HOME_GOAL, AWAY_GOAL, U_ID, CREATED_ID)
 		VALUES
 		(#{gID}, #{tHomeID}, #{tAwayID}, #{homeGoal}, #{awayGoal}, #{uID}, #{createdID})
 	</insert>
@@ -345,5 +349,43 @@
 		DELETE FROM GAME
 		WHERE G_ID = #{gID}
 	</delete>
+	<select id="selectForModGame" parameterType="int" resultMap="gameResultMap">
+		SELECT
+			g.G_ID,
+			g.G_TITLE,
+			g.G_TAG,
+			g.G_TIME,
+			g.G_INFO,
+			g.G_MINMEMBER,
+			g.T_USERID,
+			g.S_ID,
+			g.S_NUM,
+			g.G_RESDATE,
+			s.S_NAME,
+			s.S_ADDR,
+			g.G_TEAMID
+		FROM
+			GAME g
+		LEFT JOIN
+			STADIUM s ON g.S_ID = s.S_ID
+		WHERE g.G_ID = #{gID}
+	</select>
+	<update id="modGame" parameterType="GameVO">
+		UPDATE GAME
+		SET
+		G_TEAMID = #{gTeamID},
+		G_TITLE = #{gTitle},
+		G_TAG = #{gTag},
+		G_TIME = #{gTime},
+		G_INFO = #{gInfo},
+		G_MINMEMBER = #{gMinMember},
+		G_RESDATE = #{gResDate},
+		T_USERID = #{tUserID},
+		S_ID = #{sID},
+		S_NUM = #{sNum},
+		UPDATED_ID = #{updatedID}
+		WHERE
+		G_ID = #{gID}
+	</update>
 
 </mapper>

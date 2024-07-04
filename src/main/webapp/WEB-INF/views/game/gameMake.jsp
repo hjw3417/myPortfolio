@@ -22,12 +22,6 @@
       <!-- restStadium popup용 contextPath 변수 설정 -->
       var contextPath = '${pageContext.request.contextPath}';
       <!-- game/createGame.do 실패 시 알림-->
-      window.onload = function() {
-        var gameMakeresult = '${gameMakeresult}';
-        if(gameMakeresult < 0) {
-            alert("게임 생성에 실패했습니다.");
-        }
-      };
   </script>
   <title>경기 만들기</title>
 </head>
@@ -62,72 +56,164 @@
 <main>
   <div>　</div>
   <div class="gameMake-content">
-  <form id="gameMakeForm" method="post" action="/game/createGame.do">
+    <c:choose>
+        <c:when test="${not empty gameVO.sName}">
+            <form id="modGameForm" method="post" action="/game/modGame.do">
+            <input type="hidden" name="gID" value="${gameVO.gID}">
+        </c:when>
+        <c:otherwise>
+            <form id="gameMakeForm" method="post" action="/game/createGame.do">
+        </c:otherwise>
+    </c:choose>
     <table class="inputTable">
            <tr>
             <td colspan="3" style="background-color: white; border: 2pt solid rgb(184, 206, 146); height: 40px;">
-              <button id="hidden1">경기장 선택하기</button>
-              <input type="hidden" id="sID" class="sID" name="sID" />
-              <input type="hidden" id="sName" class="sName" name="sName" />
-              <button id="popupBtn"><span id="sNameText"></sapn></button>
-              </a>
+            <c:choose>
+                <c:when test="${gameVO.sID != 0}">
+                    <input type="hidden" id="sID" class="sID" name="sID" value="${gameVO.sID}" />
+                    <input type="hidden" id="sName" class="sName" name="sName" value="${gameVO.sName}" />
+                    <button id="popupBtn"><span id="sNameText">${gameVO.sName}</span></button>
+                </c:when>
+                <c:otherwise>
+                    <button id="hidden1">경기장 선택하기</button>
+                    <input type="hidden" id="sID" class="sID" name="sID" />
+                    <input type="hidden" id="sName" class="sName" name="sName" />
+                    <button id="popupBtn"><span id="sNameText"></span></button>
+                </c:otherwise>
+            </c:choose>
             </td>
           </tr>
           <tr>
             <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  font-size: 8pt; height: 30px;">
-              <span id="hidden2">선택 정보 없음</span>
-              <input type="hidden" id="gResDate" name="gResDate">
-              <span id="gResDateText"></span>
+                <c:choose>
+                    <c:when test="${not empty gameVO.gResDate}">
+                        <input type="hidden" id="gResDate" name="gResDate" value="${gameVO.gResDate}">
+                        <span id="gResDateText">${gameVO.gResDate}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <span id="hidden2">선택 정보 없음</span>
+                        <input type="hidden" id="gResDate" name="gResDate">
+                        <span id="gResDateText"></span>
+                    </c:otherwise>
+                </c:choose>
             </td>
             <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  font-size: 8pt;height: 30px;">
-              <span id="hidden3">선택 정보 없음</span>
-              <input type="hidden" id="sAddr" name="sAddr">
-              <span id="sAddrText"></span>
+              <c:choose>
+                  <c:when test="${not empty gameVO.sAddr}">
+                      <input type="hidden" id="sAddr" name="sAddr" value="${gameVO.sAddr}">
+                      <span id="sAddrText">${gameVO.sAddr}</span>
+                  </c:when>
+                  <c:otherwise>
+                      <span id="hidden3">선택 정보 없음</span>
+                      <input type="hidden" id="sAddr" name="sAddr">
+                      <span id="sAddrText"></span>
+                  </c:otherwise>
+              </c:choose>
             </td>
             </tr>
             <tr>
               <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  height: 30px;">
-                <span id="hidden4">선택 정보 없음</span>
-                <input type="hidden" id="gTime" name="gTime">
-                <span id="gTimeText"></span>
+              <c:choose>
+                  <c:when test="${gameVO.gTime != 0}">
+                      <input type="hidden" id="gTime" name="gTime" value="${gameVO.gTime}">
+                      <span id="gTimeText">${gameVO.gTime} 시간</span>
+                  </c:when>
+                  <c:otherwise>
+                      <span id="hidden4">선택 정보 없음</span>
+                      <input type="hidden" id="gTime" name="gTime">
+                      <span id="gTimeText"></span>
+                  </c:otherwise>
+              </c:choose>
               </td>
+
               <td style="background-color: white; border: 2pt solid rgb(184, 206, 146);  height: 30px;">
-                <span id="hidden5">선택 정보 없음</span>
-                <input type="hidden" id="sNum" name="sNum">
-                <span id="sNumText"></span>
+                  <c:choose>
+                      <c:when test="${gameVO.sNum != 0}">
+                          <input type="hidden" id="sNum" name="sNum" value="${gameVO.sNum}">
+                          <span id="sNumText">${gameVO.sNum} 경기장</span>
+                      </c:when>
+                      <c:otherwise>
+                        <span id="hidden5">선택 정보 없음</span>
+                        <input type="hidden" id="sNum" name="sNum">
+                        <span id="sNumText"></span>
+                      </c:otherwise>
+                  </c:choose>
               </td>
             </tr>
       <tr>
         <td colspan="4">
-          <select name="gTeamID" id="gTeamID">
-          <option selected>팀 선택하기</option>
-          <!-- game/gameMake.do 통해 team Table의 팀 명(t_name) 값 표시 -->
-          <c:forEach var="tName" items="${teamNameList}">
-            <option value="${tName.tID}">${tName.tName}</option>
-          </c:forEach>
-          </select>
-
+            <select name="gTeamID" id="gTeamID">
+                <c:choose>
+                    <c:when test="${gameVO.gTeamID != 0}">
+                        <c:forEach var="team" items="${teamNameList}">
+                            <c:choose>
+                                <c:when test="${team.tID eq gameVO.gTeamID}">
+                                    <option value="${team.tID}" selected>${team.tName}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${team.tID}">${team.tName}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="">팀 선택하기</option>
+                        <c:forEach var="team" items="${teamNameList}">
+                            <option value="${team.tID}">${team.tName}</option>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+            </select>
         </td>
       </tr>
       <tr>
         <td colspan="4">
-          <input type="text" name="gTitle" id="gTitle" placeholder="경기 제목을 입력하세요.">
+         <c:choose>
+             <c:when test="${not empty gameVO.gTitle}">
+                 <input type="text" name="gTitle" id="gTitle" placeholder="경기 제목을 입력하세요." value="${gameVO.gTitle}">
+             </c:when>
+             <c:otherwise>
+                 <input type="text" name="gTitle" id="gTitle" placeholder="경기 제목을 입력하세요." value="">
+             </c:otherwise>
+         </c:choose>
         </td>
       </tr>
       <tr>
         <td colspan="4">
-          <input type="text" name="gTag" id="gTag" placeholder="해시태그를 입력해주세요.(#로 구분)">
+          <c:choose>
+              <c:when test="${not empty gameVO.gTag}">
+                  <input type="text" name="gTag" id="gTag" placeholder="해시태그를 입력해주세요.(#로 구분)"
+                         value="${gameVO.gTag}">
+              </c:when>
+              <c:otherwise>
+                  <input type="text" name="gTag" id="gTag" placeholder="해시태그를 입력해주세요.(#로 구분)" value="">
+              </c:otherwise>
+          </c:choose>
         </td>
       </tr>
 
         <tr>
           <td colspan="4">
-            <input type="text" name="gMinMember" placeholder="참여 인원 설정하기">
+            <c:choose>
+                <c:when test="${gameVO.gMinMember != 0}">
+                    <input type="text" name="gMinMember" placeholder="참여 인원 설정하기" value="${gameVO.gMinMember}">
+                </c:when>
+                <c:otherwise>
+                    <input type="text" name="gMinMember" placeholder="참여 인원 설정하기" value="">
+                </c:otherwise>
+            </c:choose>
           </td>
         </tr>
         <tr>
           <td colspan="4"  style="height: 300px; margin: 0;">
-            <input type="textarea" id="gInfo" name="gInfo" placeholder="공지사항을 입력하기">
+            <c:choose>
+                <c:when test="${not empty gameVO.gInfo}">
+                    <textarea id="gInfo" name="gInfo" placeholder="공지사항을 입력하기">${gameVO.gInfo}</textarea>
+                </c:when>
+                <c:otherwise>
+                    <textarea id="gInfo" name="gInfo" placeholder="공지사항을 입력하기"></textarea>
+                </c:otherwise>
+            </c:choose>
           </td>
         </tr>
         <tr>
@@ -135,7 +221,7 @@
             <a href="#">저장</a>
           </td>
           <td style="background-color: rgb(146, 172, 101); height: 40px;">
-            <input class="gameMakeSubmit" type="submit" value="게임 만들기" />
+            <input class="gameMakeSubmit" type="submit" value="<c:choose><c:when test='${not empty gameVO.sName}'>수정하기</c:when><c:otherwise>게임 만들기</c:otherwise></c:choose>" />
           </td>
         </tr>
       </table>

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface GameController {
-    public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO) throws Exception;
 
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
@@ -84,4 +84,17 @@ public interface GameController {
                                              @RequestParam(value="search", required = false) String search
                                               ) throws Exception;
     public ModelAndView deleteGame(@RequestParam(value="gID") int gID) throws Exception;
+    public String goToModPage(@RequestParam(value="gID") int gID, RedirectAttributes redirectAttributes) throws Exception;
+    public String modGameResult(@RequestParam("gID") int gID,
+                                @RequestParam("gTeamID") String gTeamID,
+                                @RequestParam("gTitle") String gTitle,
+                                @RequestParam("gTag") String gTag,
+                                @RequestParam("gMinMember") int gMinMember,
+                                @RequestParam("gInfo") String gInfo,
+                                @RequestParam("sID") int sID,
+                                @RequestParam("sNum") int sNum,
+                                @RequestParam("gTime") int gTime,
+                                @RequestParam("gResDate") String gResDate,
+                                RedirectAttributes redirectAttributes
+                                ) throws Exception;
 }

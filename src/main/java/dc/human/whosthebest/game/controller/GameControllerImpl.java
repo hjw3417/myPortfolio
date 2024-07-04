@@ -14,6 +14,7 @@ import dc.human.whosthebest.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,22 +29,19 @@ public class GameControllerImpl implements GameController {
     @Autowired
     private GameService gameService;
 
-    /**
-     * 게임 생성 GET 요청을 처리합니다.
-     * 이 메서드는 사용자의 팀 정보를 가져와서 게임 생성 페이지를 표시합니다.
-     *
-     * @param request  클라이언트가 서블릿에 요청한 내용을 포함하는 HttpServletRequest 객체
-     * @param response 서블릿이 클라이언트에게 보내는 응답을 포함하는 HttpServletResponse 객체
-     * @return 뷰 이름과 모델 데이터를 포함하는 ModelAndView 객체
-     * @throws Exception 오류가 발생할 경우 예외를 던집니다
-     */
     @Override
     @RequestMapping(value = "/gameMake.do", method = RequestMethod.GET)
-    public ModelAndView gameMake(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession();
-        session.setAttribute("uID", "MOON");
-        String uID = (String) session.getAttribute("uID");
+    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO) throws Exception {
+        String uID = "heo";
+        System.out.println("gameVO.gettUserID() : " + gameVO.gettUserID());
+        System.out.println("gameVO.getgResDate() : " + gameVO.getgResDate());
+        System.out.println("goToModPage gameVO.getgTeamID() : " + gameVO.getgTeamID());
+        if(gameVO.gettUserID() != null) {
+            uID = gameVO.gettUserID();
+        }
+        System.out.println("after uID: " + uID);
         List<TeamInfoVO> teamNameList = gameService.loadMyTeam(uID);
+        System.out.println("gameMake gameVO.getgTag() : " + gameVO.getgTag());
         // 리스트의 첫 번째 값의 tID 출력
         if (!teamNameList.isEmpty()) {
             int firstTeamTID = teamNameList.get(0).gettID();
@@ -51,7 +49,10 @@ public class GameControllerImpl implements GameController {
         } else {
             System.out.println("팀 정보 리스트가 비어 있습니다.");
         }
+
+
         ModelAndView mav = new ModelAndView("/game/gameMake");
+        mav.addObject("gameVO", gameVO);
         mav.addObject("teamNameList", teamNameList);
         return mav;
     }
@@ -241,6 +242,7 @@ public class GameControllerImpl implements GameController {
         GameInfoVO gameInfoVO = new GameInfoVO();
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
         SquadVO squadVO = new SquadVO();
+        System.out.println("gameInfo.do gID : " + gID);
         gameInfoVO = gameService.selectGameInfo(gID, uID);
         if(gameInfoVO != null) {
             System.out.println("controller gameInfo.getSRegion: " + gameInfoVO.getsRegion());
@@ -426,5 +428,69 @@ public class GameControllerImpl implements GameController {
                                             ) throws Exception{
         List<StadiumVO> stadiumList = gameService.selectStadiumInfo(sRegion, search);
         return stadiumList;
+    }
+    @Override
+    @PostMapping(value="/goToModPage.do")
+    public String goToModPage(@RequestParam(value="gID") int gID, RedirectAttributes redirectAttributes) throws Exception {
+        GameVO gameVO = gameService.selectForModGame(gID);
+        redirectAttributes.addFlashAttribute("gameVO", gameVO);
+        System.out.println("goToModPage gameVO.getgTag() : " + gameVO.getgTag());
+        System.out.println("goToModPage gameVO.gettUserID() : " + gameVO.gettUserID());
+        System.out.println("goToModPage gameVO.getgTeamID() : " + gameVO.getgTeamID());
+        return "redirect:/game/gameMake.do";
+    }
+    @Override
+    @PostMapping("/modGame.do")
+    public String modGameResult(@RequestParam("gID") int gID,
+                                      @RequestParam("gTeamID") String gTeamID,
+                                      @RequestParam("gTitle") String gTitle,
+                                      @RequestParam("gTag") String gTag,
+                                      @RequestParam("gMinMember") int gMinMember,
+                                      @RequestParam("gInfo") String gInfo,
+                                      @RequestParam("sID") int sID,
+                                      @RequestParam("sNum") int sNum,
+                                      @RequestParam("gTime") int gTime,
+                                      @RequestParam("gResDate") String gResDate,
+                                      RedirectAttributes redirectAttributes
+                                      ) throws Exception {
+        GameVO gameVO = new GameVO();
+        System.out.println("controller tID : " + gTeamID);
+        int gTeamIDInt = Integer.parseInt(gTeamID);
+        gameVO.setgTeamID(gTeamIDInt);
+        System.out.println("gameVO.getgTeamID() : " + gameVO.getgTeamID());
+        gameVO.settUserID("heo");
+        System.out.println("gameVO.gettUserID() : " + gameVO.gettUserID());
+        gameVO.setUpdatedID("heo");
+        System.out.println("gameVO.getCreatedID() : " + gameVO.getCreatedID());
+        gameVO.setgTitle(gTitle);
+        System.out.println("gameVO.getgTitle() : " + gameVO.getgTitle());
+        gameVO.setgTag(gTag);
+        System.out.println("gameVO.getgTag() : " + gameVO.getgTag());
+        gameVO.setgMinMember(gMinMember);
+        System.out.println("gameVO.getgMinMember() : " + gameVO.getgMinMember());
+        gameVO.setgInfo(gInfo);
+        System.out.println("gameVO.getgInfo() : " + gameVO.getgInfo());
+        gameVO.setsID(sID);
+        System.out.println("gameVO.getsID() : " + gameVO.getsID());
+        gameVO.setsNum(sNum);
+        System.out.println("gameVO.getsNum() : " + gameVO.getsNum());
+        gameVO.setgTime(gTime);
+        System.out.println("gameVO.getgTime() : " + gameVO.getgTime());
+        gameVO.setgResDate(gResDate);
+        System.out.println("gameVO.getgResDate() : " + gameVO.getgResDate());
+        gameVO.setgID(gID);
+        System.out.println("controller 수정할 게임ID는 ? " + gID);
+        int gameMakeresult = gameService.modGame(gameVO);
+        if(gameMakeresult >= 1) {
+            System.out.println("modGame 성공");
+        }
+        System.out.println("controller gTeamIDINT : " + gameVO.getgTeamID());
+        String view = null;
+        if(gameMakeresult < 1) {
+            view = "redirect:/game/goToModPage.do";
+        } else {
+            view = "redirect:/game/gameInfo.do?gID=" + gID;
+        }
+        return view;
     }
 }

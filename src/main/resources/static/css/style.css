@@ -326,6 +326,7 @@ main{
         font-family: 'GmarketSansMedium';
         background-color: inherit;
         border: 0pt;
+        cursor: pointer;
       }
     }
   }
