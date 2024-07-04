@@ -11,5 +11,7 @@ public interface TeamService {
     public int insertTeamInfo(TeamInfoVO teamInfoVO) throws Exception;
     public int insertTeamMember(TeamMemberVO teamMemberVO) throws Exception;
     public int createTeamAndAddMember(TeamInfoVO teamInfo, String userID) throws Exception;
+    public List<TeamInfoVO> getTeamsByUserId(String userID) throws Exception;
+    public TeamInfoVO getTeamInfoById(int tID) throws Exception;
     public List ranking() throws Exception;
 }

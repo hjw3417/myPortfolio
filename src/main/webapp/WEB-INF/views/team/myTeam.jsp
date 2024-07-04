@@ -9,7 +9,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/maketeam.css">
-  <title>myteam</title>
+  <title>나의 팀</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      // 페이지 로드 시, 첫 번째 팀 정보 로드
+      var firstTeamID = ${myTeams[0].tID}; // 첫 번째 팀 ID를 가져옵니다.
+      loadTeamInfo(firstTeamID);
+
+      // Ajax로 특정 팀 정보 가져오기
+      function loadTeamInfo(tID) {
+        $.ajax({
+          url: "${contextPath}/api/teamInfo?tID=" + tID,
+          type: "GET",
+          dataType: "json",
+          success: function(team) {
+            var teamInfoHtml = '<h1>' + team.tName + '</h1>';
+            teamInfoHtml += '<p>지역: ' + team.tRegion + '</p>';
+            teamInfoHtml += '<p>팀장: ' + team.createdID + '</p>';
+            $('#teamInfo').html(teamInfoHtml);
+          },
+          error: function(xhr, status, error) {
+            console.error('Failed to retrieve team info:', error);
+          }
+        });
+      }
+      // 팀 이름 목록 클릭 시 AJAX 호출로 상세 정보 갱신
+            $('ul#teamNameList').on('click', 'li a', function(event) {
+              event.preventDefault();
+              var tID = $(this).data('tid'); // 클릭한 팀의 ID를 가져옵니다.
+              loadTeamInfo(tID); // 해당 팀의 정보를 로드합니다.
+            });
+    });
+  </script>
 </head>
 <body>
   <header>
@@ -45,16 +78,27 @@
         <div>
           <div>　</div>
           <div>나의 팀</div>
-          <ul>
-            <li><a href="${contextPath}/teamList">팀 목록</a></li>
-            <li><a href="#">나의 팀</a></li>
-            <li><a href="${contextPath}/teamMake">팀 만들기</a></li>
+          <!-- 팀 이름 목록을 출력합니다. -->
+          <ul id="teamNameList">
+            <c:forEach items="${myTeams}" var="team">
+              <li>
+                <a href="#" data-tid="${team.tID}">
+                  ${team.tName}
+                  <ul>
+                    <li><a href="${contextPath}/teamMembers?tID=${team.tID}">팀원 목록</a></li>
+                    <li><a href="${contextPath}/teamSchedule?tID=${team.tID}">팀 경기 일정</a></li>
+                    <li><a href="${contextPath}/teamRecord?tID=${team.tID}">전적</a></li>
+                    <li><a href="${contextPath}/teamBoard?tID=${team.tID}">팀 게시판</a></li>
+                  </ul>
+                </a>
+              </li>
+            </c:forEach>
           </ul>
         </div>
       </div>
       <div class="myteam">
         <section class="sec1">
-          <div class="teamprofile">
+          <div id="teamInfo" class="teamprofile">
             <div>
               <div>
                 <div>

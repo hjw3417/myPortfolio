@@ -33,9 +33,38 @@ public class TeamControllerImpl implements TeamController{
     //임시
     @Override
     @GetMapping("/myTeam")
-    public String myTeamPage() {
-        return "/team/myTeam";
+    public ModelAndView myTeamPage() {
+        ModelAndView mav = new ModelAndView("/team/myTeam");
+        String userID = "heo"; // 실제 사용자 ID 가져오는 로직으로 대체
+
+        try {
+            List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(userID);
+            mav.addObject("myTeams", myTeams);
+
+            if(myTeams != null && !myTeams.isEmpty()) {
+                TeamInfoVO firstTeamInfo = teamService.getTeamInfoById(myTeams.get(0).gettID());
+                mav.addObject("teamInfo", firstTeamInfo);
+            } else {
+                mav.addObject("teamInfo",null);
+            }
+        } catch (Exception e) {
+            mav.addObject("errorMsg", "팀 목록을 가져오는 도중 오류가 발생했습니다.");
+            e.printStackTrace();
+        }
+        return mav;
     }
+
+    //특정 팀의 상세 정보 반환
+    @GetMapping("/api/teamInfo")
+    @ResponseBody
+    public TeamInfoVO getTeamInfo(@RequestParam("tID") int tID) {
+        try {
+            return teamService.getTeamInfoById(tID);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    };
 
     //팀 만들기 insert
     //팀원 목록에 추가하는 것과 동시에 시행
@@ -93,7 +122,7 @@ public class TeamControllerImpl implements TeamController{
                 mav.addObject("errorMsg", "팀 가입 실패");
                 viewName = "team/teamList";
             } else {
-                viewName = "redirect:/temaList";
+                viewName = "redirect:/teamList";
                 //redirect 수정 핋요
             }
             mav.setViewName(viewName);

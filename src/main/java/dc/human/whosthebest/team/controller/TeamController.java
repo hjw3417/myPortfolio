@@ -13,7 +13,9 @@ public interface TeamController {
 
     public String teamMakePage();
 
-    public String myTeamPage();
+    public ModelAndView myTeamPage();
+
+    public TeamInfoVO getTeamInfo(@RequestParam("tID") int tID);
 
     public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception;
 

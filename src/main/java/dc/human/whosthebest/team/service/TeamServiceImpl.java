@@ -57,6 +57,16 @@ public class TeamServiceImpl implements TeamService {
     };
 
     @Override
+    public List<TeamInfoVO> getTeamsByUserId(String userID) throws Exception{
+        return teamDAO.selectTeamsByUserId(userID);
+    };
+
+    @Override
+    public TeamInfoVO getTeamInfoById(int tID) throws Exception {
+        return teamDAO.selectTeamInfoById(tID);
+    }
+
+    @Override
     public List ranking() throws Exception {
         List ranking = null;
         ranking = teamDAO.selectRanking();
