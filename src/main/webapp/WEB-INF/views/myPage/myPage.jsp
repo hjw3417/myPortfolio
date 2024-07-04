@@ -48,7 +48,7 @@
             <ul style="list-style-type: none;">
               <li> <a href="myPage.html"> 마이페이지 </a> </li>
               <li> <a href="myTeamGameRecord.html"> 경기 결과 </a> </li>
-              <li><a href="updateMyInfoPage.html">정보 수정 </a> </li>
+              <li><a href="/myPage/updatePwCheck">정보 수정 </a> </li>
             </ul>
         </div>
 
@@ -68,7 +68,7 @@
           <div class="infoTable">
             <table>
               <tbody>
-                <c:forEach items="${myPageInfo}" var="myInfo">
+                <c:forEach items="${myPageInfo}" var="myInfo" end="2">
                   <tr>
                     <td>소속팀</td>
                     <td>${myInfo.tName}</td> <!-- 소속팀 이름 -->

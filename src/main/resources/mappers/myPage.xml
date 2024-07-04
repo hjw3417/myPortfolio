@@ -23,6 +23,24 @@
         <result property="homeGoal"     column="home_goal" />
         <result property="awayGoal"     column="away_goal" />
     </resultMap>
+    
+    <!-- 마이페이지 - 회원정보수정 전 비밀번호 확인 -->
+    <resultMap id="checkPW" type="userInfoVO">
+        <result property="uID"  column="u_id" />
+        <result property="uPW"  column="u_pw" />
+    </resultMap>
+
+    <resultMap id="allMyInfo" type="userInfoVO">
+        <result property="uID" column="u_id"/>
+        <result property="uPW" column="u_pw"/>
+        <result property="uName" column="u_name"/>
+        <result property="uBday" column="u_bday"/>
+        <result property="uAddr1" column="u_addr1"/>
+        <result property="uAddr2" column="u_addr2"/>
+        <result property="uEmail" column="u_email"/>
+        <result property="uPhone" column="u_phone"/>
+        <result property="updatedDate" column="update_date"/>
+    </resultMap>
 
 
     <!--마이페이지 메인 - 이름 , 소속팀 ,랭크 출력-->
@@ -35,6 +53,9 @@
              where squad.t_id=team.t_id
                     and squad.u_id=users.u_id
                     and users.u_id='hong'
+                     and team.rankscore is not null
+              order by team.rankscore desc
+
         ]]>
     </select>
 
@@ -65,6 +86,49 @@
         ]]>
     </select>
 
+    <!-- 마이페이지 - 회원정보수정 전 비밀번호 확인 -->
+    <select id="selectCheckPW" resultMap="checkPW">
+        <![CDATA[
+            select count(*)
+            from users
+            where U_ID = #{uID}
+            <if test="uPW != null and uID != ''">
+                and U_PW = #{uPW}
+            </if>
+
+
+        ]]>
+    </select>
+
+    <select id="selectAllMyInfo" resultMap="allMyInfo">
+        <![CDATA[
+            select u_id,
+                   u_name,
+                   u_bday,
+                   u_addr1,
+                   u_addr2,
+                   u_email,
+                   u_phone
+            from users
+            where u_id='hong'
+        ]]>
+    </select>
+
+    <select id="updateInfo" parameterType="userInfoVO">
+        <![CDATA[
+            update users
+            set
+                u_name = #{uName},
+                u_bday = #{uBday},
+                u_addr1  = #{uAddr1},
+                u_addr2 = #{uAddr2},
+                u_email = #{uEmail},
+                u_phone = #{uPhone},
+                updated_id  = #{uID},
+                updated_date = sysdate
+            where u_id = #{uID}
+        ]]>
+    </select>
 
 
 </mapper>

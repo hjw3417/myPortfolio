@@ -13,6 +13,11 @@ public interface MyPageDAO {
 
    public List selectMyPageInfo(String uID) throws DataAccessException;
    public List selectRecentGame(String uID) throws  DataAccessException;
+   //public int selectCheckPW(String uID, String uPW) throws  DataAccessException;
 
+   public List selectAllMyInfo() throws DataAccessException;
 
+   public void updateInfo(String uID, String uName, String uBday,
+                          String uAddr1, String uAddr2, String uEmail,
+                          String uPhone) throws DataAccessException;
 }

@@ -1,12 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-  <c:set var="contextPath" value="${pageContext.request.contextPath}" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/main.css">
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="../css/myPage.css">
+
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
       //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -63,114 +65,102 @@
                   }
               }
           }).open();
-      };
-
-      function checkId(){
-              var uId =  $("#uID").val();
-
-        if (uId.trim() === ""){
-            alert("ID를 입력하세요.");
-            return;
-        }
-        $.ajax({
-            url : "${contextPath}/checkId",
-            type : "post",
-            async:true,
-            data : {uID : uId},
-            dataType:"json",
-            success:function(data, textStatus){
-                if(!data){
-                    alert("중복된 아이디입니다.");
-                } else {
-                    alert("사용 가능한 아이디입니다.");
-                }
-            },
-            error:function(data, textStatus){
-                alert("에러입니다");
-            }
-        });
-    };
-
-
-
+      }
   </script>
-  <title>join</title>
+  <title>회원정보수정</title>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="./image/logo.png">
-      <!-- <div>누가 잘차</div> -->
-    </div>
+    <header>
+      <div class="logo">
+        <img src="../image/logo.png">
+        <!-- <div>누가 잘차</div> -->
+      </div>
+
     <div>
-      <span><a href="/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="/join">회원가입</a></span>
+      <span><a href="#">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="myPage.html">마이페이지</a></span>
     </div>
     <div>
       <ul></ul>
     </div>
   </header>
-  <main style="text-align: center; height: 850px;">
+
+
+  <main >
+    <h1> 회원정보 수정</h1>
+    <!-- 사이드 바 -->
+    <div class="side">
+
+      <ul style="list-style-type: none;">
+        <li> <a href="myPage.html"> 마이페이지 </a> </li>
+        <li> <a href="myTeamGameRecord.html"> 경기 결과 </a> </li>
+        <li><a href="updateMyInfoPage.html">정보 수정 </a> </li>
+      </ul>
+  </div>
     <div>　</div>
     <div>
-      <section class="join">
+      <section class="updateMyInfo">
+        <div></div> <!--삭제 x-->
         <div>
-          회원가입
-        </div>
-        <div>
-          <form name="join" method="post" action="/join.do" modelAttribute="UserInfoVO">
+          <form name="updateMyInfo" method="post" action="/myPage/updateMyInfo" onsubmit="return validatePassword()" enctype="utf-8">
+            <c:forEach items="${allMyInfo}" var="all">
             <div>
-
-              <input type="text" id="uID" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
-              <input type="button" value="아이디 중복" id="idCheck" onclick="checkId();">
+                <input type="text" name="uID" size="12" maxlength="12" value="${all.uID}" readonly>
+              <input type="button" value="아이디 중복" disabled >
             </div>
             <div>
-              <input type="password" name="uPW" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요." required>
+              <input type="password" id="uPW" name="update_pw" size="20" minlength="9" maxlength="20" placeholder="변경할 비밀번호를 입력해주세요."  required>
               <div>
                 영문, 숫자, 특수문자 사용하여 9글자 이상 20글자 이내로 작성바랍니다.
               </div>
             </div>
             <div>
-              <input type="password" name="join_pw_con" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 확인해주세요.">
+              <input type="password" id="confirmPw" name="update_pw_con" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 확인해주세요.">
+            </div>
+             <script type="text/javascript">
+                        function validatePassword() {
+                            var password = document.getElementById("uPW").value;
+                            var confirmPassword = document.getElementById("confirmPw").value;
+
+                            if (password != confirmPassword) {
+                                alert("비밀번호가 일치하지 않습니다.");
+                                return false;
+                            }
+                            return true;
+                        }
+                    </script>
+            <div>
+              <input type="text" name="uName"  value="${all.uName}" placeholder="이름을 입력해주세요."  readonly>
             </div>
             <div>
-              <input type="text" name="uName" placeholder="이름을 입력해주세요.">
+              <input type="text" name="uBday" value="${all.uBday}" placeholder="생년월일 8자리를 입력해주세요.">
             </div>
-            <div>
-              <input type="text" name="uBday" placeholder="생년월일 8자리를 입력해주세요.">
-            </div>
-            <div>
-              <div>
-                <input type="radio" id="man" name="uGender" value="남자">
-                <label for="man">남자</label>
-              </div>
-              <div>
-                <input type="radio" id="woman" name="uGender" value="여자">
-                <label for="woman">여자</label>
-              </div>
-            </div>
+            <div></div> <!--삭제 x-->
             <div>
               <!--api 출처 https://postcode.map.daum.net/guide-->
-              <input type="text" name="join_postcode" id="postcode" placeholder="우편번호">
+              <input type="text" name="update_postcode" id="postcode" placeholder="우편번호">
               <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
             </div>
             <div>
-              <input type="text" name="uAddr1" id="roadAddress" placeholder="도로명주소">
-              <input type="text" name="join_jibunAddress" id="jibunAddress" placeholder="지번주소">
+              <input type="text" name="uAddr1" id="roadAddress" value="${all.uAddr1}" placeholder="도로명주소">
+              <input type="text" name="update_jibunAddress" id="jibunAddress"  placeholder="지번주소">
             </div>
             <div>
-              <input type="text" name="uAddr2" id="detailAddress" placeholder="상세주소를 입력해주세요.">
+              <input type="text" name="uAddr2" id="detailAddress" value="${all.uAddr2}" placeholder="상세주소를 입력해주세요.">
             </div>
             <div>
-              <input type="email" name="uEmail" placeholder="이메일 주소를 입력해주세요.">
+              <input type="email" name="uEmail" value="${all.uEmail}" placeholder="이메일 주소를 입력해주세요.">
             </div>
             <div>
-              <input type="text" name="uPhone" size="11" maxlength="11" placeholder="휴대폰 번호를 입력해주세요.">
+              <input type="text" name="uPhone" size="11" maxlength="11" value="${all.uPhone}" placeholder="휴대폰 번호를 입력해주세요.">
             </div>
+           </c:forEach>
             <div>
-              <input type="submit" value="가입하기">
-             <input type="reset" value="취소">
+              <input type="submit" value="수정하기">
+              <button type="button" > 취소 </button>
             </div>
+
           </form>
         </div>
       </section>

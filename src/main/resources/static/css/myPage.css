@@ -142,44 +142,44 @@ main{
     font-size : 25pt;
     padding-left : 13px;
     padding-top : 5px;
-    text-align : center;
+    text-align: center;
+
+  }
+  /*소속팀.랭크 정보 */
+  >.infoTable{
+    border-left : 1px solid rgb(184, 206, 146);
+    width : 500px;
+    height: 229px;
+    position: absolute;
+    left : 499px;
+    top: 0px;
+  }
+  >.infoTable table{
+    border  : none;
+    position : absolute;
+    top : 1px;
+    margin-top : 13px;
+    width : 500px;
+    height : 200px;
+    border-collapse: collapse;
+    text-align: center;
+    font-size : 14pt;
 
   }
 
-  /*소속팀.랭크 정보 */
-   >.infoTable{
-     border-left : 1px solid rgb(184, 206, 146);
-     width : 500px;
-     height: 229px;
-     position: absolute;
-     left : 499px;
-     top: 0px;
-   }
-   >.infoTable table{
-     position : absolute;
-     top : 1px;
-     margin-top : 13px;
-     width : 500px;
-     height : 200px;
-     border-collapse: collapse;
-     text-align: center;
-     font-size : 14pt;
+  >.infoTable table tr:first-child td:first-child,
+              tr:nth-child(2) td:first-child,
+              tr:nth-child(3) td:first-child{
+      width : 70px;
+      font-size :11pt;
+      color : gray;
+  }
 
-   }
-
-   >.infoTable table tr:first-child td:first-child,
-               tr:nth-child(2) td:first-child,
-               tr:nth-child(3) td:first-child{
-       width : 70px;
-       font-size :11pt;
-       color : gray;
-   }
-
-   >.infoTable table tr:first-child td:nth-child(3),
-              tr:nth-child(2) td:nth-child(3),
-              tr:nth-child(3), td:nth-child(3)>img{
-     margin-top : 9px;
-   }
+  >.infoTable table tr:first-child td:nth-child(3),
+             tr:nth-child(2) td:nth-child(3),
+             tr:nth-child(3), td:nth-child(3)>img{
+    margin-top : 9px;
+  }
 
 }
 
@@ -213,38 +213,39 @@ h2{
       font-size : 11pt;
       height : 35px;
       background-color: rgb(178, 196, 149);
-    }
-     >table tr:first-child td:first-child,
-               tr:nth-child(2) td:first-child,
-               tr:nth-child(3)  td:first-child,
-               tr:nth-child(4)  td:first-child,
-               tr:nth-child(5)  td:first-child{
-              font-size : 11pt;
-        }
-        >table  tr:nth-child(2) td:nth-child(3),
-                tr:nth-child(2) td:nth-child(5),
-                tr:nth-child(3) td:nth-child(3),
-                tr:nth-child(3) td:nth-child(5),
-                tr:nth-child(4) td:nth-child(3),
-                tr:nth-child(4) td:nth-child(5),
-                tr:nth-child(5) td:nth-child(3),
-                tr:nth-child(5) td:nth-child(5){
-                  font-size : 12pt;
-        }
-        >table tr:nth-child(2) td:nth-child(3),
-               tr:nth-child(3) td:nth-child(3),
-               tr:nth-child(4) td:nth-child(3),
-               tr:nth-child(5) td:nth-child(3){
-                padding-right : 10px;
-        }
-        >table  tr:nth-child(2) td:nth-child(5),
-                tr:nth-child(3) td:nth-child(5),
-                tr:nth-child(4) td:nth-child(5)
-                tr:nth-child(5) td:nth-child(5){
-                  padding-left : 10px;
-        }
-     }
 
+
+    }
+    >table tr:first-child td:first-child,
+           tr:nth-child(2) td:first-child,
+           tr:nth-child(3)  td:first-child,
+           tr:nth-child(4)  td:first-child,
+           tr:nth-child(5)  td:first-child{
+          font-size : 11pt;
+    }
+    >table  tr:nth-child(2) td:nth-child(3),
+            tr:nth-child(2) td:nth-child(5),
+            tr:nth-child(3) td:nth-child(3),
+            tr:nth-child(3) td:nth-child(5),
+            tr:nth-child(4) td:nth-child(3),
+            tr:nth-child(4) td:nth-child(5),
+            tr:nth-child(5) td:nth-child(3),
+            tr:nth-child(5) td:nth-child(5){
+              font-size : 12pt;
+    }
+    >table tr:nth-child(2) td:nth-child(3),
+           tr:nth-child(3) td:nth-child(3),
+           tr:nth-child(4) td:nth-child(3),
+           tr:nth-child(5) td:nth-child(3){
+            padding-right : 10px;
+    }
+    >table  tr:nth-child(2) td:nth-child(5),
+            tr:nth-child(3) td:nth-child(5),
+            tr:nth-child(4) td:nth-child(5)
+            tr:nth-child(5) td:nth-child(5){
+              padding-left : 10px;
+            }
+  }
 
 /*--------------------------------------------------------------*/
 /*마이페이지 -경기결과*/
@@ -276,95 +277,80 @@ h2{
 
 }
 
-/*----------------------------------------------------------------*/
+/**/
 /*정보 수정 전 비밀번호 확인*/
-
 .pwCheck{
+  border : none;
   position: absolute;
-  top : 100px;
-  left : 500px;
-  >div:nth-child(2)>form{
-    >div:first-child{
-      margin-bottom: 10px;
-      input:first-child{
-        padding-left: 10px;
-        width: 370px;
-        height: 35px;
-        margin: 50px 0 0 0;
-        color: rgb(126, 148, 87);
-        border: 1px solid rgb(184, 206, 146);
-      }
-      >input:nth-child(2){
-        width: 120px;
-        height: 39px;
-        position: relative;
-        top: -1px;
-        margin-left: -7px;
-        border: 1px solid rgb(184, 206, 146);
-        background-color:rgb(184, 206, 146);
-        color: white;
-        font-size: 13px;
-        /* font-weight: bold; */
-        font-family: 'GmarketSansMedium';
-      }
-      >input:nth-child(1){
-        margin-bottom: 30px;
-      }
-      >input:focus {outline: none;}
-      >input::placeholder{color: rgb(126, 148, 87);}
-    }
-    >div:nth-child(2){
-      margin-bottom: 10px;
-      input{
-        padding-left: 10px;
-        width: 370px;
-        height: 35px;
-        margin-bottom: 20px;
-        color: rgb(126, 148, 87);
-        border: 1px solid rgb(184, 206, 146);
-      }
+  top : 180px;
+  left : 480px;
+  width : 500px;
+  height : 300px;
 
-      >input:focus {outline: none;}
-      >input:focus~div{
-        display: block;
-      }
-      >input::placeholder{color: rgb(126, 148, 87);}
-      >div{
-        display: none;
-        font-size: 12px;
-        color: rgb(116, 113, 113);
-      }
-    }
-    >div:nth-child(3){
-      button:first-child{
-        width: 185px;
-        height: 50px;
-        font-size: 20px;
-        font-weight: bold;
-        background-color: rgb(184, 206, 146);
-        font-family: 'GmarketSansMedium';
-        color: white;
-        border: 1px solid rgb(184, 206, 146);
-        padding: 10px 0;
-        cursor: pointer;
-      }
-      button:nth-child(2){
-        width: 185px;
-        height: 50px;
-        font-size: 20px;
-        font-weight: bold;
-        background-color: rgb(184, 206, 146);
-        font-family: 'GmarketSansMedium';
-        color: white;
-        border: 1px solid rgb(184, 206, 146);
-        padding: 10px 0;
-        cursor: pointer;
-        margin-left: 10px;
-      }
-    }
+  >input:first-child{
+    position: absolute;
+    top : 40px;
+    left : 63px;
+    padding-left: 10px;
+    padding-top: 13px;
+    width: 370px;
+    height: 28px;
+    margin-bottom: 5px;
+    color: rgb(126, 148, 87);
+    border: 1px solid rgb(184, 206, 146);
+    background-color: white;
+
   }
-}
+>input:nth-child(2){
+      position: absolute;
+      top : 90px;
+      left : 63px;
+      padding-left: 10px;
+      padding-top: 5px;
+      width: 370px;
+      height: 35px;
+      margin-bottom: 5px;
+      color: rgb(126, 148, 87);
+      border: 1px solid rgb(184, 206, 146);
+      font-size : 12pt;
 
+  }
+  >button.ok{
+    position: absolute;
+    top : 175px;
+    left : 63px;
+    width: 165px;
+    height: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(184, 206, 146);
+    font-family: 'GmarketSansMedium';
+    color: white;
+    border: 1px solid rgb(184, 206, 146);
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  >button.cancel{
+    position: absolute;
+    top : 175px;
+    left : 282px;
+    width: 165px;
+    height: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(184, 206, 146);
+    font-family: 'GmarketSansMedium';
+    color: white;
+    border: 1px solid rgb(184, 206, 146);
+    padding: 10px 0;
+    cursor: pointer;
+  }
+
+
+
+
+
+}
 
 /*---------------------------------------------------------------*/
 /*회원정보수정*/
@@ -381,7 +367,7 @@ h2{
         padding-left: 10px;
         width: 250px;
         height: 35px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:nth-child(2){
@@ -408,7 +394,7 @@ h2{
         width: 370px;
         height: 35px;
         margin-bottom: 5px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:focus {outline: none;}
@@ -419,7 +405,7 @@ h2{
       >div{
         display: none;
         font-size: 12px;
-        color: rgb(116, 113, 113);
+        color: black;
       }
     }
     >div:nth-child(3){
@@ -429,7 +415,7 @@ h2{
         width: 370px;
         height: 35px;
         margin-bottom: 5px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:focus {outline: none;}
@@ -442,7 +428,7 @@ h2{
         width: 370px;
         height: 35px;
         margin-bottom: 5px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:focus {outline: none;}
@@ -455,7 +441,7 @@ h2{
         width: 370px;
         height: 35px;
         margin-bottom: 5px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:focus {outline: none;}
@@ -468,7 +454,7 @@ h2{
         padding-left: 10px;
         width: 250px;
         height: 35px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:nth-child(2){
@@ -494,7 +480,7 @@ h2{
         padding-left: 10px;
         width: 175px;
         height: 35px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:nth-child(2){
@@ -502,7 +488,7 @@ h2{
         width: 175px;
         height: 35px;
         margin-left: -1px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:focus {outline: none;}
@@ -515,7 +501,7 @@ h2{
         width: 370px;
         height: 35px;
         margin-bottom: 5px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:focus {outline: none;}
@@ -528,7 +514,7 @@ h2{
         width: 370px;
         height: 35px;
         margin-bottom: 5px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:focus {outline: none;}
@@ -541,7 +527,7 @@ h2{
         width: 370px;
         height: 35px;
         margin-bottom: 5px;
-        color: rgb(126, 148, 87);
+        color: black;
         border: 1px solid rgb(184, 206, 146);
       }
       >input:focus {outline: none;}

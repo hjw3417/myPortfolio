@@ -7,14 +7,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/MyPage.css">
+  <link rel="stylesheet" href="../css/myPage.css">
+
+
   <title>회원정보수정</title>
 </head>
 <body>
   <header>
     <header>
       <div class="logo">
-        <img src="img/logo.png">
+        <img src="../image/logo.png">
         <!-- <div>누가 잘차</div> -->
       </div>
 
@@ -30,6 +32,7 @@
 
   <main>
     <h1> 회원정보수정</h1>
+
     <!-- 사이드 바 -->
     <div class="side">
 
@@ -39,29 +42,16 @@
         <li><a href="updateMyInfoPage.html">정보 수정 </a> </li>
       </ul>
   </div>
-    <div>　</div>
-    <div>
-      <section class="pwCheck">
-        <div></div> <!--삭제 x-->
-        <div>
-          <form name="updateMyInfo" method="post" action="update" enctype="utf-8">
-            <div>
-              <input type="text" name="id" size="12" maxlength="12" disabled>
-            </div>
-            <div>
-              <input type="password" name="update_pw" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요."  required>
-            </div>
 
-            <div>
-              <button type="button" onclick="location.href='updateMyInfoPage.html'">확인</button>
-              <button type="button" onclick="location.href='myPage.html'"> 취소</button>
-            </div>
+   <div>　</div>
 
-          </form>
-        </div>
-      </section>
-    </div>
-  </main>
+        <form class="pwCheck" name="check" method="post" action="/myPage/updatePwCheck" enctype="utf-8">
+            <input type="hidden" name="id" value="${userID}"  >
+            <input type="password" name="pw" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요.">
+            <button class="ok" type="submit" > 확인</button>
+            <button class="cancel" type="reset" > 취소</button>
+      </form>
+    </main>
 
 
   <!--footer-->
