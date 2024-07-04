@@ -41,6 +41,19 @@
         <result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
+    <!-- BoardVO resultMap -->
+    <resultMap id="boardResult" type="dc.human.whosthebest.vo.BoardVO">
+        <result property="bID" column="B_ID" />
+        <result property="bType" column="B_TYPE" />
+        <result property="bBullet" column="B_BULLET" />
+        <result property="bTitle" column="B_TITLE" />
+        <result property="bContent" column="B_CONTENTT" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
     <select id="mainGameList" resultMap="gameListResult">
         SELECT G_TITLE, T_USERID FROM GAME ORDER BY G_CREATEDATE DESC
     </select>
@@ -69,6 +82,60 @@
 
     ]]>
     </select>
+
+    <select id="mainBoardList" resultMap="boardResult">
+        SELECT
+            B_ID,
+            B_BULLET,
+            B_TITLE,
+            CREATED_ID,
+            CREATED_DATE
+        FROM
+            BOARD
+        WHERE
+            B_TYPE = 1
+        ORDER BY
+            B_ID DESC
+    </select>
+    
+    <insert id="mainBoardWrite" parameterType="dc.human.whosthebest.vo.BoardVO">
+<!--        <selectKey keyProperty="mainBoard_id" resultType="int" order="AFTER">-->
+<!--            SELECT BOARD_SEQ.NEXTVAL FROM DUAL-->
+<!--        </selectKey>-->
+        insert into board(
+          b_id,
+          b_type,
+          b_bullet,
+          b_title,
+          b_content,
+          CREATED_ID,
+          CREATED_DATE
+        )
+        values(
+          board_seq.nextval,
+          #{bType},
+          #{bBullet},
+          #{bTitle},
+          #{bContent},
+          #{createdID},
+          #{createdDate}
+        )
+    </insert>
+
+    <select id="mainBoardDetail" resultMap="boardResult">
+        SELECT
+            B_ID,
+            B_BULLET,
+            B_TITLE,
+            CREATED_ID,
+            CREATED_DATE
+        FROM
+            BOARD
+        WHERE
+            B_ID = #{bID}
+    </select>
+
+
 
 
 </mapper>

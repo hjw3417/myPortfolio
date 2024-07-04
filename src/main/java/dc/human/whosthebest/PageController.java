@@ -26,4 +26,9 @@ public class PageController {
         return "user/findPW";
     }
 
+    @GetMapping("/boardWrite")
+    public String boardWrite(){
+        return "main/boardWrite";
+    }
+
 }

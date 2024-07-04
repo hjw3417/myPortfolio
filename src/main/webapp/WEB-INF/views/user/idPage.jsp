@@ -9,7 +9,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <title>idPop</title>
 </head>
-<body>
+<body bgcolor="#FFFFEA">
     <div class="idPage">
         <hr>
         <div>회원님의 아이디는 ${uId}입니다.</div>

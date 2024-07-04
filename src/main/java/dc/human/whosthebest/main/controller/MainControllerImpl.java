@@ -1,15 +1,15 @@
 package dc.human.whosthebest.main.controller;
 
+import ch.qos.logback.core.model.Model;
 import dc.human.whosthebest.main.service.MainService;
+import dc.human.whosthebest.vo.BoardVO;
 import dc.human.whosthebest.vo.GameListVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -33,6 +33,51 @@ public class MainControllerImpl implements MainController {
         System.out.println("메인 랭킹 시스아웃"+mRanking);
         System.out.println(mGameList);
         return mav;
+    }
+
+    @Override
+    @RequestMapping(value = "/mainBoard", method = RequestMethod.GET)
+    public ModelAndView mainBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        List<BoardVO> mBoard = mainService.mainBoardList();
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("main/boardList");
+        mav.addObject("mBoard", mBoard);
+        return mav;
+    }
+
+    @Override
+    @RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
+    public ModelAndView mainBoardWrite(BoardVO boardVO) throws Exception{
+        int result = 0;
+        try{
+            result = mainService.mainBoardWrite(boardVO);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("redirect:/board");
+        return mav;
+    }
+
+    @Override
+    @RequestMapping(value = "/boardDetail/read", method = RequestMethod.GET)
+    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception{
+        return "/boardDetail/read";
+    }
+
+    @Override
+    @RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
+    public ModelAndView mainBoardDetail(@ModelAttribute("boardVO") BoardVO boardVO,
+                                        @RequestParam("bID") int bID) throws Exception{
+
+        BoardVO mBoard = mainService.mainBoardDetail(bID);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("main/boardDetail");
+        mav.addObject("mBoard", mBoard);
+
+        return mav;
+
     }
 
 }

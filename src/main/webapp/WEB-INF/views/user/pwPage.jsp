@@ -9,7 +9,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <title>pwPop</title>
 </head>
-<body>
+<body bgcolor="#FFFFEA">
     <div class="pwPage">
         <hr>
         <div>회원님의 비밀번호는 ${uPW}입니다.</div>
