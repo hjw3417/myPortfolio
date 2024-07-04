@@ -3,8 +3,10 @@ package dc.human.whosthebest.team.controller;
 import dc.human.whosthebest.team.dao.TeamDAO;
 import dc.human.whosthebest.team.service.TeamService;
 import dc.human.whosthebest.team.service.TeamServiceImpl;
+import dc.human.whosthebest.vo.GameListVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.TeamMemberVO;
+import dc.human.whosthebest.vo.TeamProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,7 @@ public class TeamControllerImpl implements TeamController{
         return "/team/teamMake";
     }
 
-    //나의팀 페이지 단순 매핑
-    //임시
+    //나의팀 페이지
     @Override
     @GetMapping("/myTeam")
     public ModelAndView myTeamPage() {
@@ -42,10 +43,13 @@ public class TeamControllerImpl implements TeamController{
             mav.addObject("myTeams", myTeams);
 
             if(myTeams != null && !myTeams.isEmpty()) {
-                TeamInfoVO firstTeamInfo = teamService.getTeamInfoById(myTeams.get(0).gettID());
-                mav.addObject("teamInfo", firstTeamInfo);
+                int tID=myTeams.get(0).gettID();
+                TeamProfileVO teamProfile = teamService.getTeamProfile(tID);
+                List<GameListVO> gameListVO = teamService.selectGameSchedule(tID);
+                mav.addObject("teamProfile", teamProfile);
+                mav.addObject("gameList", gameListVO);
             } else {
-                mav.addObject("teamInfo",null);
+                mav.addObject("teamProfile",null);
             }
         } catch (Exception e) {
             mav.addObject("errorMsg", "팀 목록을 가져오는 도중 오류가 발생했습니다.");
@@ -57,9 +61,9 @@ public class TeamControllerImpl implements TeamController{
     //특정 팀의 상세 정보 반환
     @GetMapping("/api/teamInfo")
     @ResponseBody
-    public TeamInfoVO getTeamInfo(@RequestParam("tID") int tID) {
+    public TeamProfileVO getTeamInfo(@RequestParam("tID") int tID) {
         try {
-            return teamService.getTeamInfoById(tID);
+            return teamService.getTeamProfile(tID);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -77,7 +81,7 @@ public class TeamControllerImpl implements TeamController{
         ModelAndView mav = new ModelAndView();
         String userID = "HONG";
         //실제 userID 가져오는 로직으로 대체
-
+//        String userID = request.getSession().getAttribute("userID").toString();
         try {
             //팀생성과 동시에 팀원 목록에도 팀장 추가
             int result = teamService.createTeamAndAddMember(teamInfo, userID);

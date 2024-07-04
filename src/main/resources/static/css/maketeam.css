@@ -107,13 +107,23 @@ main{
   height: 750px;
   background-color: rgb(184, 206, 146);
   
-  >div>div:first-child{
-    height: 50px;
+  >div{
+    >div:first-child{
+      height: 50px;
+    }
+    >div:nth-child(2){
+      font-weight : bold;
+    }
+
   }
+
   >div>ul{
     font-weight: bold;
     width : 250px;
     list-style: none;
+  }
+  >div>ul>li>ul{
+    margin-bottom : 30px;
   }
   ul li a {
     text-decoration: none;
@@ -441,6 +451,7 @@ main{
         }
       }
     }
+
     >.record{
       width: 450px;
       height: 320px;
@@ -475,6 +486,7 @@ main{
           padding-left: 0px;
           box-sizing: border-box;
           >li{
+            list-style-type : none;
             box-sizing: border-box;
             width: 400px;
             height: 40px;
@@ -536,19 +548,11 @@ main{
             display: inline-block;
           }
           >li:nth-child(1){
-            width: 300px;
+            width: 400px;
             height: 40px;
             margin-left: -40px;
             background-color: white;
             vertical-align: middle;
-          }
-          >li:nth-child(2){
-            cursor: pointer;
-            width: 60px;
-            height: 40px;
-            margin-left: 10px;
-            vertical-align: middle;
-            background-color: rgb(221, 240, 189);
           }
         }
       }

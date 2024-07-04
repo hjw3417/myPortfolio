@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
@@ -11,37 +12,9 @@
   <link rel="stylesheet" href="../css/maketeam.css">
   <title>나의 팀</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+  <script src="${contextPath}/js/myTeam.js"></script>
   <script>
-    $(document).ready(function() {
-      // 페이지 로드 시, 첫 번째 팀 정보 로드
-      var firstTeamID = ${myTeams[0].tID}; // 첫 번째 팀 ID를 가져옵니다.
-      loadTeamInfo(firstTeamID);
-
-      // Ajax로 특정 팀 정보 가져오기
-      function loadTeamInfo(tID) {
-        $.ajax({
-          url: "${contextPath}/api/teamInfo?tID=" + tID,
-          type: "GET",
-          dataType: "json",
-          success: function(team) {
-            var teamInfoHtml = '<h1>' + team.tName + '</h1>';
-            teamInfoHtml += '<p>지역: ' + team.tRegion + '</p>';
-            teamInfoHtml += '<p>팀장: ' + team.createdID + '</p>';
-            $('#teamInfo').html(teamInfoHtml);
-          },
-          error: function(xhr, status, error) {
-            console.error('Failed to retrieve team info:', error);
-          }
-        });
-      }
-      // 팀 이름 목록 클릭 시 AJAX 호출로 상세 정보 갱신
-            $('ul#teamNameList').on('click', 'li a', function(event) {
-              event.preventDefault();
-              var tID = $(this).data('tid'); // 클릭한 팀의 ID를 가져옵니다.
-              loadTeamInfo(tID); // 해당 팀의 정보를 로드합니다.
-            });
-    });
+    var contextPath = "${contextPath}";
   </script>
 </head>
 <body>
@@ -59,7 +32,7 @@
           <a href="teamlist.html">팀</a>
           <div>
             <ul>
-              <li><a href="teamlist.html">팀 목록</a></li>
+              <li><a href="/teamList">팀 목록</a></li>
               <li><a href="myteam.html">나의 팀</a></li>
             </ul>
           </div>
@@ -82,7 +55,7 @@
           <ul id="teamNameList">
             <c:forEach items="${myTeams}" var="team">
               <li>
-                <a href="#" data-tid="${team.tID}">
+                <a href="${contextPath}/api/teamInfo?tID=${team.tID}" class="team-link" data-tid="${team.tID}">
                   ${team.tName}
                   <ul>
                     <li><a href="${contextPath}/teamMembers?tID=${team.tID}">팀원 목록</a></li>
@@ -98,103 +71,78 @@
       </div>
       <div class="myteam">
         <section class="sec1">
-          <div id="teamInfo" class="teamprofile">
+          <div id="teamprofile" class="teamprofile">
             <div>
               <div>
                 <div>
                   <img src="${contextPath}/image/우사기.jpg">
                 </div>
                 <div>
-                  <span>platinum</span>
-                  <span>1900</span>
+                  <span>${teamProfile.rankName}</span>
+                  <span>${teamProfile.tRankScore}</span>
                 </div>
               </div>
               <div>
                 <div>
-                  <span>팀 이름 : </span>
-                  <span>문주군단</span>
+                  <span>${teamProfile.tName}</span>
                 </div>
                 <div>
                   <span>전적 : </span>
-                  <span>47전 33승 14패</span>
+                  <span>${teamProfile.gameRecordVO.totalCount}전
+                        ${teamProfile.gameRecordVO.winCount}승
+                        ${teamProfile.gameRecordVO.loseCount}패
+                  </span>
                 </div>
                 <div>
                   <span>팀원 수 : </span>
-                  <span>50명</span>
+                  <span>${teamProfile.tMember}명</span>
                 </div>
                 <div>
                   <span>창단일 : </span>
-                  <span>2024.05.05</span>
+                  <fmt:parseDate value="${teamProfile.createdDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedCreatedDate" />
+                  <fmt:formatDate value="${parsedCreatedDate}" pattern="yyyy-MM-dd" var="formattedCreatedDate" />
+                  <span>${formattedCreatedDate}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="record">
+          <div id="record" class="record">
             <div>
               <span>전적</span>
               <span><a href="teamrecord.html">+ 더보기</a></span>
             </div>
             <div>
               <ul>
-                <li>
-                  <span>문주군단</span>
-                  <span>&nbsp;3&nbsp;</span>
-                  <span>:</span>
-                  <span>&nbsp;2&nbsp;</span>
-                  <span>문주군단</span>
-                  <span>승</span>
-                </li>
-                <li>
-                  <span>문주군단</span>
-                  <span>&nbsp;2&nbsp;</span>
-                  <span>:</span>
-                  <span>&nbsp;3&nbsp;</span>
-                  <span>김반박이</span>
-                  <span>패</span>
-                </li>
-                <li>
-                  <span>문주군단</span>
-                  <span>&nbsp;3&nbsp;</span>
-                  <span>:</span>
-                  <span>&nbsp;2&nbsp;</span>
-                  <span>개발냥발</span>
-                  <span>승</span>
-                </li>
-                <li>
-                  <span>문주군단</span>
-                  <span>&nbsp;3&nbsp;</span>
-                  <span>:</span>
-                  <span>&nbsp;5&nbsp;</span>
-                  <span>성환FC</span>
-                  <span>패</span>
-                </li>
+                <c:forEach items="${teamProfile.gameRecordVO.gameRecordInfoListVO}" var="match" end="3">
+                  <li>
+                    <span>${match.tHomeName}</span>
+                    <span>&nbsp;${match.homeGoal}&nbsp;</span>
+                    <span>:</span>
+                    <span>&nbsp;${match.awayGoal}&nbsp;</span>
+                    <span>${match.tAwayName}</span>
+                    <span>${match.resultType}</span>
+                  </li>
+                </c:forEach>
               </ul>
             </div>
           </div>
         </section>
         <section class="sec2">
-          <div class="schedule">
+          <div id="schedule" class="schedule">
             <div>
               <span>경기 일정</span>
               <span><a href="#">+ 더보기</a></span>
             </div>
             <div>
-              <ul>
-                <li>06.19 17:00  문주군단 : 김반박이</li>
-                <li>참여</li>
-              </ul>
-              <ul>
-                <li>06.20 17:00  문주군단 : 성환FC</li>
-                <li>참여</li>
-              </ul>
-              <ul>
-                <li>06.25 17:00  문주군단 : 개발냥발</li>
-                <li>참여</li>
-              </ul>
-              <ul>
-                <li>06.25 17:00  문주군단 : 개발냥발</li>
-                <li>참여</li>
-              </ul>
+              <c:forEach items="${gameList}" var="gameList" end="3">
+                <ul>
+                  <fmt:parseDate value="${gameList.gResDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedGResDate" />
+                  <fmt:formatDate value="${parsedGResDate}" pattern="yyyy-MM-dd HH:mm" var="formattedGResDate" />
+                  <li>
+                    <span>${formattedGResDate} ${gameList.sName}</span>
+                  </li>
+                </ul>
+              </c:forEach>
             </div>
           </div>
           <div class="teamboard">

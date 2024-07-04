@@ -35,6 +35,74 @@
         <result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
+    <!--TeamProfileVO resultMap-->
+    <resultMap id="teamProfileResult" type="dc.human.whosthebest.vo.TeamProfileVO">
+        <id property="tID" column="T_ID"/>
+        <result property="tName" column="T_NAME"/>
+        <result property="rankName" column="RANKNAME"/> <!--rank table 필드-->
+        <result property="tRankScore" column="RANKSCORE"/>
+        <result property="tMember" column="T_MEMBER"/>
+        <result property="createdID" column="CREATED_ID"/>
+        <result property="createdDate" column="CREATED_DATE"/>
+        <result property="updatedID" column="UPDATED_ID"/>
+        <result property="updatedDate" column="UPDATED_DATE"/>
+    </resultMap>
+
+    <!-- aboutTeamDAO 사용을 위한 이식-->
+    <!-- gameList resultMap -->
+    <resultMap id="gameListResultMap" type="GameListVO">
+        <!-- game table -->
+        <id property="gID" column="G_ID"/>
+        <result property="gTeamID" column="G_TEAMID"/>
+        <result property="gTitle" column="G_TITLE"/>
+        <result property="gTag" column="G_TAG"/>
+        <result property="gCreatedDate" column="G_CREATEDATE"/>
+        <result property="gTime" column="G_TIME"/>
+        <result property="gMinMember" column="G_MINMEMBER"/>
+        <result property="gResDate" column="G_RESDATE"/>
+        <result property="gStatus" column="G_STATUS"/>
+        <result property="tUserID" column="G_USER_ID"/>
+        <result property="sID" column="S_ID"/>
+        <result property="sNum" column="S_NUM"/>
+
+        <!-- team table -->
+        <result property="tName" column="T_NAME"/>
+        <result property="tLogo" column="T_LOGO"/>
+
+        <!-- stadium table -->
+        <result property="sName" column="S_NAME"/>
+        <result property="sRegion" column="S_REGION"/>
+        <result property="sAddr" column="S_ADDR"/>
+    </resultMap>
+
+    <resultMap id="GameRecordResultMap" type="GameRecordVO">
+        <result property="totalCount" column="totalCount"/>
+        <result property="winCount" column="winCount"/>
+        <result property="loseCount" column="loseCount"/>
+        <result property="drawCount" column="drawCount"/>
+    </resultMap>
+
+    <resultMap id="GameRecordInfoResultMap" type="GameRecordInfoListVO">
+        <!-- G_RESULT TABLE -->
+        <id property="gID" column="G_ID"/>
+        <result property="tHomeID" column="T_HOMEID"/>
+        <result property="tAwayID" column="T_AWAYID"/>
+        <result property="homeGoal" column="HOME_GOAL"/>
+        <result property="awayGoal" column="AWAY_GOAL"/>
+        <result property="uID" column="U_ID"/>
+        <result property="createdID" column="CREATED_ID"/>
+        <result property="createdDate" column="CREATED_DATE"/>
+        <result property="updatedID" column="UPDATED_ID"/>
+        <result property="updatedDate" column="UPDATED_DATE"/>
+        <!-- GAME TABLE -->
+        <result property="gResDate" column="G_RESDATE"/>
+
+        <result property="tHomeName" column="tHomeName"/>
+        <result property="tAwayName" column="tAwayName"/>
+
+        <result property="resultType" column="resultType"/>
+    </resultMap>
+
 
     <!--팀 생성-->
     <insert id="insertTeamInfo" parameterType="dc.human.whosthebest.vo.TeamInfoVO">
@@ -137,19 +205,40 @@
 
     <!-- 사용자가 속한 팀 목록 -->
     <select id="selectTeamsByUserId" resultMap="teamInfoResult">
-        SELECT T.T_NAME
-        FROM TEAM_MEMBER TM
-        JOIN TEAM T ON TM.T_ID = T.T_ID
-        WHERE TM.U_ID = #{userID}
+        SELECT
+            T.T_ID,
+            T.T_NAME
+        FROM
+            TEAM_MEMBER TM
+        JOIN
+            TEAM T
+        ON
+            TM.T_ID = T.T_ID
+        WHERE
+            TM.U_ID = #{userID}
     </select>
 
     <!-- 특정 팀의 상세 정보 -->
-    <select id="selectTeamInfoById" resultMap="teamInfoResult">
-        SELECT *
-        FROM TEAM
-        WHERE T_ID = #{tID}
+    <select id="selectTeamProfile" resultMap="teamProfileResult">
+        SELECT
+            T.T_ID,
+            T.T_NAME,
+            T.T_MEMBER,
+            T.CREATED_DATE,
+            T.RANKSCORE,
+            CASE
+                WHEN T.RANKSCORE IS NULL THEN 'unranked'
+                WHEN R.MINSCORE IS NULL OR R.MAXSCORE IS NULL THEN 'unranked'
+                ELSE R.RANK_NAME
+            END AS RANKNAME
+        FROM
+            TEAM T
+        LEFT JOIN
+            RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+        WHERE T.T_ID = #{tID}
     </select>
 
+    <!--신경쓰지말고-->
     <select id="selectAllTeamInfo" resultMap="teamInfoResult">
         <![CDATA[
             SELECT * FROM TEAM

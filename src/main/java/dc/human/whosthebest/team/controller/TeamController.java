@@ -2,6 +2,7 @@ package dc.human.whosthebest.team.controller;
 
 import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.TeamMemberVO;
+import dc.human.whosthebest.vo.TeamProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +16,7 @@ public interface TeamController {
 
     public ModelAndView myTeamPage();
 
-    public TeamInfoVO getTeamInfo(@RequestParam("tID") int tID);
+    public TeamProfileVO getTeamInfo(@RequestParam("tID") int tID);
 
     public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception;
 

@@ -1,13 +1,14 @@
 package dc.human.whosthebest.team.service;
 
+import dc.human.whosthebest.aboutteam.dao.AboutTeamDAO;
 import dc.human.whosthebest.team.dao.TeamDAO;
-import dc.human.whosthebest.vo.TeamInfoVO;
-import dc.human.whosthebest.vo.TeamMemberVO;
+import dc.human.whosthebest.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("teamService")
@@ -15,6 +16,9 @@ import java.util.List;
 public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamDAO teamDAO;
+
+    @Autowired
+    private AboutTeamDAO aboutTeamDAO;
 
     @Override
     public List listTeams() throws Exception {
@@ -62,8 +66,36 @@ public class TeamServiceImpl implements TeamService {
     };
 
     @Override
-    public TeamInfoVO getTeamInfoById(int tID) throws Exception {
-        return teamDAO.selectTeamInfoById(tID);
+    public TeamProfileVO getTeamProfile(int tID) throws Exception {
+        String resultType=null;
+        TeamProfileVO teamProfileVO = new TeamProfileVO();
+        GameRecordVO gameRecordVO = new GameRecordVO();
+        List<GameRecordInfoListVO> gameResultInfoList = new ArrayList<>();
+
+        teamProfileVO = teamDAO.selectTeamProfile(tID);
+        gameRecordVO = aboutTeamDAO.getMatchCount(tID);
+        gameResultInfoList = aboutTeamDAO.selectGResultInfo(tID, resultType);
+        gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
+        teamProfileVO.setGameRecordVO(gameRecordVO);
+
+        return teamDAO.selectTeamProfile(tID);
+    }
+
+    //AboutTeamDAO 이식
+    @Override
+    public List<GameListVO> selectGameSchedule(int tID) throws Exception {
+        List<GameListVO> gameList = aboutTeamDAO.selectGameSchedule(tID);
+        return gameList;
+    }
+
+    @Override
+    public GameRecordVO selectGameRecordInfo(int tID, String resultType) throws Exception {
+        GameRecordVO gameRecordVO = new GameRecordVO();
+        List<GameRecordInfoListVO> gameResultInfoList = new ArrayList<>();
+        gameRecordVO = aboutTeamDAO.getMatchCount(tID);
+        gameResultInfoList = aboutTeamDAO.selectGResultInfo(tID, resultType);
+        gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
+        return gameRecordVO;
     }
 
     @Override
