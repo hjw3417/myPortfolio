@@ -474,17 +474,17 @@ $(document).ready(function() {
                 var insertCommentsResult = response;
                 var html = '';
                 alert("insertCommentsResult.length: " + insertCommentsResult.length)
-                $("#gComentConent").hide();
+                $("#gComent").empty();
                 if(insertCommentsResult.length === 0) {
                     html ='<div class="nullMsg">경기 정보가 없습니다.</div>';
                     $("#gComent").html(html);
                 } else {
                     $.each(insertCommentsResult, function(index, gCommentList) {
-                        html = `
+                        html += `
                             <p><span>${gCommentList.uName} : </span>${gCommentList.gComment}</p>
                         `;
-                        $("#gComent").append(html);
                     });
+                    $("#gComent").append(html);
                 }
                 $gComent.scrollTop($gComent.prop("scrollHeight"));
             },
