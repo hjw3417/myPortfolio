@@ -1,27 +1,16 @@
 package dc.human.whosthebest.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class SquadVO {
 
-	private int gID;
-	private String tID;
-	private String uID;
-	private String createdID;
-	private String createdDate;
-	private String updatedID;
-	private String updatedDate;
-	
-	
-	public SquadVO(int gID, String tID, String uID, String createdID, String createdDate, String updatedID,
-				   String updatedDate) {
-		this.gID = gID;
-		this.tID = tID;
-		this.uID = uID;
-		this.createdID = createdID;
-		this.createdDate = createdDate;
-		this.updatedID = updatedID;
-		this.updatedDate = updatedDate;
-	}
-	
+	private int gID;                    //G_ID(게임 아이디)
+	private int tID;                    //T_ID(게임 참여자 team 아이디)
+	private String uID;                 //U_ID(게임 참여자 아이디)
+	private String createdID;			//CREATED_ID
+	private String updatedID;			//UPDATED_ID
+
 	public SquadVO() {
 
 	}
@@ -34,11 +23,11 @@ public class SquadVO {
 		this.gID = gID;
 	}
 
-	public String gettID() {
+	public int gettID() {
 		return tID;
 	}
 
-	public void settID(String tID) {
+	public void settID(int tID) {
 		this.tID = tID;
 	}
 
@@ -58,14 +47,6 @@ public class SquadVO {
 		this.createdID = createdID;
 	}
 
-	public String getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(String createdDate) {
-		this.createdDate = createdDate;
-	}
-
 	public String getUpdatedID() {
 		return updatedID;
 	}
@@ -73,17 +54,4 @@ public class SquadVO {
 	public void setUpdatedID(String updatedID) {
 		this.updatedID = updatedID;
 	}
-
-	public String getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(String updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	
-	
-	
-	
 }

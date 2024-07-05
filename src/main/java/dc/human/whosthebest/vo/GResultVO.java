@@ -46,6 +46,13 @@ public class GResultVO {
 
 	}
 
+	public String getCreatedID() {
+		return createdID;
+	}
+
+	public void setCreatedID(String createdID) {
+		this.createdID = createdID;
+	}
 
 	public int getgID() {
 		return gID;
