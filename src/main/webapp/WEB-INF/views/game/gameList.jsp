@@ -159,7 +159,6 @@
         <!-- pagination 시작 -->
         <div class="paginationContainer">
           <ul class="pagination">
-
             <li>
             <button id="gameList-prevPage" type="button" onclick="#">이전</button>
             </li>

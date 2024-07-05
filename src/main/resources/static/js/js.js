@@ -894,3 +894,129 @@ $(document).ready(function() {
     });
 });
 //gameRecord.do 관련 js 끝
+
+//gameSchedule.do 관련 js 시작
+$(document).ready(function() {
+    function selectGameScheduleAjax(pageNum, rowNum) {
+        alert("AJAX 요청 시작");
+        $.ajax({
+            url: "/team/paging/gameSchedule.do",
+            type: 'POST',
+            data: {
+                tID: tID,
+                pageNum: pageNum,
+                rowNum: rowNum
+            },
+            dataType: 'json',
+            success: function(response) {
+                alert("response : " + response);
+                var html = "";
+                var gameListVO = response;
+                if (gameListVO.length == 0) {
+                    alert("page가 없습니다.");
+                } else {
+                    alert(gameListVO.length);
+                    $('#gameScheduleCardContainer').empty();
+                    $.each(gameListVO, function(index, gameList) {
+                        html += `
+                           <div class="tableContainer">
+                             <table>
+                               <tr>
+                                 <td>경기명 : </td>
+                                 <td>${gameList.gTitle}</td>
+                                 <td>
+                                   경기 생성일 :
+                                 </td>
+                                 <td>
+                                   ${gameList.gCreatedDate}
+                                 </td>
+                               </tr>
+                               <tr>
+                                 <td>경기장 : </td>
+                                 <td>${gameList.sName} ${gameList.sNum} 경기장</td>
+                               </tr>
+                               <tr>
+                                 <td>경기장 주소 : </td>
+                                 <td>${gameList.sAddr}</td>
+                               </tr>
+                               <tr>
+                                 <td>경기일시 : </td>
+                                 <td>${gameList.gResDate} (${gameList.gTime} 시간)</td>
+                               </tr>
+                             </table>
+                             <!-- 카드 submit 끝 -->
+                           <div class="cardSubmitContainer">
+                             <!-- 임시 폼 -->
+                             <form method="get" action="${contextPath}/game/gameInfo.do">
+                               <input type="hidden" class="gID" name="gID" id="gID" value="${gameList.gID}"/>
+                               <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
+                             </form>
+                             <!-- <a href="gameInfo.html">경기 상세 보기</a> -->
+                           </div>
+                           <!-- 카드 submit 종료 -->
+                           </div>
+                        `;
+                    });
+                    $("#gameScheduleCardContainer").append(html);
+                }
+            },
+            error: function(error) {
+                // 요청 실패 시 메세지 알림
+                alert("Error: " + error);
+            }
+        });
+    }
+
+    var defaultPageNumInGameSchedule = 1;
+
+    // page 버튼 생성
+    function createPageButtonsGameSchedule() {
+        $('#gameSchedule-pageNumBtnLI').empty(); // 기존 버튼 제거
+        for (var i = defaultPageNumInGameSchedule; i <= defaultPageNumInGameSchedule + 4; i++) {
+            $('#gameSchedule-pageNumBtnLI').append(`
+                <form id="gameSchedule-pageNumForm" class="gameSchedule-pageNumForm">
+                    <input type="hidden" class="rowNum" name="rowNum" id="rowNum" value="${i - 1}">
+                    <input type="submit" class="pageNum" name="pageNum" value="${i}">
+                </form>
+            `);
+        }
+    }
+
+    // page 이동 버튼 submit
+    createPageButtonsGameSchedule();
+
+    // page 숫자 버튼 submit
+    $(document).on('submit', '#gameSchedule-pageNumForm', function(event) {
+        event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+        var rowNum = $(event.originalEvent.submitter).siblings('input[name="rowNum"]').val();
+        var pageNum = $(event.originalEvent.submitter).val();
+        selectGameScheduleAjax(pageNum, rowNum);
+    });
+
+    // 이전 버튼 submit
+    $("#gameSchedule-prevPage").on('click', function() {
+        alert("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
+        if (defaultPageNumInGameSchedule == 1) {
+            alert("첫 페이지 입니다.");
+        } else if (defaultPageNumInGameSchedule >= 6) {
+            defaultPageNumInGameSchedule -= 5;
+            var rowNum = defaultPageNumInGameSchedule - 1;
+            var pageNum = defaultPageNumInGameSchedule;
+            selectGameScheduleAjax(pageNum, rowNum);
+            createPageButtonsGameSchedule(); // 페이지 버튼 다시 생성
+        }
+    });
+
+    // 다음 버튼 submit
+    $("#gameSchedule-nextPage").on('click', function(event) {
+        alert("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
+        defaultPageNumInGameSchedule += 5;
+        alert("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
+        createPageButtonsGameSchedule(); // 페이지 버튼 다시 생성
+        event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+        var rowNum = defaultPageNumInGameSchedule - 1;
+        var pageNum = defaultPageNumInGameSchedule;
+        selectGameScheduleAjax(pageNum, rowNum);
+    });
+});
+//gameSchedule.do 관련 js 끝

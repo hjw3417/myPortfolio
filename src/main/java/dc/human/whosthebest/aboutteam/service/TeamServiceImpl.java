@@ -19,9 +19,10 @@ public class TeamServiceImpl implements TeamService {
     private TeamDAO teamDAO;
 
     @Override
-    public List<GameListVO> selectGameSchedule(int tID) throws Exception {
-        List<GameListVO> gameList = teamDAO.selectGameSchedule(tID);
-        return gameList;
+    public List<GameListVO> selectGameSchedule(int pageNum, int rowNum, int tID) throws Exception {
+        List<GameListVO> gameListVO = teamDAO.selectGameSchedule(pageNum, rowNum, tID);
+        System.out.println("service gameListVO.size() : " + gameListVO.size());
+        return gameListVO;
     }
 
     @Override

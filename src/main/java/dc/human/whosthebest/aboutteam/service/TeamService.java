@@ -6,6 +6,6 @@ import dc.human.whosthebest.vo.GameRecordVO;
 import java.util.List;
 
 public interface TeamService {
-    public List<GameListVO> selectGameSchedule(int tID) throws Exception;
+    public List<GameListVO> selectGameSchedule(int pageNum, int rowNum, int tID) throws Exception;
     public GameRecordVO selectGaameRecordInfo(int tID, String resultType) throws Exception;
 }

@@ -97,7 +97,8 @@
         WHERE 1=1
         AND g.G_TEAMID = #{tID}
         )
-        WHERE rn BETWEEN 1 AND 5
+        WHERE
+        rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5) + 4
     </select>
     <select id="getMatchCount" parameterType="int" resultMap="GameRecordResultMap">
         <![CDATA[

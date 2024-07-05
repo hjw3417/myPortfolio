@@ -20,13 +20,29 @@ public class TeamControllerImpl implements TeamController {
 
     @Override
     @GetMapping("/team/gameSchedule.do")
-    public ModelAndView gameSchedulleInfo() throws Exception {
+    public ModelAndView gameSchedulleInfo(@RequestParam(value="tID", required = false, defaultValue = "1") int tID) throws Exception {
         ModelAndView mav = new ModelAndView();
-        int tID = 1000000001;
-        List<GameListVO> gameListVO = teamService.selectGameSchedule(tID);
+        tID = 1000000001;
+        int pageNum = 1;
+        int rowNum = 0;
+        List<GameListVO> gameListVO = teamService.selectGameSchedule(pageNum, rowNum, tID);
+        System.out.println("controller gameListVO.size() : " + gameListVO.size());
         mav.addObject("gameListVO", gameListVO);
         mav.setViewName("/team/gameSchedule");
         return mav;
+    }
+
+    @Override
+    @PostMapping("/team/paging/gameSchedule.do")
+    @ResponseBody
+    public List<GameListVO> pagingGameSchedulleInfo(@RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum,
+                                                    @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,
+                                                    @RequestParam(value="tID", required = false, defaultValue = "0") int tID)
+                                                    throws Exception {
+        tID = 1000000001;
+        List<GameListVO> gameListVO = teamService.selectGameSchedule(pageNum, rowNum, tID);
+        System.out.println("RestFullcontroller gameListVO.size() : " + gameListVO.size());
+        return gameListVO;
     }
 
     @Override
