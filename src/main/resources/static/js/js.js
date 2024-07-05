@@ -526,6 +526,7 @@ $(document).ready(function() {
             }
         });
     }
+    $("#partiHomeTeamForm").hide();
     //insert AwayTeam Squad Ajax
     function insertAwayTeamSquadAjax(gID, gTeamID) {
         $.ajax({
@@ -546,6 +547,7 @@ $(document).ready(function() {
                 if(awayTeamName == null) {
                     alert("이미 참가하였습니다.")
                 } else {
+                    $("#partiHomeTeamForm").show();
                     alert(awayTeamMemberList[0].uID)
                     $("#awayTeamName").html(awayTeamName);
                     $("#awayTeamMemberList").empty();

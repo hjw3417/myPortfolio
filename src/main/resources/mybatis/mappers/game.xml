@@ -218,7 +218,7 @@
 		REGIONCODE r ON s.S_REGION = r.region_name
 		INNER JOIN
 		SQUAD sq ON g.G_ID = sq.G_ID
-		WHERE 1=1
+		WHERE g.G_STATUS = 0
 		<if test="sRegion != null and sRegion != ''">
 			AND r.REGION_CODE = #{sRegion}
 		</if>
@@ -226,12 +226,13 @@
 			AND (
 			g.G_TAG = #{search} OR
 			g.G_TITLE = #{search} OR
+			g.G_ID = #{search} OR
 			t.T_NAME = #{search} OR
 			s.S_REGION = #{search} OR
 			s.S_NAME = #{search} OR
 			s.S_ADDR = #{search}
 			)
-			OR g.G_TAG||g.G_TITLE||s.S_NAME||t.T_NAME||s.S_REGION||s.S_ADDR LIKE '%' || #{search} || '%'
+			OR g.G_ID||g.G_TAG||g.G_TITLE||s.S_NAME||t.T_NAME||s.S_REGION||s.S_ADDR LIKE '%' || #{search} || '%'
 		</if>
 		<if test="IMakeGameuID != null and IMakeGameuID != ''">
 			AND g.T_USERID = #{IMakeGameuID}
@@ -384,6 +385,13 @@
 		S_ID = #{sID},
 		S_NUM = #{sNum},
 		UPDATED_ID = #{updatedID}
+		WHERE
+		G_ID = #{gID}
+	</update>
+	<update id="updateGameState" parameterType="int">
+		UPDATE GAME
+		SET
+		G_STATUS = #{gStatus}
 		WHERE
 		G_ID = #{gID}
 	</update>

@@ -81,4 +81,7 @@ public interface GameDAO {
     public GameVO selectForModGame(int gID) throws  DataAccessException;
     public int deleteGame(int gID) throws DataAccessException;
     public int modGame(GameVO gameVO) throws DataAccessException;
+    public int updateGameState(@Param("gID") int gID,
+                               @Param("gStatus") int gStatus
+                               ) throws DataAccessException;
 }

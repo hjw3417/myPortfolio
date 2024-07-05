@@ -40,4 +40,5 @@ public interface GameService {
     public GameVO selectForModGame(int gID) throws Exception;
     public int deleteGame(int gID) throws Exception;
     public int modGame(GameVO gameVO) throws  Exception;
+    public int updateGameState(int gID, int gStatus) throws Exception;
 }

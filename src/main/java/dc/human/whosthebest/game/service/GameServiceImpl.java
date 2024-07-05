@@ -335,4 +335,10 @@ public class GameServiceImpl implements  GameService {
         int modGameResult = gameDAO.modGame(gameVO);
         return modGameResult;
     }
+
+    @Override
+    public int updateGameState(int gID, int gStatus) throws Exception {
+        int updateGameStateResult = gameDAO.updateGameState(gID, gStatus);
+        return updateGameStateResult;
+    }
 }

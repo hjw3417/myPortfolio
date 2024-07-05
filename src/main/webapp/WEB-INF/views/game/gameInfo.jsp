@@ -136,14 +136,14 @@
                   <c:otherwise>
                       <image class="tLogo" id="awayTeamLogo" name="awayTeamLogo" src="image/teamLogo.png"></image>
                       <div id="awayTeamName">${gameAwayTeamInfoVO.awayTeamName}</div>
-                      <form id="partiAwayTeamForm">
-                        <input type="hidden" id="awayGID" value="${gameInfoVO.gID}" />
-                        <input type="hidden" id="awayTeamID"  value="${gameInfoVO.tAwayID}" />
-                        <input type="submit" id="partiAwayTeamBtn" value="참가" />
-                      </form>
+
                   </c:otherwise>
               </c:choose>
-
+              <form id="partiAwayTeamForm">
+                <input type="hidden" id="awayGID" value="${gameInfoVO.gID}" />
+                <input type="hidden" id="awayTeamID"  value="${gameInfoVO.tAwayID}" />
+                <input type="submit" id="partiAwayTeamBtn" value="참가" />
+              </form>
             </div>
             <div>
               <label>경기 참가 인원</label>
