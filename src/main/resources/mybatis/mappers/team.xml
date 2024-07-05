@@ -224,7 +224,7 @@
             T.T_ID,
             T.T_NAME,
             T.T_MEMBER,
-            T.CREATED_DATE,
+            TO_CHAR(T.CREATED_DATE, 'YYYY-MM-DD') AS CREATED_DATE,
             T.RANKSCORE,
             CASE
                 WHEN T.RANKSCORE IS NULL THEN 'unranked'

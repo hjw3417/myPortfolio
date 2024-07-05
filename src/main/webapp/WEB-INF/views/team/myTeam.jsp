@@ -99,19 +99,17 @@
                 </div>
                 <div>
                   <span>창단일 : </span>
-                  <fmt:parseDate value="${teamProfile.createdDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedCreatedDate" />
-                  <fmt:formatDate value="${parsedCreatedDate}" pattern="yyyy-MM-dd" var="formattedCreatedDate" />
-                  <span>${formattedCreatedDate}</span>
+                  <span>${teamProfile.createdDate}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div id="record" class="record">
+          <div class="record">
             <div>
               <span>전적</span>
               <span><a href="teamrecord.html">+ 더보기</a></span>
             </div>
-            <div>
+            <div id="record">
               <ul>
                 <c:forEach items="${teamProfile.gameRecordVO.gameRecordInfoListVO}" var="match" end="3">
                   <li>
@@ -128,21 +126,19 @@
           </div>
         </section>
         <section class="sec2">
-          <div id="schedule" class="schedule">
+          <div class="schedule">
             <div>
               <span>경기 일정</span>
               <span><a href="#">+ 더보기</a></span>
             </div>
-            <div>
-              <c:forEach items="${gameList}" var="gameList" end="3">
-                <ul>
-                  <fmt:parseDate value="${gameList.gResDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedGResDate" />
-                  <fmt:formatDate value="${parsedGResDate}" pattern="yyyy-MM-dd HH:mm" var="formattedGResDate" />
+            <div id="schedule">
+              <ul>
+                <c:forEach items="${gameList}" var="gameList" end="3">
                   <li>
-                    <span>${formattedGResDate} ${gameList.sName}</span>
+                    <span>${gameList.gResDate} ${gameList.sName}</span>
                   </li>
-                </ul>
-              </c:forEach>
+                </c:forEach>
+              </ul>
             </div>
           </div>
           <div class="teamboard">

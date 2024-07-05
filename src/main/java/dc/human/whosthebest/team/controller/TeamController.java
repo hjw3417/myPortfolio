@@ -5,10 +5,13 @@ import dc.human.whosthebest.vo.TeamMemberVO;
 import dc.human.whosthebest.vo.TeamProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 public interface TeamController {
 
@@ -16,7 +19,7 @@ public interface TeamController {
 
     public ModelAndView myTeamPage();
 
-    public TeamProfileVO getTeamInfo(@RequestParam("tID") int tID);
+    public ResponseEntity<Map<String, Object>> getTeamProfile(@RequestParam("tID") int tID);
 
     public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception;
 

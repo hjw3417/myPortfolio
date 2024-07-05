@@ -10,12 +10,16 @@ import dc.human.whosthebest.vo.TeamProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller("teamController")
 public class TeamControllerImpl implements TeamController{
@@ -61,12 +65,17 @@ public class TeamControllerImpl implements TeamController{
     //특정 팀의 상세 정보 반환
     @GetMapping("/api/teamInfo")
     @ResponseBody
-    public TeamProfileVO getTeamInfo(@RequestParam("tID") int tID) {
+    public ResponseEntity<Map<String, Object>> getTeamProfile(@RequestParam("tID") int tID) {
+        Map<String, Object> response = new HashMap<>();
         try {
-            return teamService.getTeamProfile(tID);
+            TeamProfileVO teamProfile = teamService.getTeamProfile(tID);
+            List<GameListVO> gameListVO = teamService.selectGameSchedule(tID);
+            response.put("teamProfile", teamProfile);
+            response.put("gameList", gameListVO);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     };
 

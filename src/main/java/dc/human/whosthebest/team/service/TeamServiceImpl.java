@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("teamService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -19,6 +22,10 @@ public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private AboutTeamDAO aboutTeamDAO;
+
+    //날짜 format을 위한 필드
+    private static final SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat displayFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
     public List listTeams() throws Exception {
@@ -85,8 +92,26 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public List<GameListVO> selectGameSchedule(int tID) throws Exception {
         List<GameListVO> gameList = aboutTeamDAO.selectGameSchedule(tID);
-        return gameList;
+        //날짜 변환 후 반환
+        return gameList.stream().map(this::convertGResDate).collect(Collectors.toList());
     }
+
+    // gresdate 날짜 변환 메서드
+    private GameListVO convertGResDate(GameListVO game) {
+        game.setgResDate(formatDate(game.getgResDate()));
+        return game;
+    }
+
+    // 날짜 형식 변환 메서드
+    private String formatDate(String dateStr) {
+        try {
+            return displayFormat.format(originalFormat.parse(dateStr));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return dateStr; // 변환 실패 시 원본 문자열 반환
+        }
+    }
+
 
     @Override
     public GameRecordVO selectGameRecordInfo(int tID, String resultType) throws Exception {
@@ -104,5 +129,7 @@ public class TeamServiceImpl implements TeamService {
         ranking = teamDAO.selectRanking();
         return ranking;
     };
+
+
 
 }
