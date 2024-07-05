@@ -364,13 +364,13 @@ $(document).ready(function() {
         });
     }
     //game 조회 ajax 모듈
-    var defaultPageNum = 1; // 이 값을 JSP에서 받아올 수도 있습니다.
+    var defaultPageNumInGameList = 1; // 이 값을 JSP에서 받아올 수도 있습니다.
 
     //page 이동 버튼
-    function createPageButtons() {
-        $('#pageNumBtnLI').empty(); // 기존 버튼 제거
-        for (var i = defaultPageNum; i <= defaultPageNum + 4; i++) {
-            $('#pageNumBtnLI').append(`
+    function createPageButtonsInGameList() {
+        $('#gameList-pageNumBtnLI').empty(); // 기존 버튼 제거
+        for (var i = defaultPageNumInGameList; i <= defaultPageNumInGameList + 4; i++) {
+            $('#gameList-pageNumBtnLI').append(`
                 <form id="gamList-pageNumForm" class="gamList-pageNumForm">
                     <input type="hidden" class="rowNum" name="rowNum" id="rowNum" value="${i - 1}">
                     <input type="submit" class="pageNum" name="pageNum" value="${i}">
@@ -381,16 +381,16 @@ $(document).ready(function() {
     //page 이동 버튼
 
     // 초기 페이지 버튼 생성
-    createPageButtons();
+    createPageButtonsInGameList();
 
-    $("#nextPage").on('click', function() {
-        alert("defaultPageNum : " + defaultPageNum);
-        defaultPageNum += 5;
-        alert("defaultPageNum : " + defaultPageNum);
-        createPageButtons(); // 페이지 버튼 다시 생성
+    $("#gameList-nextPage").on('click', function() {
+        alert("defaultPageNumInGameList : " + defaultPageNumInGameList);
+        defaultPageNumInGameList += 5;
+        alert("defaultPageNumInGameList : " + defaultPageNumInGameList);
+        createPageButtonsInGameList(); // 페이지 버튼 다시 생성
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
-        var rowNum = defaultPageNum-1;
-        var pageNum = defaultPageNum;
+        var rowNum = defaultPageNumInGameList-1;
+        var pageNum = defaultPageNumInGameList;
         var sRegion = null;
         var search = null;
         var IMakeGameuID = null;
@@ -398,22 +398,22 @@ $(document).ready(function() {
         selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
 
-    $("#prevPage").on('click', function() {
-        alert("defaultPageNum : " + defaultPageNum);
-        if(defaultPageNum == 1) {
+    $("#gameList-prevPage").on('click', function() {
+        alert("defaultPageNumInGameList : " + defaultPageNumInGameList);
+        if(defaultPageNumInGameList == 1) {
             alert("첫 페이지 입니다.");
         }
-        if(defaultPageNum >= 6) {
-            defaultPageNum -= 5;
-            var rowNum = defaultPageNum-1;
-            var pageNum = defaultPageNum;
+        if(defaultPageNumInGameList >= 6) {
+            defaultPageNumInGameList -= 5;
+            var rowNum = defaultPageNumInGameList-1;
+            var pageNum = defaultPageNumInGameList;
             var sRegion = null;
             var search = null;
             var IMakeGameuID = null;
             var IPartiGameuID = null;
             selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
         }
-        createPageButtons(); // 페이지 버튼 다시 생성
+        createPageButtonsInGameList(); // 페이지 버튼 다시 생성
 
     });
     //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
@@ -727,12 +727,14 @@ $(document).ready(function() {
 
 //stadiumList.do 관련 js 시작
 $(document).ready(function() {
-    function stadiumListSearchAjax(sRegion, search) {
+    function stadiumListSearchAjax(pageNum, rowNum, sRegion, search) {
         console.log("AJAX 요청 시작");
         $.ajax({
             url: '/game/search/stadiumList.do',
             type: 'POST',
             data: {
+                pageNum: pageNum,
+                rowNum: rowNum,
                 sRegion: sRegion,
                 search: search
             },
@@ -767,14 +769,75 @@ $(document).ready(function() {
             }
         });
     }
+    var defaultPageNumInStadiumList = 1;
+    //page 이동 버튼
+    function createPageButtonsInStadiumList() {
+        $('#stadiumList-pageNumBtnLI').empty(); // 기존 버튼 제거
+        for (var i = defaultPageNumInStadiumList; i <= defaultPageNumInStadiumList + 4; i++) {
+            $('#stadiumList-pageNumBtnLI').append(`
+                <form id="stadiumList-pageNumForm" class="stadiumList-pageNumForm">
+                    <input type="hidden" class="rowNum" name="rowNum" id="rowNum" value="${i - 1}">
+                    <input type="submit" class="pageNum" name="pageNum" value="${i}">
+                </form>
+            `);
+        }
+    }
+    //page 이동 버튼
+
+    // 초기 페이지 버튼 생성
+    createPageButtonsInStadiumList();
+
+    $("#stadiumList-nextPage").on('click', function() {
+        alert("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
+        defaultPageNumInStadiumList += 5;
+        alert("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
+        createPageButtonsInStadiumList(); // 페이지 버튼 다시 생성
+        event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+        var rowNum = defaultPageNumInStadiumList-1;
+        var pageNum = defaultPageNumInStadiumList;
+        var sRegion = null;
+        var search = null;
+        stadiumListSearchAjax(pageNum, rowNum, sRegion, search);
+    });
+
+    $("#stadiumList-prevPage").on('click', function() {
+        alert("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
+        if(defaultPageNumInStadiumList == 1) {
+            alert("첫 페이지 입니다.");
+        }
+        if(defaultPageNumInStadiumList >= 6) {
+            defaultPageNumInStadiumList -= 5;
+            var rowNum = defaultPageNumInStadiumList-1;
+            var pageNum = defaultPageNumInStadiumList;
+            var sRegion = null;
+            var search = null;
+            var IMakeGameuID = null;
+            var IPartiGameuID = null;
+            stadiumListSearchAjax(rowNum, pageNum, sRegion, search);
+        }
+        createPageButtonsInStadiumList(); // 페이지 버튼 다시 생성
+
+    });
+    //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
+    $(document).on('submit', '#stadiumList-pageNumForm', function(event) {
+        event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+        var rowNum = $(event.originalEvent?.submitter).siblings('input[name="rowNum"]').val();
+        var pageNum = $(event.originalEvent?.submitter).val();
+        var sRegion = null;
+        var search = null;
+        stadiumListSearchAjax(pageNum, rowNum, sRegion, search);
+    });
+    //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
 
     $(document).on("submit", "#stadiumList-findForm", function(event) {
         event.preventDefault();
+        var rowNum = 0;
+        var pageNum = 1;
         var sRegion = $("#sRegion").val();
         var search = $("#search").val();
         alert("sRegion: " + sRegion);
         alert("search: " + search);
-        stadiumListSearchAjax(sRegion, search);
+        stadiumListSearchAjax(rowNum, pageNum, sRegion, search);
     });
 });
 //stadiumList.do 관련 js 끝

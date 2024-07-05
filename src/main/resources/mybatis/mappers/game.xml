@@ -332,7 +332,9 @@
 		ROW_NUMBER() OVER (ORDER BY S_ID) AS rn
 		FROM STADIUM
 		)
-		WHERE rn BETWEEN 1 AND 10
+		WHERE
+		rn BETWEEN (#{pageNum} + #{rowNum}*10) AND (#{pageNum} + #{rowNum}*10) + 9
+<!--		rn BETWEEN 1 AND 10-->
 		<if test="sRegion != null and sRegion != ''">
 			AND  S_REGION = #{sRegion}
 		</if>

@@ -36,7 +36,7 @@ public interface GameService {
     public GameAwayTeamInfoVO insertawayTeamMembr(SquadVO squadVO) throws Exception;
     public String selectAwayTeamName(int tID) throws Exception;
     public int insertGameResult(GResultVO gResultVO) throws Exception;
-    public List<StadiumVO> selectStadiumInfo(String sRegion, String search) throws  Exception;
+    public List<StadiumVO> selectStadiumInfo(int pageNum, int rowNum, String sRegion, String search) throws  Exception;
     public GameVO selectForModGame(int gID) throws Exception;
     public int deleteGame(int gID) throws Exception;
     public int modGame(GameVO gameVO) throws  Exception;

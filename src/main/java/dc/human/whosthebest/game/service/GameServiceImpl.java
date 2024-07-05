@@ -315,8 +315,9 @@ public class GameServiceImpl implements  GameService {
     }
 
     @Override
-    public List<StadiumVO> selectStadiumInfo(String sRegion, String search) throws Exception {
-        List<StadiumVO> stadiumVO = gameDAO.selectStadiumInfo(sRegion, search);
+    public List<StadiumVO> selectStadiumInfo(int pageNum, int rowNum, String sRegion, String search) throws Exception {
+        System.out.println("service rowNum : " + rowNum + " pageNum" + pageNum);
+        List<StadiumVO> stadiumVO = gameDAO.selectStadiumInfo(pageNum, rowNum, sRegion, search);
         return stadiumVO;
     }
     @Override

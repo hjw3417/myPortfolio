@@ -161,12 +161,12 @@
           <ul class="pagination">
 
             <li>
-            <button id="prevPage" type="button" onclick="#">이전</button>
+            <button id="gameList-prevPage" type="button" onclick="#">이전</button>
             </li>
-            <li id="pageNumBtnLI" name="pageNumBtnLI">
+            <li id="gameList-pageNumBtnLI" name="gameList-pageNumBtnLI">
             </li>
             <li>
-                <button id="nextPage" type="button" onclick="#">다음</button>
+                <button id="gameList-nextPage" type="button" onclick="#">다음</button>
             </li>
           </ul>
         </div>

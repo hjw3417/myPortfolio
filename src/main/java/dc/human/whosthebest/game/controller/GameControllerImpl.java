@@ -413,8 +413,12 @@ public class GameControllerImpl implements GameController {
     public ModelAndView selectStadiumInfo() throws Exception {
         String sRegion = null;
         String search = null;
+        int rowNum = 0;
+        int pageNum = 1;
         ModelAndView mav = new ModelAndView("/game/stadiumList");
-        List<StadiumVO> stadiumVO = gameService.selectStadiumInfo(sRegion, search);
+        System.out.println("controller rowNum : " + rowNum + " pageNum" + pageNum);
+        List<StadiumVO> stadiumVO = gameService.selectStadiumInfo(pageNum, rowNum, sRegion, search);
+        System.out.println("stadiumVO.size() : " + stadiumVO.size());
         mav.addObject("stadiumVO", stadiumVO);
         return mav;
     }
@@ -422,10 +426,12 @@ public class GameControllerImpl implements GameController {
     @Override
     @PostMapping(value="/search/stadiumList.do")
     @ResponseBody
-    public List<StadiumVO> searchStadiumInfo(@RequestParam(value="sRegion", required = false) String sRegion,
+    public List<StadiumVO> searchStadiumInfo(@RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum,
+                                             @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,
+                                             @RequestParam(value="sRegion", required = false) String sRegion,
                                              @RequestParam(value="search", required = false) String search
-                                            ) throws Exception{
-        List<StadiumVO> stadiumList = gameService.selectStadiumInfo(sRegion, search);
+                                             ) throws Exception{
+        List<StadiumVO> stadiumList = gameService.selectStadiumInfo(pageNum, rowNum, sRegion, search);
         return stadiumList;
     }
     @Override

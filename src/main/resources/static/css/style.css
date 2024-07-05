@@ -1154,24 +1154,41 @@ footer{
     .stadiumDetail.show {
       max-height: 500px; /* 충분히 큰 값으로 설정 */
       opacity: 1;
+    }
   }
-  }
-  .paginationContainer {
-    >.pagination {
+}
+.stadiumList-paginationContainer {
+    .pagination {
       display: flex;
       justify-content: center;
       list-style-type: none;
       padding: 0;
-      >li {
+      li {
+        display: flex;
         font-size: 10pt;
         margin-right: 5px;
         color: rgb(146, 172, 101);
+        button {
+            font-family: 'GmarketSansMedium';
+            background-color: inherit;
+            border: 0pt;
+            cursor: pointer;
+        }
+        form {
+            input {
+                display:flex;
+                font-family: 'GmarketSansMedium';
+                background-color: inherit;
+                border: 0pt;
+                cursor: pointer;
+            }
+            input:focus{outline: none;}
+        }
       }
-      >li:first-child, li:last-child {
-        font-size: 10pt;  
+      li:first-child, li:last-child {
+        font-size: 10pt;
       }
     }
-  }
 }
 .gameRecord-side{
   margin-top: -50px;
@@ -1672,12 +1689,14 @@ footer{
     /* margin-left: -300px; */
     margin-top: 50px;
     height: 40px;
+    margin: 0 auto;
     >.pagination {
       display: flex;
       justify-content: center;
       list-style-type: none;
       padding: 0;
       >li {
+        display: flex;
         font-size: 10pt;
         margin-right: 5px;
         color: rgb(146, 172, 101);
