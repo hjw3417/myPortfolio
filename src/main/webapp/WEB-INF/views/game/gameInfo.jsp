@@ -136,7 +136,6 @@
                   <c:otherwise>
                       <image class="tLogo" id="awayTeamLogo" name="awayTeamLogo" src="image/teamLogo.png"></image>
                       <div id="awayTeamName">${gameAwayTeamInfoVO.awayTeamName}</div>
-
                   </c:otherwise>
               </c:choose>
               <form id="partiAwayTeamForm">
