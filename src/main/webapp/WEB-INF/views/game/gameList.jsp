@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" 
     isELIgnored="false"  %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <%
@@ -129,7 +130,10 @@
                     </tr>
                     <tr>
                       <td>경기일시 : </td>
-                      <td>${gameListVO.gResDate} (${gameListVO.gTime} 시간)</td>
+                      <td>
+                          <c:set var="formattedGameListResDate" value="${fn:substring(gameListVO.gResDate, 0, 16)}" />
+                          ${formattedGameListResDate} (${gameListVO.gTime} 시간)
+                      </td>
                     </tr>
                   </table>
                 </div>

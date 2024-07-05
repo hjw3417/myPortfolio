@@ -80,7 +80,7 @@
                     <input type="text" name="awayTeamScore" id="awayTeamScore" placeholder="Score" maxlength="2">
                 </div>
                 <div class="submitContainer">
-                    <form method="post" action="${contextPath}/game/insert/gameResult.do">
+                    <form id="inputResultForm" method="post" action="${contextPath}/game/insert/gameResult.do">
                         <input type="hidden" name="homeTeamScoreHidden" id="homeTeamScoreHidden">
                         <input type="hidden" name="awayTeamScoreHidden" id="awayTeamScoreHidden">
                         <input type="hidden" name="gTeamID" id="gTeamID" value="${gTeamID}">

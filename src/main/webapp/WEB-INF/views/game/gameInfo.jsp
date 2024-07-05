@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" 
     isELIgnored="false"  %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <%
@@ -69,7 +71,7 @@
         <div class="titeContainer">
           <div>${gameInfoVO.sRegion}</div>
           <div>${gameInfoVO.gTitle}</div>
-          <div>
+          <div class="startGameFormContainer">
             <form method="post" action="${contextPath}/game/gameResult.do">
                 <input type="hidden" id="startGamesRegion" name="sRegion" value="${gameInfoVO.sRegion}" />
                 <input type="hidden" id="startGamegTitle" name="gTitle" value="${gameInfoVO.gTitle}" />
@@ -87,10 +89,12 @@
             ${gameInfoVO.gTag}
           </div>
           <div class="gMinmember" id="gMinmember" name="gMinmember">
-            <span id="nowPartiMemberNum">${gameInfoVO.nowPartiMemberNum}</span><span> <현재 참여 인원></span> / ${gameInfoVO.gMinMember}<span> <최소 참여 인원></span>
+            <span id="nowPartiMemberNum" class="nowPartiMemberNum">${gameInfoVO.nowPartiMemberNum}</span><span> <현재 참여 인원></span> / ${gameInfoVO.gMinMember}<span> <최소 참여 인원></span>
           </div>
           <div>
-            ${gameInfoVO.gCreatedDate} 개설
+              <!-- 문자열에서 필요한 부분만 추출하여 초단위를 제거 -->
+              <c:set var="formattedDate" value="${fn:substring(gameInfoVO.gCreatedDate, 0, 16)}" />
+              ${formattedDate} 개설
           </div>
         </div>
         <!-- 사이 공간 영역 종료 -->
@@ -173,10 +177,11 @@
         <!-- 팀 정보 영역 시작 -->
         <!-- 경기장 정보 영역 시작  -->
         <div class="stadiumInfoContainer">
-          <div>
+        <div>
             경기 일시<br>
-            ${gameInfoVO.gResDate} (${gameInfoVO.gTime} 시간)
-          </div>
+            <c:set var="formattedResDate" value="${fn:substring(gameInfoVO.gResDate, 0, 16)}" />
+            ${formattedResDate} (${gameInfoVO.gTime} 시간)
+        </div>
           <div>
             ${gameInfoVO.sName} ${gameInfoVO.sNum} 경기장<br>
            ${gameInfoVO.sAddr}

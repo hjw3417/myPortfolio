@@ -179,7 +179,7 @@ function receiveData(stadiumResConFormDate) {
 //팝업 창을 여는 함수
 function openResStadium(contextPath) {
     var url = contextPath + '/game/resStadium.do';
-    var popupWindow = window.open(url, 'resStadium', 'width=630,height=600,scrollbars=yes');
+    var popupWindow = window.open(url, 'resStadium', 'width=630,height=750,scrollbars=yes');
     if (popupWindow) {
         popupWindow.focus();
     } else {
@@ -299,6 +299,7 @@ $(document).ready(function() {
                     // 새로운 DOM 업데이트
                     for (var i = 0; i < gameList.length; i++) {
                         var gameListVO = gameList[i];
+                        var gResDate = gameList[i].gResDate.substring(0, 16);
 //                        html += i;
                         html += `
                             <!-- 카드 시작 -->
@@ -332,7 +333,7 @@ $(document).ready(function() {
                                             </tr>
                                             <tr>
                                                 <td>경기일시 : </td>
-                                                <td>${gameListVO.gResDate} (${gameListVO.gTime} 시간)</td>
+                                                <td>${gResDate} (${gameListVO.gTime} 시간)</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -464,15 +465,15 @@ $(document).ready(function() {
     });
     //side바 필터링 기능
     //검색 기능
-       $('#gameList-findForm').on('submit', function(event) {
-           event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
-           var rowNum = 0;
-           var pageNum = 1;
-           var sRegion = $("#sRegion").val();
-           var search = $("#search").val();
-           var uID = null;
-           selectGameAjax(rowNum, pageNum, sRegion, search, uID);
-       });
+   $('#gameList-findForm').on('submit', function(event) {
+       event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+       var rowNum = 0;
+       var pageNum = 1;
+       var sRegion = $("#sRegion").val();
+       var search = $("#search").val();
+       var uID = null;
+       selectGameAjax(rowNum, pageNum, sRegion, search, uID);
+   });
     //검색 기능
 });
 //gameMake.do 관련 js 끝
@@ -480,7 +481,7 @@ $(document).ready(function() {
 //gameInfo.do 관련 js 시작
 $(document).ready(function() {
     //경기 참여 Btn value 설정
-    $('#startGameBtn').val("경기 종료");
+    $('#startGameBtn').val("평가 입력");
 
     var $gComent = $('#gComent');
     $gComent.scrollTop($gComent.prop("scrollHeight"));
@@ -706,6 +707,20 @@ $(document).ready(function() {
     $('#awayTeamScore').on('input', function() {
         var awayTeamScoreValue = $(this).val();
         $('#awayTeamScoreHidden').val(awayTeamScoreValue);
+    });
+    $(document).on('submit', '#inputResultForm', function(event) {
+        alert("유효성 검사 시작");
+        var homeTeamScore = $("#homeTeamScoreHidden").val();
+        var awayTeamScore = $("#awayTeamScoreHidden").val();
+        if (
+            homeTeamScore !== null && homeTeamScore !== "" && !isNaN(Number(homeTeamScore)) && Number.isInteger(Number(homeTeamScore)) && Number(homeTeamScore) >= 0 &&
+            awayTeamScore !== null && awayTeamScore !== "" && !isNaN(Number(awayTeamScore)) && Number.isInteger(Number(awayTeamScore)) && Number(awayTeamScore) >= 0
+        ) {
+            alert("경기 결과가 제출되었습니다.");
+        } else {
+            alert("경기 결과를 다시 입력해주세요\n(숫자만 입력 가능)");
+            event.preventDefault(); // 폼 제출 중지
+        }
     });
 })
 //gameResult.do 관련 js 끝

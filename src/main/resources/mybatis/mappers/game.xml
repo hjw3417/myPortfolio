@@ -226,13 +226,12 @@
 			AND (
 			g.G_TAG = #{search} OR
 			g.G_TITLE = #{search} OR
-			g.G_ID = #{search} OR
 			t.T_NAME = #{search} OR
 			s.S_REGION = #{search} OR
 			s.S_NAME = #{search} OR
 			s.S_ADDR = #{search}
 			)
-			OR g.G_ID||g.G_TAG||g.G_TITLE||s.S_NAME||t.T_NAME||s.S_REGION||s.S_ADDR LIKE '%' || #{search} || '%'
+			OR g.G_TAG||g.G_TITLE||s.S_NAME||t.T_NAME||s.S_REGION||s.S_ADDR LIKE '%' || #{search} || '%'
 		</if>
 		<if test="IMakeGameuID != null and IMakeGameuID != ''">
 			AND g.T_USERID = #{IMakeGameuID}
