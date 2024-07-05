@@ -70,7 +70,7 @@
         <div>
           경기 일정
         </div>
-        <div class="gameScheduleCardContainer">
+        <div class="gameScheduleCardContainer" id="gameScheduleCardContainer">
             <!-- 카드 시작 -->
             <c:forEach var="gameList" items="${gameListVO}">
             <div class="tableContainer">

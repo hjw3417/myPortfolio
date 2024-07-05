@@ -897,7 +897,7 @@ $(document).ready(function() {
 
 //gameSchedule.do 관련 js 시작
 $(document).ready(function() {
-    function selectGameScheduleAjax(pageNum, rowNum) {
+    function selectGameScheduleAjax(pageNum, rowNum, tID) {
         alert("AJAX 요청 시작");
         $.ajax({
             url: "/team/paging/gameSchedule.do",
@@ -909,14 +909,15 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                alert("response : " + response);
-                var html = "";
+                alert("success function 시작");
                 var gameListVO = response;
                 if (gameListVO.length == 0) {
                     alert("page가 없습니다.");
                 } else {
-                    alert(gameListVO.length);
+                    alert("ajax 요청 성공 gameListVO.length : " + gameListVO.length);
                     $('#gameScheduleCardContainer').empty();
+                    alert("gameScheduleCardContainer after empty: ", $('#gameScheduleCardContainer').html());
+                    var html = "";
                     $.each(gameListVO, function(index, gameList) {
                         html += `
                            <div class="tableContainer">
@@ -990,7 +991,8 @@ $(document).ready(function() {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         var rowNum = $(event.originalEvent.submitter).siblings('input[name="rowNum"]').val();
         var pageNum = $(event.originalEvent.submitter).val();
-        selectGameScheduleAjax(pageNum, rowNum);
+        var tID = 0;
+        selectGameScheduleAjax(pageNum, rowNum, tID);
     });
 
     // 이전 버튼 submit
@@ -1002,7 +1004,8 @@ $(document).ready(function() {
             defaultPageNumInGameSchedule -= 5;
             var rowNum = defaultPageNumInGameSchedule - 1;
             var pageNum = defaultPageNumInGameSchedule;
-            selectGameScheduleAjax(pageNum, rowNum);
+            var tID = 0;
+            selectGameScheduleAjax(pageNum, rowNum, tID);
             createPageButtonsGameSchedule(); // 페이지 버튼 다시 생성
         }
     });
@@ -1016,7 +1019,8 @@ $(document).ready(function() {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInGameSchedule - 1;
         var pageNum = defaultPageNumInGameSchedule;
-        selectGameScheduleAjax(pageNum, rowNum);
+        var tID = 0;
+        selectGameScheduleAjax(pageNum, rowNum, tID);
     });
 });
 //gameSchedule.do 관련 js 끝
