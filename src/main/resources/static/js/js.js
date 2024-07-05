@@ -383,13 +383,37 @@ $(document).ready(function() {
     createPageButtons();
 
     $("#nextPage").on('click', function() {
+        alert("defaultPageNum : " + defaultPageNum);
         defaultPageNum += 5;
+        alert("defaultPageNum : " + defaultPageNum);
         createPageButtons(); // 페이지 버튼 다시 생성
+        event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+        var rowNum = defaultPageNum-1;
+        var pageNum = defaultPageNum;
+        var sRegion = null;
+        var search = null;
+        var IMakeGameuID = null;
+        var IPartiGameuID = null;
+        selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
 
     $("#prevPage").on('click', function() {
-        defaultPageNum -= 5;
+        alert("defaultPageNum : " + defaultPageNum);
+        if(defaultPageNum == 1) {
+            alert("첫 페이지 입니다.");
+        }
+        if(defaultPageNum >= 6) {
+            defaultPageNum -= 5;
+            var rowNum = defaultPageNum-1;
+            var pageNum = defaultPageNum;
+            var sRegion = null;
+            var search = null;
+            var IMakeGameuID = null;
+            var IPartiGameuID = null;
+            selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
+        }
         createPageButtons(); // 페이지 버튼 다시 생성
+
     });
     //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
     $(document).on('submit', '#gamList-pageNumForm', function(event) {
