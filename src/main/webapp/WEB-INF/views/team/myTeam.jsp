@@ -69,93 +69,95 @@
           </ul>
         </div>
       </div>
-      <div class="myteam">
-        <section class="sec1">
-          <div id="teamprofile" class="teamprofile">
-            <div>
-              <div>
+      <div id="content">
+          <div class="myteam">
+            <section class="sec1">
+              <div id="teamprofile" class="teamprofile">
                 <div>
-                  <img src="${contextPath}/image/우사기.jpg">
-                </div>
-                <div>
-                  <span>${teamProfile.rankName}</span>
-                  <span>${teamProfile.tRankScore}</span>
+                  <div>
+                    <div>
+                      <img src="${contextPath}/image/우사기.jpg">
+                    </div>
+                    <div>
+                      <span>${teamProfile.rankName}</span>
+                      <span>${teamProfile.tRankScore}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <span>${teamProfile.tName}</span>
+                    </div>
+                    <div>
+                      <span>전적 : </span>
+                      <span>${teamProfile.gameRecordVO.totalCount}전
+                            ${teamProfile.gameRecordVO.winCount}승
+                            ${teamProfile.gameRecordVO.loseCount}패
+                      </span>
+                    </div>
+                    <div>
+                      <span>팀원 수 : </span>
+                      <span>${teamProfile.tMember}명</span>
+                    </div>
+                    <div>
+                      <span>창단일 : </span>
+                      <span>${teamProfile.createdDate}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div>
+              <div class="record">
                 <div>
-                  <span>${teamProfile.tName}</span>
+                  <span>전적</span>
+                  <span><a href="teamrecord.html">+ 더보기</a></span>
                 </div>
-                <div>
-                  <span>전적 : </span>
-                  <span>${teamProfile.gameRecordVO.totalCount}전
-                        ${teamProfile.gameRecordVO.winCount}승
-                        ${teamProfile.gameRecordVO.loseCount}패
-                  </span>
-                </div>
-                <div>
-                  <span>팀원 수 : </span>
-                  <span>${teamProfile.tMember}명</span>
-                </div>
-                <div>
-                  <span>창단일 : </span>
-                  <span>${teamProfile.createdDate}</span>
+                <div id="record">
+                  <ul>
+                    <c:forEach items="${teamProfile.gameRecordVO.gameRecordInfoListVO}" var="match" end="3">
+                      <li>
+                        <span>${match.tHomeName}</span>
+                        <span>&nbsp;${match.homeGoal}&nbsp;</span>
+                        <span>:</span>
+                        <span>&nbsp;${match.awayGoal}&nbsp;</span>
+                        <span>${match.tAwayName}</span>
+                        <span>${match.resultType}</span>
+                      </li>
+                    </c:forEach>
+                  </ul>
                 </div>
               </div>
-            </div>
+            </section>
+            <section class="sec2">
+              <div class="schedule">
+                <div>
+                  <span>경기 일정</span>
+                  <span><a href="#">+ 더보기</a></span>
+                </div>
+                <div id="schedule">
+                  <ul>
+                    <c:forEach items="${gameList}" var="gameList" end="3">
+                      <li>
+                        <span>${gameList.gResDate} ${gameList.sName}</span>
+                      </li>
+                    </c:forEach>
+                  </ul>
+                </div>
+              </div>
+              <div class="teamboard">
+                <div>
+                  <span>팀 게시판</span>
+                  <span><a href="#">+ 더보기</a></span>
+                </div>
+                <div>
+                  <ul>
+                    <li>안녕하세요.</li>
+                    <li>안전게임하세요!</li>
+                    <li>다 이겨버리자고!</li>
+                    <li>뿌르르르르르</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
           </div>
-          <div class="record">
-            <div>
-              <span>전적</span>
-              <span><a href="teamrecord.html">+ 더보기</a></span>
-            </div>
-            <div id="record">
-              <ul>
-                <c:forEach items="${teamProfile.gameRecordVO.gameRecordInfoListVO}" var="match" end="3">
-                  <li>
-                    <span>${match.tHomeName}</span>
-                    <span>&nbsp;${match.homeGoal}&nbsp;</span>
-                    <span>:</span>
-                    <span>&nbsp;${match.awayGoal}&nbsp;</span>
-                    <span>${match.tAwayName}</span>
-                    <span>${match.resultType}</span>
-                  </li>
-                </c:forEach>
-              </ul>
-            </div>
-          </div>
-        </section>
-        <section class="sec2">
-          <div class="schedule">
-            <div>
-              <span>경기 일정</span>
-              <span><a href="#">+ 더보기</a></span>
-            </div>
-            <div id="schedule">
-              <ul>
-                <c:forEach items="${gameList}" var="gameList" end="3">
-                  <li>
-                    <span>${gameList.gResDate} ${gameList.sName}</span>
-                  </li>
-                </c:forEach>
-              </ul>
-            </div>
-          </div>
-          <div class="teamboard">
-            <div>
-              <span>팀 게시판</span>
-              <span><a href="#">+ 더보기</a></span>
-            </div>
-            <div>
-              <ul>
-                <li>안녕하세요.</li>
-                <li>안전게임하세요!</li>
-                <li>다 이겨버리자고!</li>
-                <li>뿌르르르르르</li>
-              </ul>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   </main>

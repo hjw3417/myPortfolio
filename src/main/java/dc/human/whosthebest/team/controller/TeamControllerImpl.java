@@ -35,52 +35,10 @@ public class TeamControllerImpl implements TeamController{
         return "/team/teamMake";
     }
 
-    //나의팀 페이지
-    @Override
-    @GetMapping("/myTeam")
-    public ModelAndView myTeamPage() {
-        ModelAndView mav = new ModelAndView("/team/myTeam");
-        String userID = "heo"; // 실제 사용자 ID 가져오는 로직으로 대체
-
-        try {
-            List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(userID);
-            mav.addObject("myTeams", myTeams);
-
-            if(myTeams != null && !myTeams.isEmpty()) {
-                int tID=myTeams.get(0).gettID();
-                TeamProfileVO teamProfile = teamService.getTeamProfile(tID);
-                List<GameListVO> gameListVO = teamService.selectGameSchedule(tID);
-                mav.addObject("teamProfile", teamProfile);
-                mav.addObject("gameList", gameListVO);
-            } else {
-                mav.addObject("teamProfile",null);
-            }
-        } catch (Exception e) {
-            mav.addObject("errorMsg", "팀 목록을 가져오는 도중 오류가 발생했습니다.");
-            e.printStackTrace();
-        }
-        return mav;
-    }
-
-    //특정 팀의 상세 정보 반환
-    @GetMapping("/api/teamInfo")
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> getTeamProfile(@RequestParam("tID") int tID) {
-        Map<String, Object> response = new HashMap<>();
-        try {
-            TeamProfileVO teamProfile = teamService.getTeamProfile(tID);
-            List<GameListVO> gameListVO = teamService.selectGameSchedule(tID);
-            response.put("teamProfile", teamProfile);
-            response.put("gameList", gameListVO);
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    };
 
     //팀 만들기 insert
     //팀원 목록에 추가하는 것과 동시에 시행
+        //프로필 사진 넣기 필요
         //해당지역 이미 생성되있는 팀이름 검사 필요
         //가입한 팀 3개 검사 필요
         //팀 만들때 팀장도 team_member 테이블에 저장 필요
@@ -158,6 +116,66 @@ public class TeamControllerImpl implements TeamController{
         return mav;
     }
 
+    //나의팀 페이지
+        //더보기 또는 사이드바 메뉴 매핑 필요
+        //프로필 사진 불러오기 필요
+    @Override
+    @GetMapping("/myTeam")
+    public ModelAndView myTeamPage() {
+        ModelAndView mav = new ModelAndView("/team/myTeam");
+        String userID = "heo"; // 실제 사용자 ID 가져오는 로직으로 대체
+
+        try {
+            List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(userID);
+            mav.addObject("myTeams", myTeams);
+
+            if(myTeams != null && !myTeams.isEmpty()) {
+                int tID=myTeams.get(0).gettID();
+                TeamProfileVO teamProfile = teamService.getTeamProfile(tID);
+                List<GameListVO> gameListVO = teamService.selectGameSchedule(tID);
+                mav.addObject("teamProfile", teamProfile);
+                mav.addObject("gameList", gameListVO);
+            } else {
+                mav.addObject("teamProfile",null);
+            }
+        } catch (Exception e) {
+            mav.addObject("errorMsg", "팀 목록을 가져오는 도중 오류가 발생했습니다.");
+            e.printStackTrace();
+        }
+        return mav;
+    }
+
+    //특정 팀의 상세 정보 반환
+    @GetMapping("/api/teamInfo")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getTeamProfile(@RequestParam("tID") int tID) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            TeamProfileVO teamProfile = teamService.getTeamProfile(tID);
+            List<GameListVO> gameListVO = teamService.selectGameSchedule(tID);
+            response.put("teamProfile", teamProfile);
+            response.put("gameList", gameListVO);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    };
+    //임시
+    //팀 멤버 페이지 매핑
+    @Override
+    @GetMapping("/teamMembers")
+    public ModelAndView teamMembersPage(@RequestParam("tID") int tID) {
+        ModelAndView mav = new ModelAndView("/team/teamMembers"); // teamMembers.jsp 파일 위치
+        try {
+//            List<TeamMemberVO> teamMembers = teamService.getTeamMembers(tID); // 팀원 목록 조회 로직
+//            mav.addObject("teamMembers", teamMembers); // 팀원 목록을 ModelAndView에 추가
+        } catch (Exception e) {
+            mav.addObject("errorMsg", "팀원 목록을 가져오는 도중 오류가 발생했습니다.");
+            e.printStackTrace();
+        }
+        return mav;
+    }
 
 
     //랭킹 페이지 매핑
