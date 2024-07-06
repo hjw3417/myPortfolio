@@ -391,8 +391,8 @@ $(document).ready(function() {
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInGameList-1;
         var pageNum = defaultPageNumInGameList;
-        var sRegion = null;
-        var search = null;
+        var sRegion = $("#sRegion").val();
+        var search = $("#search").val();
         var IMakeGameuID = null;
         var IPartiGameuID = null;
         selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
@@ -407,8 +407,8 @@ $(document).ready(function() {
             defaultPageNumInGameList -= 5;
             var rowNum = defaultPageNumInGameList-1;
             var pageNum = defaultPageNumInGameList;
-            var sRegion = null;
-            var search = null;
+            var sRegion = $("#sRegion").val();
+            var search = $("#search").val();
             var IMakeGameuID = null;
             var IPartiGameuID = null;
             selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
@@ -421,8 +421,8 @@ $(document).ready(function() {
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
         var rowNum = $(event.originalEvent?.submitter).siblings('input[name="rowNum"]').val();
         var pageNum = $(event.originalEvent?.submitter).val();
-        var sRegion = null;
-        var search = null;
+        var sRegion = $("#sRegion").val();
+        var search = $("#search").val();
         var IMakeGameuID = null;
         var IPartiGameuID = null;
         selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
@@ -795,8 +795,8 @@ $(document).ready(function() {
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInStadiumList-1;
         var pageNum = defaultPageNumInStadiumList;
-        var sRegion = null;
-        var search = null;
+        var sRegion = $("#sRegion").val();
+        var search = $("#search").val();
         stadiumListSearchAjax(pageNum, rowNum, sRegion, search);
     });
 
@@ -809,10 +809,8 @@ $(document).ready(function() {
             defaultPageNumInStadiumList -= 5;
             var rowNum = defaultPageNumInStadiumList-1;
             var pageNum = defaultPageNumInStadiumList;
-            var sRegion = null;
-            var search = null;
-            var IMakeGameuID = null;
-            var IPartiGameuID = null;
+            var sRegion = $("#sRegion").val();
+            var search = $("#search").val();
             stadiumListSearchAjax(rowNum, pageNum, sRegion, search);
         }
         createPageButtonsInStadiumList(); // 페이지 버튼 다시 생성
@@ -823,8 +821,8 @@ $(document).ready(function() {
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
         var rowNum = $(event.originalEvent?.submitter).siblings('input[name="rowNum"]').val();
         var pageNum = $(event.originalEvent?.submitter).val();
-        var sRegion = null;
-        var search = null;
+        var sRegion = $("#sRegion").val();
+        var search = $("#search").val();
         stadiumListSearchAjax(pageNum, rowNum, sRegion, search);
     });
     //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
@@ -923,7 +921,7 @@ $(document).ready(function() {
         var rowNum = $(event.originalEvent?.submitter).siblings('input[name="rowNum"]').val();
         var pageNum = $(event.originalEvent?.submitter).val();
         var tID = 0;
-        var resultType = null;
+        var resultType = $("#resultType").val();
         resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
     });
     //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
@@ -939,7 +937,7 @@ $(document).ready(function() {
             var rowNum = defaultPageNumInGameRecord - 1;
             var pageNum = defaultPageNumInGameRecord;
             var tID = 0;
-            var resultType = null;
+            var resultType = $("#resultType").val();
             resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
             createPageButtonsGameRecord(); // 페이지 버튼 다시 생성
         }
@@ -954,7 +952,7 @@ $(document).ready(function() {
         var rowNum = defaultPageNumInGameRecord - 1;
         var pageNum = defaultPageNumInGameRecord;
         var tID = 0;
-        var resultType = null;
+        var resultType = $("#resultType").val();
         resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
         createPageButtonsGameRecord(); // 페이지 버튼 다시 생성
     });
