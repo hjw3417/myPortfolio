@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TeamService {
     public List<GameListVO> selectGameSchedule(int pageNum, int rowNum, int tID) throws Exception;
-    public GameRecordVO selectGaameRecordInfo(int tID, String resultType) throws Exception;
+    public GameRecordVO selectGameRecordInfo(int pageNum, int rowNum, int tID, String resultType) throws Exception;
 }

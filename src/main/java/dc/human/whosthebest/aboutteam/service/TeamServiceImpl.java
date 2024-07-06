@@ -26,12 +26,16 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public GameRecordVO selectGaameRecordInfo(int tID, String resultType) throws Exception {
+    public GameRecordVO selectGameRecordInfo(int pageNum, int rowNum, int tID, String resultType) throws Exception {
         GameRecordVO gameRecordVO = new GameRecordVO();
         List<GameRecordInfoListVO> gameResultInfoList = new ArrayList<>();
         gameRecordVO = teamDAO.getMatchCount(tID);
-        gameResultInfoList = teamDAO.selectGResultInfo(tID, resultType);
-        gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
+        gameResultInfoList = teamDAO.selectGResultInfo(pageNum, rowNum, tID, resultType);
+        if(gameRecordVO != null) {
+            if(gameResultInfoList.size() != 0) {
+                gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
+            }
+        }
         return gameRecordVO;
     }
 }

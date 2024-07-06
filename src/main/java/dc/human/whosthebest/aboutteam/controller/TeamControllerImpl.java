@@ -47,13 +47,17 @@ public class TeamControllerImpl implements TeamController {
 
     @Override
     @GetMapping("/team/gameRecord.do")
-    public ModelAndView selectGameRecordInfo() throws Exception {
+    public ModelAndView selectGameRecordInfo(@RequestParam(value="tID", required = false, defaultValue = "0") int tID) throws Exception {
         ModelAndView mav = new ModelAndView();
         GameRecordVO gameRecordVO = new GameRecordVO();
-        int tID = 1000000001;
+        tID = 1000000001;
         String resultType = null;
-        gameRecordVO = teamService.selectGaameRecordInfo(tID, resultType);
-        System.out.println("gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
+        int pageNum =1;
+        int rowNum = 0;
+        gameRecordVO = teamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
+        if(gameRecordVO.getGameRecordInfoListVO().size() != 0) {
+            System.out.println("gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
+        }
         mav.setViewName("team/gameRecord");
         mav.addObject("gameRecordVO", gameRecordVO);
         return mav;
@@ -62,14 +66,20 @@ public class TeamControllerImpl implements TeamController {
     @Override
     @PostMapping("/team/filter/gameRecord.do")
     @ResponseBody
-    public GameRecordVO filterGameRecordInfo(@RequestParam(value="resultType", required = false) String resultType ) throws Exception {
+    public GameRecordVO filterGameRecordInfo(@RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum,
+                                             @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,
+                                             @RequestParam(value="resultType", required = false) String resultType,
+                                             @RequestParam(value="tID", required = false, defaultValue = "0") int tID
+                                             ) throws Exception {
         GameRecordVO gameRecordVO = new GameRecordVO();
-        int tID = 1000000001;
+        tID = 1000000001;
         if(resultType == "" || resultType == null) {
             resultType = null;
         }
-        gameRecordVO = teamService.selectGaameRecordInfo(tID, resultType);
-        System.out.println("restFull gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
+        gameRecordVO = teamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
+        if(gameRecordVO.getGameRecordInfoListVO() != null) {
+            System.out.println("restFullController gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
+        }
         return gameRecordVO;
     }
 }

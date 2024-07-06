@@ -844,22 +844,24 @@ $(document).ready(function() {
 //gameRecord.do 관련 js 시작
 $(document).ready(function() {
 
-    function resultTypeFilterAjax(resultType) {
+    function resultTypeFilterAjax(pageNum, rowNum, resultType, tID) {
         alert("ajax 시작");
         $.ajax({
             url: "/team/filter/gameRecord.do",
             type: 'POST',
             data: {
-                resultType: resultType
+                pageNum: pageNum,
+                rowNum: rowNum,
+                resultType: resultType,
+                tID: tID
             },
             dataType: 'json',
             success: function(response) {
                 alert("resultTypeFilterAjax response 성공");
                 alert(response.totalCount);
                 var gameRecordVO = response;
-                alert(gameRecordVO.gameRecordInfoListVO.length);
                 var html = "";
-                if(gameRecordVO.gameRecordInfoListVO.length == 0) {
+                if(gameRecordVO.gameRecordInfoListVO == null) {
                     alert("조회 결과가 없습니다.")
                 } else {
                     alert("조회 결과 출력.")
@@ -887,11 +889,78 @@ $(document).ready(function() {
         });
     }
 
+
+    var defaultPageNumInGameRecord = 1;
+
+    // page 버튼 생성
+    function createPageButtonsGameRecord() {
+        $('#GameRecord-pageNumBtnLI').empty(); // 기존 버튼 제거
+        for (var i = defaultPageNumInGameRecord; i <= defaultPageNumInGameRecord + 4; i++) {
+            $('#GameRecord-pageNumBtnLI').append(`
+                <form id="GameRecord-pageNumForm" class="GameRecord-pageNumForm">
+                    <input type="hidden" class="rowNum" name="rowNum" id="rowNum" value="${i - 1}">
+                    <input type="submit" class="pageNum" name="pageNum" value="${i}">
+                </form>
+            `);
+        }
+    }
+
+    // page 이동 버튼 submit
+    createPageButtonsGameRecord();
+
     $(document).on("change", "#resultType", function(event) {
-        event.preventDefault();
-        var resultType = $("#resultType").val();
-        resultTypeFilterAjax(resultType)
+            event.preventDefault();
+            var resultType = $("#resultType").val();
+            var pageNum = 1;
+            var rowNum = 0;
+            var tID = 0;
+            resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
+        });
+
+    //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
+    $(document).on('submit', '#GameRecord-pageNumForm', function(event) {
+        event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
+        var rowNum = $(event.originalEvent?.submitter).siblings('input[name="rowNum"]').val();
+        var pageNum = $(event.originalEvent?.submitter).val();
+        var tID = 0;
+        var resultType = null;
+        resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
     });
+    //page 버튼 동작 기능(해당 인덱스 버튼에 맞게 gameList 조회)
+
+
+    // 이전 버튼 submit
+    $("#GameRecord-prevPage").on('click', function() {
+        alert("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
+        if (defaultPageNumInGameRecord == 1) {
+            alert("첫 페이지 입니다.");
+        } else if (defaultPageNumInGameRecord >= 6) {
+            defaultPageNumInGameRecord -= 5;
+            var rowNum = defaultPageNumInGameRecord - 1;
+            var pageNum = defaultPageNumInGameRecord;
+            var tID = 0;
+            var resultType = null;
+            resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
+            createPageButtonsGameRecord(); // 페이지 버튼 다시 생성
+        }
+    });
+
+    // 다음 버튼 submit
+    $("#GameRecord-nextPage").on('click', function(event) {
+        alert("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
+        defaultPageNumInGameRecord += 5;
+        alert("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
+        event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+        var rowNum = defaultPageNumInGameRecord - 1;
+        var pageNum = defaultPageNumInGameRecord;
+        var tID = 0;
+        var resultType = null;
+        resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
+        createPageButtonsGameRecord(); // 페이지 버튼 다시 생성
+    });
+
+
+
 });
 //gameRecord.do 관련 js 끝
 
