@@ -5,7 +5,7 @@ import dc.human.whosthebest.vo.GameRecordVO;
 
 import java.util.List;
 
-public interface TeamService {
+public interface AboutteamService {
     public List<GameListVO> selectGameSchedule(int pageNum, int rowNum, int tID) throws Exception;
     public GameRecordVO selectGameRecordInfo(int pageNum, int rowNum, int tID, String resultType) throws Exception;
 }

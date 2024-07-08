@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-public interface TeamController {
+public interface AboutTeamController {
     public ModelAndView gameSchedulleInfo(@RequestParam(value="tID", required = false, defaultValue = "0") int tID) throws Exception;
     public List<GameListVO> pagingGameSchedulleInfo(@RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum,
                                                     @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,

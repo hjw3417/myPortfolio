@@ -12,7 +12,7 @@ import java.util.List;
 
 @Mapper
 @Repository("TeamDAO")
-public interface TeamDAO {
+public interface AboutTeamDAO {
     public List<GameListVO> selectGameSchedule(@Param("pageNum") int pageNum,
                                                @Param("rowNum") int rowNum,
                                                @Param("tID") int tID) throws DataAccessException;

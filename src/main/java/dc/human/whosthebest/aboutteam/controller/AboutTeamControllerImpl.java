@@ -1,6 +1,6 @@
 package dc.human.whosthebest.aboutteam.controller;
 
-import dc.human.whosthebest.aboutteam.service.TeamService;
+import dc.human.whosthebest.aboutteam.service.AboutteamService;
 import dc.human.whosthebest.vo.GameListVO;
 import dc.human.whosthebest.vo.GameRecordVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller("teamController")
-public class TeamControllerImpl implements TeamController {
+public class AboutTeamControllerImpl implements AboutTeamController {
     @Autowired
-    private TeamService teamService;
+    private AboutteamService aboutteamService;
 
     @Override
     @GetMapping("/team/gameSchedule.do")
@@ -25,7 +25,7 @@ public class TeamControllerImpl implements TeamController {
         tID = 1000000001;
         int pageNum = 1;
         int rowNum = 0;
-        List<GameListVO> gameListVO = teamService.selectGameSchedule(pageNum, rowNum, tID);
+        List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
         System.out.println("controller gameListVO.size() : " + gameListVO.size());
         mav.addObject("gameListVO", gameListVO);
         mav.setViewName("/team/gameSchedule");
@@ -40,7 +40,7 @@ public class TeamControllerImpl implements TeamController {
                                                     @RequestParam(value="tID", required = false, defaultValue = "0") int tID)
                                                     throws Exception {
         tID = 1000000001;
-        List<GameListVO> gameListVO = teamService.selectGameSchedule(pageNum, rowNum, tID);
+        List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
         System.out.println("RestFullcontroller gameListVO.size() : " + gameListVO.size());
         return gameListVO;
     }
@@ -54,7 +54,7 @@ public class TeamControllerImpl implements TeamController {
         String resultType = null;
         int pageNum =1;
         int rowNum = 0;
-        gameRecordVO = teamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
+        gameRecordVO = aboutteamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
         if(gameRecordVO.getGameRecordInfoListVO().size() != 0) {
             System.out.println("gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
         }
@@ -76,7 +76,7 @@ public class TeamControllerImpl implements TeamController {
         if(resultType == "" || resultType == null) {
             resultType = null;
         }
-        gameRecordVO = teamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
+        gameRecordVO = aboutteamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
         if(gameRecordVO.getGameRecordInfoListVO() != null) {
             System.out.println("restFullController gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
         }
