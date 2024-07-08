@@ -8,24 +8,24 @@
   <link rel="stylesheet" href="./css/main.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript">
-        function checkLogin() {
-            var errorMsg = '${errorMsg}';
-            if (errorMsg != null && errorMsg != "") {
-                alert(errorMsg);
-            }
-        }
+     function checkLogin() {
+         var errorMsg = '${errorMsg}';
+         if (errorMsg != null && errorMsg != "") {
+             alert(errorMsg);
+         }
+     }
   </script>
   <title>login</title>
 </head>
 <body onload="checkLogin();">
   <header>
     <div class="logo">
-      <img src="./image/logo.png">
+      <img src="${contextPath}/image/logo.png">
       <!-- <div>누가 잘차</div> -->
     </div>
     <div>
-      <span><a href="/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="/join">회원가입</a></span>
+      <span><a href="${contextPath}/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="${contextPath}/join">회원가입</a></span>
     </div>
     <div>
       <ul></ul>
@@ -39,7 +39,7 @@
           로그인
         </div>
         <div>
-          <form name="login" method="post" action="/login" enctype="utf-8">
+          <form name="login" method="post" action="${contextPath}/login" enctype="utf-8">
             <div>
               <input type="text" id="uID" name="uID" size="12" maxlength="12" placeholder="아이디를 입력해주세요." required>
             </div>
@@ -53,8 +53,8 @@
           </form>
         </div>
         <div>
-          <span><a href="/findPw">비밀번호 찾기</a></span>
-          <span><a href="/findId">아이디 찾기 &nbsp|&nbsp</a></span>
+          <span><a href="${contextPath}/findPw">비밀번호 찾기</a></span>
+          <span><a href="${contextPath}/findId">아이디 찾기 &nbsp|&nbsp</a></span>
         </div>
       </section>
     </div>

@@ -1,10 +1,7 @@
 package dc.human.whosthebest.team.dao;
 
 
-import dc.human.whosthebest.vo.GameRecordInfoListVO;
-import dc.human.whosthebest.vo.TeamInfoVO;
-import dc.human.whosthebest.vo.TeamMemberVO;
-import dc.human.whosthebest.vo.TeamProfileVO;
+import dc.human.whosthebest.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
@@ -27,4 +24,6 @@ public interface TeamDAO {
     public List<GameRecordInfoListVO> selectGResultInfo(@Param("tID") int tID,
                                                         @Param("resultType") String resultType
     ) throws DataAccessException;
+
+    public List<GameListVO> selectGameSchedule(int tID) throws DataAccessException;
 }
