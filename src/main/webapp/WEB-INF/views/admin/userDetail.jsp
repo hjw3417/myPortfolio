@@ -53,7 +53,9 @@
 
             <tr>
               <td> 생년월일</td>
-              <td> ${userInfo.uBday} </td>
+              <td>
+                 ${userInfo.uBday}
+               </td>
             </tr>
 
             <tr>
