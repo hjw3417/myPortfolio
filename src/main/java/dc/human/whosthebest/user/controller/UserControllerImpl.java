@@ -160,7 +160,7 @@ public class UserControllerImpl implements UserController {
 //                msgOk = "회원정보가 확인됐습니다.";
                 viewName = "user/pwPage";
             } else {
-                msgNo = "입력하신 정보가 일치하지 않습니다.";
+                msgNo = "입력하신 정보가 일치하지 않습니다!";
                 viewName = "user/findPW";
             }
 
