@@ -752,7 +752,7 @@ $(document).ready(function() {
                         var stadium = stadiumListVO[i];
                         html += `
                             <tr>
-                              <td>${i + 1}</td>
+                              <td>${stadium.sID}</td>
                               <td>${stadium.sName}</td>
                               <td>${stadium.sAddr}</td>
                               <td>${stadium.sNum}</td>

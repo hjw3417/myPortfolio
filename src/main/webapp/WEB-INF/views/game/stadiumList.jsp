@@ -100,7 +100,7 @@
           <tbody id="stadiumListTBody">
           <c:forEach var="stadiumList" items="${stadiumVO}" varStatus="status">
             <tr>
-              <td>${status.index + 1}</td>
+              <td>${stadiumList.sID}</td>
               <td>${stadiumList.sName}</td>
               <td>${stadiumList.sAddr}</td>
               <td>${stadiumList.sNum}</td>
