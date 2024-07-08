@@ -28,7 +28,7 @@ public class AboutTeamControllerImpl implements AboutTeamController {
         List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
         System.out.println("controller gameListVO.size() : " + gameListVO.size());
         mav.addObject("gameListVO", gameListVO);
-        mav.setViewName("/team/gameSchedule");
+        mav.setViewName("/aboutteam/gameSchedule");
         return mav;
     }
 
@@ -58,7 +58,7 @@ public class AboutTeamControllerImpl implements AboutTeamController {
         if(gameRecordVO.getGameRecordInfoListVO().size() != 0) {
             System.out.println("gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
         }
-        mav.setViewName("team/gameRecord");
+        mav.setViewName("aboutteam/gameRecord");
         mav.addObject("gameRecordVO", gameRecordVO);
         return mav;
     }

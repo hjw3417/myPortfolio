@@ -100,7 +100,7 @@
           <tbody id="stadiumListTBody">
           <c:forEach var="stadiumList" items="${stadiumVO}" varStatus="status">
             <tr>
-              <td>${status.index + 1}</td>
+              <td>${stadiumList.sID}</td>
               <td>${stadiumList.sName}</td>
               <td>${stadiumList.sAddr}</td>
               <td>${stadiumList.sNum}</td>
@@ -111,15 +111,20 @@
           <!-- tbody 끝 -->
         </table>
       </div>
-      <div>
-        <a href="#">이전</a>
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">다음</a>
-      </div>
+        <!-- pagination 시작 -->
+        <div class="stadiumList-paginationContainer">
+          <ul class="pagination">
+            <li>
+            <button id="stadiumList-prevPage" type="button" onclick="#">이전</button>
+            </li>
+            <li id="stadiumList-pageNumBtnLI" name="stadiumList-pageNumBtnLI">
+            </li>
+            <li>
+                <button id="stadiumList-nextPage" type="button" onclick="#">다음</button>
+            </li>
+          </ul>
+        </div>
+        <!-- pagination 종료 -->
     </div>
   </main>
 <footer>
