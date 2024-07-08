@@ -193,7 +193,7 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    @RequestMapping(value = "/gameList.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/gameInfoList.do", method = RequestMethod.GET)
     public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int defaultPageNum = 1;
         int defaultRowNum = 0;
@@ -215,7 +215,7 @@ public class GameControllerImpl implements GameController {
         mav.addObject("uID", "MOON");
         mav.addObject("gameList", gameList);
         mav.addObject("defaultPageNum", defaultPageNum);
-        mav.setViewName("/game/gameList");
+        mav.setViewName("/game/gameInfoList");
         return mav;
     }
 
