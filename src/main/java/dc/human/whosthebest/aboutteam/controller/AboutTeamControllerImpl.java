@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller("teamController")
+@Controller("aboutteamController")
 public class AboutTeamControllerImpl implements AboutTeamController {
     @Autowired
     private AboutteamService aboutteamService;
