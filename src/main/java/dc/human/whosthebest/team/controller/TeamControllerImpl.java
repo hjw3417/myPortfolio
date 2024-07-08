@@ -197,7 +197,7 @@ public class TeamControllerImpl implements TeamController{
         mav.addObject("ranking", ranking);
         return mav;
     }
-
+//커밋 테스트
 
 
 }
