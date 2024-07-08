@@ -56,7 +56,7 @@
       <tbody>
       <c:forEach items= "${usersList}" var="user">
 			<tr>
-					<td><a href="/admin/userDetail/${user.uID}">${user.uID}</td>
+					<td><a href="/admin/userDetail/${user.uID}">${user.uID} </a></td>
 					<td width="130"> ${user.uName} </td> <!-- 이름  -->
 					<td width="80"> ${user.uGender }  </td>	<!-- 성별 -->
 					<td> ${user.uBday }  </td>	<!-- 생년월일 -->

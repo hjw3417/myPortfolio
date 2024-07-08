@@ -45,9 +45,9 @@
     <!--마이페이지 메인 - 이름 , 소속팀 ,랭크 출력-->
     <select id="selectMyPageInfo" resultMap="myPageInfo">
         <![CDATA[
-             select  users.u_name,
-                     team.t_name,
-                     team.rankscore
+             select   distinct users.u_name,
+                             team.t_name,
+                             team.rankscore
              from  team, squad , users
              where squad.t_id=team.t_id
                     and squad.u_id=users.u_id
@@ -61,7 +61,7 @@
     <!-- 마이페이지메인 - 최근 경기결과  -->
     <select id="selectRecentGame"  resultMap="recentGame">
         <![CDATA[
-             SELECT
+             SELECT distinct g.g_id,
                     g.G_RESDATE,
                     t.t_name as myTeam,
                     tt.t_name as awayTeam,

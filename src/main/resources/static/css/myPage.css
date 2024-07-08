@@ -189,7 +189,6 @@ h2{
   /*최근 경기 결과*/
   .recentlyPlay{
     border : none;
-    background-color: white;
     width: 1000px;
     height: 215px;
     position: absolute;
@@ -197,10 +196,11 @@ h2{
     left : 226px;
     >table{
       width : 1000px;
-      height : 215px;
+      height : 220px;
       border-collapse: collapse;
       text-align: center;
       font-size : 13pt;
+      background-color : white;
       tr{
         border : 1px solid rgb(204, 223, 173);
       }

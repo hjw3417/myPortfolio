@@ -83,20 +83,20 @@
 
             <tr>
                <td> 소속팀1 </td>
-               <td> ${} </td>
-               <td> ${} </td>
+               <td>  </td>
+               <td>  </td>
             </tr>
 
              <tr>
                <td> 소속팀2 </td>
-               <td> ${} </td>
-               <td> ${} </td>
+               <td>  </td>
+               <td> </td>
             </tr>
 
              <tr>
                <td> 소속팀3 </td>
-               <td> ${} </td>
-               <td> ${} </td>
+               <td>  </td>
+               <td>  </td>
             </tr>
 
               <tr>
