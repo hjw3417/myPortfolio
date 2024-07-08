@@ -40,9 +40,6 @@
       </a>
     </div>
     <div class="userDetail">
-      <div>
-        프로필사진
-      </div>
       <table>
             <tr>
               <td> 이름 </td>
@@ -81,16 +78,15 @@
 
             <tr>
               <td>전화번호</td>
-              <td>  ${userInfo.uPhone} </td>
+              <td>  010-****-**** </td>
             </tr>
 
             <tr>
               <td> 가입일자 </td>
               <td> ${userInfo.createdDate}</td>
             </tr>
-
       </table>
-    </div>
+     <a href="#"> <button> 뒤로가기</button> </a>
 </div>
 </main>
 

@@ -105,6 +105,7 @@ main{
 
   >ul>li{
     padding-bottom: 50px;
+
   >a{
     text-decoration: none;
     color : black;
@@ -144,7 +145,7 @@ main{
 /*회원,팀, 경기관리 테이블 설정*/
 .list {
   height: auto;
-  width: 1000px;
+  width: 960px;
   border-collapse: collapse;
   margin: 10px 0 0 20px;
   font-size: 18px;
@@ -164,9 +165,10 @@ table.list th {
 /*회원 ID a태그 설정*/
 a{
   text-decoration-line: none;
-  color: black;
 }
-
+a:visited{
+  color : black;
+}
 a:hover{
   color : blue;
 
@@ -254,28 +256,48 @@ table.user-list th {
 .userDetail{
   width : 1020px;
   height : 650px;
-  border : 1px solid red;
   position: absolute;
   top : 160px;
   left : 212px;
   background-color: white;
-  >div{
-    width : 140px;
-    height: 140px;
-    border  : 1px solid green;
-  }
+  border : 1px solid black;
   >table{
     position: absolute;
-    top : 100px;
-    left : 120px;
-    width : 500px;
-    height : 20px;
+    top : 24px;
+    left : 30px;
+    width : 600px;
+    height : 520px;
     margin : 10px 0 0 0px;
     font-size: 13pt;
     border-collapse: collapse;
     text-align: center;
     line-height: 30px;
+
   }
   >tr,td{
-    border : 1px solid black;
+    border : none;
   }
+  >table tr:nth-child(9) td:nth-child(3),
+         tr:nth-child(10) td:nth-child(3),
+         tr:nth-child(11) td:nth-child(3){
+    text-align: left;
+    }
+
+  >a>button{
+    font-family: 'GmarketSansMedium';
+    position: absolute;
+    top : 570px;
+    left : 875px;
+    width: 105px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 12pt;
+    background-color: rgb(115, 138, 81) ;
+    border : none;
+    color : white;
+  }
+  >a>button:hover{
+    text-decoration-line: underline ;
+  }
+
+}
