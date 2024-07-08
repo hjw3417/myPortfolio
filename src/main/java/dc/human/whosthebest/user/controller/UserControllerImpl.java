@@ -54,21 +54,22 @@ public class UserControllerImpl implements UserController {
     @RequestMapping(value="/login" , method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView login(@RequestParam("uID") String uID,
-                              @RequestParam("uPW") String uPW,HttpServletRequest request, HttpServletResponse response) throws Exception{
+                              @RequestParam("uPW") String uPW,HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception{
         ModelAndView mav = new ModelAndView();
-        HttpSession session = request.getSession();
-
         try{
             String msg = "";
             String viewName = "";
             int userCount = userService.loginUser(uID, uPW);
 
             if (userCount > 0) {
-                viewName = "main/serviceMain";
+                viewName = "redirect:/serviceMain";
                 session.setAttribute("loginId", uID); // 세션에 사용자 ID 저장
+                System.out.println("================================================");
+                System.out.println("현재 로그인 유저 : " + session.getAttribute("loginId"));
+                System.out.println("================================================");
             } else {
+                viewName = "redirect:/login";
                 msg = "일치하는 회원 정보가 없습니다";
-                viewName = "user/login";
             }
 
             mav.addObject("errorMsg",msg);
@@ -79,6 +80,19 @@ public class UserControllerImpl implements UserController {
             System.out.println(ex.getMessage());
         }
         return mav;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request) throws Exception{
+
+        System.out.println("logout 메서드 진입");
+
+        HttpSession session = request.getSession();
+
+        session.invalidate();
+
+        return "redirect:/login";
+
     }
 
 

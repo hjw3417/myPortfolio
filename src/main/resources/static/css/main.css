@@ -442,7 +442,7 @@ main{
           }
         }
       }
-    >.board{
+    >.boardList{
       width: 450px;
       height: 300px;
       box-shadow: 5px 5px 10px 0px rgb(228, 228, 228);
@@ -463,27 +463,48 @@ main{
           font-weight: bold;
           cursor: pointer;
           >a{
-            text-decoration: none;
+            text-decoration-line: none;
             color: rgb(94, 94, 94);
           }
         }
       }
-      >div:nth-child(2){
-        >ul{
-          list-style-type: none;
+      >div:nth-child(2)>table{
+          margin-left: 15px;
+          /*border: 1px solid red;*/
           color: rgb(94, 94, 94);
-          line-height: 30px;
-          >li:hover{
-            text-decoration-line: underline;
+          width: 370px;
+          table-layout: fixed;
+          border-collapse: separate;
+          border-spacing: 0px 5px;
+          >tr, td{
+            /*border: 1px solid red;*/
+            white-space: nowrap;
+            overflow:hidden;
+            text-overflow: ellipsis;
           }
+        }
+        >div:nth-child(2)>table td:first-child{
+          width: 280px;
+          height: 30px;
+          padding-left: 10px;
+          background-color: white;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+        }
+        >div:nth-child(2)>table td:nth-child(2){
+          width: 80px;
+          height: 30px;
+          text-align: center;
+          background-color: white;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
         }
       }
     }
-  }
-  >.sec2{
+  .sec2{
     width: 630px;
     margin-left: -100px;
-    >.gamelist{
+    >.gameList{
       width: 450px;
       height: 300px;
       box-shadow: 5px 5px 10px 0px rgb(228, 228, 228);
@@ -542,7 +563,7 @@ main{
         border-bottom-right-radius: 10px;
       }
     }
-    >.rank{
+    >.rankList{
       width: 450px;
       height: 300px;
       box-shadow: 5px 5px 10px 0px rgb(228, 228, 228);
@@ -1082,6 +1103,10 @@ main{
   }
   td:nth-child(3){
     cursor: pointer;
+    >a{
+        text-decoration: none;
+        color:black;
+    }
   }
   td:nth-child(3):hover{
     text-decoration: underline;

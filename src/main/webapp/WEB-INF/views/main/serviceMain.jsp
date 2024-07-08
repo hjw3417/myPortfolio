@@ -16,7 +16,7 @@
       <img src="./image/logo.png">
     </div>
     <div>
-      <span><a href="/login">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
@@ -48,23 +48,29 @@
               <a href="/myPage"><div>프로필 수정</div></a>
             </div>
           </div>
-          <div class="board">
+          <div class="boardList">
             <div>
               <span>게시판</span>
-              <span><a href="#">+ 더보기</a></span>
+              <span><a href="/mainBoard">+ 더보기</a></span>
             </div>
             <div>
-              <ul>
-                <li>가</li>
-                <li>나</li>
-                <li>다</li>
-                <li>라</li>
-              </ul>
+              <table>
+                <c:forEach var ="board" items="${mBoardList}" end="4">
+                  <tr>
+                    <td>
+                      ${board.bTitle}
+                    </td>
+                    <td>
+                      ${board.createdID}
+                    </td>
+                  <tr>
+                </c:forEach>
+              </table>
             </div>
           </div>
         </section>
         <section class="sec2">
-          <div class="gamelist">
+          <div class="gameList">
             <div>
               <span>최신 경기목록</span>
               <span><a href="/gameList">+ 더보기</a></span>
@@ -84,7 +90,7 @@
               </table>
             </div>
           </div>
-          <div class="rank">
+          <div class="rankList">
             <div>
               <span>전체 랭킹 정보</span>
               <span><a href="/ranking">+ 더보기</a></span>

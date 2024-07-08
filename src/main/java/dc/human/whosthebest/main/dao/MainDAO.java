@@ -18,6 +18,7 @@ public interface MainDAO {
     List<TeamInfoVO> mainRanking() throws DataAccessException;
     List<GameListVO> mainGameList() throws DataAccessException;
     List<BoardVO> mainBoardList() throws DataAccessException;
+    List<BoardVO> mainServiceBoard() throws DataAccessException;
     int mainBoardWrite(BoardVO boardVO) throws DataAccessException;
     BoardVO mainBoardDetail(int bID) throws DataAccessException;
 }
