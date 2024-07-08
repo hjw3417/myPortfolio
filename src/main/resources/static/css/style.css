@@ -109,20 +109,35 @@ main{
     justify-content: center;
   }
 }
+
 .gameList-side{
   margin-top: -50px;
   padding-left: 20px;
   box-sizing: border-box;
-  display : flex;
   width: 350px;
   background-color: rgb(184, 206, 146);
   >div>div:first-child{
     height: 50px;
+    background-color: inherit;
+    border: 0pt;
   }
-  >div>div {
-    font-size: 11pt;
-    margin-bottom: 5px;
+  >div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      display: block;
+      button {
+        font-family: 'GmarketSansMedium';
+        display: block;
+        margin-bottom: 10px;
+        font-size: 15pt;
+        margin-bottom: 5px;
+        background-color: inherit;
+        border: 0pt;
+        cursor: pointer;
+      }
   }
+
 }
 .makeGameBtnContainer{
   width : 650px;
@@ -154,7 +169,7 @@ main{
   margin-left: 220px;
   box-sizing: border-box;
   height: 1000px;
-  >.findForm {
+  >.gameList-findForm {
     margin-bottom: 50px;
     text-align: center;
     display: flex;
@@ -181,7 +196,17 @@ main{
       cursor: pointer;
     }
   }
-  >.cardContainer {
+}
+
+.nullMsg {
+    font-family: 'GmarketSansMedium';
+    font-size: 25pt;
+    margin-top: 50px;
+    margin-left: 80px;
+    margin-bottom: 300px;
+}
+
+.cardContainer {
     display: flex;
     margin-bottom: 25px;
     >.card {
@@ -204,7 +229,7 @@ main{
           > tr:nth-child(1), > tbody > tr:nth-child(1) {
             >td:nth-child(3), td:nth-child(4) {
               text-align: right;
-            } 
+            }
           }
         }
       }
@@ -235,20 +260,21 @@ main{
         cursor: pointer;
       }
     }
-    div>form>.cardSubmit {
-      width: 150px;
-      height: 100px;
-      background-color: rgb(146, 172, 101);
-      box-shadow: 2px 2px 5px rgb(146, 172, 101);
-      border-radius: 0px 10px 10px 0px;
-      border: 0px;
-      cursor: pointer;
-      font-size: 13pt;
-      font-weight: bold;
-      color: white;
-    }
+  div>form>.cardSubmit {
+    width: 150px;
+    height: 100px;
+    background-color: rgb(146, 172, 101);
+    box-shadow: 2px 2px 5px rgb(146, 172, 101);
+    border-radius: 0px 10px 10px 0px;
+    border: 0px;
+    cursor: pointer;
+    font-size: 13pt;
+    font-weight: bold;
+    color: white;
   }
-  >.paginationContainer {
+}
+
+  .paginationContainer {
     margin-left: -300px;
     margin-top: 50px;
     >.pagination {
@@ -257,26 +283,55 @@ main{
       list-style-type: none;
       padding: 0;
       >li {
+        display: flex;
         font-size: 10pt;
         margin-right: 5px;
         color: rgb(146, 172, 101);
-        a {
-          text-decoration: none;
-          color: inherit;
+        button {
+            background-color: inherit;
+            border: 0pt;
+            color: inherit;
+            font-weight: bold;
+            cursor: pointer;
         }
+
+        input {
+        background-color: inherit;
+        border: 0pt;
+        color: inherit;
+        font-weight: bold;
+        cursor: pointer;
+        input:focus {outline: none;}
       }
       >li:first-child, li:last-child {
-        font-size: 10pt;  
+        font-size: 10pt;
+      }
       }
     }
   }
-}
+
+
+
+
+
 
 .gameInfo-content {
-  display: bolck;
   width: 900px;
   height: 1050px;
   margin: 0 auto;
+  >.modGameContainer {
+    display: flex;
+    justify-content: flex-end;
+    >form {
+      input {
+        font-family: 'GmarketSansMedium';
+        background-color: inherit;
+        border: 0pt;
+        cursor: pointer;
+      }
+      input:focus {outline: none;}
+    }
+  }
   >.titeContainer {
     display: flex;
     width: 600;
@@ -284,6 +339,23 @@ main{
     background-color: rgb(146, 172, 101);
     color: white;
     box-shadow: 5px 5px 10px gray;
+    .startGameFormContainer>form {
+        padding: 0px;
+        input {
+            font-family: 'GmarketSansMedium';
+            width: 100px;
+            height: 50px;
+            background-color: mint;
+            background-color: inherit;
+            font-size: 17pt;
+            border: 0pt;
+            cursor: pointer;
+            margin-top: -8px;
+            color: white;
+            font-weight: bold;
+        }
+        input:focus {outline: none;}
+    }
     >div:first-child {
       font-size: 25px;
       font-weight: bold;
@@ -327,9 +399,14 @@ main{
       >span {
         font-size: 8pt;
       }
+      .nowPartiMemberNum {
+        font-size: 12pt;
+      }
     }
     >div:nth-child(3) {
       margin-left: 25px;
+      font-size: 8pt;
+      margin-top: 3px;
     }
   }
   >.gameInfoContainer {
@@ -356,19 +433,32 @@ main{
         justify-content: center;
         box-sizing: border-box;
         font-weight: bold;
-        padding: 5px;
+        padding: 10px;
         margin: 0 auto;
         color: white;
         >.tLogo {
           padding: 5px;
-          width: 55px;
-          height: 55px;
+          width: 45px;
+          height: 45px;
           border-radius: 50%;
         }
         >div {
-          height: 70px;
+          height: 50px;
           font-size: 20pt;
-          line-height: 70px;
+          line-height: 50px;
+        }
+        >form {
+            input {
+                background-color: inherit;
+                font-family: 'GmarketSansMedium';
+                border: 0pt;
+                font-size: 15pt;
+                color: white;
+                cursor: pointer;
+                margin-top: 15px;
+                font-weight: bold;
+            }
+            input:focus {outline: none;}
         }
       }
       >div:nth-child(2) {
@@ -388,21 +478,47 @@ main{
           padding-left: 10px;
           box-sizing: border-box;
         }
-        >ul {
-          height: 170px;
-          overflow-y: auto;
-          list-style: none;
-          >li {
-            line-height: 15pt;
-            >span {
-              margin-left: 2px;
-              font-size: 8pt;
+        >.homeTeamMemberListContainer {
+            >ul {
+              height: 170px;
+              overflow-y: auto;
+              list-style: none;
+              >li {
+                line-height: 15pt;
+                >span {
+                  margin-left: 2px;
+                  font-size: 8pt;
+                }
+              }
             }
-          }
+        }
+        >.awayTeamMemberListContainer {
+            >ul {
+              height: 170px;
+              overflow-y: auto;
+              list-style: none;
+              padding-right: 5px;
+              >li {
+                line-height: 15pt;
+                font-size: 12pt;
+              }
+              >form {
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                input {
+                    text-align: right;
+                    background-color: inherit;
+                    font-family: 'GmarketSansMedium';
+                    border: 0pt;
+                    font-size: 12pt;
+                    cursor: pointer;
+                }
+                input:focus {outline: none;}
+              }
+            }
         }
       }
-      
-
     }
   }
 }
@@ -417,6 +533,7 @@ main{
     box-sizing: border-box;
     justify-content: center;
     margin-top: -15px;
+    font-size: 10pt;
   >div:first-child {
     width: 300px;
     height: 50px;
@@ -447,7 +564,6 @@ main{
   >.gInfoContainer {
     width: 330px;
     height: 400px;
-    overflow-y: auto;
     box-sizing: border-box;
     padding: 20px;
     box-shadow: 2px 2px 5px gray;
@@ -462,6 +578,7 @@ main{
       height: 280px;
       margin-top: 20px;
       background-color: rgb(255, 255, 234);
+      overflow-y: auto;
     }
   }
   >.gComentContainer {
@@ -474,6 +591,7 @@ main{
     box-shadow: 2px 2px 5px gray;
     background-color: rgb(184, 206, 146);
     border-radius: 5px;
+    margin-left: 15px;
     >div:first-child {
       font-size: 15pt;
       margin: 0px;
@@ -495,25 +613,24 @@ main{
       display: flex;
       margin: 0 auto;
       padding-top: 10px;
-      >.gameComents {
-        width: 230px;
-        border: 1pt solid rgb(184, 206, 146);
-      }
-      >.gameComentsSumit {
-        width: 50px;
-        text-align: center;
-        font-family: bold;
-        color: rgb(146, 172, 101);
-        font-size: 12pt;
-        font-weight: bold;
-        border: 1pt solid rgb(184, 206, 146);
-        cursor: pointer;
-      }
-      >input:focus {
-        outline: none;
+      form {
+        >.gameComents {
+          width: 230px;
+          border: 1pt solid rgb(184, 206, 146);
+        }
+        >.gameComentsSumit {
+          width: 50px;
+          text-align: center;
+          font-family: bold;
+          color: rgb(146, 172, 101);
+          font-size: 12pt;
+          font-weight: bold;
+          border: 1pt solid rgb(184, 206, 146);
+          cursor: pointer;
+        }
+        input:focus {outline: none;}
       }
     }
-    
   }
 }
 .maketeam {
@@ -642,6 +759,7 @@ main{
       input:nth-child(2){
         margin-left: 10px;
       }
+      input:focus {outline: none;}
     }
   }
 }
@@ -697,6 +815,7 @@ main{
           border : 1px solid rgb(146,172,101);
           background-color: rgb(184, 206, 146);
         }
+        input:focus {outline: none;}
         
       }
     }
@@ -1009,6 +1128,7 @@ footer{
             width: 100px;
             height: 30px;
           }
+          input:focus {outline: none;}
         }
       }
       
@@ -1034,24 +1154,133 @@ footer{
     .stadiumDetail.show {
       max-height: 500px; /* 충분히 큰 값으로 설정 */
       opacity: 1;
+    }
   }
-  }
-  .paginationContainer {
-    >.pagination {
+}
+.stadiumList-paginationContainer {
+    .pagination {
       display: flex;
       justify-content: center;
       list-style-type: none;
       padding: 0;
-      >li {
+      li {
+        display: flex;
         font-size: 10pt;
         margin-right: 5px;
         color: rgb(146, 172, 101);
+        button {
+            font-family: 'GmarketSansMedium';
+            background-color: inherit;
+            border: 0pt;
+            cursor: pointer;
+        }
+        form {
+            input {
+                display:flex;
+                font-family: 'GmarketSansMedium';
+                background-color: inherit;
+                border: 0pt;
+                cursor: pointer;
+            }
+            input:focus{outline: none;}
+        }
       }
-      >li:first-child, li:last-child {
-        font-size: 10pt;  
+      li:first-child, li:last-child {
+        font-size: 10pt;
       }
     }
+}
+.gameRecord-side{
+  margin-top: -50px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  display: flex;
+  width: 250px;
+  height: 900px;
+  background-color: rgb(184, 206, 146);
+  margin-left: -20px;
+  >div>div:first-child{
+    height: 50px;
   }
+  >div>ul{
+    font-weight: bold;
+    width : 250px;
+    list-style: none;
+  }
+  ul li a {
+    text-decoration: none;
+    color : black;
+    font-weight:normal;
+  }
+}
+.gamerecord{
+  text-align: center;
+  padding : 0px 20px;
+  width : 1000px;
+  box-sizing: border-box;
+  >div:nth-child(1){
+    font-size: 50px;
+    font-weight: bold;
+    color:rgb(146, 172, 101);
+    margin: 50px 0 20px 0;
+  }
+  >div:nth-child(2){
+    margin: 0 auto;
+    width: 600px;
+    height: 60px;
+    border: 1px solid rgb(168, 168, 168);
+    font-size: 25px;
+    line-height: 65px;
+    font-weight: bold;
+    background-color: white;
+    margin-bottom: 40px;
+  }
+  >div:nth-child(3){
+    form>select{
+      width: 100px;
+      height: 30px;
+      text-align: center;
+      font-size: 15px;
+      margin: 0 0px 10px 800px;
+      border: 1px solid rgb(168, 168, 168);
+    }
+    form>select>option:hover{
+      background-color: rgb(219, 219, 219);
+    }
+  }
+  >div:nth-child(4)>div{
+    width: 900px;
+    height: 50px;
+    margin: 0 auto;
+    font-size: 15px;
+    background-color: white;
+    border: 1px solid black;
+    margin-bottom: 30px;
+    line-height: 50px;
+  }
+    >.paginationContainer {
+      margin-left: 0px;
+      margin-top: 50px;
+      height: 40px;
+      >.pagination {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        padding: 0;
+        >li {
+          font-size: 10pt;
+          margin-right: 5px;
+          color: rgb(146, 172, 101);
+          a {
+            text-decoration: none;
+            color: inherit;
+          }
+        }
+        >li:first-child, li:last-child {
+          font-size: 10pt;
+        }
+      }
+    }
 }
 
 footer{
@@ -1085,30 +1314,27 @@ footer{
   }
 }
 
-
-
-.inputTable {
-  width: 450px;
-  height: 650px;
-  text-align: center;
-  td {
-    padding: 0px;
-  }
-  a {
-  text-decoration-line: none;
-  color: black;
-  }
-  input {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-  border: 2pt solid rgb(184, 206, 146);
-  padding: 10px; /* Optional padding */
-  margin: 0;
-  cursor: pointer;
-  }
-  input:focus {outline: none;}
-  select {
+.gameMake-content {
+    margin-bottom: 50px;
+    .inputTable {
+      width: 450px;
+      height: 650px;
+      text-align: center;
+      td {
+        padding: 0px;
+      }
+      a {
+      text-decoration-line: none;
+      color: black;
+      font-size: 13pt;
+      }
+      button {
+        background-color: transparent;
+        border: 0pt;
+        font-family: 'GmarketSansMedium';
+        font-size: 13pt;
+      }
+      input {
       width: 100%;
       height: 100%;
       box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
@@ -1116,57 +1342,79 @@ footer{
       padding: 10px; /* Optional padding */
       margin: 0;
       cursor: pointer;
-      
-  }
-  
-  textarea {
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-      border: 1pt solid rgb(184, 206, 146);
-      padding: 10px; /* Optional padding */
-      margin: 0;
-      cursor: pointer;
-  }
+      }
+      input:focus {outline: none;}
+      select {
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+          border: 2pt solid rgb(184, 206, 146);
+          padding: 10px; /* Optional padding */
+          margin: 0;
+          cursor: pointer;
+
+      }
+      textarea {
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+          border: 1pt solid rgb(184, 206, 146);
+          padding: 10px; /* Optional padding */
+          margin: 0;
+          cursor: pointer;
+      }
+      .gameMakeSubmit {
+        font-family: 'GmarketSansMedium';
+        font-size: 13pt;
+        background-color: rgb(146, 172, 101);
+      }
+    }
 }
 
-.resStadium-content {
-  display: block;
-  width: 1200px;
-  height: 850px;
-  font-weight: bold;
-  >.findForm {
-    justify-content: center;
-    margin-bottom: 50px;
-    text-align: center;
-    display: flex;
-    >.search {
-      width: 320px;
-      height: 32px;
-      border: 2pt solid rgb(146, 172, 101);
-      margin-right: 10px;
+
+.resStadiumBody {
+  font-family: 'GmarketSansMedium';
+  margin: 0 auto;
+  width : 600px;
+  background-color: rgb(255, 255, 234);
+    .resStadium-content {
+      display: block;
       font-weight: bold;
+      margin: 20px;
+      >.findForm {
+        justify-content: center;
+        margin-bottom: 50px;
+        text-align: center;
+        display: flex;
+        >.search {
+          width: 320px;
+          height: 32px;
+          border: 2pt solid rgb(146, 172, 101);
+          margin-right: 10px;
+          font-weight: bold;
+        }
+        >select {
+          height: 36px;
+          width: 80px;
+          background-color: rgb(184, 206, 146);
+          border: 1pt solid rgb(146, 172, 101);
+          margin-right: 10px;
+          font-weight: bold;
+        }
+        >select:focus {outline: none;}
+        >input:focus {outline: none;}
+        >.findFormSubmit {
+          width: 60px;
+          background-color: rgb(184, 206, 146);
+          border: 1pt solid rgb(146, 172, 101);
+          height: 36px;
+          cursor: pointer;
+          font-weight: bold;
+        }
+      }
     }
-    >select {
-      height: 36px;
-      width: 80px;
-      background-color: rgb(184, 206, 146);
-      border: 1pt solid rgb(146, 172, 101);
-      margin-right: 10px;
-      font-weight: bold;
-    }
-    >select:focus {outline: none;}
-    >input:focus {outline: none;}
-    >.findFormSubmit {
-      width: 60px;
-      background-color: rgb(184, 206, 146);
-      border: 1pt solid rgb(146, 172, 101);
-      height: 36px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-  }
-  >.stadiumContainer {
+
+  .stadiumContainer {
     display: flex;
     margin: 0 auto;
     justify-content: center;
@@ -1228,9 +1476,9 @@ footer{
       }
     }
   }
-  >.resInfoContainer {
+  .resInfoContainer {
     display: block;
-    width: 600px;
+    width: 500px;
     justify-content: center;
     margin: 0 auto;
     margin-top: 30px;
@@ -1239,15 +1487,15 @@ footer{
     tr {
       >td:first-child {
         width: 200px;
-        font-size: 20pt;
+        font-size: 15pt;
         margin-bottom: 20px;
         height: 50px;
       }
       >td:nth-child(2) {
-        width: 450px;
+        width: 400px;
         text-align: right;
         >input {
-          width: 346px;
+          width: 295px;
           height: 50px;
           font-size: 15pt;
           font-weight: bold;
@@ -1256,7 +1504,7 @@ footer{
           outline: none;
         }
         >select {
-          width: 350px;
+          width: 300px;
           height: 50px;
           font-size: 15pt;
           font-weight: bold;
@@ -1283,6 +1531,22 @@ footer{
       margin-left: 10px;
       text-decoration: none;
     }
+    >input {
+       color: white;
+       font-size: 15pt;
+       font-weight: bold;
+       width: 150px;
+       background-color: rgb(184, 206, 146);
+       justify-content: center;
+       text-align: center;
+       height: 50px;
+       cursor: pointer;
+       line-height: 50px;
+       margin-left: 10px;
+       text-decoration: none;
+       border: 0pt;
+    }
+    input:focus {outline: none;}
   }
 }
 .teamInfoModal{
@@ -1384,6 +1648,7 @@ footer{
       margin: 50px 0 20px 0;
     }
     >div:nth-child(2){
+    .cardSubmitContainer {
       form>select{
         width: 100px;
         height: 30px;
@@ -1421,16 +1686,19 @@ footer{
         }
       }
     }
+    }
   >.paginationContainer {
     /* margin-left: -300px; */
     margin-top: 50px;
     height: 40px;
+    margin: 0 auto;
     >.pagination {
       display: flex;
       justify-content: center;
       list-style-type: none;
       padding: 0;
       >li {
+        display: flex;
         font-size: 10pt;
         margin-right: 5px;
         color: rgb(146, 172, 101);
