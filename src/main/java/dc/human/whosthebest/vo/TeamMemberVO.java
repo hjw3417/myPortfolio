@@ -1,5 +1,8 @@
 package dc.human.whosthebest.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TeamMemberVO {
 	private int tID;
 	private String uID;

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.main.dao.MainDAO">
+
+    <resultMap id="gameListResult" type="dc.human.whosthebest.vo.GameListVO">
+        <result property="gTitle" column="G_TITLE"/>
+        <result property="uID" column="T_USERID"/>
+        <result property="gCreatedDate" column="G_CREATEDATE"/>
+    </resultMap>
+
+    <resultMap id="teamInfoResult" type="dc.human.whosthebest.vo.TeamInfoVO">
+        <id property="tID" column="T_ID" />
+        <result property="tName" column="T_NAME" />
+        <result property="tLogo" column="T_LOGO" />
+        <result property="tRegion" column="T_REGION" />
+        <result property="tPhone" column="T_PHONE" />
+        <result property="tRankScore" column="RANKSCORE" />
+        <result property="rankName" column="RANKNAME" />
+        <result property="tMinAge" column="T_MINAGE" />
+        <result property="tMaxAge" column="T_MAXAGE" />
+        <result property="tMaxMember" column="T_MAXMEMBER" />
+        <result property="tMember" column="T_MEMBER" />
+        <result property="tInfo" column="T_INFO" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+    <!-- TeamMemberVO resultMap-->
+    <resultMap id="teamMemberResult" type="dc.human.whosthebest.vo.TeamMemberVO">
+        <id property="tID" column="T_ID" />
+        <result property="uID" column="U_ID" />
+        <result property="uStatus" column="U_STATUS" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+    <!-- BoardVO resultMap -->
+    <resultMap id="boardResult" type="dc.human.whosthebest.vo.BoardVO">
+        <result property="bID" column="B_ID" />
+        <result property="bType" column="B_TYPE" />
+        <result property="bBullet" column="B_BULLET" />
+        <result property="bTitle" column="B_TITLE" />
+        <result property="bContent" column="B_CONTENTT" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+    <select id="mainGameList" resultMap="gameListResult">
+        SELECT G_TITLE, T_USERID FROM GAME ORDER BY G_CREATEDATE DESC
+    </select>
+
+    <select id="mainRanking" resultMap="teamInfoResult">
+        <![CDATA[
+        SELECT
+            T.T_NAME,
+            T.RANKSCORE,
+            CASE
+                WHEN T.RANKSCORE IS NULL THEN 'unranked'
+                WHEN R.MINSCORE IS NULL OR R.MAXSCORE IS NULL THEN 'unranked'
+                ELSE R.RANK_NAME
+            END AS RANKNAME
+        FROM
+            TEAM T
+        LEFT JOIN
+            RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+        ORDER BY
+        CASE
+            WHEN T.RANKSCORE IS NULL THEN -1
+            ELSE T.RANKSCORE
+        END DESC,
+        T.RANKSCORE DESC,
+        T.CREATED_DATE ASC
+
+    ]]>
+    </select>
+
+    <select id="mainBoardList" resultMap="boardResult">
+        SELECT
+            B_ID,
+            B_BULLET,
+            B_TITLE,
+            CREATED_ID,
+            CREATED_DATE
+        FROM
+            BOARD
+        WHERE
+            B_TYPE = 1
+        ORDER BY
+            B_ID DESC
+    </select>
+    
+    <insert id="mainBoardWrite" parameterType="dc.human.whosthebest.vo.BoardVO">
+<!--        <selectKey keyProperty="mainBoard_id" resultType="int" order="AFTER">-->
+<!--            SELECT BOARD_SEQ.NEXTVAL FROM DUAL-->
+<!--        </selectKey>-->
+        insert into board(
+          b_id,
+          b_type,
+          b_bullet,
+          b_title,
+          b_content,
+          CREATED_ID,
+          CREATED_DATE
+        )
+        values(
+          board_seq.nextval,
+          #{bType},
+          #{bBullet},
+          #{bTitle},
+          #{bContent},
+          #{createdID},
+          #{createdDate}
+        )
+    </insert>
+
+    <select id="mainServiceBoard" resultMap="boardResult">
+        SELECT
+        B_TITLE,
+        CREATED_ID
+        FROM
+        BOARD
+        WHERE
+        B_TYPE = 1
+        ORDER BY
+        B_ID DESC
+    </select>
+
+    <select id="mainBoardDetail" resultMap="boardResult">
+        SELECT
+            B_ID,
+            B_BULLET,
+            B_TITLE,
+            CREATED_ID,
+            CREATED_DATE
+        FROM
+            BOARD
+        WHERE
+            B_ID = #{bID}
+    </select>
+
+
+
+
+</mapper>
