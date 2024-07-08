@@ -1,6 +1,6 @@
 package dc.human.whosthebest.vo;
 
-public class rankVO {
+public class RankVO {
 	private int rankID;
 	private String rankName;
 	private int minScore;

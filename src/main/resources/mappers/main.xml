@@ -5,7 +5,7 @@
 
 <mapper namespace="dc.human.whosthebest.main.dao.MainDAO">
 
-    <resultMap id="gameListResult" type="dc.human.whosthebest.vo.GameListVO">
+    <resultMap id="gameListResult" type="dc.human.whosthebest.vo.MaingameListVO">
         <result property="gTitle" column="G_TITLE"/>
         <result property="uID" column="T_USERID"/>
         <result property="gCreatedDate" column="G_CREATEDATE"/>
@@ -121,6 +121,18 @@
           #{createdDate}
         )
     </insert>
+
+    <select id="mainServiceBoard" resultMap="boardResult">
+        SELECT
+        B_TITLE,
+        CREATED_ID
+        FROM
+        BOARD
+        WHERE
+        B_TYPE = 1
+        ORDER BY
+        B_ID DESC
+    </select>
 
     <select id="mainBoardDetail" resultMap="boardResult">
         SELECT

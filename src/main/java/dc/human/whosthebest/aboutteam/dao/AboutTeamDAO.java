@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Mapper
-@Repository("TeamDAO")
+@Repository("AboutTeamDAO")
 public interface AboutTeamDAO {
     public List<GameListVO> selectGameSchedule(@Param("pageNum") int pageNum,
                                                @Param("rowNum") int rowNum,

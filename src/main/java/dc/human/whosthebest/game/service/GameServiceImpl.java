@@ -113,6 +113,18 @@ public class GameServiceImpl implements  GameService {
 
         return createGameResult;
     }
+    /**
+     * 주어진 조건을 기반으로 게임 목록을 조회합니다.
+     *
+     * @param pageNum        조회할 페이지 번호
+     * @param rowNum         페이지당 표시할 행 수
+     * @param sRegion        조회할 지역
+     * @param search         검색할 키워드
+     * @param IMakeGameuID   사용자가 만든 게임의 사용자 ID
+     * @param IPartiGameuID  사용자가 참여한 게임의 사용자 ID
+     * @return               조회된 게임 목록이 담긴 GameListVO 객체의 리스트
+     * @throws Exception     조회 중 오류가 발생한 경우
+     */
     @Override
     public List<GameListVO> selectGameList(int pageNum,
                                            int rowNum,
@@ -134,6 +146,14 @@ public class GameServiceImpl implements  GameService {
 
         return gameList;
     }
+    /**
+     * 주어진 게임 ID와 사용자 ID를 기반으로 게임 정보를 조회합니다.
+     *
+     * @param gID  조회할 게임의 ID
+     * @param uID  조회할 사용자의 ID
+     * @return     조회된 게임 정보가 담긴 GameInfoVO 객체
+     * @throws Exception 조회 중 오류가 발생한 경우
+     */
     @Override
     public GameInfoVO selectGameInfo(int gID, String uID) throws Exception {
         GameInfoVO gameInfoVO = gameDAO.selectGameInfo(gID);
@@ -163,6 +183,14 @@ public class GameServiceImpl implements  GameService {
         }
         return gameInfoVO;
     }
+    /**
+     * 주어진 게임 ID와 팀 ID를 기반으로 원정 팀 정보를 조회합니다.
+     *
+     * @param gID  조회할 게임의 ID
+     * @param tID  조회할 팀의 ID
+     * @return     조회된 원정 팀 정보가 담긴 GameAwayTeamInfoVO 객체
+     * @throws Exception 조회 중 오류가 발생한 경우
+     */
     @Override
     public GameAwayTeamInfoVO selectAwayTeam(int gID, int tID) throws  Exception {
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
@@ -185,6 +213,13 @@ public class GameServiceImpl implements  GameService {
         gameAwayTeamInfoVO.setNowPartiMemberNum(nowPartiMemberNum);
         return gameAwayTeamInfoVO;
     }
+    /**
+     * 주어진 스쿼드 정보를 기반으로 원정 팀을 게임에 추가합니다.
+     *
+     * @param squadVO  추가할 원정 팀의 스쿼드 정보
+     * @return         업데이트된 원정 팀 정보가 담긴 GameAwayTeamInfoVO 객체
+     * @throws Exception 업데이트 중 오류가 발생한 경우
+     */
     @Override
     public GameAwayTeamInfoVO awayTeamIntoGame(SquadVO squadVO) throws  Exception {
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
@@ -230,7 +265,13 @@ public class GameServiceImpl implements  GameService {
         gameAwayTeamInfoVO.setNowPartiMemberNum(nowPartiMemberNum);
         return gameAwayTeamInfoVO;
     }
-
+    /**
+     * 주어진 스쿼드 정보를 기반으로 원정 팀 멤버를 게임에 추가합니다.
+     *
+     * @param squadVO  추가할 원정 팀의 스쿼드 정보
+     * @return         업데이트된 원정 팀 정보가 담긴 GameAwayTeamInfoVO 객체
+     * @throws Exception 추가 중 오류가 발생한 경우
+     */
     @Override
     public GameAwayTeamInfoVO insertawayTeamMembr(SquadVO squadVO) throws Exception {
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
@@ -276,7 +317,13 @@ public class GameServiceImpl implements  GameService {
         gameAwayTeamInfoVO.setNowPartiMemberNum(nowPartiMemberNum);
         return gameAwayTeamInfoVO;
     }
-
+    /**
+     * 새로운 게임 댓글을 삽입하고, 업데이트된 댓글 목록을 조회합니다.
+     *
+     * @param gCommentVO  삽입할 게임 댓글의 세부 정보
+     * @return            업데이트된 게임 댓글 목록이 담긴 GCommentVO 객체의 리스트
+     * @throws Exception  삽입 및 조회 중 오류가 발생한 경우
+     */
     @Override
     public List<GCommentVO> insertComments(GCommentVO gCommentVO) throws Exception {
         int insertCommentsResult =  gameDAO.insertComments(gCommentVO);
@@ -315,8 +362,9 @@ public class GameServiceImpl implements  GameService {
     }
 
     @Override
-    public List<StadiumVO> selectStadiumInfo(String sRegion, String search) throws Exception {
-        List<StadiumVO> stadiumVO = gameDAO.selectStadiumInfo(sRegion, search);
+    public List<StadiumVO> selectStadiumInfo(int pageNum, int rowNum, String sRegion, String search) throws Exception {
+        System.out.println("service rowNum : " + rowNum + " pageNum" + pageNum);
+        List<StadiumVO> stadiumVO = gameDAO.selectStadiumInfo(pageNum, rowNum, sRegion, search);
         return stadiumVO;
     }
     @Override

@@ -12,8 +12,10 @@ package dc.human.whosthebest.game.controller;
 import dc.human.whosthebest.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,7 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface GameController {
-    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO) throws Exception;
+    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO,
+                                 @SessionAttribute(name = "loggedID", required = false) String loggedID
+                                 ) throws Exception;
 
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
@@ -80,9 +84,11 @@ public interface GameController {
                                          @RequestParam(value="uID", required = false) String uID
                                          ) throws Exception;
     public ModelAndView selectStadiumInfo() throws Exception;
-    public List<StadiumVO> searchStadiumInfo(@RequestParam(value="sRegion", required = false) String sRegion,
+    public List<StadiumVO> searchStadiumInfo(@RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum,
+                                             @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,
+                                             @RequestParam(value="sRegion", required = false) String sRegion,
                                              @RequestParam(value="search", required = false) String search
-                                              ) throws Exception;
+                                             ) throws Exception;
     public ModelAndView deleteGame(@RequestParam(value="gID") int gID) throws Exception;
     public String goToModPage(@RequestParam(value="gID") int gID, RedirectAttributes redirectAttributes) throws Exception;
     public String modGameResult(@RequestParam("gID") int gID,
