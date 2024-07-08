@@ -81,7 +81,7 @@ public class TeamServiceImpl implements TeamService {
 
         teamProfileVO = teamDAO.selectTeamProfile(tID);
         gameRecordVO = aboutTeamDAO.getMatchCount(tID);
-        gameResultInfoList = aboutTeamDAO.selectGResultInfo(tID, resultType);
+        gameResultInfoList = teamDAO.selectGResultInfo(tID, resultType);
         gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
         teamProfileVO.setGameRecordVO(gameRecordVO);
 
@@ -91,7 +91,7 @@ public class TeamServiceImpl implements TeamService {
     //AboutTeamDAO 이식
     @Override
     public List<GameListVO> selectGameSchedule(int tID) throws Exception {
-        List<GameListVO> gameList = aboutTeamDAO.selectGameSchedule(tID);
+        List<GameListVO> gameList = teamDAO.selectGameSchedule(tID);
         //날짜 변환 후 반환
         return gameList.stream().map(this::convertGResDate).collect(Collectors.toList());
     }
