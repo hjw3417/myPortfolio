@@ -166,13 +166,19 @@ table.list th {
 a{
   text-decoration-line: none;
 }
+a:link{
+color : black;
+}
+
 a:visited{
   color : black;
 }
 a:hover{
   color : blue;
-
+  text-decoration-line  : underline;
+  text-underline-position : under;
 }
+
 
 /*관리자 메인- 최근 회원 목록*/
 .usertablecontainer {

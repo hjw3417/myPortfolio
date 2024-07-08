@@ -84,8 +84,26 @@
             </tr>
 
             <tr>
-              <td> 가입일자 </td>
-              <td> ${userInfo.createdDate}</td>
+               <td> 소속팀1 </td>
+               <td> ${} </td>
+               <td> ${} </td>
+            </tr>
+
+             <tr>
+               <td> 소속팀2 </td>
+               <td> ${} </td>
+               <td> ${} </td>
+            </tr>
+
+             <tr>
+               <td> 소속팀3 </td>
+               <td> ${} </td>
+               <td> ${} </td>
+            </tr>
+
+              <tr>
+                <td> 가입일자 </td>
+                <td> ${userInfo.createdDate}</td>
             </tr>
       </table>
      <a href="#"> <button> 뒤로가기</button> </a>
