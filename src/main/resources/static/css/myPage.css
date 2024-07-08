@@ -8,10 +8,6 @@
 body{
   font-family: 'GmarketSansMedium';
   margin: 0 auto;
-  width: 1263px;
-
-
-
 }
 header{
   margin: 0 auto;
@@ -195,14 +191,13 @@ h2{
     border : none;
     background-color: white;
     width: 1000px;
-    height: 250px;
+    height: 215px;
     position: absolute;
     top: 430px;
     left : 226px;
     >table{
-      background-color : white;
       width : 1000px;
-      height : 230px;
+      height : 215px;
       border-collapse: collapse;
       text-align: center;
       font-size : 13pt;
@@ -296,13 +291,12 @@ h2{
     padding-top: 13px;
     width: 370px;
     height: 28px;
-    margin-bottom: 5px;
     color: black;
     border: 1px solid rgb(184, 206, 146);
     background-color: white;
 
   }
->input:nth-child(2){
+  >input:nth-child(2){
       position: absolute;
       top : 90px;
       left : 63px;
@@ -315,9 +309,9 @@ h2{
       border: 1px solid rgb(184, 206, 146);
       font-size : 12pt;
   }
- >input:focus{
-      outline :  none;
- }
+  >input:focus{
+    outline : none;
+  }
   >button.ok{
     position: absolute;
     top : 175px;
@@ -352,7 +346,6 @@ h2{
 
 
 
-
 }
 
 /*---------------------------------------------------------------*/
@@ -383,13 +376,14 @@ h2{
         background-color:rgb(184, 206, 146);
         color: white;
         font-size: 13px;
+        /* font-weight: bold; */
         font-family: 'GmarketSansMedium';
 
       }
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
-    /*비밀번호 입력*/
+    /*변경할 비밀번호 입력창*/
     >div:nth-child(2){
       margin-bottom: 10px;
       input{
@@ -408,10 +402,10 @@ h2{
       >div{
         display: none;
         font-size: 12px;
-        color: black;
+        color: rgb(116, 113, 113);
       }
     }
-    /*비밀번호 확인*/
+    /*비밀번호 확인 입력창*/
     >div:nth-child(3){
       margin-bottom: 10px;
       input{
@@ -425,21 +419,7 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
-
-    >div:nth-child(4){
-      margin-bottom: 10px;
-      input{
-        padding-left: 10px;
-        width: 370px;
-        height: 35px;
-        margin-bottom: 5px;
-        color: black;
-        border: 1px solid rgb(184, 206, 146);
-      }
-      >input:focus {outline: none;}
-      >input::placeholder{color: rgb(126, 148, 87);}
-    }
-     /*이름 입력 */
+    /*이름*/
     >div:nth-child(5){
       margin-bottom: 10px;
       input{
@@ -453,9 +433,25 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
-    /*생년월일 입력 */
+    /*생년월일*/
+    >div:nth-child(6){
+      margin-bottom: 10px;
+      input{
+        padding-left: 10px;
+        width: 370px;
+        height: 35px;
+        margin-bottom: 5px;
+        color: black;
+        border: 1px solid rgb(184, 206, 146);
+      }
+      >input:focus {outline: none;}
+      >input::placeholder{color: rgb(126, 148, 87);}
+    }
+
+    /*우편번호*/
     >div:nth-child(7){
       margin-bottom: 10px;
+
       >input:first-child{
         padding-left: 10px;
         width: 250px;
@@ -480,6 +476,7 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
+    /*도로명주소*/
     >div:nth-child(8){
       margin-bottom: 10px;
       >input:first-child{
@@ -489,17 +486,19 @@ h2{
         color: black;
         border: 1px solid rgb(184, 206, 146);
       }
+      /*지번주소*/
       >input:nth-child(2){
         padding-left: 10px;
         width: 175px;
         height: 35px;
         margin-left: -1px;
         color: black;
-        border: 1px solid rgb(184, 206, 146);
+        border: 1px solid  rgb(184, 206, 146);
       }
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
+    /*상세주소*/
     >div:nth-child(9){
       margin-bottom: 10px;
       input{
@@ -513,6 +512,7 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
+    /*이메일*/
     >div:nth-child(10){
       margin-bottom: 10px;
       input{
@@ -526,6 +526,7 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
+    /*핸드폰*/
     >div:nth-child(11){
       margin-bottom: 10px;
       input{
@@ -539,8 +540,9 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
-
+    /*버튼*/
     >div:nth-child(12){
+      /*수정하기*/
       input{
         width: 185px;
         height: 50px;
@@ -553,6 +555,7 @@ h2{
         padding: 10px 0;
         cursor: pointer;
       }
+      /*취소*/
       button{
         width: 185px;
         height: 50px;

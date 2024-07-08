@@ -69,7 +69,6 @@
 
 
 
-
       </script>
 
 
@@ -142,7 +141,7 @@
             <div>
               <input type="text" name="uBday" value="${all.uBday}" placeholder="생년월일 8자리를 입력해주세요.">
             </div>
-            <div></div> <!--삭제 x-->
+
             <div>
               <!--api 출처 https://postcode.map.daum.net/guide-->
               <input type="text" name="update_postcode" id="postcode" placeholder="우편번호">
