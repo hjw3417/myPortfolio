@@ -153,14 +153,14 @@ public class UserControllerImpl implements UserController {
 
             System.out.println("uName :"+uName + " uBday: " +  uBday + " uPhone: "+ uPhone + " uID: " + uID);
             String uPW = userService.findPW(uName, uBday, uPhone, uID);
-            System.out.println("good");
+
             System.out.println(uPW);
             if (uPW != null) {
 
 //                msgOk = "회원정보가 확인됐습니다.";
                 viewName = "user/pwPage";
             } else {
-                msgNo = "입력하신 정보가 일치하지 않습니다!";
+                msgNo = "입력하신 정보가 일치하지 않습니다.";
                 viewName = "user/findPW";
             }
 

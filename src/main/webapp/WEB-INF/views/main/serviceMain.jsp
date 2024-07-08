@@ -33,7 +33,7 @@
         <li><a href="${contextPath}/game/gameInfoList.do">경기 목록</a></li>
         <li><a href="${contextPath}/game/stadiumList.do">경기장 목록</a></li>
         <li><a href="/ranking">랭킹</a></li>
-        <li><a href="#">게시판</a></li>
+        <li><a href="/mainBoard">게시판</a></li>
       </ul>
     </div>
   </header>
@@ -73,7 +73,7 @@
           <div class="gameList">
             <div>
               <span>최신 경기목록</span>
-              <span><a href="game/gameInfoList">+ 더보기</a></span>
+              <span><a href="/gameList">+ 더보기</a></span>
             </div>
             <div>
               <table>

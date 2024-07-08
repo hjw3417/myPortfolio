@@ -16,7 +16,7 @@
       <img src="./image/logo.png">
     </div>
     <div>
-      <span><a href="/login">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
@@ -33,7 +33,7 @@
         <li><a href="${contextPath}/game/gameInfoList.do">경기 목록</a></li>
         <li><a href="${contextPath}/game/stadiumList.do">경기장 목록</a></li>
         <li><a href="/ranking">랭킹</a></li>
-        <li><a href="/board">게시판</a></li>
+        <li><a href="/mainBoard">게시판</a></li>
       </ul>
     </div>
   </header>
@@ -56,8 +56,9 @@
           </tr>
         </table>
         <div>
-          <button type="button" id="modify" onclick="modfiy_btn">수정</button>
-          <button type="button" id="list" onclick="location.href='/mainBoard'">목록</button>
+          <form role="form" action="/boardDetail/create_action" method="post">
+            <button type="button" id="modify" onclick="modifiy_btn">수정</button>
+            <button type="button" id="list" onclick="location.href='/mainBoard'">목록</button>
         </div>
       </div>
     </section>
