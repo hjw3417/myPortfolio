@@ -142,7 +142,7 @@
               <!-- 카드 몸체 종료 -->
               <!-- 카드 submit 시작 -->
               <div>
-                <form method="get" action="${contextPath}/game/gameInfo.do">
+                <form method="get" action="${contextPath}/game/gameInfoList.do">
                   <input type="hidden" name="gID" value="${gameListVO.gID}" />
                   <input type="submit" class="cardSubmit" value="경기 상세 보기"/>
                 </form>
