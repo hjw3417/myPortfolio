@@ -29,21 +29,10 @@ public class GameControllerImpl implements GameController {
     @Autowired
     private GameService gameService;
 
-    /**
-     * Handles the GET request for creating a game.
-     *
-     * @param gameVO    the game details provided by the model attribute
-     * @param loggedID  the user ID stored in the session attribute, could be null
-     * @return          a ModelAndView object directing to the game creation page with necessary data
-     * @throws Exception if an error occurs during the process
-     */
     @Override
     @RequestMapping(value = "/gameMake.do", method = RequestMethod.GET)
-    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO,
-                                 @SessionAttribute(name = "loggedID", required = false) String loggedID
-                                ) throws Exception {
-        String uID = "hoe";
-//        String uID = loggedID;
+    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO) throws Exception {
+        String uID = "heo";
         System.out.println("gameVO.gettUserID() : " + gameVO.gettUserID());
         System.out.println("gameVO.getgResDate() : " + gameVO.getgResDate());
         System.out.println("goToModPage gameVO.getgTeamID() : " + gameVO.getgTeamID());
@@ -424,12 +413,8 @@ public class GameControllerImpl implements GameController {
     public ModelAndView selectStadiumInfo() throws Exception {
         String sRegion = null;
         String search = null;
-        int rowNum = 0;
-        int pageNum = 1;
         ModelAndView mav = new ModelAndView("/game/stadiumList");
-        System.out.println("controller rowNum : " + rowNum + " pageNum" + pageNum);
-        List<StadiumVO> stadiumVO = gameService.selectStadiumInfo(pageNum, rowNum, sRegion, search);
-        System.out.println("stadiumVO.size() : " + stadiumVO.size());
+        List<StadiumVO> stadiumVO = gameService.selectStadiumInfo(sRegion, search);
         mav.addObject("stadiumVO", stadiumVO);
         return mav;
     }
@@ -437,12 +422,10 @@ public class GameControllerImpl implements GameController {
     @Override
     @PostMapping(value="/search/stadiumList.do")
     @ResponseBody
-    public List<StadiumVO> searchStadiumInfo(@RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum,
-                                             @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,
-                                             @RequestParam(value="sRegion", required = false) String sRegion,
+    public List<StadiumVO> searchStadiumInfo(@RequestParam(value="sRegion", required = false) String sRegion,
                                              @RequestParam(value="search", required = false) String search
-                                             ) throws Exception{
-        List<StadiumVO> stadiumList = gameService.selectStadiumInfo(pageNum, rowNum, sRegion, search);
+                                            ) throws Exception{
+        List<StadiumVO> stadiumList = gameService.selectStadiumInfo(sRegion, search);
         return stadiumList;
     }
     @Override
