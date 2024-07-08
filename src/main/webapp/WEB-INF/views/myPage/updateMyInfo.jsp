@@ -66,7 +66,13 @@
               }
           }).open();
       }
-  </script>
+
+
+
+
+      </script>
+
+
   <title>회원정보수정</title>
 </head>
 <body>
@@ -78,8 +84,8 @@
       </div>
 
     <div>
-      <span><a href="#">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="myPage.html">마이페이지</a></span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
       <ul></ul>
@@ -93,9 +99,9 @@
     <div class="side">
 
       <ul style="list-style-type: none;">
-        <li> <a href="myPage.html"> 마이페이지 </a> </li>
-        <li> <a href="myTeamGameRecord.html"> 경기 결과 </a> </li>
-        <li><a href="updateMyInfoPage.html">정보 수정 </a> </li>
+        <li> <a href="/myPage"> 마이페이지 </a> </li>
+        <li> <a href="/myPage/myGameRecord"> 경기 결과 </a> </li>
+        <li><a href="/myPage/updatePwCheck">정보 수정 </a> </li>
       </ul>
   </div>
     <div>　</div>
@@ -110,7 +116,7 @@
               <input type="button" value="아이디 중복" disabled >
             </div>
             <div>
-              <input type="password" id="uPW" name="update_pw" size="20" minlength="9" maxlength="20" placeholder="변경할 비밀번호를 입력해주세요."  required>
+              <input type="password" id="uPW" name="uPW" size="20" minlength="9" maxlength="20" placeholder="변경할 비밀번호를 입력해주세요."  required>
               <div>
                 영문, 숫자, 특수문자 사용하여 9글자 이상 20글자 이내로 작성바랍니다.
               </div>
@@ -119,17 +125,17 @@
               <input type="password" id="confirmPw" name="update_pw_con" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 확인해주세요.">
             </div>
              <script type="text/javascript">
-                        function validatePassword() {
-                            var password = document.getElementById("uPW").value;
-                            var confirmPassword = document.getElementById("confirmPw").value;
+                  function validatePassword() {
+                      var password = document.getElementById("uPW").value;
+                      var confirmPassword = document.getElementById("confirmPw").value;
 
-                            if (password != confirmPassword) {
-                                alert("비밀번호가 일치하지 않습니다.");
-                                return false;
-                            }
-                            return true;
-                        }
-                    </script>
+                      if (password != confirmPassword) {
+                          alert("비밀번호가 일치하지 않습니다.");
+                          return false;
+                      }
+
+                  }
+               </script>
             <div>
               <input type="text" name="uName"  value="${all.uName}" placeholder="이름을 입력해주세요."  readonly>
             </div>
@@ -157,7 +163,19 @@
             </div>
            </c:forEach>
             <div>
-              <input type="submit" value="수정하기">
+              <input type="submit" id="submit" value="수정하기" onclick="return check()">
+                <script>
+                    function check() {
+                        if(confirm("수정하시겠습니까?")){
+                            alert("수정되었습니다.");
+                            var form = document.getElementById("submit");
+                            form.submit();
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }
+                </script>
               <button type="button" > 취소 </button>
             </div>
 

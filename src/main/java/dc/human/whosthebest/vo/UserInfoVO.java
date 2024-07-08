@@ -22,6 +22,15 @@ public class UserInfoVO {
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
+	private int valid;
+
+	public int getValid() {
+		return valid;
+	}
+
+	public void setValid(int valid) {
+		this.valid = valid;
+	}
 
 	public String getuGender() {
 		return uGender;

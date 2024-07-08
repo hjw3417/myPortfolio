@@ -21,8 +21,8 @@
       </div>
 
     <div>
-      <span><a href="#">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="myPage.html">마이페이지</a></span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
       <ul></ul>
@@ -37,21 +37,30 @@
     <div class="side">
 
       <ul style="list-style-type: none;">
-        <li> <a href="myPage.html"> 마이페이지 </a> </li>
-        <li> <a href="myTeamGameRecord.html"> 경기 결과 </a> </li>
-        <li><a href="updateMyInfoPage.html">정보 수정 </a> </li>
+        <li> <a href="/myPage"> 마이페이지 </a> </li>
+        <li> <a href="/myPage/myGameRecord"> 경기 결과 </a> </li>
+        <li><a href="/myPage/updatePwCheck">정보 수정 </a> </li>
       </ul>
   </div>
 
    <div>　</div>
 
         <form class="pwCheck" name="check" method="post" action="/myPage/updatePwCheck" enctype="utf-8">
-            <input type="hidden" name="id" value="${userID}"  >
-            <input type="password" name="pw" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요.">
-            <button class="ok" type="submit" > 확인</button>
+            <input type="id" name="uID" value="${uID}" readonly>
+            <input type="password" name="uPW" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요.">
+            <button class="ok" type="submit" id="submit" > 확인</button>
             <button class="cancel" type="reset" > 취소</button>
       </form>
+
+    <!-- 경고 메시지를 표시하는 JavaScript -->
+    <c:if test="${not empty errorMessage}">
+      <script type="text/javascript">
+        alert("${errorMessage}");
+      </script>
+    </c:if>
+
     </main>
+
 
 
   <!--footer-->

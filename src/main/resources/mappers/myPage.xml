@@ -25,9 +25,8 @@
     </resultMap>
     
     <!-- 마이페이지 - 회원정보수정 전 비밀번호 확인 -->
-    <resultMap id="checkPW" type="userInfoVO">
-        <result property="uID"  column="u_id" />
-        <result property="uPW"  column="u_pw" />
+    <resultMap id="myInfo" type="userInfoVO">
+        <result property="valid"  column="no" />
     </resultMap>
 
     <resultMap id="allMyInfo" type="userInfoVO">
@@ -86,18 +85,16 @@
     </select>
 
     <!-- 마이페이지 - 회원정보수정 전 비밀번호 확인 -->
-    <select id="selectCheckPW" resultMap="checkPW">
+    <select id="selectMyInfo" parameterType="String" resultMap="myInfo">
         <![CDATA[
-            select count(*)
-            from users
+            select count(*) as no from users
             where U_ID = #{uID}
-            <if test="uPW != null and uID != ''">
-                and U_PW = #{uPW}
-            </if>
+            and U_PW = #{uPW}
 
 
         ]]>
     </select>
+
 
     <select id="selectAllMyInfo" resultMap="allMyInfo">
         <![CDATA[
@@ -123,6 +120,7 @@
                 u_addr2 = #{uAddr2},
                 u_email = #{uEmail},
                 u_phone = #{uPhone},
+                u_pw  = #{uPW},
                 updated_id  = #{uID},
                 updated_date = sysdate
             where u_id = #{uID}

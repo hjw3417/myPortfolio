@@ -2,8 +2,6 @@ package dc.human.whosthebest.myPage.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.http.parser.HttpParser;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +16,9 @@ public interface MyPageController {
 
 
     //마이페이지- 회원정보수정 전 비밀번호 확인
-
+    public ModelAndView pwCheck(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public  ModelAndView pwCheck(@RequestParam("uID") String uID,
+                       @RequestParam("uPW") String uPW) throws  Exception;
 
     //마이페이지 - 회원정보수정
     public ModelAndView loadInfo(HttpServletRequest request,
@@ -30,6 +30,10 @@ public interface MyPageController {
                                @RequestParam("uAddr1") String uAddr1,
                                @RequestParam("uAddr2") String uAddr2,
                                @RequestParam("uEmail") String uEmail,
-                               @RequestParam("uPhone") String uPhone) throws Exception;
+                               @RequestParam("uPhone") String uPhone,
+                               @RequestParam("uPW") String uPW) throws Exception;
 
+
+    //로그아웃
+    public String logout(HttpServletRequest request) throws  Exception;
 }

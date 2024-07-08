@@ -31,9 +31,16 @@ public class MyPageServiceImpl implements MyPageService{
     }
 
     //마이페이지 - 회원정보수정 전 비밀번호 확인
-/*    public  int checkPwRight(String uID, String uPW) throws  Exception{
-        return myPageDAO.selectCheckPW(uID,uPW);
-    }*/
+    @Override
+    public int checkInfo(String uID, String uPW) throws  Exception{
+        int a=0;
+        a=myPageDAO.selectMyInfo(uID,uPW).getValid();
+        return a;
+    }
+
+
+
+    //마이페이지 - 회원정보수정
     @Override
     public List<UserInfoVO> loadUserInfo() throws Exception{
         return myPageDAO.selectAllMyInfo();
@@ -42,8 +49,8 @@ public class MyPageServiceImpl implements MyPageService{
     @Override
     public void updateInfo(String uID, String uName, String uBday,
                         String uAddr1, String uAddr2, String uEmail,
-                        String uPhone) throws Exception {
-        myPageDAO.updateInfo(uID, uName, uBday, uAddr1, uAddr2, uEmail, uPhone);
+                        String uPhone, String uPW) throws Exception {
+        myPageDAO.updateInfo(uID, uName, uBday, uAddr1, uAddr2, uEmail, uPhone, uPW);
     }
 
 

@@ -195,13 +195,14 @@ h2{
     border : none;
     background-color: white;
     width: 1000px;
-    height: 215px;
+    height: 250px;
     position: absolute;
     top: 430px;
     left : 226px;
     >table{
+      background-color : white;
       width : 1000px;
-      height : 215px;
+      height : 230px;
       border-collapse: collapse;
       text-align: center;
       font-size : 13pt;
@@ -296,7 +297,7 @@ h2{
     width: 370px;
     height: 28px;
     margin-bottom: 5px;
-    color: rgb(126, 148, 87);
+    color: black;
     border: 1px solid rgb(184, 206, 146);
     background-color: white;
 
@@ -310,11 +311,13 @@ h2{
       width: 370px;
       height: 35px;
       margin-bottom: 5px;
-      color: rgb(126, 148, 87);
+      color: black;
       border: 1px solid rgb(184, 206, 146);
       font-size : 12pt;
-
   }
+ >input:focus{
+      outline :  none;
+ }
   >button.ok{
     position: absolute;
     top : 175px;
@@ -380,13 +383,13 @@ h2{
         background-color:rgb(184, 206, 146);
         color: white;
         font-size: 13px;
-        /* font-weight: bold; */
         font-family: 'GmarketSansMedium';
 
       }
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
+    /*비밀번호 입력*/
     >div:nth-child(2){
       margin-bottom: 10px;
       input{
@@ -408,6 +411,7 @@ h2{
         color: black;
       }
     }
+    /*비밀번호 확인*/
     >div:nth-child(3){
       margin-bottom: 10px;
       input{
@@ -421,6 +425,7 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
+
     >div:nth-child(4){
       margin-bottom: 10px;
       input{
@@ -434,6 +439,7 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
+     /*이름 입력 */
     >div:nth-child(5){
       margin-bottom: 10px;
       input{
@@ -447,7 +453,7 @@ h2{
       >input:focus {outline: none;}
       >input::placeholder{color: rgb(126, 148, 87);}
     }
-
+    /*생년월일 입력 */
     >div:nth-child(7){
       margin-bottom: 10px;
       >input:first-child{

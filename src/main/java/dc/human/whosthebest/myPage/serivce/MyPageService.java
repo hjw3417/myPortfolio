@@ -16,11 +16,12 @@ public interface MyPageService {
 
 
     //마이페이지 - 회원정보수정 전 비밀번호 확인
-   //public  int checkPwRight(String uID, String uPW) throws  Exception;
+   public int checkInfo(String uID, String uPW) throws  Exception;
+
 
     public List<UserInfoVO> loadUserInfo() throws Exception;
 
     public void updateInfo(String uID, String uName, String uBday,
                         String uAddr1, String uAddr2, String uEmail,
-                        String uPhone) throws Exception;
+                        String uPhone, String uPW) throws Exception;
 }

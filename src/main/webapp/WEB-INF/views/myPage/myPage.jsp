@@ -46,8 +46,8 @@
       <div class="side">
 
             <ul style="list-style-type: none;">
-              <li> <a href="myPage.html"> 마이페이지 </a> </li>
-              <li> <a href="myTeamGameRecord.html"> 경기 결과 </a> </li>
+              <li> <a href="/myPage"> 마이페이지 </a> </li>
+              <li> <a href="/myPage/myGameRecord"> 경기 결과 </a> </li>
               <li><a href="/myPage/updatePwCheck">정보 수정 </a> </li>
             </ul>
         </div>
