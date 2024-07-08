@@ -13,6 +13,9 @@ HISTORY
 
 package dc.human.whosthebest.vo;
 
+import org.springframework.stereotype.Component;
+
+
 public class GameListVO {
 	//game table
 	private int gID;					//G_ID(경기 아이디/sequence)

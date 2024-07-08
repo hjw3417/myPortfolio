@@ -85,8 +85,8 @@
             <select id="resultType">
               <option value="">전체</option>
               <option value="승">승</option>
-              <option value="패">패</option>
-              <option value="무">무</option>
+              <option value="무">패</option>
+              <option value="패">무</option>
             </select>
           </form>
         </div>
@@ -107,13 +107,14 @@
         <!-- pagination 시작 -->
         <div class="paginationContainer">
           <ul class="pagination">
+
             <li>
-            <button id="GameRecord-prevPage" type="button" onclick="#">이전</button>
+            <button id="prevPage" type="button" onclick="#">이전</button>
             </li>
-            <li id="GameRecord-pageNumBtnLI" name="GameRecord-pageNumBtnLI">
+            <li id="pageNumBtnLI" name="pageNumBtnLI">
             </li>
             <li>
-                <button id="GameRecord-nextPage" type="button" onclick="#">다음</button>
+                <button id="nextPage" type="button" onclick="#">다음</button>
             </li>
           </ul>
         </div>

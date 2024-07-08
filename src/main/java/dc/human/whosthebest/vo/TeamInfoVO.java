@@ -1,9 +1,12 @@
 package dc.human.whosthebest.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component("teamInfoVO")
 public class TeamInfoVO {
 	private int tID;
 	private String tName;
-	private String tLogo;
+	private byte[] tLogo;
 	private String tRegion;
 	private String tPhone;
 	private int tRankScore;
@@ -17,8 +20,7 @@ public class TeamInfoVO {
 	private String updatedID;
 	private String updatedDate;
 
-	public TeamInfoVO() {
-	}
+
 
 	public int gettID() {
 		return tID;
@@ -36,11 +38,11 @@ public class TeamInfoVO {
 		this.tName = tName;
 	}
 
-	public String gettLogo() {
+	public byte[] gettLogo() {
 		return tLogo;
 	}
 
-	public void settLogo(String tLogo) {
+	public void settLogo(byte[] tLogo) {
 		this.tLogo = tLogo;
 	}
 

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.myPage.dao.MyPageDAO">
+
+    <!--마이페이지 메인 - 이름 , 소속팀 ,랭크 출력-->
+    <resultMap id="myPageInfo" type="myPageInfoVO">
+        <result property="uID"          column="u_id" />
+        <result property="uName"        column="u_name" />
+        <result property="tID"          column="t_id" />
+        <result property="tName"        column="t_name"/>
+        <result property="tRankScore"   column="rankscore" />
+    </resultMap>
+
+    <!-- 마이페이지메인 - 최근 경기결과  -->
+    <resultMap id="recentGame" type="recentGameVO">
+        <result property="gResDate"     column="g_resdate"  />
+        <result property="myTeam"       column="myTeam" />
+        <result property="awayTeam"     column="awayTeam" />
+        <result property="sName"        column="s_name" />
+        <result property="homeGoal"     column="home_goal" />
+        <result property="awayGoal"     column="away_goal" />
+    </resultMap>
+    
+    <!-- 마이페이지 - 회원정보수정 전 비밀번호 확인 -->
+    <resultMap id="myInfo" type="userInfoVO">
+        <result property="valid"  column="no" />
+    </resultMap>
+
+    <resultMap id="allMyInfo" type="userInfoVO">
+        <result property="uID" column="u_id"/>
+        <result property="uPW" column="u_pw"/>
+        <result property="uName" column="u_name"/>
+        <result property="uBday" column="u_bday"/>
+        <result property="uAddr1" column="u_addr1"/>
+        <result property="uAddr2" column="u_addr2"/>
+        <result property="uEmail" column="u_email"/>
+        <result property="uPhone" column="u_phone"/>
+        <result property="updatedDate" column="update_date"/>
+    </resultMap>
+
+
+    <!--마이페이지 메인 - 이름 , 소속팀 ,랭크 출력-->
+    <select id="selectMyPageInfo" resultMap="myPageInfo">
+        <![CDATA[
+             select  users.u_name,
+                     team.t_name,
+                     team.rankscore
+             from  team, squad , users
+             where squad.t_id=team.t_id
+                    and squad.u_id=users.u_id
+                    and users.u_id='hong'
+                     and team.rankscore is not null
+              order by team.rankscore desc
+
+        ]]>
+    </select>
+
+    <!-- 마이페이지메인 - 최근 경기결과  -->
+    <select id="selectRecentGame"  resultMap="recentGame">
+        <![CDATA[
+             SELECT
+                    g.G_RESDATE,
+                    t.t_name as myTeam,
+                    tt.t_name as awayTeam,
+                    s.s_name,
+                    r.home_goal,
+                    r.away_goal
+             FROM G_RESULT r
+                INNER JOIN GAME g
+                ON g.G_ID = r.g_id
+                INNER JOIN STADIUM s
+                ON g.S_ID = s.S_ID
+                INNER JOIN TEAM t
+                ON t.T_ID = r.T_HOMEID
+                INNER JOIN TEAM tt
+                ON tt.T_ID = r.T_AWAYID
+                INNER JOIN SQUAD sq
+                on sq.t_id = r.t_homeid
+             where sq.u_id = 'hong'
+             order by g.g_resdate desc
+        ]]>
+    </select>
+
+    <!-- 마이페이지 - 회원정보수정 전 비밀번호 확인 -->
+    <select id="selectMyInfo" parameterType="String" resultMap="myInfo">
+        <![CDATA[
+            select count(*) as no
+            from users
+            where U_ID = #{uID}
+                and U_PW = #{uPW}
+
+
+        ]]>
+    </select>
+
+
+    <select id="selectAllMyInfo" resultMap="allMyInfo">
+        <![CDATA[
+            select u_id,
+                   u_name,
+                   u_bday,
+                   u_addr1,
+                   u_addr2,
+                   u_email,
+                   u_phone
+            from users
+            where u_id='hong'
+        ]]>
+    </select>
+
+    <select id="updateInfo" parameterType="userInfoVO">
+        <![CDATA[
+            update users
+            set
+                u_name = #{uName},
+                u_bday = #{uBday},
+                u_addr1  = #{uAddr1},
+                u_addr2 = #{uAddr2},
+                u_email = #{uEmail},
+                u_phone = #{uPhone},
+                u_pw  = #{uPW},
+                updated_id  = #{uID},
+                updated_date = sysdate
+            where u_id = #{uID}
+        ]]>
+    </select>
+
+
+</mapper>
