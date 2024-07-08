@@ -74,21 +74,20 @@ public class MainControllerImpl implements MainController {
         return mav;
     }
 
-    @Override
-    @RequestMapping(value = "/boardDetail/read", method = RequestMethod.GET)
-    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception{
-        return "/boardDetail/read";
-    }
+//    @Override
+//    @RequestMapping(value = "/boardDetail/read", method = RequestMethod.GET)
+//    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception{
+//        return "/boardDetail/read";
+//    }
 
     @Override
     @RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
-    public ModelAndView mainBoardDetail(@ModelAttribute("boardVO") BoardVO boardVO,
-                                        @RequestParam("bID") int bID) throws Exception{
+    public ModelAndView mainBoardDetail(@RequestParam("bID") int bID) throws Exception{
 
         BoardVO mBoard = mainService.mainBoardDetail(bID);
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("main/boardDetail");
         mav.addObject("mBoard", mBoard);
+        mav.setViewName("main/boardDetail");
 
         return mav;
 

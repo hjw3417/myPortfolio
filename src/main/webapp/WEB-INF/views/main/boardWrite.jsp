@@ -33,7 +33,7 @@
         <li><a href="/gameList">경기 목록</a></li>
         <li><a href="/stadiumList">경기장 목록</a></li>
         <li><a href="/ranking">랭킹</a></li>
-        <li><a href="/board">게시판</a></li>
+        <li><a href="/mainBoard">게시판</a></li>
       </ul>
     </div>
   </header>
@@ -62,7 +62,7 @@
           </div>
           <div>
             <input type="submit" value="등록">
-            <input type="reset" value="취소">
+            <input type="reset" value="취소" onclick="location.href='/mainBoard'">
           </div>
         </form>
       </div>
