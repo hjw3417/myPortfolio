@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dc.human.whosthebest.game.dao.GameDAO">
+	<!--  StadiumVO resultMap	-->
+	<resultMap id="stadiumResultMap" type="StadiumVO">
+		<result property="sID" column="S_ID"/>
+		<result property="sName" column="S_NAME"/>
+		<result property="sRegion" column="S_REGION"/>
+		<result property="sAddr" column="S_ADDR"/>
+		<result property="sOwner" column="S_OWNER"/>
+		<result property="sPhone" column="S_PHONE"/>
+		<result property="sNum" column="S_NUM"/>
+	</resultMap>
+	<!--  TeamInfoVO ResultMap	-->
+	<resultMap id="teamInfoResultMap" type="TeamInfoVO">
+		<result property="tID" column="T_ID"/>
+		<result property="tName" column="T_NAME"/>
+		<result property="tLogo" column="T_LOGO"/>
+		<result property="tregion" column="T_REGION"/>
+		<result property="tphone" column="T_PHONE"/>
+		<result property="tRankScore" column="RANKSCORE"/>
+		<result property="tMinAge" column="T_MINAGE"/>
+		<result property="tMaxAge" column="T_MAXAGE"/>
+		<result property="tMaxMember" column="T_MAXMEMBER"/>
+		<result property="tMember" column="T_MEMBER"/>
+		<result property="tInfo" column="T_INFO"/>
+		<result property="createdID" column="CREATED_ID"/>
+		<result property="createdDate" column="CREATED_DATE"/>
+		<result property="updatedID" column="UPDATED_ID"/>
+		<result property="updatedDate" column="UPDATED_DATE"/>
+	</resultMap>
+	<!-- game ResultMap -->
+	<resultMap id="gameResultMap" type="GameVO">
+		<id property="gID" column="G_ID"/>
+		<result property="gTeamID" column="G_TEAMID"/>
+		<result property="gTitle" column="G_TITLE"/>
+		<result property="gTag" column="G_TAG"/>
+		<result property="gCreatedDate" column="G_CREATEDATE"/>
+		<result property="gTime" column="G_TIME"/>
+		<result property="gInfo" column="G_INFO"/>
+		<result property="gMinMember" column="G_MINMEMBER"/>
+		<result property="gResDate" column="G_RESDATE"/>
+		<result property="gStatus" column="G_STATUS"/>
+		<result property="tUserID" column="T_USERID"/>
+		<result property="tAwayID" column="T_AWAYID"/>
+		<result property="sID" column="S_ID"/>
+		<result property="sNum" column="S_NUM"/>
+		<result property="sName" column="S_NAME"/>
+		<result property="sAddr" column="S_ADDR"/>
+	</resultMap>
+
+	<!-- gameList resultMap -->
+	<resultMap id="gameListResultMap" type="GameListVO">
+		<!-- game table -->
+		<id property="gID" column="G_ID"/>
+		<result property="gTeamID" column="G_TEAMID"/>
+		<result property="gTitle" column="G_TITLE"/>
+		<result property="gTag" column="G_TAG"/>
+		<result property="gCreatedDate" column="G_CREATEDATE"/>
+		<result property="gTime" column="G_TIME"/>
+		<result property="gMinMember" column="G_MINMEMBER"/>
+		<result property="gResDate" column="G_RESDATE"/>
+		<result property="gStatus" column="G_STATUS"/>
+		<result property="tUserID" column="G_USER_ID"/>
+		<result property="sID" column="S_ID"/>
+		<result property="sNum" column="S_NUM"/>
+
+		<!-- team table -->
+		<result property="tName" column="T_NAME"/>
+		<result property="tLogo" column="T_LOGO"/>
+
+		<!-- stadium table -->
+		<result property="sName" column="S_NAME"/>
+		<result property="sRegion" column="S_REGION"/>
+		<result property="sAddr" column="S_ADDR"/>
+	</resultMap>
+
+	<resultMap id="GameInfoResultMap" type="dc.human.whosthebest.vo.GameInfoVO">
+		<!-- Game table fields -->
+		<id property="gID" column="gID"/>
+		<result property="gTeamID" column="gTeamID"/>
+		<result property="gTitle" column="gTitle"/>
+		<result property="gTag" column="gTag"/>
+		<result property="gCreatedDate" column="gCreatedDate"/>
+		<result property="gTime" column="gTime"/>
+		<result property="gInfo" column="gInfo"/>
+		<result property="gMinMember" column="gMinMember"/>
+		<result property="gResDate" column="gResDate"/>
+		<result property="gStatus" column="gStatus"/>
+		<result property="tUserID" column="T_USERID"/>
+		<result property="tAwayID" column="tAwayID"/>
+		<result property="sID" column="sID"/>
+		<result property="sNum" column="sNum"/>
+
+		<!-- Team table fields -->
+		<result property="tName" column="tName"/>
+		<result property="tLogo" column="tLogo"/>
+
+		<!-- Stadium table fields -->
+		<result property="sName" column="sName"/>
+		<result property="sRegion" column="sRegion"/>
+		<result property="sAddr" column="sAddr"/>
+		<result property="sOwner" column="sOwner"/>
+		<result property="sPhone" column="sPhone"/>
+	</resultMap>
+	<!-- SquadVO resultMap -->
+	<resultMap id="SquadResultMap" type="SquadVO">
+		<id property="gId" column="g_id"/>
+		<result property="tId" column="t_id"/>
+		<result property="uId" column="u_id"/>
+		<result property="createdID" column="CREATED_ID"/>
+	</resultMap>
+	<resultMap id="GameMemberListMap" type="GameMemberListVO">
+		<id property="uID" column="U_ID"/>
+		<result property="uName" column="U_NAME"/>
+	</resultMap>
+	<!-- GCommentVO resultMap -->
+	<resultMap id="GCommentVOMap" type="GCommentVO">
+		<id property="uID" column="U_ID"/>
+		<result property="gID" column="G_ID"/>
+		<result property="gComment" column="g_comment"/>
+		<result property="comCreatedID" column="COM_CREATED_ID"/>
+		<result property="uName" column="U_NAME"/>
+	</resultMap>
+
+	<select id="loadMyTeam" parameterType="String" resultMap="teamInfoResultMap">
+		SELECT t.t_id,
+		       t.t_name
+		FROM team t, team_member tm
+		WHERE t.t_id = tm.t_id
+		and tm.U_ID = #{uID}
+	</select>
+
+	<select id="selectStadium" parameterType="java.util.Map" resultMap="stadiumResultMap">
+		SELECT s.s_name, s.s_ID
+		FROM stadium s, regioncode rc
+		WHERE s.s_region = rc.region_name
+		<if test="sRegion != null and sRegion != ''">
+			AND rc.region_code =	#{sRegion}
+		</if>
+		<if test="search != null and search != ''">
+			AND s.s_name||s.s_region||s.s_addr||s.s_owner LIKE '%' || #{search} || '%'
+		</if>
+	</select>
+	<select id="stadiumDetail" parameterType="int" resultMap="stadiumResultMap">
+		<![CDATA[
+		SELECT S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_PHONE, S_NUM
+		FROM STADIUM
+		WHERE S_ID = #{sID}
+		]]>
+	</select>
+	<!-- INSERT 쿼리 -->
+	<insert id="createGame" parameterType="GameVO">
+		INSERT INTO GAME (
+		G_TEAMID,
+		G_TITLE,
+		G_TAG,
+		G_TIME,
+		G_INFO,
+		G_MINMEMBER,
+		G_RESDATE,
+		T_USERID,
+		S_ID,
+		S_NUM,
+		CREATED_ID
+		) VALUES (
+		#{gTeamID},
+		#{gTitle},
+		#{gTag},
+		#{gTime},
+		#{gInfo},
+		#{gMinMember},
+		#{gResDate},
+		#{tUserID},
+		#{sID},
+		#{sNum},
+		#{createdID}
+		)
+		<!-- 시퀀스를 통해 기본 키 값 가져오기 -->
+		<selectKey keyProperty="gID" resultType="int" order="AFTER">
+			SELECT G_SEQUENCE.CURRVAL FROM dual
+		</selectKey>
+	</insert>
+	<select id="selectGameMaker" parameterType="int" resultMap="gameResultMap">
+		SELECT G_TEAMID, T_USERID
+		FROM GAME
+		WHERE G_ID = #{gID}
+	</select>
+	<insert id="insertSquad" parameterType="SquadVO">
+		INSERT INTO SQUAD
+		(G_ID, T_ID, U_ID, CREATED_ID)
+		VALUES
+		(#{gID}, #{tID}, #{uID}, #{createdID})
+	</insert>
+	<select id="selectGameList" parameterType="int" resultMap="gameListResultMap">
+		SELECT g_id, G_TEAMID, G_TITLE, G_TAG, G_CREATEDATE, G_TIME, G_MINMEMBER, G_RESDATE, G_STATUS,
+		G_USER_ID, S_ID, S_NUM,
+		T_NAME, T_LOGO, T_REGION, T_PHONE, RANKSCORE, T_MINAGE, T_MAXAGE, T_MAXMEMBER, T_MEMBER, T_INFO,
+		S_NAME, S_REGION, S_ADDR, S_OWNER, S_PHONE
+		FROM (
+		SELECT
+		g.G_ID, g.G_TEAMID, g.G_TITLE, g.G_TAG, g.G_CREATEDATE, g.G_TIME, g.G_MINMEMBER, g.G_RESDATE, g.G_STATUS,
+		g.T_USERID AS G_USER_ID, g.S_ID, g.S_NUM,
+		t.T_NAME, t.T_LOGO, t.T_REGION, t.T_PHONE, t.RANKSCORE, t.T_MINAGE, t.T_MAXAGE, t.T_MAXMEMBER, t.T_MEMBER,
+		t.T_INFO, t.CREATED_ID, t.CREATED_DATE, t.UPDATED_ID, t.UPDATED_DATE,
+		s.S_NAME, s.S_REGION, s.S_ADDR, s.S_OWNER, s.S_PHONE,
+		ROW_NUMBER() OVER (ORDER BY g.G_CREATEDATE DESC) AS rn
+		FROM
+		GAME g
+		INNER JOIN
+		TEAM t ON g.G_TEAMID = t.T_ID
+		INNER JOIN
+		STADIUM s ON g.S_ID = s.S_ID
+		INNER JOIN
+		REGIONCODE r ON s.S_REGION = r.region_name
+		INNER JOIN
+		SQUAD sq ON g.G_ID = sq.G_ID
+		WHERE g.G_STATUS = 0
+		<if test="sRegion != null and sRegion != ''">
+			AND r.REGION_CODE = #{sRegion}
+		</if>
+		<if test="search != null and search != ''">
+			AND (
+			g.G_TAG = #{search} OR
+			g.G_TITLE = #{search} OR
+			t.T_NAME = #{search} OR
+			s.S_REGION = #{search} OR
+			s.S_NAME = #{search} OR
+			s.S_ADDR = #{search}
+			)
+			OR g.G_TAG||g.G_TITLE||s.S_NAME||t.T_NAME||s.S_REGION||s.S_ADDR LIKE '%' || #{search} || '%'
+		</if>
+		<if test="IMakeGameuID != null and IMakeGameuID != ''">
+			AND g.T_USERID = #{IMakeGameuID}
+		</if>
+		<if test="IPartiGameuID != null and IPartiGameuID != ''">
+			AND SQ.U_ID = #{IPartiGameuID}
+		</if>
+		)
+		WHERE rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5) + 5
+	</select>
+
+	<select id="selectGameInfo" resultMap="GameInfoResultMap" parameterType="int">
+		SELECT
+		g.G_ID AS gID,
+		g.G_TEAMID AS gTeamID,
+		g.G_TITLE AS gTitle,
+		g.G_TAG AS gTag,
+		g.G_CREATEDATE AS gCreatedDate,
+		g.G_TIME AS gTime,
+		g.G_INFO AS gInfo,
+		g.G_MINMEMBER AS gMinMember,
+		g.G_RESDATE AS gResDate,
+		g.G_STATUS AS gStatus,
+		g.T_USERID AS tUserID,
+		g.T_AWAYID AS tAwayID,
+		g.S_ID AS sID,
+		g.S_NUM AS sNum,
+		t.T_NAME AS tName,
+		t.T_LOGO AS tLogo,
+		s.S_NAME AS sName,
+		s.S_REGION AS sRegion,
+		s.S_ADDR AS sAddr,
+		s.S_OWNER AS sOwner,
+		s.S_PHONE AS sPhone
+		FROM game g
+		LEFT JOIN team t ON g.G_TEAMID = t.T_ID
+		LEFT JOIN stadium s ON g.S_ID = s.S_ID
+		WHERE
+		g.G_ID = #{gID}
+	</select>
+	<select id="selectGameTMemmber" parameterType="SquadVO" resultMap="GameMemberListMap">
+		select
+			u.U_ID,
+			u.U_NAME
+		FROM
+			SQUAD sq
+		LEFT JOIN USERS u ON sq.U_ID = u.U_ID
+		WHERE
+			sq.G_ID = #{gID} and sq.T_ID = #{tID}
+	</select>
+	<select id="selectComments" parameterType="int" resultMap="GCommentVOMap">
+		select cm.G_COMMENT, u.U_NAME
+		FROM G_COMMENT cm
+		LEFT JOIN
+		USERS u ON cm.U_ID = u.U_ID
+		WHERE cm.G_ID = #{gID}
+	</select>
+	<select id="nowPartiMemberNum" parameterType="int" resultType="int">
+		select count(*)
+		from squad
+		where g_id = #{gID}
+	</select>
+	<insert id="insertComments" parameterType="GCommentVO">
+		INSERT INTO G_COMMENT (U_ID, G_ID, G_COMMENT, COM_CREATED_ID)
+		VALUES (#{uID}, #{gID}, #{gComment}, #{comCreatedID})
+	</insert>
+	<select id="checkDuplicateSquad" parameterType="SquadVO" resultType="int">
+		SELECT COUNT(*)
+		FROM SQUAD
+		WHERE U_ID = #{uID} and G_ID = #{gID}
+	</select>
+	<update id="updateAwayTeamID" parameterType="int">
+		UPDATE GAME
+		SET T_AWAYID = #{tID}
+		WHERE G_ID = #{gID}
+	</update>
+	<select id="checkAwayTeamExist" parameterType="GameVO" resultType="int">
+		SELECT COUNT(*)
+		FROM GAME
+		WHERE G_ID = #{gID} and T_AWAYID = #{tAwayID}
+	</select>
+	<select id="selectAwayTeamName" parameterType="int" resultType="String">
+		select T_NAME
+		FROM TEAM
+		WHERE T_ID = #{tID}
+	</select>
+	<insert id="insertGameResult" parameterType="GResultVO">
+		INSERT INTO G_RESULT
+		(G_ID, T_HOMEID, T_AWAYID, HOME_GOAL, AWAY_GOAL, U_ID, CREATED_ID)
+		VALUES
+		(#{gID}, #{tHomeID}, #{tAwayID}, #{homeGoal}, #{awayGoal}, #{uID}, #{createdID})
+	</insert>
+	<select id="selectStadiumInfo" resultMap="stadiumResultMap">
+		SELECT *
+		FROM (
+		SELECT
+		S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_NUM,
+		ROW_NUMBER() OVER (ORDER BY S_ID) AS rn
+		FROM STADIUM
+		)
+		WHERE rn BETWEEN 1 AND 10
+		<if test="sRegion != null and sRegion != ''">
+			AND  S_REGION = #{sRegion}
+		</if>
+		<if test="search != null and search != ''">
+			AND (
+			S_REGION = #{search} OR
+			S_NAME = #{search} OR
+			S_OWNER = #{search}
+			)
+			AND S_REGION||S_NAME||S_OWNER LIKE '%' || #{search} || '%'
+		</if>
+	</select>
+	<delete id="deleteGame" parameterType="int">
+		DELETE FROM GAME
+		WHERE G_ID = #{gID}
+	</delete>
+	<select id="selectForModGame" parameterType="int" resultMap="gameResultMap">
+		SELECT
+			g.G_ID,
+			g.G_TITLE,
+			g.G_TAG,
+			g.G_TIME,
+			g.G_INFO,
+			g.G_MINMEMBER,
+			g.T_USERID,
+			g.S_ID,
+			g.S_NUM,
+			g.G_RESDATE,
+			s.S_NAME,
+			s.S_ADDR,
+			g.G_TEAMID
+		FROM
+			GAME g
+		LEFT JOIN
+			STADIUM s ON g.S_ID = s.S_ID
+		WHERE g.G_ID = #{gID}
+	</select>
+	<update id="modGame" parameterType="GameVO">
+		UPDATE GAME
+		SET
+		G_TEAMID = #{gTeamID},
+		G_TITLE = #{gTitle},
+		G_TAG = #{gTag},
+		G_TIME = #{gTime},
+		G_INFO = #{gInfo},
+		G_MINMEMBER = #{gMinMember},
+		G_RESDATE = #{gResDate},
+		T_USERID = #{tUserID},
+		S_ID = #{sID},
+		S_NUM = #{sNum},
+		UPDATED_ID = #{updatedID}
+		WHERE
+		G_ID = #{gID}
+	</update>
+	<update id="updateGameState" parameterType="int">
+		UPDATE GAME
+		SET
+		G_STATUS = #{gStatus}
+		WHERE
+		G_ID = #{gID}
+	</update>
+
+</mapper>
