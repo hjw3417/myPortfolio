@@ -12,8 +12,10 @@ package dc.human.whosthebest.game.controller;
 import dc.human.whosthebest.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,7 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface GameController {
-    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO) throws Exception;
+    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO,
+                                 @SessionAttribute(name = "loggedID", required = false) String loggedID
+                                 ) throws Exception;
 
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception;
 

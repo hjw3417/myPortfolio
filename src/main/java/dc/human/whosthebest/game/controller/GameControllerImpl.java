@@ -29,10 +29,21 @@ public class GameControllerImpl implements GameController {
     @Autowired
     private GameService gameService;
 
+    /**
+     * Handles the GET request for creating a game.
+     *
+     * @param gameVO    the game details provided by the model attribute
+     * @param loggedID  the user ID stored in the session attribute, could be null
+     * @return          a ModelAndView object directing to the game creation page with necessary data
+     * @throws Exception if an error occurs during the process
+     */
     @Override
     @RequestMapping(value = "/gameMake.do", method = RequestMethod.GET)
-    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO) throws Exception {
-        String uID = "heo";
+    public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO,
+                                 @SessionAttribute(name = "loggedID", required = false) String loggedID
+                                ) throws Exception {
+        String uID = "hoe";
+//        String uID = loggedID;
         System.out.println("gameVO.gettUserID() : " + gameVO.gettUserID());
         System.out.println("gameVO.getgResDate() : " + gameVO.getgResDate());
         System.out.println("goToModPage gameVO.getgTeamID() : " + gameVO.getgTeamID());
