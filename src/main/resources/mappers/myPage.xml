@@ -87,9 +87,10 @@
     <!-- 마이페이지 - 회원정보수정 전 비밀번호 확인 -->
     <select id="selectMyInfo" parameterType="String" resultMap="myInfo">
         <![CDATA[
-            select count(*) as no from users
+            select count(*) as no
+            from users
             where U_ID = #{uID}
-            and U_PW = #{uPW}
+                and U_PW = #{uPW}
 
 
         ]]>
