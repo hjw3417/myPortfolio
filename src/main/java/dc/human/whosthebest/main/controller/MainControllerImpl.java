@@ -4,6 +4,7 @@ import ch.qos.logback.core.model.Model;
 import dc.human.whosthebest.main.service.MainService;
 import dc.human.whosthebest.vo.BoardVO;
 import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.MaingameListVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,17 +35,24 @@ public class MainControllerImpl implements MainController {
         System.out.println("세션에 저장된 변수 : " + name);
         System.out.println("=============================================");
 
-        ModelAndView mav = new ModelAndView("/main/serviceMain");
+        ModelAndView mav = new ModelAndView("main/serviceMain");
 
         List<TeamInfoVO> mRanking = mainService.mainRanking();
-        List<GameListVO> mGameList = mainService.mainGameList();
+        List<MaingameListVO> mGameList = mainService.mainGameList();
         List<BoardVO> mBoardList = mainService.mainBoardList();
+        if(mRanking != null) {
+            mav.addObject("mRanking", mRanking);
+            System.out.println("메인 랭킹 시스아웃" + mRanking);
+        }
 
-        mav.addObject("mRanking", mRanking);
-        mav.addObject("mGameList", mGameList);
-        mav.addObject("mBoardList", mBoardList);
-        System.out.println("메인 랭킹 시스아웃" + mRanking);
-        System.out.println(mGameList);
+        if(mRanking != null) {
+            mav.addObject("mGameList", mGameList);
+        }
+
+        if(mRanking != null) {
+            mav.addObject("mBoardList", mBoardList);
+            System.out.println(mGameList);
+        }
 
         return mav;
     }
@@ -74,11 +82,11 @@ public class MainControllerImpl implements MainController {
         return mav;
     }
 
-    @Override
-    @RequestMapping(value = "/boardDetail/read", method = RequestMethod.GET)
-    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception{
-        return "/boardDetail/read";
-    }
+//    @Override
+//    @RequestMapping(value = "/boardDetail/read", method = RequestMethod.GET)
+//    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception{
+//        return "/boardDetail/read";
+//    }
 
     @Override
     @RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
@@ -87,8 +95,8 @@ public class MainControllerImpl implements MainController {
 
         BoardVO mBoard = mainService.mainBoardDetail(bID);
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("main/boardDetail");
         mav.addObject("mBoard", mBoard);
+        mav.setViewName("redirect:/boardDetail");
 
         return mav;
 

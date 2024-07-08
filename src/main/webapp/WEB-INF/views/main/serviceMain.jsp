@@ -73,7 +73,7 @@
           <div class="gameList">
             <div>
               <span>최신 경기목록</span>
-              <span><a href="/gameList">+ 더보기</a></span>
+              <span><a href="game/gameInfoList">+ 더보기</a></span>
             </div>
             <div>
               <table>

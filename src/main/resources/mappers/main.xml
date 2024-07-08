@@ -5,7 +5,7 @@
 
 <mapper namespace="dc.human.whosthebest.main.dao.MainDAO">
 
-    <resultMap id="gameListResult" type="dc.human.whosthebest.vo.GameListVO">
+    <resultMap id="gameListResult" type="dc.human.whosthebest.vo.MaingameListVO">
         <result property="gTitle" column="G_TITLE"/>
         <result property="uID" column="T_USERID"/>
         <result property="gCreatedDate" column="G_CREATEDATE"/>
