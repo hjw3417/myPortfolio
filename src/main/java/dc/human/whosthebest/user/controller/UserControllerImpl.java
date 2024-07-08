@@ -153,7 +153,7 @@ public class UserControllerImpl implements UserController {
 
             System.out.println("uName :"+uName + " uBday: " +  uBday + " uPhone: "+ uPhone + " uID: " + uID);
             String uPW = userService.findPW(uName, uBday, uPhone, uID);
-
+            System.out.println("good");
             System.out.println(uPW);
             if (uPW != null) {
 
