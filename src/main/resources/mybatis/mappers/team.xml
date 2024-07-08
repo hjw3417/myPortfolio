@@ -24,17 +24,6 @@
         <result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
-    <!-- TeamMemberVO resultMap-->
-    <resultMap id="teamMemberResult" type="dc.human.whosthebest.vo.TeamMemberVO">
-        <id property="tID" column="T_ID" />
-        <result property="uID" column="U_ID" />
-        <result property="uStatus" column="U_STATUS" />
-        <result property="createdID" column="CREATED_ID" />
-        <result property="createdDate" column="CREATED_DATE" />
-        <result property="updatedID" column="UPDATED_ID" />
-        <result property="updatedDate" column="UPDATED_DATE" />
-    </resultMap>
-
     <!--TeamProfileVO resultMap-->
     <resultMap id="teamProfileResult" type="dc.human.whosthebest.vo.TeamProfileVO">
         <id property="tID" column="T_ID"/>
@@ -102,6 +91,20 @@
 
         <result property="resultType" column="resultType"/>
     </resultMap>
+
+
+    <!-- TeamMemberVO resultMap-->
+    <resultMap id="teamMemberResult" type="dc.human.whosthebest.vo.TeamMemberVO">
+        <id property="tID" column="T_ID" />
+        <result property="uID" column="U_ID" />
+        <result property="uStatus" column="U_STATUS" />
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+        <result property="leader" column="LEADER"/>
+    </resultMap>
+
 
 
     <!--팀 생성-->
@@ -234,9 +237,43 @@
         FROM
             TEAM T
         LEFT JOIN
-            RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
-        WHERE T.T_ID = #{tID}
+            RANK R
+        ON
+            T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+        WHERE
+            T.T_ID = #{tID}
     </select>
+
+
+    <select id="selectTeamMembers" resultMap="teamMemberResult">
+        SELECT
+            TM.T_ID,
+            TM.U_ID,
+            TM.U_STATUS,
+            U.U_BDAY,
+            U.U_PHONE,
+            TM.CREATED_DATE,
+            CASE
+                WHEN TM.U_ID = T.CREATED_ID THEN 1
+                ELSE 0
+            END AS LEADER
+        FROM
+            TEAM_MEMBER TM
+        JOIN
+            USERS U
+        ON
+            TM.U_ID = U.U_ID
+        JOIN
+            TEAM T
+        ON
+            TM.T_ID = T.T_ID
+        WHERE
+            TM.T_ID = #{tID}
+
+    </select>
+
+
+
 
     <!--신경쓰지말고-->
     <select id="selectAllTeamInfo" resultMap="teamInfoResult">

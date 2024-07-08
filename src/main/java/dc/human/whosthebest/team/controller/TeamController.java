@@ -16,11 +16,6 @@ import java.util.Map;
 public interface TeamController {
 
     public String teamMakePage();
-    //팀멤버 임시
-    public ModelAndView teamMembersPage(@RequestParam("tID") int tID);
-    public ModelAndView myTeamPage();
-
-    public ResponseEntity<Map<String, Object>> getTeamProfile(@RequestParam("tID") int tID);
 
     public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception;
 
@@ -28,8 +23,15 @@ public interface TeamController {
 
     public ModelAndView listTeams() throws Exception;
 
+    public ModelAndView myTeamPage();
+
+    public ResponseEntity<Map<String, Object>> getTeamProfile(@RequestParam("tID") int tID);
+
+    //팀멤버 임시
+    public ModelAndView teamMembersPage(@RequestParam("tID") int tID);
 
     public ModelAndView Ranking() throws Exception;
+
 
 
 

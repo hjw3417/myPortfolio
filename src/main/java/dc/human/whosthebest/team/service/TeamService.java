@@ -14,4 +14,6 @@ public interface TeamService {
     public List<GameListVO> selectGameSchedule(int tID) throws Exception;
     public GameRecordVO selectGameRecordInfo(int tID, String resultType) throws Exception;
     public List ranking() throws Exception;
+
+    public List<TeamMemberVO> getTeamMembers(int tID) throws Exception;
 }

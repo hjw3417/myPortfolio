@@ -29,7 +29,7 @@
     <div>
       <ul>
         <li>
-          <a href="teamlist.html">팀</a>
+          <a href="/teamList">팀</a>
           <div>
             <ul>
               <li><a href="/teamList">팀 목록</a></li>

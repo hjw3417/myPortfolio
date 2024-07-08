@@ -126,6 +126,7 @@ public class TeamControllerImpl implements TeamController{
         String userID = "heo"; // 실제 사용자 ID 가져오는 로직으로 대체
 
         try {
+            //팀 목록 사이드바에 가져오기
             List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(userID);
             mav.addObject("myTeams", myTeams);
 
@@ -167,9 +168,16 @@ public class TeamControllerImpl implements TeamController{
     @GetMapping("/teamMembers")
     public ModelAndView teamMembersPage(@RequestParam("tID") int tID) {
         ModelAndView mav = new ModelAndView("/team/teamMembers"); // teamMembers.jsp 파일 위치
+        String userID = "heo";
+
         try {
-//            List<TeamMemberVO> teamMembers = teamService.getTeamMembers(tID); // 팀원 목록 조회 로직
-//            mav.addObject("teamMembers", teamMembers); // 팀원 목록을 ModelAndView에 추가
+            //팀 목록 사이드바에 가져오기
+            List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(userID);
+            mav.addObject("myTeams", myTeams);
+
+            List<TeamMemberVO> teamMembers = teamService.getTeamMembers(tID); // 팀원 목록 조회 로직
+            mav.addObject("teamMembers", teamMembers);  // 팀원 목록을 ModelAndView에 추가
+            mav.addObject("tID",tID);
         } catch (Exception e) {
             mav.addObject("errorMsg", "팀원 목록을 가져오는 도중 오류가 발생했습니다.");
             e.printStackTrace();

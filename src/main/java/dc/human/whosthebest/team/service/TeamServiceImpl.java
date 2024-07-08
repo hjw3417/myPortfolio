@@ -122,6 +122,11 @@ public class TeamServiceImpl implements TeamService {
         gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
         return gameRecordVO;
     }
+    @Override
+    public List<TeamMemberVO> getTeamMembers(int tID) throws Exception {
+        List<TeamMemberVO> teamMemberList = teamDAO.selectTeamMembers(tID);
+        return teamMemberList;
+    }
 
     @Override
     public List ranking() throws Exception {

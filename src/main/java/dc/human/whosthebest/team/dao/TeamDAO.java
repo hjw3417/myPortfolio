@@ -15,8 +15,10 @@ import java.util.List;
 public interface TeamDAO {
     public List selectTeamList() throws DataAccessException;
     public int insertTeamInfo(TeamInfoVO teamInfoVO) throws DataAccessException;
-    public int insertTeamMember(TeamMemberVO teamMemberVo) throws DataAccessException;
+    public int insertTeamMember(TeamMemberVO teamMemberVO) throws DataAccessException;
     public List<TeamInfoVO> selectTeamsByUserId(String userID) throws DataAccessException;
     public TeamProfileVO selectTeamProfile(int tID) throws DataAccessException;
     public List selectRanking() throws DataAccessException;
+
+    public List<TeamMemberVO> selectTeamMembers(int tID) throws DataAccessException;
 }
