@@ -118,7 +118,7 @@ public class TeamServiceImpl implements TeamService {
         GameRecordVO gameRecordVO = new GameRecordVO();
         List<GameRecordInfoListVO> gameResultInfoList = new ArrayList<>();
         gameRecordVO = aboutTeamDAO.getMatchCount(tID);
-        gameResultInfoList = aboutTeamDAO.selectGResultInfo(tID, resultType);
+        gameResultInfoList = teamDAO.selectGResultInfo(tID, resultType);
         gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
         return gameRecordVO;
     }
