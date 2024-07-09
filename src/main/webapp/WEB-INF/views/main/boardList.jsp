@@ -12,11 +12,13 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="./image/logo.png">
+<div class="logo">
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
-      <span><a href="/login">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
@@ -58,9 +60,9 @@
                   <td>${boardList.bID}</td>
                   <td>${boardList.bBullet}</td>
                   <td>
-                    <a href="/boardDetail/read?bID=${boardList.bID}">
+                    <a href="/boardDetail/read?bTitle=${boardList.bTitle}">
                       ${boardList.bTitle}
-                    </a>
+                    <a>
                   </td>
                   <td>${boardList.createdID}</td>
                   <td>${boardList.createdDate}</td>

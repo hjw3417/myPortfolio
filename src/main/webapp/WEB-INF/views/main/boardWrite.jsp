@@ -12,11 +12,13 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="./image/logo.png">
+<div class="logo">
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
-      <span><a href="/login">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
@@ -62,7 +64,7 @@
           </div>
           <div>
             <input type="submit" value="등록">
-            <input type="reset" value="취소">
+            <input type="reset" value="취소" onclick="location.href='/mainBoard'">
           </div>
         </form>
       </div>
