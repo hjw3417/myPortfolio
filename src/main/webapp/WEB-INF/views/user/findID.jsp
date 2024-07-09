@@ -21,8 +21,10 @@
 </head>
 <body onload="findID();">
   <header>
-    <div class="logo">
-      <img src="./image/logo.png">
+<div class="logo">
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
       <span><a href="/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>

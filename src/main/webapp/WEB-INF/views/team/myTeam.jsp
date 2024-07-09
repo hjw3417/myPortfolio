@@ -19,9 +19,10 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="../image/logo.png">
-      <!-- <div>누가 잘차</div> -->
+<div class="logo">
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
       <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
@@ -109,7 +110,7 @@
               <div class="record">
                 <div>
                   <span>전적</span>
-                  <span><a href="teamrecord.html">+ 더보기</a></span>
+                  <span><a href="/team/gameRecord.do?${teamProfile.tID}">+ 더보기</a></span>
                 </div>
                 <div id="record">
                   <ul>
@@ -131,7 +132,7 @@
               <div class="schedule">
                 <div>
                   <span>경기 일정</span>
-                  <span><a href="#">+ 더보기</a></span>
+                  <span><a href="/team/gameRecord.do?${teamProfile.tID}">+ 더보기</a></span>
                 </div>
                 <div id="schedule">
                   <ul>

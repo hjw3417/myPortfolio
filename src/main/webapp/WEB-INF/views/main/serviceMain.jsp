@@ -12,9 +12,10 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="../image/logo.png">
-      <!-- <div>누가 잘차</div> -->
+<div class="logo">
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
       <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
@@ -74,7 +75,7 @@
           <div class="gameList">
             <div>
               <span>최신 경기목록</span>
-              <span><a href="/gameList">+ 더보기</a></span>
+              <span><a href="/game/gameInfoList.do">+ 더보기</a></span>
             </div>
             <div>
               <table>
