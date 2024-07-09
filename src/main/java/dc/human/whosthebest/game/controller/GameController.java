@@ -25,7 +25,7 @@ import java.util.Map;
 
 public interface GameController {
     public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO,
-                                 @SessionAttribute(name = "loggedID", required = false) String loggedID
+                                 @SessionAttribute(name = "loginId", required = false) String loginId
                                  ) throws Exception;
 
     public ModelAndView selectStadium(HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -35,7 +35,8 @@ public interface GameController {
 
     public StadiumVO stadiumDetail(@RequestParam(value = "sID", required = false) String sID) throws Exception;
 
-    public ModelAndView createGame(@RequestParam("gTeamID") String gTeamID,
+    public ModelAndView createGame(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                   @RequestParam("gTeamID") String gTeamID,
                                    @RequestParam("gTitle") String gTitle,
                                    @RequestParam("gTag") String gTag,
                                    @RequestParam("gMinMember") int gMinMember,
@@ -44,7 +45,9 @@ public interface GameController {
                                    @RequestParam("sNum") int sNum,
                                    @RequestParam("gTime") int gTime,
                                    @RequestParam("gResDate") String gResDate) throws Exception;
-    public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView selectGameList(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) throws Exception;
     public List<GameListVO> selectGameList(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                            @RequestParam(value = "rowNum", required = false, defaultValue = "0") int rowNum,
                                            @RequestParam(value = "sRegion", required = false) String sRegion,
@@ -52,28 +55,35 @@ public interface GameController {
                                            @RequestParam(value = "IMakeGameuID", required = false) String IMakeGameuID,
                                            @RequestParam(value = "IPartiGameuID", required = false) String IPartiGameuID
                                           ) throws Exception;
-    public ModelAndView selectGameInfo(@RequestParam("gID") int gID) throws Exception;
-    public List<GCommentVO> insertComments(@ModelAttribute("gCommentVO") GCommentVO gCommentVO)  throws Exception;
-    public  List<GameMemberListVO> partiHomeTeam(@RequestParam("gID") int gID,
-                                                 @RequestParam("gTeamID") int gTeamID
+    public ModelAndView selectGameInfo(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                       @RequestParam("gID") int gID) throws Exception;
+    public List<GCommentVO> insertComments(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                           @ModelAttribute("gCommentVO") GCommentVO gCommentVO) throws Exception;
+    public  List<GameMemberListVO> partiHomeTeam(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                                 @RequestParam(value="gID", required = false, defaultValue = "1") int gID,
+                                                 @RequestParam(value="gTeamID", required = false, defaultValue = "1") int gTeamID
+                                                ) throws Exception;
+    public GameAwayTeamInfoVO insertAndSelectAwayTeam(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                                      @RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                                      @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID
+                                                     ) throws Exception;
+    public GameAwayTeamInfoVO insertawayTeamMembr(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                                  @RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                                  @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID
                                                  ) throws Exception;
-    public GameAwayTeamInfoVO insertAndSelectAwayTeam(@RequestParam("gID") int gID,
-                                                       @RequestParam("tAwayID") int tAwayID
-                                                      ) throws Exception;
-    public GameAwayTeamInfoVO insertawayTeamMembr(@RequestParam("gID") int gID,
-                                                   @RequestParam("tAwayID") int tAwayID
-                                                    ) throws Exception;
 
-    public String intoGameResult(@RequestParam("gID") int gID,
-                                       @RequestParam("sRegion") String sRegion,
-                                       @RequestParam("gTitle") String gTitle,
-                                       @RequestParam("tID") int tID,
-                                       @RequestParam("tAwayID") int tAwayID,
-                                      RedirectAttributes redirectAttributes) throws Exception;
-    public ModelAndView intoGameResultHadler(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+    public String  intoGameResult(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                  @RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                  @RequestParam(value="sRegion", required = false) String sRegion,
+                                  @RequestParam(value="gTitle", required = false)  String gTitle,
+                                  @RequestParam(value="gTeamID", required = false, defaultValue = "0") int gTeamID,
+                                  @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID,
+                                  RedirectAttributes redirectAttributes) throws Exception;
+    public ModelAndView intoGameResultHadler(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                             @RequestParam(value="gID", required = false, defaultValue = "0") int gID,
                                              @RequestParam(value="sRegion", required = false) String sRegion,
                                              @RequestParam(value="gTitle", required = false)String gTitle,
-                                             @RequestParam(value="tID", required = false) int tID,
+                                             @RequestParam(value="gTeamID", required = false) int gTeamID,
                                              @RequestParam(value="tAwayID", required = false) int tAwayID
                                              ) throws Exception;
     public ModelAndView insertGameResult(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
@@ -83,15 +93,17 @@ public interface GameController {
                                          @RequestParam(value="awayTeamScoreHidden", required = false, defaultValue = "0") int awayTeamScoreHidden,
                                          @RequestParam(value="uID", required = false) String uID
                                          ) throws Exception;
-    public ModelAndView selectStadiumInfo() throws Exception;
+    public ModelAndView selectStadiumInfo(@SessionAttribute(name = "loginId", required = false) String loginId) throws Exception;
     public List<StadiumVO> searchStadiumInfo(@RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum,
                                              @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,
                                              @RequestParam(value="sRegion", required = false) String sRegion,
                                              @RequestParam(value="search", required = false) String search
                                              ) throws Exception;
-    public ModelAndView deleteGame(@RequestParam(value="gID") int gID) throws Exception;
+    public ModelAndView deleteGame(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                   @RequestParam(value="gID") int gID) throws Exception;
     public String goToModPage(@RequestParam(value="gID") int gID, RedirectAttributes redirectAttributes) throws Exception;
-    public String modGameResult(@RequestParam("gID") int gID,
+    public String modGameResult(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                @RequestParam("gID") int gID,
                                 @RequestParam("gTeamID") String gTeamID,
                                 @RequestParam("gTitle") String gTitle,
                                 @RequestParam("gTag") String gTag,
@@ -102,5 +114,5 @@ public interface GameController {
                                 @RequestParam("gTime") int gTime,
                                 @RequestParam("gResDate") String gResDate,
                                 RedirectAttributes redirectAttributes
-                                ) throws Exception;
+                               ) throws Exception;
 }

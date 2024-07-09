@@ -13,7 +13,8 @@
 <body>
   <header>
     <div class="logo">
-      <img src="./image/logo.png">
+      <img src="../image/logo.png">
+      <!-- <div>누가 잘차</div> -->
     </div>
     <div>
       <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
