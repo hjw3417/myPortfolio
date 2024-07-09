@@ -22,7 +22,6 @@ public class AboutTeamControllerImpl implements AboutTeamController {
     @GetMapping("/team/gameSchedule.do")
     public ModelAndView gameSchedulleInfo(@RequestParam(value="tID", required = false, defaultValue = "1") int tID) throws Exception {
         ModelAndView mav = new ModelAndView();
-        tID = 1000000001;
         int pageNum = 1;
         int rowNum = 0;
         List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
@@ -39,7 +38,6 @@ public class AboutTeamControllerImpl implements AboutTeamController {
                                                     @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,
                                                     @RequestParam(value="tID", required = false, defaultValue = "0") int tID)
                                                     throws Exception {
-        tID = 1000000001;
         List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
         System.out.println("RestFullcontroller gameListVO.size() : " + gameListVO.size());
         return gameListVO;
@@ -50,7 +48,6 @@ public class AboutTeamControllerImpl implements AboutTeamController {
     public ModelAndView selectGameRecordInfo(@RequestParam(value="tID", required = false, defaultValue = "0") int tID) throws Exception {
         ModelAndView mav = new ModelAndView();
         GameRecordVO gameRecordVO = new GameRecordVO();
-        tID = 1000000001;
         String resultType = null;
         int pageNum =1;
         int rowNum = 0;
@@ -72,7 +69,6 @@ public class AboutTeamControllerImpl implements AboutTeamController {
                                              @RequestParam(value="tID", required = false, defaultValue = "0") int tID
                                              ) throws Exception {
         GameRecordVO gameRecordVO = new GameRecordVO();
-        tID = 1000000001;
         if(resultType == "" || resultType == null) {
             resultType = null;
         }

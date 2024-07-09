@@ -44,9 +44,10 @@ public class TeamControllerImpl implements TeamController{
         //팀 만들때 팀장도 team_member 테이블에 저장 필요
     @Override
     @RequestMapping(value="/insertTeamInfo" ,method = RequestMethod.POST)
-    public ModelAndView insertTeamInfo(@ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception {
+    public ModelAndView insertTeamInfo(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                       @ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception {
         ModelAndView mav = new ModelAndView();
-        String userID = "HONG";
+        String userID = loginId;
         //실제 userID 가져오는 로직으로 대체
 //        String userID = request.getSession().getAttribute("userID").toString();
         try {
@@ -76,12 +77,13 @@ public class TeamControllerImpl implements TeamController{
         //3개이상 가입 금지
     @Override
     @RequestMapping(value="/insertTeamMember" ,method = RequestMethod.POST)
-    public ModelAndView insertTeamMember(@RequestParam("tID") int tID) throws Exception{
+    public ModelAndView insertTeamMember(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                         @RequestParam("tID") int tID) throws Exception{
         ModelAndView mav = new ModelAndView();
 
         try {
             String viewName = "";
-            String userID = "MOON";
+            String userID = loginId;
             TeamMemberVO teamMember = new TeamMemberVO();
             teamMember.setCreatedID(userID);
             teamMember.setuID(userID);
@@ -121,9 +123,9 @@ public class TeamControllerImpl implements TeamController{
         //프로필 사진 불러오기 필요
     @Override
     @GetMapping("/myTeam")
-    public ModelAndView myTeamPage() {
+    public ModelAndView myTeamPage(@SessionAttribute(name = "loginId", required = false) String loginId) {
         ModelAndView mav = new ModelAndView("/team/myTeam");
-        String userID = "heo"; // 실제 사용자 ID 가져오는 로직으로 대체
+        String userID = loginId; // 실제 사용자 ID 가져오는 로직으로 대체
 
         try {
             //팀 목록 사이드바에 가져오기
@@ -166,9 +168,10 @@ public class TeamControllerImpl implements TeamController{
     //팀 멤버 페이지 매핑
     @Override
     @GetMapping("/teamMembers")
-    public ModelAndView teamMembersPage(@RequestParam("tID") int tID) {
+    public ModelAndView teamMembersPage(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                        @RequestParam("tID") int tID) {
         ModelAndView mav = new ModelAndView("/team/teamMembers"); // teamMembers.jsp 파일 위치
-        String userID = "heo";
+        String userID = loginId;
 
         try {
             //팀 목록 사이드바에 가져오기

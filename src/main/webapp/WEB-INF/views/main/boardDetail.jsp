@@ -12,8 +12,10 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="./image/logo.png">
+<div class="logo">
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
       <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
@@ -56,9 +58,8 @@
           </tr>
         </table>
         <div>
-          <form role="form" action="/boardDetail/create_action" method="post">
-            <button type="button" id="modify" onclick="modifiy_btn">수정</button>
-            <button type="button" id="list" onclick="location.href='/mainBoard'">목록</button>
+          <button type="button" id="modify" onclick="modfiy_btn">수정</button>
+          <button type="button" id="list" onclick="location.href='/mainBoard'">목록</button>
         </div>
       </div>
     </section>

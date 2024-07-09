@@ -14,7 +14,7 @@ public interface MainController {
     public ModelAndView mainInfo(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView mainBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView mainBoardWrite(BoardVO boardVO) throws Exception;
-//    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception;
+    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception;
     public ModelAndView mainBoardDetail(@ModelAttribute("boardVO") BoardVO boardVO,
                                   @RequestParam("bID") int bID) throws Exception;
 }
