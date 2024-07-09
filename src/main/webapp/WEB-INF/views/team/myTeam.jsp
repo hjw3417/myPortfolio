@@ -110,7 +110,7 @@
               <div class="record">
                 <div>
                   <span>전적</span>
-                  <span><a href="/team/gameRecord.do?${teamProfile.tID}">+ 더보기</a></span>
+                  <span><a href="/team/gameRecord.do?tID=${teamProfile.tID}">+ 더보기</a></span>
                 </div>
                 <div id="record">
                   <ul>
@@ -132,7 +132,7 @@
               <div class="schedule">
                 <div>
                   <span>경기 일정</span>
-                  <span><a href="/team/gameRecord.do?${teamProfile.tID}">+ 더보기</a></span>
+                  <span><a href="/team/gameSchedule.do?tID=${teamProfile.tID}">+ 더보기</a></span>
                 </div>
                 <div id="schedule">
                   <ul>
