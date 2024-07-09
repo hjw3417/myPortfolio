@@ -69,7 +69,6 @@ public class AboutTeamControllerImpl implements AboutTeamController {
                                              @RequestParam(value="tID", required = false, defaultValue = "0") int tID
                                              ) throws Exception {
         GameRecordVO gameRecordVO = new GameRecordVO();
-        tID = 1000000001;
         if(resultType == "" || resultType == null) {
             resultType = null;
         }
