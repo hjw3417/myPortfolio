@@ -62,7 +62,7 @@
           <img src="../image/user.png" class="profile">  </img>
 
           <c:if test="${not empty myPageInfo}">
-              <div class="name">${myPageInfo[0].uName}</div> <!-- 첫 번째 요소의 이름 출력 -->
+              <div class="name">${myPageInfo[0].uID}</div> <!-- 첫 번째 요소의 이름 출력 -->
           </c:if>
 
 

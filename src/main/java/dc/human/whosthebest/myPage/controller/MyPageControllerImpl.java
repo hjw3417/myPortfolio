@@ -56,7 +56,7 @@ public class MyPageControllerImpl implements  MyPageController {
     @RequestMapping(value= "/myPage/updatePwCheck" , method = RequestMethod.GET)
     public ModelAndView pwCheck(HttpServletRequest request,
                                 HttpServletResponse response) throws Exception{
-        String uID= "hong";
+        String uID= "moonej";
         ModelAndView mav = new ModelAndView("/myPage/updatePwCheck");
         mav.addObject("uID",uID);
         return mav;
