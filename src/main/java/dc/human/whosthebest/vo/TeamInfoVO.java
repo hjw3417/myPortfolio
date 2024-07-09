@@ -20,8 +20,8 @@ public class TeamInfoVO {
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
-	
-	
+
+
 	public int gettID() {
 		return tID;
 	}

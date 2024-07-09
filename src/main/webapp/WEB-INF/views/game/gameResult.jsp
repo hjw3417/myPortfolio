@@ -15,37 +15,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/js.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/js.js"></script>
     <title>경기 결과 입력</title>
+    <script>
+        alert("gID : " + ${gameinfoVO.gID});
+    </script>
 </head>
 <body>
-<header>
+  <header>
     <div class="logo">
-        <img src="../image/logo.png">
-        <!-- <div>누가 잘차</div> -->
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
-        <span><a href="login.html">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
-        <span><a href="myPage.html">마이페이지</a></span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
-        <ul>
-            <li>
-                <a href="teamlist.html">팀</a>
-                <div>
-                    <ul>
-                        <li><a href="teamlist.html">팀 목록</a></li>
-                        <li><a href="myteam.html">나의 팀</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li><a href="gameList.html">경기 목록</a></li>
-            <li><a href="stadiumList.html">경기장 목록</a></li>
-            <li><a href="rankWatch.html">랭킹</a></li>
-            <li><a href="#">게시판</a></li>
-        </ul>
+      <ul>
+        <li>
+          <a href="/teamList">팀</a>
+          <div>
+            <ul>
+              <li><a href="/teamList">팀 목록</a></li>
+              <li><a href="/myTeam">나의 팀</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="${contextPath}/game/gameInfoList.do">경기 목록</a></li>
+        <li><a href="${contextPath}/game/stadiumList.do">경기장 목록</a></li>
+        <li><a href="/ranking">랭킹</a></li>
+        <li><a href="/mainBoard">게시판</a></li>
+      </ul>
     </div>
-</header>
+  </header>
 <main>
     <div>　</div>
     <div>
@@ -53,8 +59,8 @@
         <div class="gameResult-content">
             <!-- 경기 제목 영역 시작 -->
             <div class="titeContainer">
-                <div>천안</div>
-                <div>진짜 뒤지고 싶은 사람~~!</div>
+                <div>${sRegion}</div>
+                <div>${gTitle}</div>
                 <div>
                     <a>경기 종료</a>
                 </div>
@@ -64,19 +70,25 @@
             <div class="resultInputContainer">
                 <div class="teamNameContainer">
                     <button class="teamName" id="homeTeam" onclick="changeButtons('homeTeam', 'oppanentTeam')">
-                        문주군단
+                        ${homeTeamName}
                     </button>
                     <button class="teamName" id="oppanentTeam" onclick="changeButtons('oppanentTeam', 'homeTeam')">
-                        개발냥발
+                        ${awayTeamName}
                     </button>
                 </div>
                 <div class="scoreInputContianer">
-                    <input type="text" placeholder="Score" maxlength="2">
-                    <input type="text" placeholder="Score" maxlength="2">
+                    <input type="text" name="homeTeamScore" id="homeTeamScore" placeholder="Score" maxlength="2">
+                    <input type="text" name="awayTeamScore" id="awayTeamScore" placeholder="Score" maxlength="2">
                 </div>
                 <div class="submitContainer">
-                    <form action="gameList.html">
-                        <input type="submit" value="결과 제출">
+                    <form id="inputResultForm" method="post" action="${contextPath}/game/insert/gameResult.do">
+                        <input type="hidden" name="homeTeamScoreHidden" id="homeTeamScoreHidden">
+                        <input type="hidden" name="awayTeamScoreHidden" id="awayTeamScoreHidden">
+                        <input type="hidden" name="gTeamID" id="gTeamID" value="${gTeamID}">
+                        <input type="hidden" name="tAwayID" id="tAwayID" value="${tAwayID}">
+                        <input type="hidden" name="uID" id="uID" value="${uID}">
+                        <input type="hidden" name="gID" value="${gID}"/>
+                        <input type="submit" value="결과 제출" />
                     </form>
                 </div>
             </div>

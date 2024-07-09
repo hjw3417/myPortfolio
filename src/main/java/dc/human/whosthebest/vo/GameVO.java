@@ -13,6 +13,9 @@ DATE     		NAME       DESCRIPTION
 
 package dc.human.whosthebest.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class GameVO {
 		
 		private int gID;               //G_ID(경기 아이디/sequence)
@@ -31,10 +34,30 @@ public class GameVO {
 		private int sNum;              //S_NUM(경기장 내 번호)
 		private String createdID;      //CREATED_ID(생성자 ID/DB에서 생성)
 		private String createdDate;    //CREATED_DATE(생성 날짜/DB에서 생성)  
-		private String updateID;       //UPDATED_ID(업데이트 ID/DB에서 생성)
+		private String updatedID;       //UPDATED_ID(업데이트 ID/DB에서 생성)
 		private String updatedDate;    //UPDATED_DATE(업데이트 날짜/DB에서 생성)
 
+		//STADIUM TABLE
+		private String sName;			//S_NAME(경기장 이름)
+		private String sAddr; 			//S_ADDR(경기장 주소)
+
 		public GameVO() {}
+
+		public String getsAddr() {
+			return sAddr;
+		}
+
+		public void setsAddr(String sAddr) {
+			this.sAddr = sAddr;
+		}
+
+		public String getsName() {
+				return sName;
+			}
+
+		public void setsName(String sName) {
+			this.sName = sName;
+		}
 
 		public int getgID() {
 			return gID;
@@ -164,17 +187,17 @@ public class GameVO {
 			this.createdDate = createdDate;
 		}
 
-		public String getUpdateID() {
-			return updateID;
+		public String getUpdatedID() {
+			return updatedID;
 		}
 
-		public void setUpdateID(String updateID) {
-			this.updateID = updateID;
+		public void setUpdatedID(String updatedID) {
+			this.updatedID = updatedID;
 		}
 
 		public String getUpdatedDate() {
-			return updatedDate;
-		}
+				return updatedDate;
+			}
 
 		public void setUpdatedDate(String updatedDate) {
 			this.updatedDate = updatedDate;
