@@ -682,21 +682,21 @@ $(document).ready(function() {
 });
 //gameInfo.do 관련 js 끝
 
-function changeButtons(clickedButtonId, otherButtonId) {
-    let $clickedButton = $("#" + clickedButtonId);
-    let $otherButton = $("#" + otherButtonId);
-
-    if ($clickedButton.hasClass("teamName")) {
-        $clickedButton.removeClass("teamName").addClass("winner").text("승");
-        $otherButton.removeClass("teamName").addClass("looser").text("패");
-    } else if ($clickedButton.hasClass("winner")) {
-        $clickedButton.removeClass("winner").addClass("teamName").text("문주군단");
-        $otherButton.removeClass("looser").addClass("teamName").text("개발냥발");
-    } else if ($clickedButton.hasClass("looser")) {
-        $clickedButton.removeClass("looser").addClass("winner").text("승");
-        $otherButton.removeClass("teamName").addClass("looser").text("패");
-    }
-}
+//function changeButtons(clickedButtonId, otherButtonId) {
+//    let $clickedButton = $("#" + clickedButtonId);
+//    let $otherButton = $("#" + otherButtonId);
+//
+//    if ($clickedButton.hasClass("teamName")) {
+//        $clickedButton.removeClass("teamName").addClass("winner").text("승");
+//        $otherButton.removeClass("teamName").addClass("looser").text("패");
+//    } else if ($clickedButton.hasClass("winner")) {
+//        $clickedButton.removeClass("winner").addClass("teamName").text("문주군단");
+//        $otherButton.removeClass("looser").addClass("teamName").text("개발냥발");
+//    } else if ($clickedButton.hasClass("looser")) {
+//        $clickedButton.removeClass("looser").addClass("winner").text("승");
+//        $otherButton.removeClass("teamName").addClass("looser").text("패");
+//    }
+//}
 
 //gameResult.do 관련 js 시작
 $(document).ready(function() {
