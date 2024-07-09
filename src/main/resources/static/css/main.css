@@ -11,7 +11,7 @@ header{
   >div:first-child{
     text-align: center;
 
-    >a>img{
+    >img{
       justify-content: center;
       width: 393px;
       height: 130px;
