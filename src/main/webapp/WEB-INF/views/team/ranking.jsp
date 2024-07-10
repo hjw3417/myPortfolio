@@ -44,18 +44,7 @@
   <main>
     <div>　</div>
     <div>
-      <div class="side">
-        <div>
-          <div>　</div>
-          <div>팀</div>
-          <ul>팀목록
-            <li><a href="teammemberlist.html">팀원 목록</a></li>
-            <li><a href="#">팀 경기 일정</a></li>
-            <li><a href="teamrecord.html">전적</a></li>
-            <li><a href="#">팀 게시판</a></li>
-          </ul>
-        </div>
-      </div>
+
       <div class="teamlist">
         <div>
           랭킹
@@ -102,7 +91,7 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach var="team" items="${ranking}" varStatus="loop">
+            <c:forEach var="team" items="${ranking}" varStatus="loop" end="5">
               <tr>
                 <td>${loop.index+1}</td>
                 <td>${team.tName}</td>

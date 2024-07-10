@@ -55,9 +55,8 @@
                   ${team.tName}
                   <ul>
                     <li><a href="${contextPath}/teamMembers?tID=${team.tID}">팀원 목록</a></li>
-                    <li><a href="${contextPath}/teamSchedule?tID=${team.tID}">팀 경기 일정</a></li>
-                    <li><a href="${contextPath}/teamRecord?tID=${team.tID}">전적</a></li>
-                    <li><a href="${contextPath}/teamBoard?tID=${team.tID}">팀 게시판</a></li>
+                    <li><a href="${contextPath}/gameSchedule?tID=${team.tID}">팀 경기 일정</a></li>
+                    <li><a href="${contextPath}/gameRecord?tID=${team.tID}">전적</a></li>
                   </ul>
                 </a>
               </li>
@@ -77,57 +76,34 @@
         </div>
         <div>
           <table>
-            <tr>
-              <th>NO</th>
-              <th>ID</th>
-              <th>생년월일</th>
-              <th>전화번호</th>
-              <th>가입날짜</th>
-              <th>
-                <div>추방버튼</div>
-                <div>(팀장만 가능)</div>
-              </th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>moon</td>
-              <td>99****</td>
-              <td>010****1111</td>
-              <td>2024.05.29</td>
-              <td><div>추방</div></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>heo</td>
-              <td>95****</td>
-              <td>010****2222</td>
-              <td>2024.05.01</td>
-              <td><div>추방</div></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><div>추방</div></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><div>추방</div></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><div>추방</div></td>
-            </tr>
+            <thead>
+              <tr>
+                <th>NO</th>
+                <th>ID</th>
+                <th>생년월일</th>
+                <th>전화번호</th>
+                <th>가입날짜</th>
+                <c:if test="${teamMember.leader == 1}">
+                  <th>
+                    <div>추방버튼</div>
+                  </th>
+                </c:if>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="teamMembers" items="${teamMembers}" varStatus="loop" end="5">
+                <tr>
+                  <td>${loop.index+1}</td>
+                  <td>${teamMembers.uID}</td>
+                  <td>${teamMembers.uBday}</td>
+                  <td>${teamMembers.uPhone}</td>
+                  <td>${teamMembers.createdDate}</td>
+                  <c:if test="${teamMember.leader == 1}">
+                    <td><div>추방</div></td>
+                  </c:if>
+                </tr>
+              </c:forEach>
+            </tbody>
           </table>
         </div>
       </div>

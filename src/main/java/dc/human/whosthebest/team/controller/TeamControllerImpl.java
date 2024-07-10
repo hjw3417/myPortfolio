@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +79,8 @@ public class TeamControllerImpl implements TeamController{
     @Override
     @RequestMapping(value="/insertTeamMember" ,method = RequestMethod.POST)
     public ModelAndView insertTeamMember(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                         @RequestParam("tID") int tID) throws Exception{
+                                         @RequestParam("tID") int tID,
+                                         RedirectAttributes redirectAttributes) throws Exception{
         ModelAndView mav = new ModelAndView();
 
         try {
@@ -92,9 +94,11 @@ public class TeamControllerImpl implements TeamController{
 
 
             if(insertTeamMemberResult<1) {
+                redirectAttributes.addFlashAttribute("errorMsg", "팀 가입 실패");
                 mav.addObject("errorMsg", "팀 가입 실패");
-                viewName = "team/teamList";
+                viewName = "redirect:/teamList";
             } else {
+                redirectAttributes.addFlashAttribute("errorMsg",  "팀 가입 성공");
                 viewName = "redirect:/teamList";
                 //redirect 수정 핋요
             }

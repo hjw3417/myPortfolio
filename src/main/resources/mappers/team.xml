@@ -105,6 +105,20 @@
         <result property="leader" column="LEADER"/>
     </resultMap>
 
+    <!-- TeamMemberVO resultMap-->
+    <resultMap id="teamMemberInfoResult" type="dc.human.whosthebest.vo.TeamMemberInfoVO">
+        <id property="tID" column="T_ID" />
+        <result property="uID" column="U_ID" />
+        <result property="uStatus" column="U_STATUS" />
+        <result property="uBday" column="U_BDAY" />
+        <result property="uPhone" column="U_PHONE" />
+        <result property="leader" column="LEADER"/>
+        <result property="createdID" column="CREATED_ID" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="updatedID" column="UPDATED_ID" />
+        <result property="updatedDate" column="UPDATED_DATE" />
+
+    </resultMap>
 
 
     <!--팀 생성-->
@@ -299,7 +313,7 @@
     </select>
 
 
-    <select id="selectTeamMembers" resultMap="teamMemberResult">
+    <select id="selectTeamMembers" resultMap="teamMemberInfoResult">
         SELECT
             TM.T_ID,
             TM.U_ID,
@@ -323,6 +337,8 @@
             TM.T_ID = T.T_ID
         WHERE
             TM.T_ID = #{tID}
+        AND
+            TM.U_STATUS = 1
 
     </select>
 

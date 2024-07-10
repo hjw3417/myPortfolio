@@ -63,7 +63,6 @@
                     <li><a href="${contextPath}/teamMembers?tID=${team.tID}">팀원 목록</a></li>
                     <li><a href="${contextPath}/team/gameSchedule?tID=${team.tID}">팀 경기 일정</a></li>
                     <li><a href="${contextPath}/team/gameRecord?tID=${team.tID}">전적</a></li>
-                    <li><a href="${contextPath}/teamBoard?tID=${team.tID}">팀 게시판</a></li>
                   </ul>
                 </a>
               </li>

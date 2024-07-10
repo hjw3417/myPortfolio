@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
@@ -22,7 +23,8 @@ public interface TeamController {
                                        @ModelAttribute("teamInfo") TeamInfoVO teamInfo) throws Exception;
 
     public ModelAndView insertTeamMember(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                         @RequestParam("tID") int tID) throws Exception;
+                                         @RequestParam("tID") int tID,
+                                         RedirectAttributes redirectAttributes) throws Exception;
 
     public ModelAndView listTeams() throws Exception;
 
