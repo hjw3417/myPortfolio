@@ -82,7 +82,7 @@ $(document).ready(function() {
                  window.close();
              }
     $('#stadiumResConForm').submit(function(event) {
-        alert("전송 on")
+        console.log("전송 on")
         event.preventDefault();
 
         // 값 변수에 저장
@@ -95,7 +95,7 @@ $(document).ready(function() {
         var sResNum = $('#sResNum').val();
 
         // 변수 값들을 alert로 표시
-        alert('ID: ' + sID + '\n' +
+        console.log('ID: ' + sID + '\n' +
               'Name: ' + sName + '\n' +
               'Address: ' + sAddr + '\n' +
               'Reservation Date: ' + sResDate + '\n' +
@@ -116,7 +116,7 @@ $(document).ready(function() {
         var gTime = sResETime - sResSTime;
         // 종료 시간이 더 큰지 확인
         if (gTime <= 0) {
-            alert("시간 다시 선택 해주세요.");
+            alert("시간을 다시 선택 해주세요.");
             return;
         }
 
@@ -167,7 +167,7 @@ function receiveData(stadiumResConFormDate) {
     $('#sNumText').text(stadiumResConFormDate.sResNum + " 경기장");
 
     // stadiumResConFormDate 객체의 값을 alert로 표시
-    alert('ID: ' + stadiumResConFormDate.sID + '\n' +
+    console.log('ID: ' + stadiumResConFormDate.sID + '\n' +
           'Name: ' + stadiumResConFormDate.sName + '\n' +
           'Address: ' + stadiumResConFormDate.sAddr + '\n' +
           'Reservation Date: ' + stadiumResConFormDate.gResDate + '\n' +
@@ -288,13 +288,12 @@ $(document).ready(function() {
                 var gameList = response;
                 var html = '';
                 // gameList가 null일 시 알림
-                alert(gameList.length);
                 if (gameList.length === 0) {
                     $("#gameListContainer").empty();
                     html = '<div class="nullMsg">경기 정보가 없습니다.</div>';
                     $("#gameListContainer").html(html);
                 } else {
-                    alert("else : " + gameList[0].gID);
+                    console.log("else : " + gameList[0].gID);
                     $("#gameListContainer").empty();
                     // 새로운 DOM 업데이트
                     for (var i = 0; i < gameList.length; i++) {
@@ -354,12 +353,11 @@ $(document).ready(function() {
                         `;
                     }
                     $("#gameListContainer").append(html); // 최종 HTML을 한 번에 추가
-                    alert("sdfsdf");
                 }
             },
             error: function(error) {
                 //요청 실패 시 메세지 알림
-                alert("Error: ", error);
+                console.log("Error: ", error);
             }
         });
     }
@@ -384,9 +382,9 @@ $(document).ready(function() {
     createPageButtonsInGameList();
 
     $("#gameList-nextPage").on('click', function() {
-        alert("defaultPageNumInGameList : " + defaultPageNumInGameList);
+        console.log("defaultPageNumInGameList : " + defaultPageNumInGameList);
         defaultPageNumInGameList += 5;
-        alert("defaultPageNumInGameList : " + defaultPageNumInGameList);
+        console.log("defaultPageNumInGameList : " + defaultPageNumInGameList);
         createPageButtonsInGameList(); // 페이지 버튼 다시 생성
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInGameList-1;
@@ -399,7 +397,7 @@ $(document).ready(function() {
     });
 
     $("#gameList-prevPage").on('click', function() {
-        alert("defaultPageNumInGameList : " + defaultPageNumInGameList);
+        console.log("defaultPageNumInGameList : " + defaultPageNumInGameList);
         if(defaultPageNumInGameList == 1) {
             alert("첫 페이지 입니다.");
         }
@@ -447,8 +445,8 @@ $(document).ready(function() {
         var search = null;
         var IMakeGameuID = $("#selectIMakeGame").val();
         var IPartiGameuID = null;
-        alert("IMakeGameuID" + IMakeGameuID);
-        alert("IPartiGameuID" + IPartiGameuID);
+        console.log("IMakeGameuID" + IMakeGameuID);
+        console.log("IPartiGameuID" + IPartiGameuID);
         selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
     $('#selectIPartiGame').on('click', function(event) {
@@ -459,8 +457,8 @@ $(document).ready(function() {
         var search = null;
         var IMakeGameuID = null;
         var IPartiGameuID = $("#selectIPartiGame").val();
-        alert("IMakeGameuID" + IMakeGameuID);
-        alert("IPartiGameuID" + IPartiGameuID);
+        console.log("IMakeGameuID" + IMakeGameuID);
+        console.log("IPartiGameuID" + IPartiGameuID);
         selectGameAjax(rowNum, pageNum, sRegion, search, IMakeGameuID, IPartiGameuID);
     });
     //side바 필터링 기능
@@ -487,7 +485,7 @@ $(document).ready(function() {
     $gComent.scrollTop($gComent.prop("scrollHeight"));
     // insertCommentAjax 함수 정의
     function insertCommentAjax(gameComments, gameInfoGID) {
-        alert("insertCommentAjax 실행 : " + gameComments + gameInfoGID);
+        console.log("insertCommentAjax 실행 : " + gameComments + gameInfoGID);
         $.ajax({
             url: '/game/comment/gameInfo.do',   // 요청 URL
             type: 'POST',
@@ -498,7 +496,7 @@ $(document).ready(function() {
             success: function(response) {
                 var insertCommentsResult = response;
                 var html = '';
-                alert("insertCommentsResult.length: " + insertCommentsResult.length)
+                console.log("insertCommentsResult.length: " + insertCommentsResult.length)
                 $("#gComent").empty();
                 if(insertCommentsResult.length === 0) {
                     html ='<div class="nullMsg">경기 정보가 없습니다.</div>';
@@ -515,7 +513,7 @@ $(document).ready(function() {
             },
             error: function(error) {
                 // 요청 실패 시 메세지 알림
-                alert("Error: " + error);
+                console.log("Error: " + error);
             }
         });
     }
@@ -535,7 +533,7 @@ $(document).ready(function() {
                 if(gameMemberList.length === 0) {
                     alert("이미 참가하였습니다.")
                 } else {
-                    alert(gameMemberList[0].uID)
+                    console.log(gameMemberList[0].uID)
                     $("#homeTeamMemberList").empty();
                     $.each(gameMemberList, function(index, gameMember) {
                         var html = `
@@ -547,7 +545,7 @@ $(document).ready(function() {
             },
             error: function(error) {
                 //요청 실패 시 메세지 알림
-                alert("Error: " + error);
+                console.log("Error: " + error);
             }
         });
     }
@@ -566,12 +564,12 @@ $(document).ready(function() {
                 var awayTeamMemberList = response.awayTeamMemberList;
                 var nowPartiMemberNum = response.nowPartiMemberNum;
                 var tAwayID = response.tAwayID;
-                alert("tAwayID : " + tAwayID);
+                console.log("tAwayID : " + tAwayID);
                 var html = '';
                 if(awayTeamName == null) {
                     alert("이미 참가하였습니다.")
                 } else {
-                    alert(awayTeamMemberList[0].uID)
+                    console.log(awayTeamMemberList[0].uID)
                     $("#awayTeamName").html(awayTeamName);
                     $("#awayTeamMemberList").empty();
                     $.each(awayTeamMemberList, function(index, awayTeamMember) {
@@ -587,7 +585,7 @@ $(document).ready(function() {
             },
             error: function(error) {
                 //요청 실패 시 메세지 알림
-                alert("Error: " + error);
+                console.log("Error: " + error);
             }
         });
     }
@@ -614,7 +612,7 @@ $(document).ready(function() {
                 } else if(checkDuplicateSquadResult == false) {
                     alert("이미 참여하셨습니다.")
                 } else {
-                    alert(awayTeamMemberList[0].uID)
+                    console.log(awayTeamMemberList[0].uID)
                     $("#awayTeamName").html(awayTeamName);
                     $("#awayTeamMemberList").empty();
                     $.each(awayTeamMemberList, function(index, awayTeamMember) {
@@ -628,7 +626,7 @@ $(document).ready(function() {
             },
             error: function(error) {
                 //요청 실패 시 메세지 알림
-                alert("Error: " + error);
+                console.log("Error: " + error);
             }
         });
     }
@@ -637,7 +635,7 @@ $(document).ready(function() {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         var gameComments = $('#gameComments').val();
         var gameInfoGID = $('#gameInfoGID').val();
-        alert("insertCommentForm 실행" + gameComments);
+        console.log("insertCommentForm 실행" + gameComments);
         if(gameComments === '') {
             alert('코멘트를 입력해주세요.');
         } else {
@@ -649,7 +647,7 @@ $(document).ready(function() {
         event.preventDefault();     // 폼의 기본 제출 동작을 막습니다.
         var gID = $('#gID').val();
         var gTeamID = $('#homeTeamID').val();
-        alert("gID : " + gID)
+        console.log("gID : " + gID)
         insertAwayTeamMemberAjax(gID, gTeamID);
     });
 
@@ -657,7 +655,7 @@ $(document).ready(function() {
             event.preventDefault();     // 폼의 기본 제출 동작을 막습니다.
             var gID = $('#awayGID').val();
             var gTeamID = $('#awayTeamID').val();
-            alert("gID : " + gID)
+            console.log("gID : " + gID)
             insertAwayTeamMemberAjax(gID, gTeamID);
         });
 
@@ -669,8 +667,8 @@ $(document).ready(function() {
             // 현재 폼의 데이터 가져오기
             var gID = submitter.siblings('input[name="awayLeaderGID"]').val();
             var gTeamID = submitter.siblings('input[name="awayLeaderTeamID"]').val();
-            alert("gID : " + gID)
-            alert("gTeamID : " + gTeamID)
+            console.log("gID : " + gID)
+            console.log("gTeamID : " + gTeamID)
             insertAwayTeamSquadAjax(gID, gTeamID);
         });
 
@@ -709,7 +707,7 @@ $(document).ready(function() {
         $('#awayTeamScoreHidden').val(awayTeamScoreValue);
     });
     $(document).on('submit', '#inputResultForm', function(event) {
-        alert("유효성 검사 시작");
+        console.log("유효성 검사 시작");
         var homeTeamScore = $("#homeTeamScoreHidden").val();
         var awayTeamScore = $("#awayTeamScoreHidden").val();
         if (
@@ -742,11 +740,11 @@ $(document).ready(function() {
             success: function(response) {
                 var html = "";
                 var stadiumListVO = response;
-                alert(stadiumListVO.length);
+                console.log(stadiumListVO.length);
                 if (stadiumListVO.length == 0) {
                     alert("검색 정보가 없습니다.")
                 } else {
-                    alert(stadiumListVO[0].sName);
+                    console.log(stadiumListVO[0].sName);
                     $("#stadiumListTBody").empty();
                     for (var i = 0; i < stadiumListVO.length; i++) {
                         var stadium = stadiumListVO[i];
@@ -765,7 +763,7 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error("AJAX 요청 실패", status, error);
-                alert("Error: " + xhr.responseText);
+                console.log("Error: " + xhr.responseText);
             }
         });
     }
@@ -788,9 +786,9 @@ $(document).ready(function() {
     createPageButtonsInStadiumList();
 
     $("#stadiumList-nextPage").on('click', function() {
-        alert("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
+        console.log("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
         defaultPageNumInStadiumList += 5;
-        alert("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
+        console.log("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
         createPageButtonsInStadiumList(); // 페이지 버튼 다시 생성
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInStadiumList-1;
@@ -801,7 +799,7 @@ $(document).ready(function() {
     });
 
     $("#stadiumList-prevPage").on('click', function() {
-        alert("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
+        console.log("defaultPageNumInStadiumList : " + defaultPageNumInStadiumList);
         if(defaultPageNumInStadiumList == 1) {
             alert("첫 페이지 입니다.");
         }
@@ -833,8 +831,8 @@ $(document).ready(function() {
         var pageNum = 1;
         var sRegion = $("#sRegion").val();
         var search = $("#search").val();
-        alert("sRegion: " + sRegion);
-        alert("search: " + search);
+        console.log("sRegion: " + sRegion);
+        console.log("search: " + search);
         stadiumListSearchAjax(rowNum, pageNum, sRegion, search);
     });
 });
@@ -843,7 +841,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     function resultTypeFilterAjax(pageNum, rowNum, resultType, tID) {
-        alert("ajax 시작");
+        console.log("ajax 시작");
         $.ajax({
             url: "/team/filter/gameRecord.do",
             type: 'POST',
@@ -855,14 +853,14 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                alert("resultTypeFilterAjax response 성공");
-                alert(response.totalCount);
+                console.log("resultTypeFilterAjax response 성공");
+                console.log(response.totalCount);
                 var gameRecordVO = response;
                 var html = "";
                 if(gameRecordVO.gameRecordInfoListVO == null) {
                     alert("조회 결과가 없습니다.")
                 } else {
-                    alert("조회 결과 출력.")
+                    console.log("조회 결과 출력.")
                     $("#gameRecordContainer").empty();
                     $.each(gameRecordVO.gameRecordInfoListVO, function(index, gameRecord) {
                         html += `
@@ -882,7 +880,7 @@ $(document).ready(function() {
                 }
             },
             error: function(error) {
-                alert("Error: " + error);
+                console.log("Error: " + error);
             }
         });
     }
@@ -929,7 +927,7 @@ $(document).ready(function() {
 
     // 이전 버튼 submit
     $("#GameRecord-prevPage").on('click', function() {
-        alert("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
+        console.log("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
         if (defaultPageNumInGameRecord == 1) {
             alert("첫 페이지 입니다.");
         } else if (defaultPageNumInGameRecord >= 6) {
@@ -945,9 +943,9 @@ $(document).ready(function() {
 
     // 다음 버튼 submit
     $("#GameRecord-nextPage").on('click', function(event) {
-        alert("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
+        console.log("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
         defaultPageNumInGameRecord += 5;
-        alert("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
+        console.log("defaultPageNumInGameRecord : " + defaultPageNumInGameRecord);
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInGameRecord - 1;
         var pageNum = defaultPageNumInGameRecord;
@@ -965,7 +963,7 @@ $(document).ready(function() {
 //gameSchedule.do 관련 js 시작
 $(document).ready(function() {
     function selectGameScheduleAjax(pageNum, rowNum, tID) {
-        alert("AJAX 요청 시작");
+        console.log("AJAX 요청 시작");
         $.ajax({
             url: "/team/paging/gameSchedule.do",
             type: 'POST',
@@ -976,14 +974,14 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                alert("success function 시작");
+                console.log("success function 시작");
                 var gameListVO = response;
                 if (gameListVO.length == 0) {
                     alert("page가 없습니다.");
                 } else {
-                    alert("ajax 요청 성공 gameListVO.length : " + gameListVO.length);
+                    console.log("ajax 요청 성공 gameListVO.length : " + gameListVO.length);
                     $('#gameScheduleCardContainer').empty();
-                    alert("gameScheduleCardContainer after empty: ", $('#gameScheduleCardContainer').html());
+                    console.log("gameScheduleCardContainer after empty: ", $('#gameScheduleCardContainer').html());
                     var html = "";
                     $.each(gameListVO, function(index, gameList) {
                         html += `
@@ -1030,7 +1028,7 @@ $(document).ready(function() {
             },
             error: function(error) {
                 // 요청 실패 시 메세지 알림
-                alert("Error: " + error);
+                console.log("Error: " + error);
             }
         });
     }
@@ -1064,7 +1062,7 @@ $(document).ready(function() {
 
     // 이전 버튼 submit
     $("#gameSchedule-prevPage").on('click', function() {
-        alert("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
+        console.log("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
         if (defaultPageNumInGameSchedule == 1) {
             alert("첫 페이지 입니다.");
         } else if (defaultPageNumInGameSchedule >= 6) {
@@ -1079,9 +1077,9 @@ $(document).ready(function() {
 
     // 다음 버튼 submit
     $("#gameSchedule-nextPage").on('click', function(event) {
-        alert("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
+        console.log("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
         defaultPageNumInGameSchedule += 5;
-        alert("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
+        console.log("defaultPageNumInGameSchedule : " + defaultPageNumInGameSchedule);
         createPageButtonsGameSchedule(); // 페이지 버튼 다시 생성
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInGameSchedule - 1;

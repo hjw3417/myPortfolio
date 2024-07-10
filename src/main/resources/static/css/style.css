@@ -14,7 +14,6 @@ header{
   margin: 0 auto;
   >div:first-child{
     text-align: center;
-
     >a>img{
       justify-content: center;
       width: 393px;
@@ -96,6 +95,125 @@ header{
     }
   }
 }
+
+
+.gamerecord{
+  text-align: center;
+  padding : 0px 20px;
+  width : 1000px;
+  box-sizing: border-box;
+  >div:nth-child(1){
+    font-size: 50px;
+    font-weight: bold;
+    color:rgb(146, 172, 101);
+    margin: 50px 0 20px 0;
+  }
+  >div:nth-child(2){
+    margin: 0 auto;
+    width: 600px;
+    height: 60px;
+    border: 1px solid rgb(168, 168, 168);
+    font-size: 30px;
+    line-height: 65px;
+    font-weight: bold;
+    background-color: white;
+    margin-bottom: 40px;
+  }
+  >div:nth-child(3){
+    form>select{
+      width: 100px;
+      height: 30px;
+      text-align: center;
+      font-size: 15px;
+      margin: 0 0px 10px 800px;
+      border: 1px solid rgb(168, 168, 168);
+    }
+    form>select>option:hover{
+      background-color: rgb(219, 219, 219);
+    }
+  }
+  >div:nth-child(4)>div{
+    width: 900px;
+    height: 50px;
+    margin: 0 auto;
+    font-size: 15px;
+    background-color: white;
+    border: 1px solid black;
+    margin-bottom: 30px;
+    line-height: 50px;
+  }
+    >.paginationContainer {
+      margin-left: 0px;
+      margin-top: 50px;
+      height: 40px;
+      >.pagination {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        padding: 0;
+        >li {
+          font-size: 10pt;
+          margin-right: 5px;
+          color: rgb(146, 172, 101);
+          a {
+            text-decoration: none;
+            color: inherit;
+          }
+        }
+        >li:first-child, li:last-child {
+          font-size: 10pt;
+        }
+      }
+    }
+}
+.gameRecord-main{
+  margin: 0 auto;
+  height: 750px;
+  width : 1263px;
+  background-color: rgb(255, 255, 234);
+  display: flex;
+  >div:first-child{
+    height: 50px;
+  }
+  >div:nth-child(2){
+    display: flex;
+    width : 1263px;
+  }
+}
+.gameRecord-side{
+  margin-top: 0px;
+  margin-left: -28px;
+  padding-left: 20px;
+  box-sizing : border-box;
+  display: flex;
+  width: 250px;
+  height: 750px;
+  background-color: rgb(184, 206, 146);
+
+  >div{
+    >div:first-child{
+      height: 50px;
+    }
+    >div:nth-child(2){
+      font-weight : bold;
+    }
+  }
+
+  >div>ul{
+    font-weight: bold;
+    width : 250px;
+    list-style: none;
+  }
+  >div>ul>li>ul{
+    margin-bottom : 30px;
+  }
+  ul li a {
+    text-decoration: none;
+    color : black;
+    font-weight:normal;
+  }
+}
+
 main{
   margin: 0 auto;
   width : 100%;
@@ -1190,190 +1308,7 @@ footer{
       }
     }
 }
-.gameRecord-side{
-  margin-top: -50px;
-  padding-left: 20px;
-  box-sizing: border-box;
-  display: flex;
-  width: 250px;
-  height: 900px;
-  background-color: rgb(184, 206, 146);
-  margin-left: -20px;
-  >div>div:first-child{
-    height: 50px;
-  }
-  >div>ul{
-    font-weight: bold;
-    width : 250px;
-    list-style: none;
-  }
-  ul li a {
-    text-decoration: none;
-    color : black;
-    font-weight:normal;
-  }
-}
-.gamerecord{
-  text-align: center;
-  padding : 0px 20px;
-  width : 1000px;
-  box-sizing: border-box;
-  >div:nth-child(1){
-    font-size: 50px;
-    font-weight: bold;
-    color:rgb(146, 172, 101);
-    margin: 50px 0 20px 0;
-  }
-  >div:nth-child(2){
-    margin: 0 auto;
-    width: 600px;
-    height: 60px;
-    border: 1px solid rgb(168, 168, 168);
-    font-size: 25px;
-    line-height: 65px;
-    font-weight: bold;
-    background-color: white;
-    margin-bottom: 40px;
-  }
-  >div:nth-child(3){
-    form>select{
-      width: 100px;
-      height: 30px;
-      text-align: center;
-      font-size: 15px;
-      margin: 0 0px 10px 800px;
-      border: 1px solid rgb(168, 168, 168);
-    }
-    form>select>option:hover{
-      background-color: rgb(219, 219, 219);
-    }
-  }
-  >div:nth-child(4)>div{
-    width: 900px;
-    height: 50px;
-    margin: 0 auto;
-    font-size: 15px;
-    background-color: white;
-    border: 1px solid black;
-    margin-bottom: 30px;
-    line-height: 50px;
-  }
-    >.paginationContainer {
-      margin-left: 0px;
-      margin-top: 50px;
-      height: 40px;
-      >.pagination {
-        display: flex;
-        justify-content: center;
-        list-style-type: none;
-        padding: 0;
-        >li {
-          font-size: 10pt;
-          margin-right: 5px;
-          color: rgb(146, 172, 101);
-          a {
-            text-decoration: none;
-            color: inherit;
-          }
-        }
-        >li:first-child, li:last-child {
-          font-size: 10pt;
-        }
-      }
-    }
-}
-.gameRecord-side{
-  margin-top: -50px;
-  padding-left: 20px;
-  box-sizing: border-box;
-  display: flex;
-  width: 250px;
-  height: 900px;
-  background-color: rgb(184, 206, 146);
-  margin-left: -20px;
-  >div>div:first-child{
-    height: 50px;
-  }
-  >div>ul{
-    font-weight: bold;
-    width : 250px;
-    list-style: none;
-  }
-  ul li a {
-    text-decoration: none;
-    color : black;
-    font-weight:normal;
-  }
-}
-.gamerecord{
-  text-align: center;
-  padding : 0px 20px;
-  width : 1000px;
-  box-sizing: border-box;
-  >div:nth-child(1){
-    font-size: 50px;
-    font-weight: bold;
-    color:rgb(146, 172, 101);
-    margin: 50px 0 20px 0;
-  }
-  >div:nth-child(2){
-    margin: 0 auto;
-    width: 600px;
-    height: 60px;
-    border: 1px solid rgb(168, 168, 168);
-    font-size: 30px;
-    line-height: 65px;
-    font-weight: bold;
-    background-color: white;
-    margin-bottom: 40px;
-  }
-  >div:nth-child(3){
-    form>select{
-      width: 100px;
-      height: 30px;
-      text-align: center;
-      font-size: 15px;
-      margin: 0 0px 10px 800px;
-      border: 1px solid rgb(168, 168, 168);
-    }
-    form>select>option:hover{
-      background-color: rgb(219, 219, 219);
-    }
-  }
-  >div:nth-child(4)>div{
-    width: 900px;
-    height: 50px;
-    margin: 0 auto;
-    font-size: 15px;
-    background-color: white;
-    border: 1px solid black;
-    margin-bottom: 30px;
-    line-height: 50px;
-  }
-    >.paginationContainer {
-      margin-left: 0px;
-      margin-top: 50px;
-      height: 40px;
-      >.pagination {
-        display: flex;
-        justify-content: center;
-        list-style-type: none;
-        padding: 0;
-        >li {
-          font-size: 10pt;
-          margin-right: 5px;
-          color: rgb(146, 172, 101);
-          a {
-            text-decoration: none;
-            color: inherit;
-          }
-        }
-        >li:first-child, li:last-child {
-          font-size: 10pt;
-        }
-      }
-    }
-}
+
 
 footer{
   text-align: center;
@@ -1703,36 +1638,51 @@ footer{
     }
   }
 }
-
 .gameSchedule-content {
-  .side{
-    margin-top: -50px;
-    padding-left: 20px;
-    box-sizing: border-box;
+    margin: 0 auto;
     display: flex;
-    width: 250px;
-    height: 1150px;
-    background-color: rgb(184, 206, 146);
-    >div>div:first-child{
+    width : 1263px;
+.side{
+  margin-top: -50px;
+  margin-left: -639px;
+  padding-left: 20px;
+  box-sizing : border-box;
+  display: flex;
+  width: 250px;
+  height: 750px;
+  background-color: rgb(184, 206, 146);
+
+  >div{
+    >div:first-child{
       height: 50px;
     }
-    >div>ul{
-      font-weight: bold;
-      width : 250px;
-      list-style: none;
+    >div:nth-child(2){
+      font-weight : bold;
     }
-    ul li a {
-      text-decoration: none;
-      color : black;
-      font-weight:normal;
-    }
+
   }
+
+  >div>ul{
+    font-weight: bold;
+    width : 250px;
+    list-style: none;
+  }
+  >div>ul>li>ul{
+    margin-bottom : 30px;
+  }
+  ul li a {
+    text-decoration: none;
+    color : black;
+    font-weight:normal;
+  }
+}
   .gameSchedule{
     text-align: center;
     padding : 0px 20px;
-    width : 1020px;
+    width : 800px;
     box-sizing: border-box;
     display: block;
+    margin: 0;
     >div:nth-child(1){
       font-size: 50px;
       font-weight: bold;

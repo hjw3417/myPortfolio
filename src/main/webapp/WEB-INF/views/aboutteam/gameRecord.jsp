@@ -23,8 +23,9 @@
 <body>
   <header>
     <div class="logo">
-      <img src="../image/logo.png">
-      <!-- <div>누가 잘차</div> -->
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
       <span><a href="login.html">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
@@ -48,18 +49,28 @@
       </ul>
     </div>
   </header>
-  <main>
+  <main class="gameRecord-main">
     <div>　</div>
     <div>
       <div class="gameRecord-side">
         <div>
           <div>　</div>
           <div>나의 팀</div>
-          <ul>문주 군단
-            <li><a href="#">팀원 목록</a></li>
-            <li><a href="#">팀 경기 일정</a></li>
-            <li><a href="#">전적</a></li>
-            <li><a href="#">팀 게시판</a></li>
+          <!-- 팀 이름 목록을 출력합니다. -->
+          <ul id="teamNameList">
+            <c:forEach items="${myTeams}" var="team">
+              <li>
+                <a href="${contextPath}/api/teamInfo?tID=${team.tID}" class="team-link" data-tid="${team.tID}">
+                  ${team.tName}
+                  <ul>
+                    <li><a href="${contextPath}/teamMembers?tID=${team.tID}">팀원 목록</a></li>
+                    <li><a href="${contextPath}/team/gameSchedule.do?tID=${team.tID}">팀 경기 일정</a></li>
+                    <li><a href="${contextPath}/team/gameRecord.do?tID=${team.tID}">전적</a></li>
+                    <li><a href="${contextPath}/teamBoard?tID=${team.tID}">팀 게시판</a></li>
+                  </ul>
+                </a>
+              </li>
+            </c:forEach>
           </ul>
         </div>
       </div>

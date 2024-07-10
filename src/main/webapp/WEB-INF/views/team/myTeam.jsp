@@ -19,7 +19,7 @@
 </head>
 <body>
   <header>
-<div class="logo">
+    <div class="logo">
       <a href="/serviceMain">
         <img src="${contextPath}/image/logo.png">
       </a>
