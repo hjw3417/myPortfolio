@@ -2,6 +2,7 @@ package dc.human.whosthebest.main.dao;
 
 import dc.human.whosthebest.vo.BoardVO;
 import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.MaingameListVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +17,7 @@ import java.util.List;
 public interface MainDAO {
 
     List<TeamInfoVO> mainRanking() throws DataAccessException;
-    List<GameListVO> mainGameList() throws DataAccessException;
+    List<MaingameListVO> mainGameList() throws DataAccessException;
     List<BoardVO> mainBoardList() throws DataAccessException;
     List<BoardVO> mainServiceBoard() throws DataAccessException;
     int mainBoardWrite(BoardVO boardVO) throws DataAccessException;

@@ -320,7 +320,7 @@ $(document).ready(function() {
                                             <tr>
                                                 <td>경기명 : </td>
                                                 <td>${gameListVO.gTitle}</td>
-                                                <td>경기 생성일 :</td>
+                                                <td>생성일 :</td>
                                                 <td>${gameListVO.gCreatedDate}</td>
                                             </tr>
                                             <tr>
@@ -328,7 +328,7 @@ $(document).ready(function() {
                                                 <td>${gameListVO.sName} ${gameListVO.sNum} 경기장</td>
                                             </tr>
                                             <tr>
-                                                <td>경기장 주소 : </td>
+                                                <td>주소 : </td>
                                                 <td>${gameListVO.sAddr}</td>
                                             </tr>
                                             <tr>
@@ -682,21 +682,21 @@ $(document).ready(function() {
 });
 //gameInfo.do 관련 js 끝
 
-function changeButtons(clickedButtonId, otherButtonId) {
-    let $clickedButton = $("#" + clickedButtonId);
-    let $otherButton = $("#" + otherButtonId);
-
-    if ($clickedButton.hasClass("teamName")) {
-        $clickedButton.removeClass("teamName").addClass("winner").text("승");
-        $otherButton.removeClass("teamName").addClass("looser").text("패");
-    } else if ($clickedButton.hasClass("winner")) {
-        $clickedButton.removeClass("winner").addClass("teamName").text("문주군단");
-        $otherButton.removeClass("looser").addClass("teamName").text("개발냥발");
-    } else if ($clickedButton.hasClass("looser")) {
-        $clickedButton.removeClass("looser").addClass("winner").text("승");
-        $otherButton.removeClass("teamName").addClass("looser").text("패");
-    }
-}
+//function changeButtons(clickedButtonId, otherButtonId) {
+//    let $clickedButton = $("#" + clickedButtonId);
+//    let $otherButton = $("#" + otherButtonId);
+//
+//    if ($clickedButton.hasClass("teamName")) {
+//        $clickedButton.removeClass("teamName").addClass("winner").text("승");
+//        $otherButton.removeClass("teamName").addClass("looser").text("패");
+//    } else if ($clickedButton.hasClass("winner")) {
+//        $clickedButton.removeClass("winner").addClass("teamName").text("문주군단");
+//        $otherButton.removeClass("looser").addClass("teamName").text("개발냥발");
+//    } else if ($clickedButton.hasClass("looser")) {
+//        $clickedButton.removeClass("looser").addClass("winner").text("승");
+//        $otherButton.removeClass("teamName").addClass("looser").text("패");
+//    }
+//}
 
 //gameResult.do 관련 js 시작
 $(document).ready(function() {

@@ -3,6 +3,7 @@ package dc.human.whosthebest.main.service;
 import dc.human.whosthebest.main.dao.MainDAO;
 import dc.human.whosthebest.vo.BoardVO;
 import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.MaingameListVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public List<GameListVO> mainGameList() throws Exception{
-        List<GameListVO> mainGameList;
+    public List<MaingameListVO> mainGameList() throws Exception{
+        List<MaingameListVO> mainGameList;
         mainGameList = mainDAO.mainGameList();
         return  mainGameList;
     }

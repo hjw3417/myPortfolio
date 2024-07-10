@@ -4,6 +4,7 @@ import ch.qos.logback.core.model.Model;
 import dc.human.whosthebest.main.service.MainService;
 import dc.human.whosthebest.vo.BoardVO;
 import dc.human.whosthebest.vo.GameListVO;
+import dc.human.whosthebest.vo.MaingameListVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,7 +38,7 @@ public class MainControllerImpl implements MainController {
         ModelAndView mav = new ModelAndView("/main/serviceMain");
 
         List<TeamInfoVO> mRanking = mainService.mainRanking();
-        List<GameListVO> mGameList = mainService.mainGameList();
+        List<MaingameListVO> mGameList = mainService.mainGameList();
         List<BoardVO> mBoardList = mainService.mainBoardList();
 
         mav.addObject("mRanking", mRanking);
@@ -82,20 +83,21 @@ public class MainControllerImpl implements MainController {
         return mav;
     }
 
-//    @Override
-//    @RequestMapping(value = "/boardDetail/read", method = RequestMethod.GET)
-//    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception{
-//        return "/boardDetail/read";
-//    }
+    @Override
+    @RequestMapping(value = "/boardDetail/read", method = RequestMethod.GET)
+    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception{
+        return "/boardDetail/read";
+    }
 
     @Override
     @RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
-    public ModelAndView mainBoardDetail(@RequestParam("bID") int bID) throws Exception{
+    public ModelAndView mainBoardDetail(@ModelAttribute("boardVO") BoardVO boardVO,
+                                        @RequestParam("bID") int bID) throws Exception{
 
         BoardVO mBoard = mainService.mainBoardDetail(bID);
         ModelAndView mav = new ModelAndView();
-        mav.addObject("mBoard", mBoard);
         mav.setViewName("main/boardDetail");
+        mav.addObject("mBoard", mBoard);
 
         return mav;
 

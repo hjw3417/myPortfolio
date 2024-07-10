@@ -35,10 +35,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int findID (String uName, String uBday, String uPhone) throws Exception{
+    public String findID (String uName, String uBday, String uPhone) throws Exception{
+        System.out.println("uName: " + uName + " uBday: " + uBday + " uPhone: " + uPhone);
         return userDAO.findID(uName, uBday, uPhone);
     }
 
+    @Override
+    public String findPW (String uName, String uBday, String uPhone, String uID) throws Exception{
+        System.out.println("uName: " + uName + " uBday: " + uBday + " uPhone: " + uPhone + " uId: " + uID);
+        return userDAO.findPW(uName, uBday, uPhone, uID);
+    }
 
 
 }
