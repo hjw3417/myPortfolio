@@ -75,7 +75,7 @@
           <div class="gameList">
             <div>
               <span>최신 경기목록</span>
-              <span><a href="/gameList">+ 더보기</a></span>
+              <span><a href="${contextPath}/game/gameInfoList.do">+ 더보기</a></span>
             </div>
             <div>
               <table>
