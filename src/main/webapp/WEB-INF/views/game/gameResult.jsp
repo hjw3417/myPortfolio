@@ -25,9 +25,10 @@
 </head>
 <body>
 <header>
-    <div class="logo">
-        <img src="../image/logo.png">
-        <!-- <div>누가 잘차</div> -->
+<div class="logo">
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
         <span><a href="login.html">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
