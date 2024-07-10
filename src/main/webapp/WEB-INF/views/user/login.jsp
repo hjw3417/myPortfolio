@@ -20,7 +20,7 @@
 <body onload="checkLogin();">
   <header>
     <div class="logo">
-          <a href="/serviceMain">
+          <a>
             <img src="./image/logo.png">
           </a>
         </div>
