@@ -204,7 +204,7 @@ public class GameControllerImpl implements GameController {
         mav.addObject("uID", "MOON");
         mav.addObject("gameList", gameList);
         mav.addObject("defaultPageNum", defaultPageNum);
-        mav.setViewName("/game/gameList");
+        mav.setViewName("/game/gameInfoList");
         return mav;
     }
 
