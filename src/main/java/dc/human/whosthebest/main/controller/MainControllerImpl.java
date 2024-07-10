@@ -91,8 +91,7 @@ public class MainControllerImpl implements MainController {
 
     @Override
     @RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
-    public ModelAndView mainBoardDetail(@ModelAttribute("boardVO") BoardVO boardVO,
-                                        @RequestParam("bID") int bID) throws Exception{
+    public ModelAndView mainBoardDetail(@RequestParam("bID") int bID) throws Exception{
 
         BoardVO mBoard = mainService.mainBoardDetail(bID);
         ModelAndView mav = new ModelAndView();
