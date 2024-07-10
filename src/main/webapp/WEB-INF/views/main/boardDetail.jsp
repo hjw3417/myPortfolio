@@ -13,8 +13,10 @@
 <body>
   <header>
     <div class="logo">
-      <img src="./image/logo.png">
-    </div>
+          <a href="/serviceMain">
+            <img src="./image/logo.png">
+          </a>
+        </div>
     <div>
       <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/myPage">마이페이지</a></span>

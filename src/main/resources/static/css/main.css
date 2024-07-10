@@ -11,7 +11,7 @@ header{
   >div:first-child{
     text-align: center;
 
-    >img{
+    >a>img{
       justify-content: center;
       width: 393px;
       height: 130px;
@@ -474,6 +474,7 @@ main{
           color: rgb(94, 94, 94);
           width: 370px;
           table-layout: fixed;
+          border-collapse: separate;
           border-collapse: separate;
           border-spacing: 0px 5px;
           >tr, td{

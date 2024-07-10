@@ -1,0 +1,309 @@
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'KCC-Hanbit';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+body {
+  font-family: 'GmarketSansMedium';
+  background-color: white(218, 228, 203);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+
+
+main{
+  background-color:   rgb(255, 255, 234); /* rgb(255, 255, 234);   rgb(230, 230, 210);    */
+  width: 1260px;
+  height: 850px;   /*나중에 auto로 설정하기*/
+  position: relative;  /* 부모 요소로서의 위치 설정 */
+  >h2{
+    position: absolute;
+    top : 65px;
+    left : 220px;
+
+  }
+}
+
+/*상단 관리자페이지 글씨*/
+.admin{
+  font-family: 'KCC-Hanbit';
+  background-color: rgb(218, 228, 203) ;
+  border : none;
+  width: 1260px;
+  height : 50px;
+  position: absolute;
+  top: 0px;
+  left : 0px;
+  z-index: 2;
+  >a>img{
+    width: 20px;
+    height : 20px;
+    margin-top : 5px;
+    position: absolute;
+    top : 10px;
+    left : 200px;
+}
+  >div{
+    width: 120px;
+    height : 30px;
+    padding-top : 12px;
+    color:rgb(54, 75, 23);
+    font-size: 13pt;
+    font-weight: bold;
+    margin-left : 230px;
+
+  }
+}
+
+/*사이드 바*/
+.side{
+  font-family: 'KCC-Hanbit';
+  background-color: rgb(218, 228, 203) ;
+  z-index: 1;
+  border : none;
+  width: 190px;
+  height: 850px;
+  position: absolute;  /* main 요소 내에서 절대 위치 */
+  left: 0px;  /* main 요소 기준으로 조정된 left 값 */
+  top: 0px;  /* main 요소 기준으로 조정된 top 값 */
+  >img{
+    width: 120px;
+    height: 120px;
+    margin: 75px 0 0 40px;
+    top: 0;
+  }
+  >div{
+    border :none;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    font-size : 25pt;
+    margin : 0 0 60px 50px;
+
+  }
+  >ul{
+    list-style: none; /* 기본 스타일 제거 */
+    padding-left: 47px;
+    font-size: 15pt; /* 여백 제거 */
+
+
+  }
+
+  >ul>li{
+    padding-bottom: 50px;
+
+  >a{
+    text-decoration: none;
+    color : black;
+   }
+  }
+  >ul>li:nth-child(2){
+    padding-left: 10px;
+  }
+  >ul>li:nth-child(3){
+    padding-left: 18px;
+  }
+  >ul>li:nth-child(4){
+    padding-left: 10px;
+  }
+  >ul>li:nth-child(5){
+    padding-left: 20px;
+  }
+
+  >a>.logoutimg{
+    width: 25px;
+    height: 25px;
+    margin : 50px 0 0 80px;
+  }
+
+}
+
+/*회원,팀, 경기관리 테이블 담는 div*/
+.tablecontainer {
+  position: absolute;
+  top: 140px;
+  left: 210px;
+  width: 1030px;
+  height: 600px;
+  border : none;
+}
+
+/*회원,팀, 경기관리 테이블 설정*/
+.list {
+  height: auto;
+  width: 960px;
+  border-collapse: collapse;
+  margin: 10px 0 0 20px;
+  font-size: 18px;
+  border: 1px solid rgb(203, 216, 184);
+  background-color: white;
+}
+
+table.list th, table.list td {
+  padding: 10px;
+  text-align: center;
+}
+
+table.list th {
+  background-color: rgb(218, 228, 203);
+}
+
+/*회원 ID a태그 설정*/
+a{
+  text-decoration-line: none;
+}
+a:link{
+color : black;
+}
+
+a:visited{
+  color : black;
+}
+a:hover{
+  color : blue;
+  text-decoration-line  : underline;
+  text-underline-position : under;
+}
+
+
+/*관리자 메인- 최근 회원 목록*/
+.usertablecontainer {
+
+  background-color: white;
+  border-radius: 15px 15px 15px 15px;
+
+  width: 1000px;
+  height: 360px;
+  position: absolute;
+  top : 70px;
+  left : 220px;
+  >h2{
+    font-family: 'KCC-Hanbit';
+    position: absolute;
+    left : 25px;
+  }
+  >a>button{
+    font-family: 'GmarketSansMedium';
+    width: 120px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left : 860px;
+    margin-top : 10px;
+    font-size: 12pt;
+    background-color: rgb(115, 138, 81) ;
+    border : none;
+    color : white;
+    }
+  }
+
+/*관리자 메인- 최근 팀 목록*/
+  .teamtablecontainer {
+    border-radius: 15px 15px 15px 15px;
+    background-color: white;
+    width: 1000px;
+    height: 360px;
+    position: absolute;
+    top : 465px;
+    left : 220px;
+    >h2{
+      font-family: 'KCC-Hanbit';
+      position: absolute;
+      left : 25px;
+    }
+    >a>button{
+      font-family: 'GmarketSansMedium';
+      width: 120px;
+      height: 35px;
+      border-radius: 10px 10px 10px 10px;
+      margin-left : 860px;
+      margin-top : 15px;
+      font-size: 12pt;
+      background-color: rgb(115, 138, 81) ;
+      border : none;
+      color : white;
+      }
+    }
+
+/* 관리자 메인- 최근 회원.팀 테이블 설정*/
+table.user-list {
+  height: auto;
+  width: 960px;
+  border-collapse: collapse;
+  margin: 70px 0 0 20px;
+  font-size: 18px;
+  border: 1px solid rgb(203, 216, 184); /* 테이블 가장자리 선 */
+}
+
+table.user-list th, table.user-list td {
+  padding: 10px;
+  text-align: center;
+}
+
+table.user-list th {
+  background-color: rgb(218, 228, 203);
+}
+
+
+/*회원 목록 - 회원 상세보기*/
+.userDetail{
+  width : 1020px;
+  height : 650px;
+  position: absolute;
+  top : 160px;
+  left : 212px;
+  background-color: white;
+  border : 1px solid black;
+  >table{
+    position: absolute;
+    top : 24px;
+    left : 30px;
+    width : 600px;
+    height : 520px;
+    margin : 10px 0 0 0px;
+    font-size: 13pt;
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 30px;
+
+  }
+  >tr,td{
+    border : none;
+  }
+  >table tr:nth-child(9) td:nth-child(3),
+         tr:nth-child(10) td:nth-child(3),
+         tr:nth-child(11) td:nth-child(3){
+    text-align: left;
+    }
+
+  >a>button{
+    font-family: 'GmarketSansMedium';
+    position: absolute;
+    top : 570px;
+    left : 875px;
+    width: 105px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 12pt;
+    background-color: rgb(115, 138, 81) ;
+    border : none;
+    color : white;
+  }
+  >a>button:hover{
+    text-decoration-line: underline ;
+  }
+
+}

@@ -99,9 +99,10 @@
 <body>
   <header>
     <div class="logo">
-      <img src="./image/logo.png">
-      <!-- <div>누가 잘차</div> -->
-    </div>
+          <a href="/serviceMain">
+            <img src="./image/logo.png">
+          </a>
+        </div>
     <div>
       <span><a href="/login">로그인</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/join">회원가입</a></span>

@@ -60,15 +60,17 @@ public class UserControllerImpl implements UserController {
             String msg = "";
             String viewName = "";
             int userCount = userService.loginUser(uID, uPW);
-
-            if (userCount > 0) {
+            if(uID.equals("admin")){
+                session.setAttribute("loginId", uID);
+                viewName = "redirect:/admin/main.do";
+            } else if (userCount > 0) {
                 viewName = "redirect:/serviceMain";
                 session.setAttribute("loginId", uID); // 세션에 사용자 ID 저장
                 System.out.println("================================================");
                 System.out.println("현재 로그인 유저 : " + session.getAttribute("loginId"));
                 System.out.println("================================================");
             } else {
-                viewName = "redirect:/login";
+                viewName = "user/login";
                 msg = "일치하는 회원 정보가 없습니다";
             }
 

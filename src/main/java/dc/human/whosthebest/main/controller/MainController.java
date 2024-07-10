@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface MainController {
     public ModelAndView mainInfo(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
-    public ModelAndView mainBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public ModelAndView mainBoard(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView mainBoardWrite(BoardVO boardVO) throws Exception;
 //    public String read(@ModelAttribute("boardVO")BoardVO boardVO) throws  Exception;
     public ModelAndView mainBoardDetail(@RequestParam("bID") int bID) throws Exception;

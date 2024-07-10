@@ -51,7 +51,15 @@ public class MainControllerImpl implements MainController {
 
     @Override
     @RequestMapping(value = "/mainBoard", method = RequestMethod.GET)
-    public ModelAndView mainBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public ModelAndView mainBoard(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+        session.getAttribute("loginID");
+
+        String name = (String) session.getAttribute("loginId");
+
+        System.out.println("=============================================");
+        System.out.println("세션에 저장된 변수 : " + name);
+        System.out.println("=============================================");
+
         List<BoardVO> mBoard = mainService.mainBoardList();
         ModelAndView mav = new ModelAndView();
         mav.setViewName("main/boardList");
