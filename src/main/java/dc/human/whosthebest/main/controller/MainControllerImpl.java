@@ -79,7 +79,7 @@ public class MainControllerImpl implements MainController {
         }
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("redirect:/board");
+        mav.setViewName("redirect:/mainBoard");
         return mav;
     }
 

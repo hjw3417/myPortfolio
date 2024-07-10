@@ -97,14 +97,34 @@
 
     <!--회원목록 페이지-->
     <select id="selectAllUserList" resultMap="userResult">
+        <!--허진욱 수정(1에서 8번 까지 조회 및 회원가입일자(created_date 기준 내림차순 정렬 추가) -->
         <![CDATA[
-            select U_ID,
+        SELECT U_ID,
+               u_name,
+               u_gender,
+               u_bday,
+               u_addr1,
+               u_email
+        FROM (
+            SELECT U_ID,
                    u_name,
                    u_gender,
                    u_bday,
                    u_addr1,
-                   u_email
-            from users
+                   u_email,
+                   ROWNUM AS rnum
+            FROM (
+                SELECT U_ID,
+                       u_name,
+                       u_gender,
+                       u_bday,
+                       u_addr1,
+                       u_email
+                FROM users
+                ORDER BY CREATED_DATE DESC
+            )
+        )
+        WHERE rnum BETWEEN 1 AND 10
         ]]>
     </select>
 
