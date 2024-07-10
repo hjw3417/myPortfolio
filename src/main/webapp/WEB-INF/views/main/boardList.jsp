@@ -13,10 +13,12 @@
 <body>
   <header>
     <div class="logo">
-      <img src="./image/logo.png">
-    </div>
+          <a href="/serviceMain">
+            <img src="./image/logo.png">
+          </a>
+        </div>
     <div>
-      <span><a href="/login">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
@@ -33,7 +35,7 @@
         <li><a href="/gameList">경기 목록</a></li>
         <li><a href="/stadiumList">경기장 목록</a></li>
         <li><a href="/ranking">랭킹</a></li>
-        <li><a href="/board">게시판</a></li>
+        <li><a href="/mainBoard">게시판</a></li>
       </ul>
     </div>
   </header>
@@ -58,9 +60,9 @@
                   <td>${boardList.bID}</td>
                   <td>${boardList.bBullet}</td>
                   <td>
-                    <a href="/boardDetail/read?bID=${boardList.bID}">
+                    <a href="/boardDetail?bID=${boardList.bID}">
                       ${boardList.bTitle}
-                    <a>
+                    </a>
                   </td>
                   <td>${boardList.createdID}</td>
                   <td>${boardList.createdDate}</td>

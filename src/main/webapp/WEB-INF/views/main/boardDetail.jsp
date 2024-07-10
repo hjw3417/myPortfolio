@@ -13,10 +13,12 @@
 <body>
   <header>
     <div class="logo">
-      <img src="./image/logo.png">
-    </div>
+          <a href="/serviceMain">
+            <img src="./image/logo.png">
+          </a>
+        </div>
     <div>
-      <span><a href="/login">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
@@ -33,7 +35,7 @@
         <li><a href="/gameList">경기 목록</a></li>
         <li><a href="/stadiumList">경기장 목록</a></li>
         <li><a href="/ranking">랭킹</a></li>
-        <li><a href="/board">게시판</a></li>
+        <li><a href="/mainBoard">게시판</a></li>
       </ul>
     </div>
   </header>
@@ -44,20 +46,21 @@
       <div>
         <table>
           <tr>
+            <th>${mBoard.bBullet}</th>
             <th>${mBoard.bType}</th>
             <th>${mBoard.bTitle}</th>
             <th>${mBoard.createdID}</th>
             <th>${mBoard.createdDate}</th>
           </tr>
           <tr>
-            <td colspan="4">
+            <td colspan="5">
               ${mBoard.bContent}
             </td>
           </tr>
         </table>
         <div>
-          <button type="button" id="modify" onclick="modfiy_btn">수정</button>
-          <button type="button" id="list" onclick="location.href='/mainBoard'">목록</button>
+            <button type="button" id="modify" onclick="modifiy_btn">수정</button>
+            <button type="button" id="list" onclick="location.href='/mainBoard'">목록</button>
         </div>
       </div>
     </section>

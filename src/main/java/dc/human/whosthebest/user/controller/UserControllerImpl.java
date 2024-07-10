@@ -4,6 +4,7 @@ import dc.human.whosthebest.user.service.UserService;
 import dc.human.whosthebest.vo.UserInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller("userController")
-@RestController
 public class UserControllerImpl implements UserController {
 
     @Autowired
@@ -54,18 +54,24 @@ public class UserControllerImpl implements UserController {
     @RequestMapping(value="/login" , method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView login(@RequestParam("uID") String uID,
-                              @RequestParam("uPW") String uPW,HttpServletRequest request, HttpServletResponse response) throws Exception{
+                              @RequestParam("uPW") String uPW,HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception{
         ModelAndView mav = new ModelAndView();
         try{
             String msg = "";
             String viewName = "";
             int userCount = userService.loginUser(uID, uPW);
-
-            if (userCount > 0) {
-                viewName = "main/serviceMain";
+            if(uID.equals("admin")){
+                session.setAttribute("loginId", uID);
+                viewName = "redirect:/admin/main.do";
+            } else if (userCount > 0) {
+                viewName = "redirect:/serviceMain";
+                session.setAttribute("loginId", uID); // 세션에 사용자 ID 저장
+                System.out.println("================================================");
+                System.out.println("현재 로그인 유저 : " + session.getAttribute("loginId"));
+                System.out.println("================================================");
             } else {
-                msg = "일치하는 회원 정보가 없습니다";
                 viewName = "user/login";
+                msg = "일치하는 회원 정보가 없습니다";
             }
 
             mav.addObject("errorMsg",msg);
@@ -78,6 +84,20 @@ public class UserControllerImpl implements UserController {
         return mav;
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request) throws Exception{
+
+        System.out.println("logout 메서드 진입");
+
+        HttpSession session = request.getSession();
+
+        session.invalidate();
+
+        return "redirect:/login";
+
+    }
+
+
 
     @Override
     @RequestMapping(value="/findId" , method = RequestMethod.POST)
@@ -87,26 +107,68 @@ public class UserControllerImpl implements UserController {
                                @RequestParam("uPhone") String uPhone, HttpServletRequest request, HttpServletResponse response) throws Exception{
 
         ModelAndView mav = new ModelAndView();
-        String uID = request.getParameter("uID");
 
         try{
             String msgOk = "";
             String msgNo = "";
             String viewName = "";
-            int userCount = userService.findID(uName, uBday, uPhone);
 
+            System.out.println("uName :"+uName + "uBday: " +  uBday + "uPhone: "+ uPhone);
+            String uID = userService.findID(uName, uBday, uPhone);
 
-            if (userCount > 0) {
-                msgOk = "회원님의 아이디는 "+ uID + "입니다.";
-                viewName = "user/login";
+            System.out.println(uID);
+            if (uID != null) {
+
+//                msgOk = "회원정보가 확인됐습니다.";
+                viewName = "user/idPage";
             } else {
-                msgNo = "아이디 또는 생년월일 또는 휴대폰 번호가 일치하지 않습니다.";
+                msgNo = "입력하신 정보가 일치하지 않습니다.";
                 viewName = "user/findID";
             }
 
             mav.addObject("checkMsg",msgOk);
             mav.addObject("errorMsg",msgNo);
             mav.addObject("uId",uID);
+            mav.setViewName(viewName);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return mav;
+
+    }
+
+    @Override
+    @RequestMapping(value="/findPw" , method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView findPw(@RequestParam("uName") String uName,
+                               @RequestParam("uBday") String uBday,
+                               @RequestParam("uPhone") String uPhone,
+                               @RequestParam("uID")String uID, HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+        ModelAndView mav = new ModelAndView();
+
+        try{
+            String msgOk = "";
+            String msgNo = "";
+            String viewName = "";
+
+            System.out.println("uName :"+uName + " uBday: " +  uBday + " uPhone: "+ uPhone + " uID: " + uID);
+            String uPW = userService.findPW(uName, uBday, uPhone, uID);
+
+            System.out.println(uPW);
+            if (uPW != null) {
+
+//                msgOk = "회원정보가 확인됐습니다.";
+                viewName = "user/pwPage";
+            } else {
+                msgNo = "입력하신 정보가 일치하지 않습니다.";
+                viewName = "user/findPW";
+            }
+
+            mav.addObject("checkMsg",msgOk);
+            mav.addObject("errorMsg",msgNo);
+            mav.addObject("uPW",uPW);
             mav.setViewName(viewName);
 
         } catch (Exception ex) {

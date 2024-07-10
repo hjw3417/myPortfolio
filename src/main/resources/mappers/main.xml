@@ -47,7 +47,7 @@
         <result property="bType" column="B_TYPE" />
         <result property="bBullet" column="B_BULLET" />
         <result property="bTitle" column="B_TITLE" />
-        <result property="bContent" column="B_CONTENTT" />
+        <result property="bContent" column="B_CONTENT" />
         <result property="createdID" column="CREATED_ID" />
         <result property="createdDate" column="CREATED_DATE" />
         <result property="updatedID" column="UPDATED_ID" />
@@ -90,18 +90,27 @@
             B_TITLE,
             CREATED_ID,
             CREATED_DATE
-        FROM
-            BOARD
+        FROM (
+            SELECT
+                B_ID,
+                B_BULLET,
+                B_TITLE,
+                CREATED_ID,
+                CREATED_DATE,
+                ROW_NUMBER() OVER (PARTITION BY B_BULLET ORDER BY B_ID DESC) AS rn
+            FROM
+                BOARD
+            WHERE
+                B_TYPE = 1
+        ) sub
         WHERE
-            B_TYPE = 1
+            (B_BULLET = '공지' AND rn &lt;= 2)
+            OR (B_BULLET = '일반' AND rn &lt;= 5)
         ORDER BY
-            B_ID DESC
+            B_BULLET ASC
     </select>
     
     <insert id="mainBoardWrite" parameterType="dc.human.whosthebest.vo.BoardVO">
-<!--        <selectKey keyProperty="mainBoard_id" resultType="int" order="AFTER">-->
-<!--            SELECT BOARD_SEQ.NEXTVAL FROM DUAL-->
-<!--        </selectKey>-->
         insert into board(
           b_id,
           b_type,
@@ -122,11 +131,24 @@
         )
     </insert>
 
+    <select id="mainServiceBoard" resultMap="boardResult">
+        SELECT
+        B_TITLE,
+        CREATED_ID
+        FROM
+        BOARD
+        WHERE
+        B_TYPE = 1
+        ORDER BY
+        B_ID DESC
+    </select>
+
     <select id="mainBoardDetail" resultMap="boardResult">
         SELECT
             B_ID,
             B_BULLET,
             B_TITLE,
+            B_CONTENT,
             CREATED_ID,
             CREATED_DATE
         FROM
