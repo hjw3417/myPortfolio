@@ -97,7 +97,7 @@
                     <td><input type="date" name="sResDate" id="sResDate"></td>
                 </tr>
                 <tr>
-                    <td>시작 시작 : </td>
+                    <td>시작 시간 : </td>
                     <td>
                         <select  name="sResSTime" id="sResSTime">
                             <option selected disabled>시작 시간 선택</option>
@@ -115,7 +115,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>종료 시작 : </td>
+                    <td>종료 시간 : </td>
                     <td>
                         <select name="sResETime" id="sResETime">
                             <option selected disabled>종료 시간 선택</option>

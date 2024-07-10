@@ -1,14 +1,13 @@
 package dc.human.whosthebest.aboutteam.controller;
 
 import dc.human.whosthebest.aboutteam.service.AboutteamService;
+import dc.human.whosthebest.team.service.TeamService;
 import dc.human.whosthebest.vo.GameListVO;
 import dc.human.whosthebest.vo.GameRecordVO;
+import dc.human.whosthebest.vo.TeamInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -18,13 +17,22 @@ public class AboutTeamControllerImpl implements AboutTeamController {
     @Autowired
     private AboutteamService aboutteamService;
 
+    @Autowired
+    private TeamService teamService;
+
     @Override
     @GetMapping("/team/gameSchedule.do")
-    public ModelAndView gameSchedulleInfo(@RequestParam(value="tID", required = false, defaultValue = "1") int tID) throws Exception {
+    public ModelAndView gameSchedulleInfo(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                          @RequestParam(value="tID", required = false, defaultValue = "0") int tID
+                                          ) throws Exception {
         ModelAndView mav = new ModelAndView();
         int pageNum = 1;
         int rowNum = 0;
         List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
+        List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(loginId);
+        if(myTeams != null) {
+            mav.addObject("myTeams", myTeams);
+        }
         System.out.println("controller gameListVO.size() : " + gameListVO.size());
         mav.addObject("gameListVO", gameListVO);
         mav.setViewName("/aboutteam/gameSchedule");
@@ -36,8 +44,7 @@ public class AboutTeamControllerImpl implements AboutTeamController {
     @ResponseBody
     public List<GameListVO> pagingGameSchedulleInfo(@RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum,
                                                     @RequestParam(value="rowNum", required = false, defaultValue = "0") int rowNum,
-                                                    @RequestParam(value="tID", required = false, defaultValue = "0") int tID)
-                                                    throws Exception {
+                                                    @RequestParam(value="tID", required = false, defaultValue = "0") int tID) throws Exception {
         List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
         System.out.println("RestFullcontroller gameListVO.size() : " + gameListVO.size());
         return gameListVO;
@@ -45,18 +52,25 @@ public class AboutTeamControllerImpl implements AboutTeamController {
 
     @Override
     @GetMapping("/team/gameRecord.do")
-    public ModelAndView selectGameRecordInfo(@RequestParam(value="tID", required = false, defaultValue = "0") int tID) throws Exception {
+    public ModelAndView selectGameRecordInfo(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                             @RequestParam(value="tID", required = false, defaultValue = "0") int tID)
+                                             throws Exception {
         ModelAndView mav = new ModelAndView();
         GameRecordVO gameRecordVO = new GameRecordVO();
         String resultType = null;
         int pageNum =1;
         int rowNum = 0;
         gameRecordVO = aboutteamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
+        List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(loginId);
+
         if(gameRecordVO.getGameRecordInfoListVO().size() != 0) {
             System.out.println("gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
+            mav.addObject("gameRecordVO", gameRecordVO);
+        }
+        if(myTeams != null) {
+            mav.addObject("myTeams", myTeams);
         }
         mav.setViewName("aboutteam/gameRecord");
-        mav.addObject("gameRecordVO", gameRecordVO);
         return mav;
     }
 

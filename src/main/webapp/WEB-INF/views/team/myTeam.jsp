@@ -19,7 +19,7 @@
 </head>
 <body>
   <header>
-<div class="logo">
+    <div class="logo">
       <a href="/serviceMain">
         <img src="${contextPath}/image/logo.png">
       </a>
@@ -61,8 +61,8 @@
                   ${team.tName}
                   <ul>
                     <li><a href="${contextPath}/teamMembers?tID=${team.tID}">팀원 목록</a></li>
-                    <li><a href="${contextPath}/team/gameSchedule?tID=${team.tID}">팀 경기 일정</a></li>
-                    <li><a href="${contextPath}/team/gameRecord?tID=${team.tID}">전적</a></li>
+                    <li><a href="${contextPath}/team/gameSchedule.do?tID=${team.tID}">팀 경기 일정</a></li>
+                    <li><a href="${contextPath}/team/gameRecord.do?tID=${team.tID}">전적</a></li>
                     <li><a href="${contextPath}/teamBoard?tID=${team.tID}">팀 게시판</a></li>
                   </ul>
                 </a>

@@ -166,8 +166,8 @@ public class GameControllerImpl implements GameController {
         System.out.println("controller tID : " + gTeamID);
         int gTeamIDInt = Integer.parseInt(gTeamID);
         gameVO.setgTeamID(gTeamIDInt);
-        gameVO.settUserID("loginId");
-        gameVO.setCreatedID("loginId");
+        gameVO.settUserID(loginId);
+        gameVO.setCreatedID(loginId);
         gameVO.setgTitle(gTitle);
         gameVO.setgTag(gTag);
         gameVO.setgMinMember(gMinMember);
@@ -184,7 +184,7 @@ public class GameControllerImpl implements GameController {
         if (gameMakeresult < 0) {
             mav.setViewName("redirect:/game/gameMake.do");
         } else {
-            mav.setViewName("redirect:/game/gameList.do");
+            mav.setViewName("redirect:/game/gameInfoList.do");
             //mav.setViewName("redirect:/game/gameMake.do");
         }
         mav.addObject("gameMakeresult", gameMakeresult);
@@ -276,7 +276,7 @@ public class GameControllerImpl implements GameController {
     @PostMapping(value="/delGame.do")
     public ModelAndView deleteGame(@SessionAttribute(name = "loginId", required = false) String loginId,
                                    @RequestParam(value="gID") int gID) throws Exception {
-        ModelAndView mav = new ModelAndView("redirect:/game/gameList.do");
+        ModelAndView mav = new ModelAndView("redirect:/game/gameInfoList.do");
         gameService.deleteGame(gID);
         return mav;
     }
