@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller("myPageController")
 public class MyPageControllerImpl implements  MyPageController {
-
+//셔ㅑㄱ샤ㅕㄱ샷갸
     @Autowired
     private MyPageService myPageService;
 
