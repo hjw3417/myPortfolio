@@ -57,7 +57,7 @@
           <div>팀</div>
           <ul>
             <li><a href="${contextPath}/teamList">팀 목록</a></li>
-            <li><a href="#">나의 팀</a></li>
+            <li><a href="${contextPath}/myTeam">나의 팀</a></li>
             <li><a href="${contextPath}/teamMake">팀 만들기</a></li>
           </ul>
         </div>
