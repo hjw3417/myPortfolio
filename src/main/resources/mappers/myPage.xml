@@ -45,23 +45,22 @@
     <!--마이페이지 메인 - 이름 , 소속팀 ,랭크 출력-->
     <select id="selectMyPageInfo" resultMap="myPageInfo">
         <![CDATA[
-             select  users.u_name,
-                     team.t_name,
-                     team.rankscore
-             from  team, squad , users
-             where squad.t_id=team.t_id
-                    and squad.u_id=users.u_id
-                    and users.u_id='hong'
-                     and team.rankscore is not null
-              order by team.rankscore desc
-
+            select u.u_name,
+                    u.u_id,
+                    t.t_name,
+                    t.rankscore
+            from users u, team t, team_member tm
+            where tm.u_id=u.u_id
+                and tm.t_id = t.t_id
+                and u.u_id  = #{uID)
+            order by t.rankscore desc
         ]]>
     </select>
 
     <!-- 마이페이지메인 - 최근 경기결과  -->
     <select id="selectRecentGame"  resultMap="recentGame">
         <![CDATA[
-             SELECT
+             SELECT distinct g.g_id,
                     g.G_RESDATE,
                     t.t_name as myTeam,
                     tt.t_name as awayTeam,
@@ -79,7 +78,7 @@
                 ON tt.T_ID = r.T_AWAYID
                 INNER JOIN SQUAD sq
                 on sq.t_id = r.t_homeid
-             where sq.u_id = 'hong'
+             where sq.u_id = #{uID}
              order by g.g_resdate desc
         ]]>
     </select>
@@ -107,7 +106,7 @@
                    u_email,
                    u_phone
             from users
-            where u_id='hong'
+            where u_id= #{uID}
         ]]>
     </select>
 

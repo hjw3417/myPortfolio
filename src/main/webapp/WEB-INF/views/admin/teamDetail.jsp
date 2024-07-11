@@ -34,70 +34,76 @@
                   <li> <a href="/admin/userList.do">회원 관리 </a> </li>
                   <li><a href="/admin/teamList.do">팀 관리 </a> </li>
                   <li><a href="/admin/gameList.do">경기 관리 </a></li>
+                  <li><a href="/mainBoard"> 게시판 </a></li>
              </ul>
         <a href="/login">
         <img class="logoutimg" src="/image/logout.png" alt="로그아웃">
       </a>
     </div>
-    <div class="userDetail">
-      <div>
-        프로필사진
-      </div>
-      <table>
-            <tr>
-              <td> 팀 이름 </td>
-              <td>${teamInfo.tName}</td>
-            </tr>
+     <div class="teamDetail">
+          <table class="info">
+                <tr>
+                  <td> 팀 ID </td>
+                  <td>${teamInfo.tID}</td>
+                  <td> 팀 이름 </td>
+                  <td>${teamInfo.tName}</td>
+                </tr>
 
-            <tr>
-              <td> 팀 ID </td>
-              <td>${teamInfo.tID}</td>
-            </tr>
+                <tr>
+                  <td>팀 인원</td>
+                  <td>  ${teamInfo.tMember} </td>
+                  <td> 팀 최대인원 </td>
+                  <td>  ${teamInfo.tMaxMember}</td>
+                </tr>
 
-            <tr>
-              <td> 지역 </td>
-              <td> ${teamInfo.tRegion} </td>
-            </tr>
+                <tr>
 
-            <tr>
-              <td> 랭크 </td>
-              <td> ${teamInfo.tRankScore} </td>
-            </tr>
+                  <td>팀 소개 </td>
+                  <td>  ${teamInfo.tInfo} </td>
+                  <td> 랭크 </td>
+                  <td> ${teamInfo.tRankScore} </td>
+                </tr>
 
-            <tr>
-              <td> 팀가입 최소나이 </td>
-              <td>  ${teamInfo.tMinAge} </td>
-            </tr>
+                <tr>
+                  <td> 팀가입 최소나이 </td>
+                  <td>  ${teamInfo.tMinAge} </td>
+                  <td> 팀가입 최대나이 </td>
+                  <td>   ${teamInfo.tMaxAge} </td>
+                </tr>
 
-            <tr>
-              <td> 팀가입 최대나이 </td>
-              <td>   ${teamInfo.tMaxAge} </td>
-            </tr>
+                <tr>
+                  <td> 주장 </td>
+                  <td>  </td>
+                  <td> 개설일자 </td>
+                  <td> ${teamInfo.createdDate}</td>
+                </tr>
+          </table>
+          <div> 경기내역 </div>
+          <table class="playTable">
+                <tr>
+                 <th width="150"> 경기 일시 </th>
+                 <th width="230" > 나의팀</th>
+                 <th colspan="3"> 득점 </th>
+                 <th width="230"> 상대팀 </th>
+                 <th> 경기 장소</th>
+                </tr>
 
-            <tr>
-              <td> 팀 최대인원 </td>
-              <td>  ${teamInfo.tMaxMember}</td>
-            </tr>
+                <tr>
+                  <td width="120">  </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> : </td>
+                  <td>  </td>
+                  <td>  </td>
+                  <td></td>
+                 </tr>
 
-            <tr>
-              <td>팀 인원</td>
-              <td>  ${teamInfo.tMember} </td>
-            </tr>
+          </table>
 
-            <tr>
-              <td>팀 소개 </td>
-              <td>  ${teamInfo.tInfo} </td>
-            </tr>
 
-            <tr>
-              <td> 개설일자 </td>
-              <td> ${teamInfo.createdDate}</td>
-            </tr>
-
-      </table>
+         <a href="#"> <button> 뒤로가기</button> </a>
     </div>
-</div>
-</main>
+    </main>
 
-</body>
-</html>
+    </body>
+    </html>
