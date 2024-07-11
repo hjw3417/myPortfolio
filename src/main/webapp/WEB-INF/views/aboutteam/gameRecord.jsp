@@ -28,17 +28,17 @@
       </a>
     </div>
     <div>
-      <span><a href="login.html">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="myPage.html">마이페이지</a></span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
       <ul>
         <li>
-          <a href="teamlist.html">팀</a>
+          <a href="/teamList">팀</a>
           <div>
             <ul>
-              <li><a href="teamlist.html">팀 목록</a></li>
-              <li><a href="myteam.html">나의 팀</a></li>
+              <li><a href="/teamList">팀 목록</a></li>
+              <li><a href="/myTeam">나의 팀</a></li>
             </ul>
           </div>
         </li>
