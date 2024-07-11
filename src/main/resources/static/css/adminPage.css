@@ -140,6 +140,7 @@ main{
   width: 1030px;
   height: 600px;
   border : none;
+  overflow : auto;
 }
 
 /*회원,팀, 경기관리 테이블 설정*/
