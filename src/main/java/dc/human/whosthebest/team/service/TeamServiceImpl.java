@@ -25,8 +25,8 @@ public class TeamServiceImpl implements TeamService {
     private AboutTeamDAO aboutTeamDAO;
 
     //날짜 format을 위한 필드
-    private static final SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static final SimpleDateFormat displayFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private static final SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private static final SimpleDateFormat displayFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
     @Override
     public List listTeams() throws Exception {
