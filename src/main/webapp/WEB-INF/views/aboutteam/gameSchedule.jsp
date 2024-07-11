@@ -125,6 +125,7 @@
             <!-- 카드 끝 -->
 
             <!-- pagination 시작 -->
+            <input type="hidden" id="tIDHidden" value="${tID}"/>
             <div class="paginationContainer">
               <ul class="pagination">
                 <li>

@@ -30,11 +30,14 @@ public class AboutTeamControllerImpl implements AboutTeamController {
         int rowNum = 0;
         List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
         List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(loginId);
+        if(gameListVO != null) {
+            mav.addObject("gameListVO", gameListVO);
+            System.out.println("controller gameListVO.size() : " + gameListVO.size());
+        }
         if(myTeams != null) {
             mav.addObject("myTeams", myTeams);
         }
-        System.out.println("controller gameListVO.size() : " + gameListVO.size());
-        mav.addObject("gameListVO", gameListVO);
+        mav.addObject("tID", tID);
         mav.setViewName("/aboutteam/gameSchedule");
         return mav;
     }
