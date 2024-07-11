@@ -344,7 +344,7 @@
 			S_NAME = #{search} OR
 			S_OWNER = #{search}
 			)
-			AND S_REGION||S_NAME||S_OWNER LIKE '%' || #{search} || '%'
+			OR S_REGION||S_NAME||S_OWNER LIKE '%' || #{search} || '%'
 		</if>
 		)
 		WHERE
