@@ -216,6 +216,8 @@
 		STADIUM s ON g.S_ID = s.S_ID
 		INNER JOIN
 		REGIONCODE r ON s.S_REGION = r.region_name
+		INNER JOIN
+		SQUAD sq ON sq.g_id = g.g_id
 		WHERE g.G_STATUS = 0
 		<if test="sRegion != null and sRegion != ''">
 			AND r.REGION_CODE = #{sRegion}
@@ -235,7 +237,7 @@
 			AND g.T_USERID = #{IMakeGameuID}
 		</if>
 		<if test="IPartiGameuID != null and IPartiGameuID != ''">
-			AND SQ.U_ID = #{IPartiGameuID}
+			AND sq.U_ID = #{IPartiGameuID}
 		</if>
 		)
 		WHERE rn BETWEEN (#{pageNum} + #{rowNum}*5) AND (#{pageNum} + #{rowNum}*5) + 5
