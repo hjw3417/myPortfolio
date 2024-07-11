@@ -34,9 +34,7 @@ public class AboutTeamServiceImpl implements AboutteamService {
         gameResultInfoList = aboutTeamDAO.selectGResultInfo(pageNum, rowNum, tID, resultType);
         String myTeamName = aboutTeamDAO.myTeamName(tID).gettHomeName();
         if(gameRecordVO != null) {
-            if(gameResultInfoList.size() != 0) {
-                gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
-            }
+            gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
             if(myTeamName != null) {
                 gameRecordVO.settName(myTeamName);
             }

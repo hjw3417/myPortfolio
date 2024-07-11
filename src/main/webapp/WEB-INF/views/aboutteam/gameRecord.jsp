@@ -101,18 +101,25 @@
           </form>
         </div>
         <div id="gameRecordContainer">
-        <c:forEach var="gameRecord" items="${gameRecordVO.gameRecordInfoListVO}">
-            <div>
-                <span>${gameRecord.tHomeName}&nbsp;</span>
-                <span>${gameRecord.homeGoal}</span>
-                <span>:</span>
-                <span>${gameRecord.awayGoal}</span>
-                <span>&nbsp;</span>
-                <span>${gameRecord.tAwayName}</span>
-                <span>${gameRecord.gResDate}</span>
-                <span>${gameRecord.resultType}</span>
-            </div>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${empty gameRecordVO or empty gameRecordVO.gameRecordInfoListVO}">
+                <div>조회 결과가 없습니다</div>
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="gameRecord" items="${gameRecordVO.gameRecordInfoListVO}">
+                    <div>
+                        <span>${gameRecord.tHomeName}&nbsp;</span>
+                        <span>${gameRecord.homeGoal}</span>
+                        <span>:</span>
+                        <span>${gameRecord.awayGoal}</span>
+                        <span>&nbsp;</span>
+                        <span>${gameRecord.tAwayName}</span>
+                        <span>${gameRecord.gResDate}</span>
+                        <span>${gameRecord.resultType}</span>
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
         </div>
         <!-- pagination 시작 -->
         <div class="paginationContainer">
