@@ -13,26 +13,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller("myPageController")
 public class MyPageControllerImpl implements  MyPageController {
-
+//셔ㅑㄱ샤ㅕㄱ샷갸
     @Autowired
     private MyPageService myPageService;
 
     //마이페이지 메인
     @Override
     @RequestMapping(value = "/myPage", method = RequestMethod.GET)
-    public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView myPage(@SessionAttribute(name = "loginId", required = false) String loginId,
+                               HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-//        HttpSession session = request.getSession();
-//        String uID = (String) session.getAttribute("loginId");
 
-        List<MyPageInfoVO> myPageInfo = myPageService.getUserinfo();
-        List<RecentGameVO> recentGame = myPageService.getRecentGame();
+        String uID = loginId;
+        List<MyPageInfoVO> myPageInfo = myPageService.getUserinfo(uID);
+        List<RecentGameVO> recentGame = myPageService.getRecentGame(uID);
         ModelAndView mav = new ModelAndView("/myPage/myPage");
         mav.addObject("myPageInfo", myPageInfo);
         mav.addObject("recentGame", recentGame);
@@ -42,9 +43,12 @@ public class MyPageControllerImpl implements  MyPageController {
     //마이페이지 - 내가 참여한 경기결과
     @Override
     @RequestMapping(value = "/myPage/myGameRecord")
-    public ModelAndView myGameRecord(HttpServletRequest request,
+    public ModelAndView myGameRecord(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                     HttpServletRequest request,
                                      HttpServletResponse response) throws Exception{
-        List<RecentGameVO> myGameRecord = myPageService.getRecentGame();
+
+        String uID = loginId;
+        List<RecentGameVO> myGameRecord = myPageService.getRecentGame(uID);
         ModelAndView mav = new ModelAndView("/myPage/myGameRecord");
         mav.addObject("recentGame", myGameRecord);
         return  mav;
@@ -54,9 +58,10 @@ public class MyPageControllerImpl implements  MyPageController {
   /*  마이페이지 - 회원정보수정 전 비밀번호 확인 */
     @Override
     @RequestMapping(value= "/myPage/updatePwCheck" , method = RequestMethod.GET)
-    public ModelAndView pwCheck(HttpServletRequest request,
+    public ModelAndView pwCheck(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                HttpServletRequest request,
                                 HttpServletResponse response) throws Exception{
-        String uID= "hong";
+        String uID = loginId;
         ModelAndView mav = new ModelAndView("/myPage/updatePwCheck");
         mav.addObject("uID",uID);
         return mav;
@@ -89,8 +94,10 @@ public class MyPageControllerImpl implements  MyPageController {
     /*마이페이지  - 회원정보수정*/
     @Override
     @RequestMapping(value = "/myPage/updateMyInfoPage" ,  method = {RequestMethod.GET, RequestMethod.POST})
-    public  ModelAndView loadInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        List<UserInfoVO> allMyInfo = myPageService.loadUserInfo();
+    public  ModelAndView loadInfo(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                  HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String uID = loginId;
+        List<UserInfoVO> allMyInfo = myPageService.loadUserInfo(uID);
         ModelAndView mav = new ModelAndView("/myPage/updateMyInfo");
         mav.addObject("allMyInfo", allMyInfo);
         return  mav;
@@ -98,7 +105,8 @@ public class MyPageControllerImpl implements  MyPageController {
 
     @Override
     @RequestMapping(value = "/myPage/updateMyInfo" ,method=RequestMethod.POST)
-    public String updateMyInfo(@RequestParam("uID") String uID,
+    public String updateMyInfo(@SessionAttribute(name = "loginId", required = false) String loginId,
+                               @RequestParam("uID") String uID,
                                @RequestParam("uName") String uName,
                                @RequestParam("uBday") String uBday,
                                @RequestParam("uAddr1") String uAddr1,
@@ -107,8 +115,8 @@ public class MyPageControllerImpl implements  MyPageController {
                                @RequestParam("uPhone") String uPhone,
                                @RequestParam("uPW") String uPW) throws Exception {
 
-    myPageService.updateInfo(uID,uName,uBday,uAddr1,uAddr2, uEmail, uPhone, uPW);
-    return "redirect:/myPage";
+        myPageService.updateInfo(uID,uName,uBday,uAddr1,uAddr2, uEmail, uPhone, uPW);
+        return "redirect:/myPage";
     }
 
     //로그아웃

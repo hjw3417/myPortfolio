@@ -35,6 +35,7 @@
                <li> <a href="/admin/userList.do">회원 관리 </a> </li>
                <li><a href="/admin/teamList.do">팀 관리 </a> </li>
                <li><a href="/admin/gameList.do">경기 관리 </a></li>
+               <li><a href="/mainBoard"> 게시판 </a></li>
             </ul>
         <a href="/login">
         <img class="logoutimg" src="../image/logout.png" alt="로그아웃" >

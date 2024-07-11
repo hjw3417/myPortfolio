@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -62,7 +63,7 @@
           <img src="../image/user.png" class="profile">  </img>
 
           <c:if test="${not empty myPageInfo}">
-              <div class="name">${myPageInfo[0].uName}</div> <!-- 첫 번째 요소의 이름 출력 -->
+              <div class="name">${myPageInfo[0].uID}</div> <!-- 첫 번째 요소의 이름 출력 -->
           </c:if>
 
 

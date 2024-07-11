@@ -140,6 +140,7 @@ main{
   width: 1030px;
   height: 600px;
   border : none;
+  overflow : auto;
 }
 
 /*회원,팀, 경기관리 테이블 설정*/
@@ -151,6 +152,7 @@ main{
   font-size: 18px;
   border: 1px solid rgb(203, 216, 184);
   background-color: white;
+
 }
 
 table.list th, table.list td {
@@ -162,24 +164,22 @@ table.list th {
   background-color: rgb(218, 228, 203);
 }
 
-/*회원 ID a태그 설정*/
-a{
+table.list td a:link{
+  color : black;
   text-decoration-line: none;
 }
-a:link{
-color : black;
-}
 
-a:visited{
+table.list td a:visited{
   color : black;
+  text-decoration-line: none;
 }
-a:hover{
+
+table.list td a:hover{
   color : blue;
-  text-decoration-line  : underline;
+  text-decoration-line: underline;
   text-underline-position : under;
+
 }
-
-
 /*관리자 메인- 최근 회원 목록*/
 .usertablecontainer {
 
@@ -306,4 +306,70 @@ table.user-list th {
     text-decoration-line: underline ;
   }
 
+}
+
+/*팀 목록 - 팀 상세보기*/
+.teamDetail{
+  width : 1020px;
+  height : 650px;
+  position: absolute;
+  top : 160px;
+  left : 212px;
+  background-color: white;
+  border : 1px solid black;
+  >.info{
+    position: absolute;
+    top : 24px;
+    left : 30px;
+    width : 960px;
+    height : 200px;
+    margin : 10px 0 0 0px;
+    font-size: 13pt;
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 30px;
+  }
+
+  >table tr:nth-child(9) td:nth-child(3),
+         tr:nth-child(10) td:nth-child(3),
+         tr:nth-child(11) td:nth-child(3){
+    text-align: left;
+    }
+  >div{
+    font-size : 16pt;
+    font-weight: bold;
+    position: absolute;
+    top : 260px;
+    left : 34px;
+  }
+  >.playTable{
+    position: absolute;
+    top : 300px;
+    left : 30px;
+    border : 1px solid rgb(115, 138, 81) ;
+    width : 960px;
+    height : 300px;
+    border-collapse: collapse;
+    text-align: center;
+    >tr,td{
+      border-bottom : 1px solid rgb(115, 138, 81) ;
+      border-top: 1px solid rgb(115, 138, 81) ;
+  }
+}
+  >a>button{
+    font-family: 'GmarketSansMedium';
+    position: absolute;
+    top : 605px;
+    left : 875px;
+    width: 105px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 12pt;
+    background-color: rgb(115, 138, 81) ;
+    border : none;
+    color : white;
+  }
+  >a>button:hover{
+    text-decoration-line: underline ;
+  }
 }

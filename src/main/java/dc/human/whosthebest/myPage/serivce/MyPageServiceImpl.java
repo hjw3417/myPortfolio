@@ -20,14 +20,14 @@ public class MyPageServiceImpl implements MyPageService{
 
     //마이페이지 메인
     @Override
-    public List getUserinfo() throws Exception{
-        return myPageDAO.selectMyPageInfo();
+    public List getUserinfo(String uID) throws Exception{
+        return myPageDAO.selectMyPageInfo(uID);
 
     }
 
     @Override
-    public List<RecentGameVO> getRecentGame() throws Exception{
-        return myPageDAO.selectRecentGame();
+    public List<RecentGameVO> getRecentGame(String uID) throws Exception{
+        return myPageDAO.selectRecentGame(uID);
     }
 
     //마이페이지 - 회원정보수정 전 비밀번호 확인
@@ -42,8 +42,8 @@ public class MyPageServiceImpl implements MyPageService{
 
     //마이페이지 - 회원정보수정
     @Override
-    public List<UserInfoVO> loadUserInfo() throws Exception{
-        return myPageDAO.selectAllMyInfo();
+    public List<UserInfoVO> loadUserInfo(String uID) throws Exception{
+        return myPageDAO.selectAllMyInfo(uID);
     }
 
     @Override

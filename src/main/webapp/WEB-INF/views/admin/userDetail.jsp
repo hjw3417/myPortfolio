@@ -34,6 +34,7 @@
                   <li> <a href="/admin/userList.do">회원 관리 </a> </li>
                   <li><a href="/admin/teamList.do">팀 관리 </a> </li>
                   <li><a href="/admin/gameList.do">경기 관리 </a></li>
+                  <li><a href="/mainBoard"> 게시판 </a></li>
              </ul>
         <a href="/login">
         <img class="logoutimg" src="/image/logout.png" alt="로그아웃">
@@ -53,7 +54,9 @@
 
             <tr>
               <td> 생년월일</td>
-              <td> ${userInfo.uBday} </td>
+              <td>
+                 ${userInfo.uBday}
+               </td>
             </tr>
 
             <tr>
@@ -83,20 +86,20 @@
 
             <tr>
                <td> 소속팀1 </td>
-               <td> ${} </td>
-               <td> ${} </td>
+               <td>  </td>
+               <td>  </td>
             </tr>
 
              <tr>
                <td> 소속팀2 </td>
-               <td> ${} </td>
-               <td> ${} </td>
+               <td>  </td>
+               <td> </td>
             </tr>
 
              <tr>
                <td> 소속팀3 </td>
-               <td> ${} </td>
-               <td> ${} </td>
+               <td>  </td>
+               <td>  </td>
             </tr>
 
               <tr>

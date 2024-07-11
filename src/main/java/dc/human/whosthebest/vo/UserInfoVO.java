@@ -22,6 +22,7 @@ public class UserInfoVO {
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
+	//myPage 정보 수정 전 pwCheck하기 위해 만든 컬럼이라 DB에는 없는 컬럼입니다!!
 	private int valid;
 
 	public int getValid() {

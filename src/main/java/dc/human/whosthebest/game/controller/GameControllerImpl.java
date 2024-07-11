@@ -33,21 +33,23 @@ public class GameControllerImpl implements GameController {
      * Handles the GET request for creating a game.
      *
      * @param gameVO    the game details provided by the model attribute
-     * @param loginId  the user ID stored in the session attribute, could be null
+     * @param loggedID  the user ID stored in the session attribute, could be null
      * @return          a ModelAndView object directing to the game creation page with necessary data
      * @throws Exception if an error occurs during the process
      */
     @Override
     @RequestMapping(value = "/gameMake.do", method = RequestMethod.GET)
     public ModelAndView gameMake(@ModelAttribute("gameVO") GameVO gameVO,
-                                 @SessionAttribute(name = "loginId", required = false) String loginId
+                                 @SessionAttribute(name = "loggedID", required = false) String loggedID
                                 ) throws Exception {
-//        String uID = "hoe";
-        String uID = loginId;
+        String uID = "hoe";
+//        String uID = loggedID;
         System.out.println("gameVO.gettUserID() : " + gameVO.gettUserID());
         System.out.println("gameVO.getgResDate() : " + gameVO.getgResDate());
         System.out.println("goToModPage gameVO.getgTeamID() : " + gameVO.getgTeamID());
-
+        if(gameVO.gettUserID() != null) {
+            uID = gameVO.gettUserID();
+        }
         System.out.println("after uID: " + uID);
         List<TeamInfoVO> teamNameList = gameService.loadMyTeam(uID);
         System.out.println("gameMake gameVO.getgTag() : " + gameVO.getgTag());
@@ -152,22 +154,21 @@ public class GameControllerImpl implements GameController {
     @Override
     @RequestMapping(value = "/createGame.do", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView createGame(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                   @RequestParam("gTeamID") String gTeamID,
-                                   @RequestParam("gTitle") String gTitle,
-                                   @RequestParam("gTag") String gTag,
-                                   @RequestParam("gMinMember") int gMinMember,
-                                   @RequestParam("gInfo") String gInfo,
-                                   @RequestParam("sID") int sID,
-                                   @RequestParam("sNum") int sNum,
-                                   @RequestParam("gTime") int gTime,
-                                   @RequestParam("gResDate") String gResDate) throws Exception {
+    public ModelAndView createGame(@RequestParam(value="gTeamID", required = false) String gTeamID,
+                                   @RequestParam(value="gTitle", required = false) String gTitle,
+                                   @RequestParam(value="gTag", required = false) String gTag,
+                                   @RequestParam(value="gMinMember", required = false, defaultValue = "1") int gMinMember,
+                                   @RequestParam(value="gInfo", required = false) String gInfo,
+                                   @RequestParam(value="sID", required = false, defaultValue = "1") int sID,
+                                   @RequestParam(value="sNum", required = false, defaultValue = "1") int sNum,
+                                   @RequestParam(value="gTime", required = false, defaultValue = "1") int gTime,
+                                   @RequestParam(value="gResDate", required = false) String gResDate) throws Exception {
         GameVO gameVO = new GameVO();
         System.out.println("controller tID : " + gTeamID);
         int gTeamIDInt = Integer.parseInt(gTeamID);
         gameVO.setgTeamID(gTeamIDInt);
-        gameVO.settUserID(loginId);
-        gameVO.setCreatedID(loginId);
+        gameVO.settUserID("hong");
+        gameVO.setCreatedID("hong");
         gameVO.setgTitle(gTitle);
         gameVO.setgTag(gTag);
         gameVO.setgMinMember(gMinMember);
@@ -184,7 +185,7 @@ public class GameControllerImpl implements GameController {
         if (gameMakeresult < 0) {
             mav.setViewName("redirect:/game/gameMake.do");
         } else {
-            mav.setViewName("redirect:/game/gameInfoList.do");
+            mav.setViewName("redirect:/game/gameList.do");
             //mav.setViewName("redirect:/game/gameMake.do");
         }
         mav.addObject("gameMakeresult", gameMakeresult);
@@ -192,10 +193,8 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    @RequestMapping(value = "/gameInfoList.do", method = RequestMethod.GET)
-    public ModelAndView selectGameList(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                       HttpServletRequest request,
-                                       HttpServletResponse response) throws Exception {
+    @RequestMapping(value = "/gameList.do", method = RequestMethod.GET)
+    public ModelAndView selectGameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int defaultPageNum = 1;
         int defaultRowNum = 0;
         String IMakeGameuID = null;
@@ -213,10 +212,10 @@ public class GameControllerImpl implements GameController {
             System.out.println("controller 리스트가 비어 있습니다.");
         }
         ModelAndView mav = new ModelAndView();
-        mav.addObject("uID", loginId);
+        mav.addObject("uID", "MOON");
         mav.addObject("gameList", gameList);
         mav.addObject("defaultPageNum", defaultPageNum);
-        mav.setViewName("/game/gameInfoList");
+        mav.setViewName("/game/gameList");
         return mav;
     }
 
@@ -248,10 +247,8 @@ public class GameControllerImpl implements GameController {
 
     @Override
     @GetMapping(value = "/gameInfo.do")
-    public ModelAndView selectGameInfo(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                       @RequestParam("gID") int gID) throws Exception {
-        String uID = loginId;
-        System.out.println("loginId : " + uID);
+    public ModelAndView selectGameInfo(@RequestParam(value="gID", required = false, defaultValue = "1") int gID) throws Exception {
+        String uID = "heo";
         ModelAndView mav = new ModelAndView();
         GameInfoVO gameInfoVO = new GameInfoVO();
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
@@ -274,18 +271,16 @@ public class GameControllerImpl implements GameController {
     }
     @Override
     @PostMapping(value="/delGame.do")
-    public ModelAndView deleteGame(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                   @RequestParam(value="gID") int gID) throws Exception {
-        ModelAndView mav = new ModelAndView("redirect:/game/gameInfoList.do");
+    public ModelAndView deleteGame(@RequestParam(value="gID") int gID) throws Exception {
+        ModelAndView mav = new ModelAndView("redirect:/game/gameList.do");
         gameService.deleteGame(gID);
         return mav;
     }
     @Override
     @PostMapping(value="/comment/gameInfo.do")
     @ResponseBody
-    public List<GCommentVO> insertComments(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                           @ModelAttribute("gCommentVO") GCommentVO gCommentVO) throws Exception {
-        String uID = loginId;
+    public List<GCommentVO> insertComments(@ModelAttribute("gCommentVO") GCommentVO gCommentVO) throws Exception {
+        String uID = "heo";
         gCommentVO.setuID(uID);
         gCommentVO.setComCreatedID(uID);
         List<GCommentVO> insertCommentsResult = null;
@@ -297,15 +292,14 @@ public class GameControllerImpl implements GameController {
     @Override
     @PostMapping(value="/partiHome/gameInfo.do")
     @ResponseBody
-    public  List<GameMemberListVO> partiHomeTeam(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                                 @RequestParam(value="gID", required = false, defaultValue = "1") int gID,
+    public  List<GameMemberListVO> partiHomeTeam(@RequestParam(value="gID", required = false, defaultValue = "1") int gID,
                                                  @RequestParam(value="gTeamID", required = false, defaultValue = "1") int gTeamID
                                                 ) throws Exception {
         SquadVO squadVO = new SquadVO();
         squadVO.setgID(gID);
         squadVO.settID(gTeamID);
-        squadVO.setuID(loginId);
-        squadVO.setCreatedID(loginId);
+        squadVO.setuID("insi");
+        squadVO.setCreatedID("insi");
         List<GameMemberListVO> gameMemberList = gameService.insertAndSelectHomeTeam(squadVO);
         System.out.println("gameMemberList.isEmpty() : " + gameMemberList.isEmpty());
         return gameMemberList;
@@ -314,8 +308,7 @@ public class GameControllerImpl implements GameController {
     @Override
     @PostMapping(value="/partiAway/gameInfo.do")
     @ResponseBody
-    public GameAwayTeamInfoVO insertAndSelectAwayTeam(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                                      @RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+    public GameAwayTeamInfoVO insertAndSelectAwayTeam(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
                                                       @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID
                                                          ) throws Exception {
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
@@ -323,8 +316,8 @@ public class GameControllerImpl implements GameController {
         SquadVO squadVO = new SquadVO();
         squadVO.setgID(gID);
         squadVO.settID(tAwayID);
-        squadVO.setuID(loginId);
-        squadVO.setCreatedID(loginId);
+        squadVO.setuID("baba");
+        squadVO.setCreatedID("baba");
 
 
         gameAwayTeamInfoVO = gameService.awayTeamIntoGame(squadVO);
@@ -339,8 +332,7 @@ public class GameControllerImpl implements GameController {
     @Override
     @PostMapping(value="/partiAwayMember/gameInfo.do")
     @ResponseBody
-    public GameAwayTeamInfoVO insertawayTeamMembr(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                                  @RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+    public GameAwayTeamInfoVO insertawayTeamMembr(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
                                                   @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID
                                                  ) throws Exception {
         GameAwayTeamInfoVO gameAwayTeamInfoVO = new GameAwayTeamInfoVO();
@@ -348,8 +340,8 @@ public class GameControllerImpl implements GameController {
         SquadVO squadVO = new SquadVO();
         squadVO.setgID(gID);
         squadVO.settID(tAwayID);
-        squadVO.setuID(loginId);
-        squadVO.setCreatedID(loginId);
+        squadVO.setuID("baba");
+        squadVO.setCreatedID("baba");
 
         gameAwayTeamInfoVO = gameService.insertawayTeamMembr(squadVO);
         return gameAwayTeamInfoVO;
@@ -357,14 +349,13 @@ public class GameControllerImpl implements GameController {
 
     @Override
     @PostMapping(value = "/gameResult.do")
-    public String  intoGameResult(@SessionAttribute(name = "loginId", required = false) String loginId,
-                               @RequestParam(value="gID", required = false, defaultValue = "0") int gID,
-                               @RequestParam(value="sRegion", required = false) String sRegion,
-                               @RequestParam(value="gTitle", required = false)  String gTitle,
-                               @RequestParam(value="gTeamID", required = false, defaultValue = "0") int gTeamID,
-                               @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID,
-                                RedirectAttributes redirectAttributes) throws Exception {
-        String uID = loginId;
+    public String  intoGameResult(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+                                       @RequestParam(value="sRegion", required = false) String sRegion,
+                                       @RequestParam(value="gTitle", required = false)  String gTitle,
+                                       @RequestParam(value="gTeamID", required = false, defaultValue = "0") int gTeamID,
+                                       @RequestParam(value="tAwayID", required = false, defaultValue = "0") int tAwayID,
+                                        RedirectAttributes redirectAttributes) throws Exception {
+        String uID = "heo";
         ModelAndView mav = new ModelAndView();
         String homeTeamName = gameService.selectAwayTeamName(gTeamID);
         String awayTeamName = gameService.selectAwayTeamName(tAwayID);
@@ -380,14 +371,13 @@ public class GameControllerImpl implements GameController {
     }
     @Override
     @GetMapping("/gameResultView")
-    public ModelAndView intoGameResultHadler(@SessionAttribute(name = "loginId", required = false) String loginId,
-                                             @RequestParam(value="gID", required = false, defaultValue = "0") int gID,
+    public ModelAndView intoGameResultHadler(@RequestParam(value="gID", required = false, defaultValue = "0") int gID,
                                              @RequestParam(value="sRegion", required = false) String sRegion,
                                              @RequestParam(value="gTitle", required = false)String gTitle,
                                              @RequestParam(value="gTeamID", required = false) int gTeamID,
                                              @RequestParam(value="tAwayID", required = false) int tAwayID
-                                            ) throws Exception{
-        String uID = loginId;
+                                                ) throws Exception {
+        String uID = "heo";
         ModelAndView mav = new ModelAndView("/game/gameResult");
         String homeTeamName = gameService.selectAwayTeamName(gTeamID);
         String awayTeamName = gameService.selectAwayTeamName(tAwayID);
@@ -431,7 +421,7 @@ public class GameControllerImpl implements GameController {
     }
     @Override
     @GetMapping(value="/stadiumList.do")
-    public ModelAndView selectStadiumInfo(@SessionAttribute(name = "loginId", required = false) String loginId) throws Exception {
+    public ModelAndView selectStadiumInfo() throws Exception {
         String sRegion = null;
         String search = null;
         int rowNum = 0;
@@ -467,27 +457,26 @@ public class GameControllerImpl implements GameController {
     }
     @Override
     @PostMapping("/modGame.do")
-    public String modGameResult(@SessionAttribute(name = "loginId", required = false) String loginId,
-                              @RequestParam("gID") int gID,
-                              @RequestParam("gTeamID") String gTeamID,
-                              @RequestParam("gTitle") String gTitle,
-                              @RequestParam("gTag") String gTag,
-                              @RequestParam("gMinMember") int gMinMember,
-                              @RequestParam("gInfo") String gInfo,
-                              @RequestParam("sID") int sID,
-                              @RequestParam("sNum") int sNum,
-                              @RequestParam("gTime") int gTime,
-                              @RequestParam("gResDate") String gResDate,
-                              RedirectAttributes redirectAttributes
-                              ) throws Exception {
+    public String modGameResult(@RequestParam("gID") int gID,
+                                      @RequestParam("gTeamID") String gTeamID,
+                                      @RequestParam("gTitle") String gTitle,
+                                      @RequestParam("gTag") String gTag,
+                                      @RequestParam("gMinMember") int gMinMember,
+                                      @RequestParam("gInfo") String gInfo,
+                                      @RequestParam("sID") int sID,
+                                      @RequestParam("sNum") int sNum,
+                                      @RequestParam("gTime") int gTime,
+                                      @RequestParam("gResDate") String gResDate,
+                                      RedirectAttributes redirectAttributes
+                                      ) throws Exception {
         GameVO gameVO = new GameVO();
         System.out.println("controller tID : " + gTeamID);
         int gTeamIDInt = Integer.parseInt(gTeamID);
         gameVO.setgTeamID(gTeamIDInt);
         System.out.println("gameVO.getgTeamID() : " + gameVO.getgTeamID());
-        gameVO.settUserID(loginId);
+        gameVO.settUserID("heo");
         System.out.println("gameVO.gettUserID() : " + gameVO.gettUserID());
-        gameVO.setUpdatedID(loginId);
+        gameVO.setUpdatedID("heo");
         System.out.println("gameVO.getCreatedID() : " + gameVO.getCreatedID());
         gameVO.setgTitle(gTitle);
         System.out.println("gameVO.getgTitle() : " + gameVO.getgTitle());

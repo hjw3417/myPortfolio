@@ -1,5 +1,8 @@
 package dc.human.whosthebest.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component("myPageInfoVO")
 //MyPage
 public class MyPageInfoVO {
 

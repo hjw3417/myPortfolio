@@ -32,6 +32,7 @@
               <li> <a href="/admin/userList.do">회원 관리 </a> </li>
               <li><a href="/admin/teamList.do">팀 관리 </a> </li>
               <li><a href="/admin/gameList.do">경기 관리 </a></li>
+              <li><a href="/mainBoard"> 게시판 </a></li>
             </ul>
         <a href="/login">
         <img class="logoutimg" src="../image/logout.png" alt="로그아웃">
@@ -56,7 +57,7 @@
       <tbody>
       <c:forEach items= "${usersList}" var="user">
 			<tr>
-					<td><a href="/admin/userDetail/${user.uID}">${user.uID}</td>
+					<td><a href="/admin/userDetail/${user.uID}">${user.uID} </a></td>
 					<td width="130"> ${user.uName} </td> <!-- 이름  -->
 					<td width="80"> ${user.uGender }  </td>	<!-- 성별 -->
 					<td> ${user.uBday }  </td>	<!-- 생년월일 -->

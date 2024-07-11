@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface MyPageService {
 
-    public List<MyPageInfoVO> getUserinfo() throws Exception;
-    public List<RecentGameVO> getRecentGame() throws Exception;
+    public List<MyPageInfoVO> getUserinfo(String uID) throws Exception;
+    public List<RecentGameVO> getRecentGame(String uID) throws Exception;
 
     //마이페이지 - 내가 참여한 경기 결과
 
@@ -19,7 +19,7 @@ public interface MyPageService {
    public int checkInfo(String uID, String uPW) throws  Exception;
 
 
-    public List<UserInfoVO> loadUserInfo() throws Exception;
+    public List<UserInfoVO> loadUserInfo(String uID) throws Exception;
 
     public void updateInfo(String uID, String uName, String uBday,
                         String uAddr1, String uAddr2, String uEmail,

@@ -17,7 +17,7 @@ public interface AdminService {
 
     //경기목록
     public List listGames() throws Exception;
-    
+
     //관리자메인-최근 회왼목록
     public List newUserList() throws  Exception;
 
