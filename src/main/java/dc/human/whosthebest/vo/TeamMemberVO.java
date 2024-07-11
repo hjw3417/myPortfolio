@@ -1,13 +1,22 @@
 package dc.human.whosthebest.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TeamMemberVO {
 	private int tID;
 	private String uID;
 	private int uStatus;
+	private int leader;
 	private String createdID;
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
+
+	//leader 항목 추가
+
+
+
 	public int gettID() {
 		return tID;
 	}
@@ -50,8 +59,15 @@ public class TeamMemberVO {
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	
-	
+
+	//leader 추가
+	public int getLeader() {
+		return leader;
+	}
+
+	public void setLeader(int leader) {
+		this.leader = leader;
+	}
 	
 	
 }

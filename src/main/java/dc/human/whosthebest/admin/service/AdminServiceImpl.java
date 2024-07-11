@@ -2,7 +2,6 @@ package dc.human.whosthebest.admin.service;
 
 import dc.human.whosthebest.admin.dao.AdminDAO;
 import dc.human.whosthebest.vo.AdminGameListVO;
-import dc.human.whosthebest.vo.GameListVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;

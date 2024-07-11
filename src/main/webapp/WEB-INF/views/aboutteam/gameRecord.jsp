@@ -23,43 +23,53 @@
 <body>
   <header>
     <div class="logo">
-      <img src="../image/logo.png">
-      <!-- <div>누가 잘차</div> -->
+      <a href="/serviceMain">
+        <img src="${contextPath}/image/logo.png">
+      </a>
     </div>
     <div>
-      <span><a href="login.html">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
-      <span><a href="myPage.html">마이페이지</a></span>
+      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
       <ul>
         <li>
-          <a href="teamlist.html">팀</a>
+          <a href="/teamList">팀</a>
           <div>
             <ul>
-              <li><a href="teamlist.html">팀 목록</a></li>
-              <li><a href="myteam.html">나의 팀</a></li>
+              <li><a href="/teamList">팀 목록</a></li>
+              <li><a href="/myTeam">나의 팀</a></li>
             </ul>
           </div>
         </li>
-        <li><a href="${contextPath}/game/gameList.do">경기 목록</a></li>
+        <li><a href="${contextPath}/game/gameInfoList.do">경기 목록</a></li>
         <li><a href="${contextPath}/game/stadiumList.do">경기장 목록</a></li>
-        <li><a href="rankWatch.html">랭킹</a></li>
-        <li><a href="#">게시판</a></li>
+        <li><a href="/ranking">랭킹</a></li>
+        <li><a href="/mainBoard">게시판</a></li>
       </ul>
     </div>
   </header>
-  <main>
+  <main class="gameRecord-main">
     <div>　</div>
     <div>
       <div class="gameRecord-side">
         <div>
           <div>　</div>
           <div>나의 팀</div>
-          <ul>문주 군단
-            <li><a href="#">팀원 목록</a></li>
-            <li><a href="#">팀 경기 일정</a></li>
-            <li><a href="#">전적</a></li>
-            <li><a href="#">팀 게시판</a></li>
+          <!-- 팀 이름 목록을 출력합니다. -->
+          <ul id="teamNameList">
+            <c:forEach items="${myTeams}" var="team">
+              <li>
+                <a href="${contextPath}/api/teamInfo?tID=${team.tID}" class="team-link" data-tid="${team.tID}">
+                  ${team.tName}
+                  <ul>
+                    <li><a href="${contextPath}/teamMembers?tID=${team.tID}">팀원 목록</a></li>
+                    <li><a href="${contextPath}/team/gameSchedule.do?tID=${team.tID}">팀 경기 일정</a></li>
+                    <li><a href="${contextPath}/team/gameRecord.do?tID=${team.tID}">전적</a></li>
+                  </ul>
+                </a>
+              </li>
+            </c:forEach>
           </ul>
         </div>
       </div>

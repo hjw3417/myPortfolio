@@ -97,14 +97,34 @@
 
     <!--회원목록 페이지-->
     <select id="selectAllUserList" resultMap="userResult">
+        <!--허진욱 수정(1에서 10번 까지 조회 및 회원가입일자(created_date 기준 내림차순 정렬 추가) -->
         <![CDATA[
-            select U_ID,
+        SELECT U_ID,
+               u_name,
+               u_gender,
+               u_bday,
+               u_addr1,
+               u_email
+        FROM (
+            SELECT U_ID,
                    u_name,
                    u_gender,
                    u_bday,
                    u_addr1,
-                   u_email
-            from users
+                   u_email,
+                   ROWNUM AS rnum
+            FROM (
+                SELECT U_ID,
+                       u_name,
+                       u_gender,
+                       u_bday,
+                       u_addr1,
+                       u_email
+                FROM users
+                ORDER BY CREATED_DATE DESC
+            )
+        )
+        WHERE rnum BETWEEN 1 AND 10
         ]]>
     </select>
 
@@ -157,15 +177,25 @@
 
     <!--경기목록 페이지-->
     <select id="selectGameList" resultMap="gameList">
+        <!--허진욱 수정(1에서 10번 까지 조회 및 경기 생성일자(G_CREATEDATE) 기준 내림차순 정렬 추가) -->
         <![CDATA[
-            select game.g_id,
+        SELECT g_id,
+               g_title,
+               g_resdate,
+               s_name,
+               g_status
+        FROM (
+            SELECT game.g_id,
                    game.g_title,
                    game.g_resdate,
                    stadium.s_name,
-                   game.g_status
-            from game,stadium
-            where game.s_id=stadium.s_id
-            order by g_id
+                   game.g_status,
+                   ROW_NUMBER() OVER (ORDER BY game.G_CREATEDATE DESC) AS rnum
+            FROM game
+            JOIN stadium ON game.s_id = stadium.s_id
+            ORDER BY G_CREATEDATE DESC
+        )
+        WHERE rnum <= 10
         ]]>
     </select>
 

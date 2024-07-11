@@ -216,8 +216,6 @@
 		STADIUM s ON g.S_ID = s.S_ID
 		INNER JOIN
 		REGIONCODE r ON s.S_REGION = r.region_name
-		INNER JOIN
-		SQUAD sq ON g.G_ID = sq.G_ID
 		WHERE g.G_STATUS = 0
 		<if test="sRegion != null and sRegion != ''">
 			AND r.REGION_CODE = #{sRegion}
@@ -331,8 +329,7 @@
 		S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_NUM,
 		ROW_NUMBER() OVER (ORDER BY S_ID) AS rn
 		FROM STADIUM
-		)
-		WHERE rn BETWEEN 1 AND 10
+		WHERE 1=1
 		<if test="sRegion != null and sRegion != ''">
 			AND  S_REGION = #{sRegion}
 		</if>
@@ -344,6 +341,11 @@
 			)
 			AND S_REGION||S_NAME||S_OWNER LIKE '%' || #{search} || '%'
 		</if>
+		)
+		WHERE
+		rn BETWEEN (#{pageNum} + #{rowNum}*10) AND (#{pageNum} + #{rowNum}*10) + 9
+<!--		rn BETWEEN 1 AND 10-->
+
 	</select>
 	<delete id="deleteGame" parameterType="int">
 		DELETE FROM GAME

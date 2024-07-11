@@ -10,11 +10,8 @@ CREATED DATE    : 2024.06.21.
 package dc.human.whosthebest.game.service;
 
 import dc.human.whosthebest.vo.*;
-import org.springframework.dao.DataAccessException;
 
-import java.util.AbstractMap;
 import java.util.List;
-import java.util.Map;
 
 public interface GameService {
     public List<TeamInfoVO> loadMyTeam(String uID) throws Exception;
