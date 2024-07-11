@@ -100,7 +100,7 @@ public class TeamControllerImpl implements TeamController{
             } else {
                 redirectAttributes.addFlashAttribute("errorMsg",  "팀 가입 성공");
                 viewName = "redirect:/teamList";
-                //redirect 수정 핋요
+
             }
             mav.setViewName(viewName);
         } catch(Exception e) {
