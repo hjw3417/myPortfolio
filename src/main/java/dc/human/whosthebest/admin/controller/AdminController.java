@@ -28,4 +28,6 @@ public interface AdminController {
     //경기 상세보기
     public ModelAndView detailGame(@PathVariable("gID") String gID, HttpServletRequest request, HttpServletResponse response) throws  Exception;
 
+    //로그아웃
+    public String logout(HttpServletRequest request) throws  Exception;
 }

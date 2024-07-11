@@ -1,11 +1,10 @@
 package dc.human.whosthebest.admin.controller;
 
 import dc.human.whosthebest.admin.service.AdminService;
-import dc.human.whosthebest.vo.AdminGameListVO;
-import dc.human.whosthebest.vo.TeamInfoVO;
-import dc.human.whosthebest.vo.UserInfoVO;
+import dc.human.whosthebest.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,7 +67,8 @@ public class AdminControllerImpl implements AdminController {
     @Override
     @RequestMapping(value = "/gameList.do", method = RequestMethod.GET)
     public ModelAndView listGames(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List gameList = adminService.listGames();
+        List<GameStadiumVO> gameList = adminService.listGames();
+
         ModelAndView mav = new ModelAndView("/admin/gameList");
         mav.addObject("gameList", gameList);
         return mav;
@@ -106,8 +106,10 @@ public class AdminControllerImpl implements AdminController {
                                    HttpServletRequest request,
                                    HttpServletResponse response) throws Exception{
         TeamInfoVO teamDetail = adminService.getTeamById(tID);
+        List<RecentGameVO> teamGame = adminService.getTeamGameById(tID);
         ModelAndView mav = new ModelAndView(("/admin/teamDetail"));
         mav.addObject("teamInfo", teamDetail);
+        mav.addObject("teamGame", teamGame);
         return  mav;
     }
 
@@ -122,14 +124,21 @@ public class AdminControllerImpl implements AdminController {
         ModelAndView mav = new ModelAndView("/admin/gameDetail");
         mav.addObject("gameInfo", gameDetail);
         return mav;
-
-
     }
 
+    //로그아웃
+    @Override
+    @RequestMapping(value = "/logout")
+    public String logout(HttpServletRequest request) throws  Exception{
+        HttpSession session = request.getSession();
 
+        // 세션에서 저장된 정보 삭제
+        session.removeAttribute("uID");  // 예시로 userId라는 세션 속성을 삭제하는 것을 가정
 
+        // 세션 전체를 삭제하려면 아래 코드를 사용
+        // session.invalidate();
 
-
-
-
+        // 로그인 페이지로 리다이렉트
+        return "redirect:/login";  // 로그인 페이지 URL로 변경
+    }
 }

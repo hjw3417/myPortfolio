@@ -53,7 +53,7 @@
             where tm.u_id=u.u_id
                 and tm.t_id = t.t_id
                 and u.u_id  = #{uID}
-            order by t.rankscore desc
+            order by t.rankscore asc
         ]]>
     </select>
 

@@ -35,7 +35,7 @@
             </ul>
           </div>
         </li>
-        <li><a href="${contextPath}/game/gameInfoList.do">경기 목록</a></li>
+       <li><a href="${contextPath}/game/gameInfoList.do">경기 목록</a></li>
         <li><a href="${contextPath}/game/stadiumList.do">경기장 목록</a></li>
         <li><a href="/ranking">랭킹</a></li>
         <li><a href="/mainBoard">게시판</a></li>
@@ -102,44 +102,57 @@
         <h2> 최근 경기결과</h2>
 
         <!--최근 경기결과-->
-        <div class="recentlyPlay">
-          <table>
-            <tr>
-                 <th width="110"> 경기 일시 </th>
-                 <th width="190"> 나의팀</th>
-                 <th width="50" colspan="3"> 득점 </th>
-                 <th width="190"> 상대팀 </th>
-                 <th width="220"> 경기 장소</th>
-                 <th width="70"> 경기 결과</td>
-            </tr>
-
-           <c:forEach items="${recentGame}" var="recent" end="3">
+       <div class="recentlyPlay">
+         <table>
+           <thead>
              <tr>
-                  <td width="110" height="50"> ${recent.gResDate}   </td>
-                  <td width="190"> ${recent.myTeam} </td>
-                  <td width="20"> ${recent.homeGoal} </td>
-                  <td width="10"> : </td>
-                  <td width="20"> ${recent.awayGoal} </td>
-                  <td  width="200"> ${recent.awayTeam}  </td>
-                  <td width="220">  ${recent.sName} </td>
-                  <td width="70">
+               <th width="110"> 경기 일시 </th>
+               <th width="190"> 나의팀</th>
+               <th width="50" colspan="3"> 득점 </th>
+               <th width="190"> 상대팀 </th>
+               <th width="220"> 경기 장소</th>
+               <th width="70"> 경기 결과</th>
+             </tr>
+           </thead>
+
+           <tbody>
+             <c:choose>
+               <c:when test="${empty recentGame}">
+                 <tr>
+                   <td colspan="8" style="text-align:center;">참여한 경기가 없습니다</td>
+                 </tr>
+               </c:when>
+               <c:otherwise>
+                 <c:forEach items="${recentGame}" var="recent" end="3">
+                   <tr>
+                     <td width="110" height="50"> ${recent.gResDate} </td>
+                     <td width="190"> ${recent.myTeam} </td>
+                     <td width="20"> ${recent.homeGoal} </td>
+                     <td width="10"> : </td>
+                     <td width="20"> ${recent.awayGoal} </td>
+                     <td width="200"> ${recent.awayTeam} </td>
+                     <td width="220"> ${recent.sName} </td>
+                     <td width="70">
                        <c:choose>
-                           <c:when test="${recent.homeGoal > recent.awayGoal}">
-                               승
-                           </c:when>
-                           <c:when test="${recent.homeGoal == recent.awayGoal}">
-                               무승부
-                           </c:when>
-                           <c:otherwise>
-                               패
-                           </c:otherwise>
+                         <c:when test="${recent.homeGoal > recent.awayGoal}">
+                           승
+                         </c:when>
+                         <c:when test="${recent.homeGoal == recent.awayGoal}">
+                           무승부
+                         </c:when>
+                         <c:otherwise>
+                           패
+                         </c:otherwise>
                        </c:choose>
-                  </td>
-              </tr>
-            </c:forEach>
-          </table>
-        </div>
-  </main>
+                     </td>
+                   </tr>
+                 </c:forEach>
+               </c:otherwise>
+             </c:choose>
+           </tbody>
+         </table>
+       </div>
+   </main>
 
 
   <footer>

@@ -2,6 +2,7 @@ package dc.human.whosthebest.admin.service;
 
 import dc.human.whosthebest.admin.dao.AdminDAO;
 import dc.human.whosthebest.vo.AdminGameListVO;
+import dc.human.whosthebest.vo.RecentGameVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,11 @@ public class AdminServiceImpl implements  AdminService{
     @Override
     public TeamInfoVO getTeamById(String tID) throws  Exception{
         return adminDAO.selectTeamDetailById(tID);
+    }
+
+    @Override
+    public List<RecentGameVO> getTeamGameById(String tID) throws  Exception{
+        return adminDAO.selectTeamGame(tID);
     }
 
     //경기 상세보기
