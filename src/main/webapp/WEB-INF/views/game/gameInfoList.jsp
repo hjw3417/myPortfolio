@@ -102,7 +102,7 @@
               <div class="card">
                 <!-- profile 시작 -->
                 <div onclick="openModal()" class="teamProfileContainer" id="teamProfileContainer" name="teamProfileContainer" >
-                  <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
+                  <image class="tLogo" id="tLogo" name="tLogo" src="${contextPath}/image/우사기.jpg"></image>
                   <div class="tName" id="tName" name="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
                 </div>
                 <!-- profile 종료 -->

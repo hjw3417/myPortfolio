@@ -307,7 +307,7 @@ $(document).ready(function() {
                                 <div class="card">
                                     <!-- profile 시작 -->
                                     <div onclick="openModal()" class="teamProfileContainer">
-                                        <img class="tLogo" src="image/teamLogo.png">
+                                        <image class="tLogo" id="tLogo" name="tLogo"></image>
                                         <div class="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
                                     </div>
                                     <!-- profile 종료 -->
@@ -353,6 +353,9 @@ $(document).ready(function() {
                         `;
                     }
                     $("#gameListContainer").append(html); // 최종 HTML을 한 번에 추가
+                    $(".tLogo").each(function() {
+                        $(this).attr("src", contextPath + "/image/우사기.jpg");
+                    });
                 }
             },
             error: function(error) {
