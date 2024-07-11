@@ -2,7 +2,7 @@ package dc.human.whosthebest.admin.service;
 
 import dc.human.whosthebest.admin.dao.AdminDAO;
 import dc.human.whosthebest.vo.AdminGameListVO;
-import dc.human.whosthebest.vo.GameListVO;
+
 import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class AdminServiceImpl implements  AdminService{
 
     @Autowired
     private AdminDAO adminDAO;
-    
+
     //회원목록
     @Override
     public List listUsers() throws Exception{
@@ -26,7 +26,7 @@ public class AdminServiceImpl implements  AdminService{
         usersList = adminDAO.selectAllUserList();
         return usersList;
     }
-    
+
     //팀목록
     @Override
     public List listTeams() throws Exception{
@@ -34,7 +34,7 @@ public class AdminServiceImpl implements  AdminService{
         teamsList = adminDAO.selectAllTeamList();
         return teamsList;
     }
-    
+
     //경기목록
     @Override
     public List listGames() throws Exception{

@@ -2,7 +2,7 @@ package dc.human.whosthebest.admin.controller;
 
 import dc.human.whosthebest.admin.service.AdminService;
 import dc.human.whosthebest.vo.AdminGameListVO;
-import dc.human.whosthebest.vo.GameListVO;
+
 import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.UserInfoVO;
 import jakarta.servlet.http.HttpServletRequest;

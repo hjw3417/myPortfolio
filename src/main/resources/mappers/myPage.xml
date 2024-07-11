@@ -52,7 +52,7 @@
             from users u, team t, team_member tm
             where tm.u_id=u.u_id
                 and tm.t_id = t.t_id
-                and u.u_id  = 'moonej'
+                and u.u_id  = #{uID)
             order by t.rankscore desc
         ]]>
     </select>
@@ -78,7 +78,7 @@
                 ON tt.T_ID = r.T_AWAYID
                 INNER JOIN SQUAD sq
                 on sq.t_id = r.t_homeid
-             where sq.u_id = 'moonej'
+             where sq.u_id = #{uID}
              order by g.g_resdate desc
         ]]>
     </select>
@@ -106,7 +106,7 @@
                    u_email,
                    u_phone
             from users
-            where u_id='moonej'
+            where u_id= #{uID}
         ]]>
     </select>
 

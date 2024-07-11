@@ -36,7 +36,7 @@
         <result property="tRankScore" column="rankscore" />
         <result property="tMember"    column="t_member" />
     </resultMap>
-    
+
     <!-- 팀 상세보기 -->
     <resultMap id="teamInfo" type="teamInfoVO">
         <result property="tID"          column="t_id" />
@@ -50,7 +50,7 @@
         <result property="tInfo"        column="t_info" />
         <result property="createdDate"  column="created_date"/>
     </resultMap>
-    
+
 
     <!--경기목록 페이지-경기 리스트-->
     <resultMap id="gameList" type="dc.human.whosthebest.vo.GameStadiumVO">
@@ -110,7 +110,7 @@
 
     <!--회원 상세보기-->
     <select id="selectUserDetailById" resultMap="userInfo">
-    <![CDATA[
+        <![CDATA[
             select u_name,
                    u_id,
                    u_bday,
@@ -169,16 +169,16 @@
         ]]>
     </select>
 
-<!--    &lt;!&ndash;경기 상세보기&ndash;&gt;
-    <select id="selectGameDetailById" resultMap="adminGameListVO">
-        <![CDATA[
-            select
-            from game g, team t, g_result r, stadium s
-            where t_id= #{tID}
-        ]]>
+    <!--    &lt;!&ndash;경기 상세보기&ndash;&gt;
+        <select id="selectGameDetailById" resultMap="adminGameListVO">
+            <![CDATA[
+                select
+                from game g, team t, g_result r, stadium s
+                where t_id= #{tID}
+            ]]>
 
 
-    </select>-->
+        </select>-->
 
     <!--관리자페이지 - 최근 회원목록 조회-->
     <select id="selectNewUserList" resultMap="newUserList">
