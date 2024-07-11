@@ -92,7 +92,7 @@ public class AboutTeamControllerImpl implements AboutTeamController {
             resultType = null;
         }
         gameRecordVO = aboutteamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
-        if(gameRecordVO.getGameRecordInfoListVO() != null) {
+        if(gameRecordVO.getGameRecordInfoListVO().size() != 0) {
             System.out.println("restFullController gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
         }
         return gameRecordVO;

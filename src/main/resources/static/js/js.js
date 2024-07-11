@@ -857,7 +857,7 @@ $(document).ready(function() {
                 console.log(response.totalCount);
                 var gameRecordVO = response;
                 var html = "";
-                if(gameRecordVO.gameRecordInfoListVO == null) {
+                if(gameRecordVO.gameRecordInfoListVO.length == 0) {
                     alert("조회 결과가 없습니다.")
                 } else {
                     console.log("조회 결과 출력.")
