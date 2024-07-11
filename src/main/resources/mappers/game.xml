@@ -286,6 +286,7 @@
 		LEFT JOIN
 		USERS u ON cm.U_ID = u.U_ID
 		WHERE cm.G_ID = #{gID}
+		ORDER BY COM_CREATED_DATE
 	</select>
 	<select id="nowPartiMemberNum" parameterType="int" resultType="int">
 		select count(*)
