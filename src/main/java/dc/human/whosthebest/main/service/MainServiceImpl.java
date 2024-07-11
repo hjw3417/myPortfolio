@@ -56,7 +56,6 @@ public class MainServiceImpl implements MainService {
     @Override
     public int mainBoardWrite(BoardVO boardVO) throws Exception{
         boardVO.setCreatedDate(sqlDate.toString());
-        boardVO.setCreatedID("hong");
         return mainDAO.mainBoardWrite(boardVO);
     }
 
