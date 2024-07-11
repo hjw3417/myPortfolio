@@ -181,7 +181,7 @@
         ]]>
     </select>
     <select id="myTeamName" resultType="int" resultMap="GameRecordInfoResultMap">
-        SELECT t_name
+        SELECT T_NAME AS tHomeName
         FROM TEAM
         WHERE t_id = #{tID}
     </select>
