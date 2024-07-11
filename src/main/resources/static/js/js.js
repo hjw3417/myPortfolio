@@ -809,7 +809,7 @@ $(document).ready(function() {
             var pageNum = defaultPageNumInStadiumList;
             var sRegion = $("#sRegion").val();
             var search = $("#search").val();
-            stadiumListSearchAjax(rowNum, pageNum, sRegion, search);
+            stadiumListSearchAjax(pageNum, rowNum, sRegion, search);
         }
         createPageButtonsInStadiumList(); // 페이지 버튼 다시 생성
 
@@ -833,7 +833,7 @@ $(document).ready(function() {
         var search = $("#search").val();
         console.log("sRegion: " + sRegion);
         console.log("search: " + search);
-        stadiumListSearchAjax(rowNum, pageNum, sRegion, search);
+        stadiumListSearchAjax(pageNum, rowNum, sRegion, search);
     });
 });
 //stadiumList.do 관련 js 끝
