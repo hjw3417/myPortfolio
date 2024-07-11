@@ -52,7 +52,7 @@
             from users u, team t, team_member tm
             where tm.u_id=u.u_id
                 and tm.t_id = t.t_id
-                and u.u_id  = #{uID)
+                and u.u_id  = #{uID}
             order by t.rankscore desc
         ]]>
     </select>

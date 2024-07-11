@@ -32,9 +32,8 @@ public class MyPageControllerImpl implements  MyPageController {
 
 
         String uID = loginId;
-
-        List<MyPageInfoVO> myPageInfo = myPageService.getUserinfo();
-        List<RecentGameVO> recentGame = myPageService.getRecentGame();
+        List<MyPageInfoVO> myPageInfo = myPageService.getUserinfo(uID);
+        List<RecentGameVO> recentGame = myPageService.getRecentGame(uID);
         ModelAndView mav = new ModelAndView("/myPage/myPage");
         mav.addObject("myPageInfo", myPageInfo);
         mav.addObject("recentGame", recentGame);
@@ -49,7 +48,7 @@ public class MyPageControllerImpl implements  MyPageController {
                                      HttpServletResponse response) throws Exception{
 
         String uID = loginId;
-        List<RecentGameVO> myGameRecord = myPageService.getRecentGame();
+        List<RecentGameVO> myGameRecord = myPageService.getRecentGame(uID);
         ModelAndView mav = new ModelAndView("/myPage/myGameRecord");
         mav.addObject("recentGame", myGameRecord);
         return  mav;
@@ -98,7 +97,7 @@ public class MyPageControllerImpl implements  MyPageController {
     public  ModelAndView loadInfo(@SessionAttribute(name = "loginId", required = false) String loginId,
                                   HttpServletRequest request, HttpServletResponse response) throws Exception{
         String uID = loginId;
-        List<UserInfoVO> allMyInfo = myPageService.loadUserInfo();
+        List<UserInfoVO> allMyInfo = myPageService.loadUserInfo(uID);
         ModelAndView mav = new ModelAndView("/myPage/updateMyInfo");
         mav.addObject("allMyInfo", allMyInfo);
         return  mav;
