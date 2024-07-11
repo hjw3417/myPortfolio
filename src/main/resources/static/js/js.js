@@ -909,7 +909,8 @@ $(document).ready(function() {
             var resultType = $("#resultType").val();
             var pageNum = 1;
             var rowNum = 0;
-            var tID = 0;
+            var tID = $("#tIDHidden").val();
+            console.log("tID : " + tID);
             resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
         });
 
@@ -918,7 +919,8 @@ $(document).ready(function() {
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
         var rowNum = $(event.originalEvent?.submitter).siblings('input[name="rowNum"]').val();
         var pageNum = $(event.originalEvent?.submitter).val();
-        var tID = 0;
+        var tID = $("#tIDHidden").val();
+        console.log("tID : " + tID);
         var resultType = $("#resultType").val();
         resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
     });
@@ -934,7 +936,8 @@ $(document).ready(function() {
             defaultPageNumInGameRecord -= 5;
             var rowNum = defaultPageNumInGameRecord - 1;
             var pageNum = defaultPageNumInGameRecord;
-            var tID = 0;
+            var tID = $("#tIDHidden").val();
+            console.log("tID : " + tID);
             var resultType = $("#resultType").val();
             resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
             createPageButtonsGameRecord(); // 페이지 버튼 다시 생성
@@ -949,7 +952,8 @@ $(document).ready(function() {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInGameRecord - 1;
         var pageNum = defaultPageNumInGameRecord;
-        var tID = 0;
+        var tID = $("#tIDHidden").val();
+        console.log("tID : " + tID);
         var resultType = $("#resultType").val();
         resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
         createPageButtonsGameRecord(); // 페이지 버튼 다시 생성

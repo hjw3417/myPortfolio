@@ -74,6 +74,7 @@ public class AboutTeamControllerImpl implements AboutTeamController {
         if(myTeams != null) {
             mav.addObject("myTeams", myTeams);
         }
+        mav.addObject("tID", tID);
         mav.setViewName("aboutteam/gameRecord");
         return mav;
     }

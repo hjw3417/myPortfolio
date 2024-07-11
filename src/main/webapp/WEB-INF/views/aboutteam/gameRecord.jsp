@@ -18,6 +18,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/js.js"></script>
+  <script>
+  </script>
   <title>game record</title>
 </head>
 <body>
@@ -91,6 +93,7 @@
           <span></span>
         </div>
         <div>
+          <input type="hidden" id="tIDHidden" value="${tID}">
           <form action="#">
             <select id="resultType">
               <option value="">전체</option>
