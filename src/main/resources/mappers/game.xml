@@ -216,8 +216,10 @@
 		STADIUM s ON g.S_ID = s.S_ID
 		INNER JOIN
 		REGIONCODE r ON s.S_REGION = r.region_name
+		<if test="IPartiGameuID != null and IPartiGameuID != ''">
 		INNER JOIN
 		SQUAD sq ON sq.g_id = g.g_id
+		</if>
 		WHERE g.G_STATUS = 0
 		<if test="sRegion != null and sRegion != ''">
 			AND r.REGION_CODE = #{sRegion}
