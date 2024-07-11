@@ -73,7 +73,7 @@
 
                 <tr>
                   <td> 주장 </td>
-                  <td>  </td>
+                  <td> ${teamInfo.createdID} </td>
                   <td> 개설일자 </td>
                   <td> ${teamInfo.createdDate}</td>
                 </tr>

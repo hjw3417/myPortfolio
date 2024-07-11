@@ -6,6 +6,7 @@ import dc.human.whosthebest.vo.TeamInfoVO;
 import dc.human.whosthebest.vo.UserInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,24 @@ public class AdminControllerImpl implements AdminController {
     @Override
     @RequestMapping(value = "/userList.do", method = RequestMethod.GET)
     public ModelAndView listUsers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List usersList = adminService.listUsers();
+        List<UserInfoVO> usersList = adminService.listUsers();
+        for(UserInfoVO user : usersList){
+            if(user.getuGender() ==null){
+                user.setuGender(" ");
+            }
+            if(user.getuBday() ==null){
+                user.setuBday(" ");
+            }
+            if(user.getuAddr1()==null){
+                user.setuAddr1(" ");
+            }
+            if(user.getuAddr2() == null){
+                user.setuAddr2(" ");
+            }
+            if(user.getuEmail() ==null){
+                user.setuEmail(" ");
+            }
+        }
         ModelAndView mav = new ModelAndView("/admin/userList");
         mav.addObject("usersList", usersList);
         return mav;
