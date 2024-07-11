@@ -68,8 +68,9 @@ public class AboutTeamControllerImpl implements AboutTeamController {
 
         if(gameRecordVO.getGameRecordInfoListVO().size() != 0) {
             System.out.println("gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
-            mav.addObject("gameRecordVO", gameRecordVO);
         }
+        System.out.println("Service myTeamName : " + gameRecordVO.gettName());
+        mav.addObject("gameRecordVO", gameRecordVO);
         if(myTeams != null) {
             mav.addObject("myTeams", myTeams);
         }

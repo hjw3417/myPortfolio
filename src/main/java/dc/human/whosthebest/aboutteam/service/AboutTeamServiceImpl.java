@@ -37,6 +37,7 @@ public class AboutTeamServiceImpl implements AboutteamService {
             gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
             if(myTeamName != null) {
                 gameRecordVO.settName(myTeamName);
+                System.out.println("Service myTeamName : " + myTeamName);
             }
         }
         return gameRecordVO;
