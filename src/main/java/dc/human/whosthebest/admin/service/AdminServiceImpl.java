@@ -20,8 +20,8 @@ public class AdminServiceImpl implements  AdminService{
     
     //회원목록
     @Override
-    public List listUsers() throws Exception{
-        List usersList = null;
+    public List<UserInfoVO> listUsers() throws Exception{
+        List<UserInfoVO> usersList = null;
         usersList = adminDAO.selectAllUserList();
         return usersList;
     }

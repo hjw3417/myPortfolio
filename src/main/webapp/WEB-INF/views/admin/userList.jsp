@@ -56,14 +56,14 @@
 
       <tbody>
       <c:forEach items= "${usersList}" var="user">
-			<tr>
-					<td><a href="/admin/userDetail/${user.uID}">${user.uID} </a></td>
-					<td width="130"> ${user.uName} </td> <!-- 이름  -->
-					<td width="80"> ${user.uGender }  </td>	<!-- 성별 -->
-					<td> ${user.uBday }  </td>	<!-- 생년월일 -->
-					<td width="260" >  ${user.uAddr1 }  </td>	<!-- 도로명 주소 -->
-					<td>  ${user.uEmail } </td>	<!-- 이메일 -->
-			</tr>
+			  <tr>
+                    <td><a href="/admin/userDetail/${user.uID}">${user.uID}</a></td>
+                    <td width="130">${user.uName}</td> <!-- 이름 -->
+                    <td width="80">${user.uGender}</td> <!-- 성별 -->
+                    <td>${user.uBday}</td> <!-- 생년월일 -->
+                    <td width="260">${user.uAddr1}</td> <!-- 도로명 주소 -->
+                    <td>${user.uEmail}</td> <!-- 이메일 -->
+                </tr>
 		</c:forEach>
       </tbody>
   </table>

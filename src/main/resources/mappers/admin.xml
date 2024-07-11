@@ -48,6 +48,7 @@
         <result property="tMaxMember"   column="t_maxmember"/>
         <result property="tMember"      column="t_member" />
         <result property="tInfo"        column="t_info" />
+        <result property="createdID"    column="created_id" />
         <result property="createdDate"  column="created_date"/>
     </resultMap>
 
@@ -168,6 +169,7 @@
                    t_maxmember,
                    t_member,
                    t_info,
+                   created_id,
                    created_date
             from team
             where t_id= #{tID}

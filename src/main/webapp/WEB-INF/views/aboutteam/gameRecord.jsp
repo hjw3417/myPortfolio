@@ -75,7 +75,7 @@
       </div>
       <div class="gamerecord">
         <div>
-          전적
+          ${gameRecordVO.tName} 전적
         </div>
         <div>
           <span>전체 전적&emsp;</span>
