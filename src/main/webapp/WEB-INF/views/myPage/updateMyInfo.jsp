@@ -176,7 +176,7 @@
                         }
                     }
                 </script>
-              <button type="button" > 취소 </button>
+              <button type="button" onclick="window.location.href='/myPage';" > 취소 </button>
             </div>
 
           </form>

@@ -124,7 +124,7 @@ main{
     padding-left: 20px;
   }
 
-  >a>.logoutimg{
+  .logoutimg{
     width: 25px;
     height: 25px;
     margin : 50px 0 0 80px;
@@ -138,7 +138,7 @@ main{
   top: 140px;
   left: 210px;
   width: 1030px;
-  height: 600px;
+  height: 670px;
   border : none;
   overflow : auto;
 }
@@ -289,7 +289,7 @@ table.user-list th {
     text-align: left;
     }
 
-  >a>button{
+  >button{
     font-family: 'GmarketSansMedium';
     position: absolute;
     top : 570px;
@@ -302,7 +302,7 @@ table.user-list th {
     border : none;
     color : white;
   }
-  >a>button:hover{
+  >button:hover{
     text-decoration-line: underline ;
   }
 
@@ -342,21 +342,34 @@ table.user-list th {
     top : 260px;
     left : 34px;
   }
-  >.playTable{
+  >.playTableContainer{
     position: absolute;
     top : 300px;
     left : 30px;
-    border : 1px solid rgb(115, 138, 81) ;
+    border : none;
     width : 960px;
-    height : 300px;
-    border-collapse: collapse;
-    text-align: center;
-    >tr,td{
-      border-bottom : 1px solid rgb(115, 138, 81) ;
-      border-top: 1px solid rgb(115, 138, 81) ;
+    height : 290px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    >.playTable{
+      border : 1px solid rgb(115, 138, 81) ;
+      width : 960px;
+      border-collapse: collapse;
+      text-align: center;
+      font-size : 13pt;
+      font-weight: 100;
+        >tr,td{
+          border-bottom : 1px solid rgb(115, 138, 81) ;
+          border-top: 1px solid rgb(115, 138, 81) ;
+
+      }
+        >thead{
+          background-color:  rgb(218, 228, 203) ;
+        }
+    }
+
   }
-}
-  >a>button{
+  >button{
     font-family: 'GmarketSansMedium';
     position: absolute;
     top : 605px;
@@ -369,7 +382,7 @@ table.user-list th {
     border : none;
     color : white;
   }
-  >a>button:hover{
+  >button:hover{
     text-decoration-line: underline ;
   }
 }

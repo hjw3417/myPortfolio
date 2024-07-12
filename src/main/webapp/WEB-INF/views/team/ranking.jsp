@@ -9,10 +9,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="${contextPath}/css/maketeam.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/js.js"></script>
   <title>랭킹</title>
 
 </head>
-<body onload="checkInsertTeamMemberResult();">
+<!-- <body onload="checkInsertTeamMemberResult();"> -->
+<!-- 허진욱 -->
+<body>
   <header>
 <div class="logo">
       <a href="/serviceMain">
@@ -50,10 +55,15 @@
           랭킹
         </div>
         <div> <!--searchteam 이름은 변경할 수 있음-->
-          <form name="searchteam" method="post" action="searchteam" enctype="utf-8">
+          <!-- <form name="searchteam" method="post" action="searchteam" enctype="utf-8"> -->
+          <!-- 허진욱 -->
+          <form id="searchteamForm">
             <div>
-              <select name="t_region">
-                <option value="" disabled selected>지역</option>
+              <!-- <select name="t_region"> -->
+              <select name="t_region" id="t_region">
+                <!--<option value="" disabled selected>지역</option> -->
+                <!-- 허진욱 -->
+                <option value="" selected>전체</option>
                 <option value="서울">서울</option>
                 <option value="인천">인천</option>
                 <option value="경기">경기</option>
@@ -72,8 +82,12 @@
               </select>
             </div>
             <div>
-              <input type="text" name="t_name" size="12" maxlength="12" placeholder="팀 이름을 입력해주세요" required>
-              <input type="button" value="검색">
+              <!-- <input type="text" name="t_name" size="12" maxlength="12" placeholder="팀 이름을 입력해주세요"> -->
+              <!-- 허진욱 -->
+              <input type="text" id="t_name" name="t_name" size="12" maxlength="12" placeholder="팀 이름을 입력해주세요">
+              <!-- <input type="button" value="검색"> -->
+              <!-- 허진욱 -->
+              <input type="submit" value="검색">
             </div>
           </form>
         </div>
@@ -90,7 +104,9 @@
               <th>인원</th>
             </tr>
           </thead>
-          <tbody>
+          <!-- <tbody> -->
+          <!-- 허진욱 -->
+          <tbody id="rankingTbody">
             <c:forEach var="team" items="${ranking}" varStatus="loop" end="5">
               <tr>
                 <td>${loop.index+1}</td>

@@ -246,15 +246,16 @@ h2{
 /*--------------------------------------------------------------*/
 /*마이페이지 -경기결과*/
 .gameRecord{
+  overflow : auto;
   border : none;
   width : 990px;
-  height : 470px;
+  height : 540px;
   position : absolute;
   top : 120px;
   left  : 230px;
   >table{
     width : 990px;
-    height : 470px;
+    height : 540px;
     border-collapse: collapse;
     text-align: center;
     font-size : 13pt;

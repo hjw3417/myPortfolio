@@ -25,8 +25,8 @@ public class TeamServiceImpl implements TeamService {
     private AboutTeamDAO aboutTeamDAO;
 
     //날짜 format을 위한 필드
-    private static final SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static final SimpleDateFormat displayFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private static final SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private static final SimpleDateFormat displayFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
     @Override
     public List listTeams() throws Exception {
@@ -122,6 +122,7 @@ public class TeamServiceImpl implements TeamService {
         } catch (ParseException e) {
             e.printStackTrace();
             return dateStr; // 변환 실패 시 원본 문자열 반환
+            //포맷 변환
         }
     }
 
@@ -141,10 +142,17 @@ public class TeamServiceImpl implements TeamService {
         return teamMemberList;
     }
 
+//    @Override
+//    public List ranking() throws Exception {
+//        List ranking = null;
+//        ranking = teamDAO.selectRanking();
+//        return ranking;
+//    };
+
     @Override
-    public List ranking() throws Exception {
-        List ranking = null;
-        ranking = teamDAO.selectRanking();
+    public List<TeamInfoVO> ranking(String region, String search) throws Exception {
+        List<TeamInfoVO> ranking = new ArrayList<>();
+        ranking = teamDAO.selectRanking(region, search);
         return ranking;
     };
 

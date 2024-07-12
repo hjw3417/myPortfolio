@@ -26,14 +26,24 @@ public class AboutTeamServiceImpl implements AboutteamService {
     }
 
     @Override
+    public String myTeamName(int tID) throws Exception {
+        String myTeamName = aboutTeamDAO.myTeamName(tID);
+        return myTeamName;
+    }
+
+    @Override
     public GameRecordVO selectGameRecordInfo(int pageNum, int rowNum, int tID, String resultType) throws Exception {
         GameRecordVO gameRecordVO = new GameRecordVO();
         List<GameRecordInfoListVO> gameResultInfoList = new ArrayList<>();
+
         gameRecordVO = aboutTeamDAO.getMatchCount(tID);
         gameResultInfoList = aboutTeamDAO.selectGResultInfo(pageNum, rowNum, tID, resultType);
+        String myTeamName = aboutTeamDAO.myTeamName(tID);
         if(gameRecordVO != null) {
-            if(gameResultInfoList.size() != 0) {
-                gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
+            gameRecordVO.setGameRecordInfoListVO(gameResultInfoList);
+            if(myTeamName != null) {
+                gameRecordVO.settName(myTeamName);
+                System.out.println("Service myTeamName : " + myTeamName);
             }
         }
         return gameRecordVO;

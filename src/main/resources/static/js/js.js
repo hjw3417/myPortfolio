@@ -307,7 +307,7 @@ $(document).ready(function() {
                                 <div class="card">
                                     <!-- profile 시작 -->
                                     <div onclick="openModal()" class="teamProfileContainer">
-                                        <img class="tLogo" src="image/teamLogo.png">
+                                        <image class="tLogo" id="tLogo" name="tLogo"></image>
                                         <div class="tName" value="${gameListVO.tName}">${gameListVO.tName}</div>
                                     </div>
                                     <!-- profile 종료 -->
@@ -353,6 +353,9 @@ $(document).ready(function() {
                         `;
                     }
                     $("#gameListContainer").append(html); // 최종 HTML을 한 번에 추가
+                    $(".tLogo").each(function() {
+                        $(this).attr("src", contextPath + "/image/우사기.jpg");
+                    });
                 }
             },
             error: function(error) {
@@ -857,7 +860,7 @@ $(document).ready(function() {
                 console.log(response.totalCount);
                 var gameRecordVO = response;
                 var html = "";
-                if(gameRecordVO.gameRecordInfoListVO == null) {
+                if(gameRecordVO.gameRecordInfoListVO.length == 0) {
                     alert("조회 결과가 없습니다.")
                 } else {
                     console.log("조회 결과 출력.")
@@ -909,7 +912,8 @@ $(document).ready(function() {
             var resultType = $("#resultType").val();
             var pageNum = 1;
             var rowNum = 0;
-            var tID = 0;
+            var tID = $("#tIDHidden").val();
+            console.log("tID : " + tID);
             resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
         });
 
@@ -918,7 +922,8 @@ $(document).ready(function() {
         event.preventDefault();     //폼의 기본 제출 동작을 막습니다.
         var rowNum = $(event.originalEvent?.submitter).siblings('input[name="rowNum"]').val();
         var pageNum = $(event.originalEvent?.submitter).val();
-        var tID = 0;
+        var tID = $("#tIDHidden").val();
+        console.log("tID : " + tID);
         var resultType = $("#resultType").val();
         resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
     });
@@ -934,7 +939,8 @@ $(document).ready(function() {
             defaultPageNumInGameRecord -= 5;
             var rowNum = defaultPageNumInGameRecord - 1;
             var pageNum = defaultPageNumInGameRecord;
-            var tID = 0;
+            var tID = $("#tIDHidden").val();
+            console.log("tID : " + tID);
             var resultType = $("#resultType").val();
             resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
             createPageButtonsGameRecord(); // 페이지 버튼 다시 생성
@@ -949,7 +955,8 @@ $(document).ready(function() {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         var rowNum = defaultPageNumInGameRecord - 1;
         var pageNum = defaultPageNumInGameRecord;
-        var tID = 0;
+        var tID = $("#tIDHidden").val();
+        console.log("tID : " + tID);
         var resultType = $("#resultType").val();
         resultTypeFilterAjax(pageNum, rowNum, resultType, tID);
         createPageButtonsGameRecord(); // 페이지 버튼 다시 생성
@@ -1092,3 +1099,61 @@ $(document).ready(function() {
     });
 });
 //gameSchedule.do 관련 js 끝
+
+//랭킹 검색기능_허진욱
+$(document).ready(function() {
+    function searchRankingAjax(region, search) {
+        console.log("에이젝스 실행");
+        $.ajax({
+            url: '/search/ranking',
+            type: 'POST',
+            data: {
+                region: region,
+                search: search
+            },
+            dataType: 'json',
+            success: function(response) {
+                console.log("에이젝스 리스폰 실행");
+                var rankingList = response;
+                console.log("rankingList 길이 : " + rankingList.length);
+                var html = "";
+                if (rankingList == null || rankingList.length === 0) {
+                    $("#rankingTbody").empty();
+                    html = `
+                        <tr>
+                            <td colspan="7">랭킹 정보가 없습니다.</td>
+                        </tr>
+                    `;
+                } else {
+                    $("#rankingTbody").empty();
+                    $.each(rankingList.slice(0, 6), function(index, team) {
+                        html += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${team.tName}</td>
+                                <td>${team.tRegion}</td>
+                                <td>${team.rankName}</td>
+                                <td>${team.tRankScore}</td>
+                                <td>${team.tMinAge} - ${team.tMaxAge}</td>
+                                <td>${team.tMember} / ${team.tMaxMember}</td>
+                            </tr>
+                        `;
+                    });
+                }
+                $("#rankingTbody").html(html);
+            },
+            error: function(error) {
+                console.log("Error: ", error);
+            }
+        });
+    }
+
+    $('#searchteamForm').on('submit', function(event) {
+        event.preventDefault();
+        console.log("submit 실행");
+        var region = $("#t_region").val();
+        var search = $("#t_name").val();
+        searchRankingAjax(region, search);
+    });
+});
+//랭킹 검색기능_허진욱

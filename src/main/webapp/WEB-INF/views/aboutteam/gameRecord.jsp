@@ -18,6 +18,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/js.js"></script>
+  <script>
+  </script>
   <title>game record</title>
 </head>
 <body>
@@ -75,7 +77,7 @@
       </div>
       <div class="gamerecord">
         <div>
-          전적
+          ${gameRecordVO.tName} 전적
         </div>
         <div>
           <span>전체 전적&emsp;</span>
@@ -91,6 +93,7 @@
           <span></span>
         </div>
         <div>
+          <input type="hidden" id="tIDHidden" value="${tID}">
           <form action="#">
             <select id="resultType">
               <option value="">전체</option>
@@ -101,18 +104,25 @@
           </form>
         </div>
         <div id="gameRecordContainer">
-        <c:forEach var="gameRecord" items="${gameRecordVO.gameRecordInfoListVO}">
-            <div>
-                <span>${gameRecord.tHomeName}&nbsp;</span>
-                <span>${gameRecord.homeGoal}</span>
-                <span>:</span>
-                <span>${gameRecord.awayGoal}</span>
-                <span>&nbsp;</span>
-                <span>${gameRecord.tAwayName}</span>
-                <span>${gameRecord.gResDate}</span>
-                <span>${gameRecord.resultType}</span>
-            </div>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${empty gameRecordVO or empty gameRecordVO.gameRecordInfoListVO}">
+                <div>조회 결과가 없습니다</div>
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="gameRecord" items="${gameRecordVO.gameRecordInfoListVO}">
+                    <div>
+                        <span>${gameRecord.tHomeName}&nbsp;</span>
+                        <span>${gameRecord.homeGoal}</span>
+                        <span>:</span>
+                        <span>${gameRecord.awayGoal}</span>
+                        <span>&nbsp;</span>
+                        <span>${gameRecord.tAwayName}</span>
+                        <span>${gameRecord.gResDate}</span>
+                        <span>${gameRecord.resultType}</span>
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
         </div>
         <!-- pagination 시작 -->
         <div class="paginationContainer">

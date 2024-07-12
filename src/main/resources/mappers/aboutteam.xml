@@ -95,6 +95,7 @@
         INNER JOIN STADIUM s ON g.S_ID = s.S_ID
         INNER JOIN REGIONCODE r ON s.S_REGION = r.region_name
         WHERE 1=1
+        AND g.G_STATUS = 0
         AND g.G_TEAMID = #{tID}
         )
         WHERE
@@ -179,5 +180,10 @@
         )
         WHERE rn BETWEEN (#{pageNum} + #{rowNum} * 4) AND (#{pageNum} + #{rowNum} * 4) + 4
         ]]>
+    </select>
+    <select id="myTeamName" parameterType="int" resultType="String">
+        SELECT T_NAME
+        FROM TEAM
+        WHERE t_id = #{tID}
     </select>
 </mapper>

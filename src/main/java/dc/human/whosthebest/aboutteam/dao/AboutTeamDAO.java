@@ -22,4 +22,5 @@ public interface AboutTeamDAO {
                                                         @Param("tID") int tID,
                                                         @Param("resultType") String resultType
                                                         ) throws DataAccessException;
+    public String myTeamName(@Param("tID") int tID) throws DataAccessException;
 }

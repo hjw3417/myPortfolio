@@ -30,6 +30,11 @@ public class AboutTeamControllerImpl implements AboutTeamController {
         int rowNum = 0;
         List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
         List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(loginId);
+        String myTeamName = aboutteamService.myTeamName(tID);
+        if(myTeamName != null) {
+            mav.addObject("myTeamName", myTeamName);
+            System.out.println("myTeamName : " + myTeamName);
+        }
         if(gameListVO != null) {
             mav.addObject("gameListVO", gameListVO);
             System.out.println("controller gameListVO.size() : " + gameListVO.size());
@@ -68,11 +73,13 @@ public class AboutTeamControllerImpl implements AboutTeamController {
 
         if(gameRecordVO.getGameRecordInfoListVO().size() != 0) {
             System.out.println("gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
-            mav.addObject("gameRecordVO", gameRecordVO);
         }
+        System.out.println("Service myTeamName : " + gameRecordVO.gettName());
+        mav.addObject("gameRecordVO", gameRecordVO);
         if(myTeams != null) {
             mav.addObject("myTeams", myTeams);
         }
+        mav.addObject("tID", tID);
         mav.setViewName("aboutteam/gameRecord");
         return mav;
     }
@@ -90,7 +97,7 @@ public class AboutTeamControllerImpl implements AboutTeamController {
             resultType = null;
         }
         gameRecordVO = aboutteamService.selectGameRecordInfo(pageNum, rowNum, tID, resultType);
-        if(gameRecordVO.getGameRecordInfoListVO() != null) {
+        if(gameRecordVO.getGameRecordInfoListVO().size() != 0) {
             System.out.println("restFullController gameRecordVO.getGameRecordInfoListVO().get(0).getgID(): " + gameRecordVO.getGameRecordInfoListVO().get(0).getgID());
         }
         return gameRecordVO;

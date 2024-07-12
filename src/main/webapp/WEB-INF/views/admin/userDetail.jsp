@@ -81,7 +81,7 @@
 
             <tr>
               <td>전화번호</td>
-              <td>  010-****-**** </td>
+              <td> 010-****-**** </td>
             </tr>
 
             <tr>
@@ -107,7 +107,7 @@
                 <td> ${userInfo.createdDate}</td>
             </tr>
       </table>
-     <a href="#"> <button> 뒤로가기</button> </a>
+     <button onclick="window.history.back();"> 뒤로가기</button>
 </div>
 </main>
 

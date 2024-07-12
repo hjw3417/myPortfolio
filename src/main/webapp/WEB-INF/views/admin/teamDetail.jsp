@@ -73,35 +73,49 @@
 
                 <tr>
                   <td> 주장 </td>
-                  <td>  </td>
+                  <td> ${teamInfo.createdID} </td>
                   <td> 개설일자 </td>
                   <td> ${teamInfo.createdDate}</td>
                 </tr>
           </table>
           <div> 경기내역 </div>
+          <div class="playTableContainer">
           <table class="playTable">
-                <tr>
-                 <th width="150"> 경기 일시 </th>
-                 <th width="230" > 나의팀</th>
-                 <th colspan="3"> 득점 </th>
-                 <th width="230"> 상대팀 </th>
-                 <th> 경기 장소</th>
-                </tr>
+              <thead>
+               <tr>
+                  <th width="150"> 경기 일시 </th>
+                  <th width="190"> 나의팀</th>
+                  <th width="50" colspan="3"> 득점 </th>
+                  <th width="190"> 상대팀 </th>
+                  <th width="200"> 경기 장소</th>
+               </tr>
+              </thead>
 
-                <tr>
-                  <td width="120">  </td>
-                  <td> </td>
-                  <td> </td>
-                  <td> : </td>
-                  <td>  </td>
-                  <td>  </td>
-                  <td></td>
-                 </tr>
-
+             <tbody>
+                 <c:choose>
+                     <c:when test="${empty teamGame}">
+                         <tr>
+                             <td colspan="7" style="text-align:center;">경기 내역이 없습니다</td>
+                         </tr>
+                     </c:when>
+                     <c:otherwise>
+                         <c:forEach items="${teamGame}" var="tGame">
+                             <tr>
+                                 <td width="150">${tGame.gResDate}</td>
+                                 <td width="200">${tGame.myTeam}</td>
+                                 <td width="10">${tGame.homeGoal}</td>
+                                 <td width="20">:</td>
+                                 <td width="10">${tGame.awayGoal}</td>
+                                 <td width="200">${tGame.awayTeam}</td>
+                                 <td width="70">${tGame.sName}</td>
+                             </tr>
+                         </c:forEach>
+                     </c:otherwise>
+                 </c:choose>
+             </tbody>
           </table>
-
-
-         <a href="#"> <button> 뒤로가기</button> </a>
+        </div>
+          <button  onclick="window.history.back();" > 뒤로가기 </button>
     </div>
     </main>
 

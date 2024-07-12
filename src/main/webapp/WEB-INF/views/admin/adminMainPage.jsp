@@ -37,9 +37,18 @@
                <li><a href="/admin/gameList.do">경기 관리 </a></li>
                <li><a href="/mainBoard"> 게시판 </a></li>
             </ul>
-        <a href="/login">
-        <img class="logoutimg" src="../image/logout.png" alt="로그아웃" >
-      </a>
+
+        <img class="logoutimg" src="../image/logout.png" alt="로그아웃" onclick="logoutFunction()" >
+        <script>
+        function logoutFunction() {
+            // 로그아웃을 수행할 URL 설정
+            var logoutUrl = "/logout"; // 예시 URL, 실제 프로젝트에 맞게 수정
+
+            // 로그아웃을 요청하고 페이지 이동
+            window.location.href = logoutUrl;
+        }
+        </script>
+
 
     </div>
 

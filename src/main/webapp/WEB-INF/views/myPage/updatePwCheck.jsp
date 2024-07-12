@@ -50,7 +50,7 @@
             <input type="id" name="uID" value="${uID}" readonly>
             <input type="password" name="uPW" size="20" minlength="9" maxlength="20" placeholder="비밀번호를 입력해주세요.">
             <button class="ok" type="submit" id="submit" > 확인</button>
-            <button class="cancel" type="reset" > 취소</button>
+            <button class="cancel" type="button"  onclick="window.history.back();" > 취소</button>
       </form>
 
     <!-- 경고 메시지를 표시하는 JavaScript -->
