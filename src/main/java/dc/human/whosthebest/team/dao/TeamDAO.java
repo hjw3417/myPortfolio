@@ -17,8 +17,11 @@ public interface TeamDAO {
     public int insertTeamMember(TeamMemberVO teamMemberVO) throws DataAccessException;
     public List<TeamInfoVO> selectTeamsByUserId(String userID) throws DataAccessException;
     public TeamProfileVO selectTeamProfile(int tID) throws DataAccessException;
-    public List selectRanking() throws DataAccessException;
-
+//    public List selectRanking() throws DataAccessException;
+    //허진욱
+    public List<TeamInfoVO> selectRanking(@Param("region") String region,
+                                          @Param("search") String search
+                                         ) throws DataAccessException;
     public List<TeamMemberVO> selectTeamMembers(int tID) throws DataAccessException;
 
     public List<GameRecordInfoListVO> selectGResultInfo(@Param("tID") int tID,

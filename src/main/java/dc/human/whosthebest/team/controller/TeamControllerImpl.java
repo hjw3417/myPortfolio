@@ -196,15 +196,49 @@ public class TeamControllerImpl implements TeamController{
     //랭킹 페이지 매핑
         //페이징 처리 필요
         //검색 기능 지역 필터링 메소드 추가 필요
+//    @Override
+//    @GetMapping("/ranking")
+//    public ModelAndView Ranking() throws Exception{
+//        List ranking = teamService.ranking();
+//        ModelAndView mav = new ModelAndView("/team/ranking");
+//        mav.addObject("ranking", ranking);
+//        return mav;
+//    }
+//커밋 테스트
+    //허진욱
     @Override
     @GetMapping("/ranking")
-    public ModelAndView Ranking() throws Exception{
-        List ranking = teamService.ranking();
+    public ModelAndView Ranking(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                @RequestParam(name="region", required = false) String region,
+                                @RequestParam(name="search", required = false) String search
+                                ) throws Exception{
+        if(region == null || region == "") {
+            region = null;
+        }
+        if(search == null || search == "") {
+            search = null;
+        }
+        List ranking = teamService.ranking(region, search);
         ModelAndView mav = new ModelAndView("/team/ranking");
         mav.addObject("ranking", ranking);
         return mav;
     }
-//커밋 테스트
+    //허진욱
+    @Override
+    @PostMapping("/search/ranking")
+    @ResponseBody
+    public List<TeamInfoVO> SearchRanking(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                          @RequestParam(name="region", required = false) String region,
+                                          @RequestParam(name="search", required = false) String search
+                                            ) throws Exception {
+        if(region == null || region == "") {
+            region = null;
+        }
+        if(search == null || search == "") {
+            search = null;
+        }
+        List<TeamInfoVO> selectRanking = teamService.ranking(region, search);
 
-
+        return selectRanking;
+    }
 }

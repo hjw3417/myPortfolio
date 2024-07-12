@@ -142,10 +142,17 @@ public class TeamServiceImpl implements TeamService {
         return teamMemberList;
     }
 
+//    @Override
+//    public List ranking() throws Exception {
+//        List ranking = null;
+//        ranking = teamDAO.selectRanking();
+//        return ranking;
+//    };
+
     @Override
-    public List ranking() throws Exception {
-        List ranking = null;
-        ranking = teamDAO.selectRanking();
+    public List<TeamInfoVO> ranking(String region, String search) throws Exception {
+        List<TeamInfoVO> ranking = new ArrayList<>();
+        ranking = teamDAO.selectRanking(region, search);
         return ranking;
     };
 

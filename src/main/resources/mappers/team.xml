@@ -188,7 +188,7 @@
     ]]>
     </select>
 
-    <!-- 랭킹 select-->
+    <!-- 랭킹 select_허진욱-->
     <select id="selectRanking" resultMap="teamInfoResult">
         <![CDATA[
         SELECT
@@ -209,6 +209,19 @@
             TEAM T
         LEFT JOIN
             RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE
+        WHERE 1=1
+        ]]>
+        <if test="region != null and region != ''">
+            AND  T.T_REGION = #{region}
+        </if>
+        <if test="search != null and search != ''">
+            AND (
+            T.T_NAME = #{search} OR
+            T.T_REGION = #{search}
+            )
+            OR T.T_NAME ||T.T_REGION LIKE '%' || #{search} || '%'
+        </if>
+        <![CDATA[
         ORDER BY
         CASE
             WHEN T.RANKSCORE IS NULL THEN -1
@@ -216,9 +229,40 @@
         END DESC,
         T.RANKSCORE DESC,
         T.CREATED_DATE ASC
-
-    ]]>
+        ]]>
     </select>
+
+<!--    &lt;!&ndash; 랭킹 select&ndash;&gt;-->
+<!--    <select id="selectRanking" resultMap="teamInfoResult">-->
+<!--        <![CDATA[-->
+<!--        SELECT-->
+<!--            T.T_ID,-->
+<!--            T.T_NAME,-->
+<!--            T.T_REGION,-->
+<!--            T.RANKSCORE,-->
+<!--            CASE-->
+<!--                WHEN T.RANKSCORE IS NULL THEN 'unranked'-->
+<!--                WHEN R.MINSCORE IS NULL OR R.MAXSCORE IS NULL THEN 'unranked'-->
+<!--                ELSE R.RANK_NAME-->
+<!--            END AS RANKNAME,-->
+<!--            T.T_MINAGE,-->
+<!--            T.T_MAXAGE,-->
+<!--            T.T_MEMBER,-->
+<!--            T.T_MAXMEMBER-->
+<!--        FROM-->
+<!--            TEAM T-->
+<!--        LEFT JOIN-->
+<!--            RANK R ON T.RANKSCORE BETWEEN R.MINSCORE AND R.MAXSCORE-->
+<!--        ORDER BY-->
+<!--        CASE-->
+<!--            WHEN T.RANKSCORE IS NULL THEN -1-->
+<!--            ELSE T.RANKSCORE-->
+<!--        END DESC,-->
+<!--        T.RANKSCORE DESC,-->
+<!--        T.CREATED_DATE ASC-->
+
+<!--    ]]>-->
+<!--    </select>-->
 
     <!-- 사용자가 속한 팀 목록 -->
     <select id="selectTeamsByUserId" resultMap="teamInfoResult">

@@ -13,7 +13,9 @@ public interface TeamService {
     public TeamProfileVO getTeamProfile(int tID) throws Exception;
     public List<GameListVO> selectGameSchedule(int tID) throws Exception;
     public GameRecordVO selectGameRecordInfo(int tID, String resultType) throws Exception;
-    public List ranking() throws Exception;
+//    public List ranking() throws Exception;
+    //허진욱
+    public List<TeamInfoVO> ranking(String region, String search) throws Exception;
 
     public List<TeamMemberVO> getTeamMembers(int tID) throws Exception;
 }

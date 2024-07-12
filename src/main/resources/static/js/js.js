@@ -1099,3 +1099,61 @@ $(document).ready(function() {
     });
 });
 //gameSchedule.do 관련 js 끝
+
+//랭킹 검색기능_허진욱
+$(document).ready(function() {
+    function searchRankingAjax(region, search) {
+        console.log("에이젝스 실행");
+        $.ajax({
+            url: '/search/ranking',
+            type: 'POST',
+            data: {
+                region: region,
+                search: search
+            },
+            dataType: 'json',
+            success: function(response) {
+                console.log("에이젝스 리스폰 실행");
+                var rankingList = response;
+                console.log("rankingList 길이 : " + rankingList.length);
+                var html = "";
+                if (rankingList == null || rankingList.length === 0) {
+                    $("#rankingTbody").empty();
+                    html = `
+                        <tr>
+                            <td colspan="7">랭킹 정보가 없습니다.</td>
+                        </tr>
+                    `;
+                } else {
+                    $("#rankingTbody").empty();
+                    $.each(rankingList.slice(0, 6), function(index, team) {
+                        html += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${team.tName}</td>
+                                <td>${team.tRegion}</td>
+                                <td>${team.rankName}</td>
+                                <td>${team.tRankScore}</td>
+                                <td>${team.tMinAge} - ${team.tMaxAge}</td>
+                                <td>${team.tMember} / ${team.tMaxMember}</td>
+                            </tr>
+                        `;
+                    });
+                }
+                $("#rankingTbody").html(html);
+            },
+            error: function(error) {
+                console.log("Error: ", error);
+            }
+        });
+    }
+
+    $('#searchteamForm').on('submit', function(event) {
+        event.preventDefault();
+        console.log("submit 실행");
+        var region = $("#t_region").val();
+        var search = $("#t_name").val();
+        searchRankingAjax(region, search);
+    });
+});
+//랭킹 검색기능_허진욱
