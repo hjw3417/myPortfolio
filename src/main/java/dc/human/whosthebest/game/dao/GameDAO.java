@@ -92,6 +92,7 @@ public interface GameDAO {
                                            @Param("IPartiGameuID") String IPartiGameuID
                                            ) throws DataAccessException;
     /**
+    /**
      * 주어진 게임 ID를 기반으로 게임 정보를 조회합니다.
      *
      * @param gID  조회할 게임의 ID
