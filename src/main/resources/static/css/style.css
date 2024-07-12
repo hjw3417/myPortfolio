@@ -445,6 +445,7 @@ main{
         font-family: 'GmarketSansMedium';
         background-color: inherit;
         cursor: pointer;
+        border: 0pt;
       }
       input:focus {outline: none;}
     }
