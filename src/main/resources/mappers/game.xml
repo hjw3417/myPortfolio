@@ -331,20 +331,22 @@
 		SELECT *
 		FROM (
 		SELECT
-		S_ID, S_NAME, S_REGION, S_ADDR, S_OWNER, S_NUM,
+		s.S_ID, s.S_NAME, s.S_REGION, s.S_ADDR, s.S_OWNER, s.S_NUM,
 		ROW_NUMBER() OVER (ORDER BY S_ID) AS rn
-		FROM STADIUM
+		FROM STADIUM s
+		INNER JOIN
+		REGIONCODE r ON s.S_REGION = r.region_name
 		WHERE 1=1
 		<if test="sRegion != null and sRegion != ''">
-			AND  S_REGION = #{sRegion}
+			AND  r.REGION_CODE = #{sRegion}
 		</if>
 		<if test="search != null and search != ''">
 			AND (
-			S_REGION = #{search} OR
-			S_NAME = #{search} OR
-			S_OWNER = #{search}
+			s.S_REGION = #{search} OR
+			s.S_NAME = #{search} OR
+			s.S_OWNER = #{search}
 			)
-			OR S_REGION||S_NAME||S_OWNER LIKE '%' || #{search} || '%'
+			OR s.S_REGION||s.S_NAME||s.S_OWNER LIKE '%' || #{search} || '%'
 		</if>
 		)
 		WHERE
