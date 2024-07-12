@@ -23,5 +23,6 @@ public interface MainDAO {
     List<BoardVO> mainServiceBoard() throws DataAccessException;
     int mainBoardWrite(BoardVO boardVO) throws DataAccessException;
     BoardVO mainBoardDetail(int bID) throws DataAccessException;
-    BoardVO mainBoardModify (BoardVO boardVO) throws DataAccessException;
+    int mainBoardModify (BoardVO boardVO) throws DataAccessException;
+    int mainBoardDelete(int bID) throws DataAccessException;
 }

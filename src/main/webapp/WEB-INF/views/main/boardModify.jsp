@@ -54,14 +54,14 @@
               <option value="일반">일반</option>
             </select>
             <select name="bType">
-              <option value="1">메인</option>
-              <option value="0">팀</option>
+              <option value="0">메인</option>
+              <option value="1">팀</option>
             </select>
             <input type="hidden" name="bID" value="${boardVO.bID}">
             <input type="text" name="bTitle" id="bTitle_text" value="${boardVO.bTitle}" placeholder="제목을 입력해주세요." required>
           </div>
           <div>
-            <textarea name="bContent" rows="5" value="${boardVO.bContent}" placeholder="내용을 입력해주세요." required></textarea>
+            <textarea name="bContent" rows="5" placeholder="내용을 입력해주세요." required>${boardVO.bContent}</textarea>
           </div>
           <div>
             <input type="submit" value="수정하기">

@@ -47,7 +47,15 @@
         <table>
           <tr>
             <th>${mBoard.bBullet}</th>
-            <th>${mBoard.bType}</th>
+            <th><c:choose>
+              <c:when test="${mBoard.bType == 0}">
+                메인
+              </c:when>
+              <c:when test="${mBoard.bType == 1}">
+                팀
+              </c:when>
+            </c:choose>
+            </th>
             <th>${mBoard.bTitle}</th>
             <th>${mBoard.createdID}</th>
             <th>${mBoard.createdDate}</th>
@@ -59,11 +67,8 @@
           </tr>
         </table>
         <div>
-            <form name="boardD" method="post" action="/boardEdit" enctype="utf-8">
-            <input type="hidden" name="bID" value="${mBoard.bID}">
-            <button type="submit" id="modify">수정</button>
-            </form>
-            <button type="button" id="delete" onclick="delete_btn">삭제</button>
+            <button type="submit" id="modify" onclick="location.href='/boardEdit?bID=${mBoard.bID}'">수정</button>
+            <button type="button" id="delete" onclick="location.href='/boardDelete?bID=${mBoard.bID}'">삭제</button>
             <button type="button" id="list" onclick="location.href='/mainBoard'">목록</button>
         </div>
       </div>

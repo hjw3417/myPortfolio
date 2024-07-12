@@ -66,8 +66,14 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public BoardVO mainBoardModify (BoardVO boardVO) throws Exception{
+    public int mainBoardModify (BoardVO boardVO) throws Exception{
         boardVO.setUpdatedDate(sqlDate.toString());
         return mainDAO.mainBoardModify(boardVO);
     }
+
+    @Override
+    public int mainBoardDelete (int bID) throws Exception{
+        return mainDAO.mainBoardDelete(bID);
+    }
+
 }

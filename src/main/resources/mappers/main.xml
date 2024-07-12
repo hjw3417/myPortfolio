@@ -97,7 +97,7 @@
                 B_TITLE,
                 CREATED_ID,
                 CREATED_DATE,
-                ROW_NUMBER() OVER (PARTITION BY B_BULLET ORDER BY B_ID DESC) AS rn
+                ROW_NUMBER() OVER (PARTITION BY B_BULLET ORDER BY CREATED_DATE DESC) AS rn
             FROM
                 BOARD
             WHERE
@@ -171,6 +171,13 @@
             B_ID = #{bID}
     </update>
 
+    <delete id="mainBoardDelete" parameterType="int">
+        DELETE
+        FROM
+            BOARD
+        WHERE
+            B_ID = #{bID}
+    </delete>
 
 
 

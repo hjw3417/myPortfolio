@@ -19,4 +19,5 @@ public interface MainController {
     public ModelAndView mainBoardDetail(@RequestParam("bID") int bID) throws Exception;
     public ModelAndView showBoardModify(@RequestParam("bID") int bID) throws Exception;
     public ModelAndView mainBoardModify(@SessionAttribute(name = "loginId", required = false) String loginId, @RequestParam("bID") int bID, BoardVO boardVO) throws Exception;
+    public  ModelAndView mainBoardDelete(int bID) throws Exception;
 }

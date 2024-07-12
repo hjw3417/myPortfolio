@@ -103,7 +103,7 @@ public class MainControllerImpl implements MainController {
     }
 
     @Override
-    @RequestMapping(value = "/boardEdit", method = RequestMethod.POST)
+    @RequestMapping(value = "/boardEdit", method = RequestMethod.GET)
     public ModelAndView showBoardModify(@RequestParam("bID") int bID) throws Exception{
         ModelAndView mav = new ModelAndView();
         BoardVO boardVO = mainService.mainBoardDetail(bID);
@@ -135,7 +135,9 @@ public class MainControllerImpl implements MainController {
 
             mainService.mainBoardModify(boardVO);
 
-            mav.setViewName("main/boardDetail");
+            mav.addObject("bID", bID);
+
+            mav.setViewName("redirect:/boardDetail");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -143,5 +145,20 @@ public class MainControllerImpl implements MainController {
 
 
         return mav;
+    }
+
+    @Override
+    @RequestMapping(value = "/boardDelete", method = RequestMethod.GET)
+    public  ModelAndView mainBoardDelete(int bID) throws Exception{
+
+        ModelAndView mav = new ModelAndView();
+
+        mainService.mainBoardDelete(bID);
+
+        mav.setViewName("redirect:/mainBoard");
+
+        return mav;
+
+
     }
 }
