@@ -157,16 +157,18 @@
             B_ID = #{bID}
     </select>
     
-    <update id="mainBoardModify" parameterType="dc.human.whosthebest.vo.BoardVO">
-        UPDATE BOARD
-        SET B_TYPE = #{bType},
+    <update id="mainBoardModify" parameterType="BoardVO">
+        UPDATE
+            BOARD
+        SET
+            B_TYPE = #{bType},
             B_BULLET = #{bBullet},
             B_TITLE = #{bTitle},
             B_CONTENT = #{bContent},
             UPDATED_ID = #{updatedID},
-            UPDATED_DATE = #{updatedDate}
-
-
+            UPDATED_DATE = #{updatedID}
+        WHERE
+            B_ID = #{bID}
     </update>
 
 

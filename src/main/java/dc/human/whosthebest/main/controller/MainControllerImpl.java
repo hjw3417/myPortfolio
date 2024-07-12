@@ -70,10 +70,10 @@ public class MainControllerImpl implements MainController {
 
     @Override
     @RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
-    public ModelAndView mainBoardWrite(BoardVO boardVO) throws Exception{
+    public ModelAndView mainBoardWrite(@SessionAttribute(name = "loginId", required = false) String loginId, BoardVO boardVO) throws Exception{
         int result = 0;
         try{
-            result = mainService.mainBoardWrite(boardVO);
+            result = mainService.mainBoardWrite(loginId, boardVO);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -102,4 +102,46 @@ public class MainControllerImpl implements MainController {
 
     }
 
+    @Override
+    @RequestMapping(value = "/boardEdit", method = RequestMethod.POST)
+    public ModelAndView showBoardModify(@RequestParam("bID") int bID) throws Exception{
+        ModelAndView mav = new ModelAndView();
+        BoardVO boardVO = mainService.mainBoardDetail(bID);
+        System.out.println("bID는 도대체 뭘까!!!!!!================================= : " + bID);
+        mav.addObject("boardVO", boardVO);
+        mav.addObject("bID", bID);
+        mav.setViewName("main/boardModify");
+        return mav;
+    }
+
+
+
+    @Override
+    @RequestMapping(value = "/boardModify", method = RequestMethod.POST)
+    public ModelAndView mainBoardModify(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                        @RequestParam("bID") int bID,
+                                        @ModelAttribute("boardVO") BoardVO boardVO) throws Exception{
+
+        ModelAndView mav = new ModelAndView();
+
+        try {
+            boardVO.setUpdatedID(loginId);
+            boardVO.setbID(bID);
+
+            System.out.println("bID는 도대체 뭘까!!!!!!================================= : " + bID);
+
+            System.out.println("boardVO.getbType() : " + boardVO.getbType());
+
+
+            mainService.mainBoardModify(boardVO);
+
+            mav.setViewName("main/boardDetail");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return mav;
+    }
 }

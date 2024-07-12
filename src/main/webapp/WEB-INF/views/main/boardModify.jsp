@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="./css/main.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <title>board</title>
+  <title>boardWrite</title>
 </head>
 <body>
   <header>
@@ -18,7 +18,7 @@
           </a>
         </div>
     <div>
-      <span><a href="/logout">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
+      <span><a href="/login">로그아웃</a>&nbsp;&nbsp;|&nbsp;</span>
       <span><a href="/myPage">마이페이지</a></span>
     </div>
     <div>
@@ -42,32 +42,34 @@
   <main style="text-align: center; height: 750px;">
     <div>　</div>
     <div>
-      <section class="boardDetail">
+      <section class="boardModify">
       <div>
-        <table>
-          <tr>
-            <th>${mBoard.bBullet}</th>
-            <th>${mBoard.bType}</th>
-            <th>${mBoard.bTitle}</th>
-            <th>${mBoard.createdID}</th>
-            <th>${mBoard.createdDate}</th>
-          </tr>
-          <tr>
-            <td colspan="5">
-              ${mBoard.bContent}
-            </td>
-          </tr>
-        </table>
-        <div>
-            <form name="boardD" method="post" action="/boardEdit" enctype="utf-8">
-            <input type="hidden" name="bID" value="${mBoard.bID}">
-            <button type="submit" id="modify">수정</button>
-            </form>
-            <button type="button" id="delete" onclick="delete_btn">삭제</button>
-            <button type="button" id="list" onclick="location.href='/mainBoard'">목록</button>
-        </div>
+        게시글 수정
       </div>
-    </section>
+      <div>
+        <form name="boardModify" method="post" action="/boardModify" enctype="utf-8">
+          <div>
+            <select name="bBullet">
+              <option value="공지">공지</option>
+              <option value="일반">일반</option>
+            </select>
+            <select name="bType">
+              <option value="1">메인</option>
+              <option value="0">팀</option>
+            </select>
+            <input type="hidden" name="bID" value="${boardVO.bID}">
+            <input type="text" name="bTitle" id="bTitle_text" value="${boardVO.bTitle}" placeholder="제목을 입력해주세요." required>
+          </div>
+          <div>
+            <textarea name="bContent" rows="5" value="${boardVO.bContent}" placeholder="내용을 입력해주세요." required></textarea>
+          </div>
+          <div>
+            <input type="submit" value="수정하기">
+            <input type="reset" value="취소" onclick="location.href='/mainBoard'">
+          </div>
+        </form>
+      </div>
+      </section>
     </div>
   </main>
 
