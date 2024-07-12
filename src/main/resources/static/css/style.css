@@ -445,6 +445,7 @@ main{
         font-family: 'GmarketSansMedium';
         background-color: inherit;
         cursor: pointer;
+        border: 0pt;
       }
       input:focus {outline: none;}
     }
@@ -1682,6 +1683,14 @@ footer{
     box-sizing: border-box;
     display: block;
     margin: 0;
+    .tableContainerNone {
+        margin: 0 auto;
+        width: 900px;
+        height: 300px;
+        margin-top: 100px;
+        margin-left: -60px;
+        font-size: 30pt;
+    }
     >div:nth-child(1){
       font-size: 50px;
       font-weight: bold;

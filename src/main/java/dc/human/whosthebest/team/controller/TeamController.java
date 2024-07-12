@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Map;
 
 public interface TeamController {
@@ -36,8 +37,16 @@ public interface TeamController {
     public ModelAndView teamMembersPage(@SessionAttribute(name = "loginId", required = false) String loginId,
                                         @RequestParam("tID") int tID);
 
-    public ModelAndView Ranking() throws Exception;
-
+//    public ModelAndView Ranking() throws Exception;
+    //허진욱
+    public ModelAndView Ranking(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                @RequestParam(name="region", required = false) String region,
+                                @RequestParam(name="search", required = false) String search
+                               ) throws Exception;
+    public List<TeamInfoVO> SearchRanking(@SessionAttribute(name = "loginId", required = false) String loginId,
+                                    @RequestParam(name="region", required = false) String region,
+                                    @RequestParam(name="search", required = false) String search
+                                ) throws Exception;
 
 
 

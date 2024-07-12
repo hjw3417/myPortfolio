@@ -2,8 +2,8 @@ package dc.human.whosthebest.vo;
 
 public class BoardVO {
 	
-	private String bID;
-	private String bType;
+	private int bID;
+	private int bType;
 	private String bBullet;
 	private String bTitle;
 	private String bContent;
@@ -11,19 +11,21 @@ public class BoardVO {
 	private String createdDate;
 	private String updatedID;
 	private String updatedDate;
-	
-	
-	
-	public String getbID() {
+
+
+	public int getbID() {
 		return bID;
 	}
-	public void setbID(String bID) {
+
+	public void setbID(int bID) {
 		this.bID = bID;
 	}
-	public String getbType() {
+
+	public int getbType() {
 		return bType;
 	}
-	public void setbType(String bType) {
+
+	public void setbType(int bType) {
 		this.bType = bType;
 	}
 	public String getbBullet() {

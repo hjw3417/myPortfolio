@@ -104,7 +104,7 @@
           <!-- 나의 팀 시작 -->
           <div class="teamMember">
             <div>
-                <image class="tLogo" id="tLogo" name="tLogo" src="image/teamLogo.png"></image>
+                <image class="tLogo" id="tLogo" name="tLogo" src="${contextPath}/image/우사기.jpg"></image>
                 <div>${gameInfoVO.tName}</div>
                 <form id="partiHomeTeamForm">
                     <input type="hidden" id="gID" value="${gameInfoVO.gID}" />
@@ -139,7 +139,7 @@
                       <div id="awayTeamName">경기 참가하기</div>
                   </c:when>
                   <c:otherwise>
-                      <image class="tLogo" id="awayTeamLogo" name="awayTeamLogo" src="image/teamLogo.png"></image>
+                      <image class="tLogo" id="awayTeamLogo" name="awayTeamLogo" src="${contextPath}/image/우사기.jpg"></image>
                       <div id="awayTeamName">${gameAwayTeamInfoVO.awayTeamName}</div>
                   </c:otherwise>
               </c:choose>

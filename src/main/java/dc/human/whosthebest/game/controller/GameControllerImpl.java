@@ -414,7 +414,7 @@ public class GameControllerImpl implements GameController {
                                          @RequestParam(value="uID", required = false) String uID
     ) throws Exception {
 
-        ModelAndView mav = new ModelAndView("redirect:/game/gameList.do");
+        ModelAndView mav = new ModelAndView("redirect:/game/gameInfoList.do");
         System.out.println("3 gID : " + gID);
         System.out.println("3 tAwayID : " + tAwayID);
         GResultVO gResultVO = new GResultVO();

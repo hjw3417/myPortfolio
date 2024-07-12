@@ -5,6 +5,7 @@ import dc.human.whosthebest.vo.GameListVO;
 import dc.human.whosthebest.vo.MaingameListVO;
 import dc.human.whosthebest.vo.TeamInfoVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -22,4 +23,5 @@ public interface MainDAO {
     List<BoardVO> mainServiceBoard() throws DataAccessException;
     int mainBoardWrite(BoardVO boardVO) throws DataAccessException;
     BoardVO mainBoardDetail(int bID) throws DataAccessException;
+    BoardVO mainBoardModify (BoardVO boardVO) throws DataAccessException;
 }

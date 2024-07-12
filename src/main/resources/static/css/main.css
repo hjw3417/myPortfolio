@@ -1234,9 +1234,83 @@ main{
       background-color: rgb(184, 206, 146);
       border: none;
       font-size: 20px;
+      cursor: pointer;
     }
     >button:nth-child(2){
       margin-left: 10px;
+    }
+    >button:nth-child(3){
+      margin-left: 10px;
+    }
+  }
+}
+
+/*게시글 수정 css*/
+.boardModify{
+  >div:first-child{
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(126, 148, 87);
+    margin: 5px 0 20px 0;
+  }
+  >div:nth-child(2){
+    width: 900px;
+    /* border: 1px solid red; */
+    >form>div:first-child>select{
+      width: 150px;
+      height: 44px;
+      box-sizing: border-box;
+      text-align: center;
+      border: 1px solid gray;
+      font-family: 'GmarketSansMedium';
+      background-color: rgb(184, 206, 146);
+    }
+    >form>div:first-child>select:nth-child(2){
+      margin-left: -7px;
+    }
+    >form>div:first-child>select:focus {outline: none;}
+    >form>div:first-child>input{
+      width: 600px;
+      height: 44px;
+      margin-left: -7px;
+      color:black;
+      box-sizing: border-box;
+      padding-left: 10px;
+      font-family: 'GmarketSansMedium';
+      border: 1px solid gray;
+      background-color: rgb(184, 206, 146);
+    }
+    >form>div:first-child>input:focus {outline: none;}
+    >form>div:first-child>input::placeholder{
+      color: black;
+      padding-left: 10px;
+    }
+    >form>div:nth-child(2)>textarea{
+      width: 898px;
+      height: 400px;
+      margin-top: -1px;
+      border: 1px solid gray;
+      box-sizing: border-box;
+      padding: 10px 0 0 10px;
+      font-family: 'GmarketSansMedium';
+    }
+    >form>div:nth-child(2)>textarea:focus {outline: none;}
+    >form>div:nth-child(2)>textarea::placeholder{padding-left: 10px;}
+    >form>div:nth-child(3){
+      text-align: right;
+      >input{
+        width: 100px;
+        height: 50px;
+        color: white;
+        font-family: 'GmarketSansMedium';
+        background-color: rgb(126, 148, 87);
+        border: none;
+        font-size: 20px;
+        margin-top: 30px;
+      }
+      >input:nth-child(2){
+        margin-left: 10px;
+      }
     }
   }
 }
