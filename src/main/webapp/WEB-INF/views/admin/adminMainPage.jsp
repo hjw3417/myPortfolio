@@ -38,7 +38,7 @@
                <li><a href="/mainBoard"> 게시판 </a></li>
             </ul>
 
-        <img class="logoutimg" src="../image/logout.png" alt="로그아웃" onclick="logoutFunction()" >
+        <img class="logoutimg" src="/image/logout.png" alt="로그아웃" onclick="logoutFunction()" >
         <script>
         function logoutFunction() {
             // 로그아웃을 수행할 URL 설정
