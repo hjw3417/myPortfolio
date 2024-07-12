@@ -93,7 +93,7 @@ public class AdminControllerImpl implements AdminController {
     public ModelAndView detailUser(@PathVariable("uID") String uID,
                                    HttpServletRequest request,
                                    HttpServletResponse response) throws Exception {
-        UserInfoVO userDetail = adminService.getUserDetailById(uID);
+        List<MyPageInfoVO> userDetail = adminService.getUserDetailById(uID);
         ModelAndView mav = new ModelAndView("/admin/userDetail");
         mav.addObject("userInfo", userDetail);
         return mav;
@@ -119,10 +119,12 @@ public class AdminControllerImpl implements AdminController {
     public ModelAndView detailGame(@PathVariable("gID") String gID,
                                    HttpServletRequest request,
                                    HttpServletResponse response) throws Exception{
-        AdminGameListVO gameDetail = adminService.getGameById(gID);
-        System.out.println("게임 상세보기 컨트롤러 성공");
+        AdminGameListVO gameDetail = adminService.getGameDetilById(gID);
+        List<RecentGameVO> gameResult = adminService.getGameResultById(gID);
         ModelAndView mav = new ModelAndView("/admin/gameDetail");
         mav.addObject("gameInfo", gameDetail);
+        mav.addObject("gameResult", gameResult);
+
         return mav;
     }
 

@@ -10,10 +10,10 @@ public class GameStadiumVO {
     private String gameTitle;
     private String gameResDate;
     private String stadiumName;
-    private String gameStatus;
+    private int gameStatus;
 
     // 생성자
-    public GameStadiumVO (int gameId, String gameTitle, String gameResDate, String stadiumName ,String gameStatus) {
+    public GameStadiumVO (int gameId, String gameTitle, String gameResDate, String stadiumName ,int gameStatus) {
         this.gameId = gameId;
         this.gameTitle = gameTitle;
         this.gameResDate = gameResDate;
@@ -57,11 +57,11 @@ public class GameStadiumVO {
         this.stadiumName = stadiumName;
     }
 
-    public String getGameStatus() {
+    public int getGameStatus() {
         return gameStatus;
     }
 
-    public void setGameStatus(String gameStatus) {
+    public void setGameStatus(int gameStatus) {
         this.gameStatus = gameStatus;
     }
 }

@@ -83,10 +83,10 @@
           <table class="playTable">
               <thead>
                <tr>
-                  <th width="150"> 경기 일시 </th>
-                  <th width="190"> 나의팀</th>
-                  <th width="50" colspan="3"> 득점 </th>
-                  <th width="190"> 상대팀 </th>
+                  <th width="210"> 경기 일시 </th>
+                  <th width="200"> 나의팀</th>
+                  <th width="3" colspan="3"> 득점 </th>
+                  <th width="200"> 상대팀 </th>
                   <th width="200"> 경기 장소</th>
                </tr>
               </thead>
@@ -101,13 +101,13 @@
                      <c:otherwise>
                          <c:forEach items="${teamGame}" var="tGame">
                              <tr>
-                                 <td width="150">${tGame.gResDate}</td>
-                                 <td width="200">${tGame.myTeam}</td>
-                                 <td width="10">${tGame.homeGoal}</td>
-                                 <td width="20">:</td>
-                                 <td width="10">${tGame.awayGoal}</td>
-                                 <td width="200">${tGame.awayTeam}</td>
-                                 <td width="70">${tGame.sName}</td>
+                                 <td height="40">${tGame.gResDate}</td>
+                                 <td>${tGame.myTeam}</td>
+                                 <td> ${tGame.homeGoal}</td>
+                                 <td>:</td>
+                                 <td> ${tGame.awayGoal}</td>
+                                 <td> ${tGame.awayTeam}</td>
+                                 <td> ${tGame.sName}</td>
                              </tr>
                          </c:forEach>
                      </c:otherwise>
