@@ -1,9 +1,6 @@
 package dc.human.whosthebest.admin.dao;
 
-import dc.human.whosthebest.vo.AdminGameListVO;
-import dc.human.whosthebest.vo.RecentGameVO;
-import dc.human.whosthebest.vo.TeamInfoVO;
-import dc.human.whosthebest.vo.UserInfoVO;
+import dc.human.whosthebest.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
@@ -32,11 +29,12 @@ public interface AdminDAO {
     public List selectNewTeamList() throws DataAccessException;
 
     //회원 상세보기
-    UserInfoVO selectUserDetailById(@Param("uID") String uID) throws DataAccessException;
+    List<MyPageInfoVO> selectUserDetailById(@Param("uID") String uID) throws DataAccessException;
 
     //팀 상세보기
     TeamInfoVO selectTeamDetailById(@Param("tID")String tID) throws DataAccessException;
     List<RecentGameVO> selectTeamGame(@Param("tID") String tID) throws DataAccessException;
     //게임 상세보기
     AdminGameListVO selectGameDetailById(@Param("gID")String gID) throws DataAccessException;
+    List<RecentGameVO> selectGameResult(@Param("gID") String gID) throws  DataAccessException;
 }

@@ -86,13 +86,13 @@
                   <td width="70">
                     <c:choose>
                       <c:when test="${recent.homeGoal > recent.awayGoal}">
-                        승
+                        <span class="blue-text"> 승   </span>
                       </c:when>
                       <c:when test="${recent.homeGoal == recent.awayGoal}">
                         무승부
                       </c:when>
                       <c:otherwise>
-                        패
+                        <span class="red-text"> 패  </span>
                       </c:otherwise>
                     </c:choose>
                   </td>

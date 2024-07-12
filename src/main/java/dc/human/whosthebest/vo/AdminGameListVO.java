@@ -20,8 +20,9 @@ public class AdminGameListVO {
     private int tAwayID;           //T_AWAYID(경기 상대 팀)
     private int sID;               //S_ID(경기장 ID)
     private int sNum;              //S_NUM(경기장 내 번호)
-
-    private String tName;
+    private String createdID;      //CREATED_ID(생성자 ID/DB에서 생성)
+    private String myTeam;
+    private String awayTeam;
 
     //private int gID;				//G_ID(경기 ID)
     private int tHomeID;            //T_HOMEID(경기 생성자 팀 ID)
@@ -35,6 +36,29 @@ public class AdminGameListVO {
     public AdminGameListVO() {
     }
 
+    public String getCreatedID() {
+        return createdID;
+    }
+
+    public void setCreatedID(String createdID) {
+        this.createdID = createdID;
+    }
+
+    public String getMyTeam() {
+        return myTeam;
+    }
+
+    public void setMyTeam(String myTeam) {
+        this.myTeam = myTeam;
+    }
+
+    public String getAwayTeam() {
+        return awayTeam;
+    }
+
+    public void setAwayTeam(String awayTeam) {
+        this.awayTeam = awayTeam;
+    }
 
     public String getsName() {
         return sName;
@@ -146,14 +170,6 @@ public class AdminGameListVO {
 
     public void setsNum(int sNum) {
         this.sNum = sNum;
-    }
-
-    public String gettName() {
-        return tName;
-    }
-
-    public void settName(String tName) {
-        this.tName = tName;
     }
 
     public int gettHomeID() {

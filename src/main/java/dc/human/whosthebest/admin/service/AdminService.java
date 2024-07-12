@@ -1,9 +1,6 @@
 package dc.human.whosthebest.admin.service;
 
-import dc.human.whosthebest.vo.AdminGameListVO;
-import dc.human.whosthebest.vo.RecentGameVO;
-import dc.human.whosthebest.vo.TeamInfoVO;
-import dc.human.whosthebest.vo.UserInfoVO;
+import dc.human.whosthebest.vo.*;
 
 import java.util.List;
 
@@ -26,12 +23,13 @@ public interface AdminService {
     public List newTeamList() throws  Exception;
 
     //회원 상세보기
-    public UserInfoVO getUserDetailById(String uID) throws Exception;
+    public  List<MyPageInfoVO> getUserDetailById(String uID) throws Exception;
 
     //팀 상세보기
     public TeamInfoVO getTeamById(String tID) throws  Exception;
     public List<RecentGameVO> getTeamGameById(String tID) throws  Exception;
 
     //게임 상세보기
-    public AdminGameListVO getGameById(String gID) throws  Exception;
+    public AdminGameListVO getGameDetilById(String gID) throws  Exception;
+    public List<RecentGameVO> getGameResultById(String gID) throws Exception;
 }

@@ -44,39 +44,39 @@
       <table>
             <tr>
               <td> 이름 </td>
-              <td>${userInfo.uName}</td>
+              <td>${userInfo[0].uName}</td>
             </tr>
 
             <tr>
               <td> 아이디</td>
-              <td>${userInfo.uID}</td>
+              <td>${userInfo[0].uID}</td>
             </tr>
 
             <tr>
               <td> 생년월일</td>
               <td>
-                 ${userInfo.uBday}
+                 ${userInfo[0].uBday}
                </td>
             </tr>
 
             <tr>
               <td> 성별 </td>
-              <td> ${userInfo.uGender} </td>
+              <td> ${userInfo[0].uGender} </td>
             </tr>
 
             <tr>
               <td> 도로명 주소 </td>
-              <td>  ${userInfo.uAddr1} </td>
+              <td>  ${userInfo[0].uAddr1} </td>
             </tr>
 
             <tr>
               <td> 상세 주소 </td>
-              <td>   ${userInfo.uAddr2} </td>
+              <td>   ${userInfo[0].uAddr2} </td>
             </tr>
 
             <tr>
               <td> 이메일 </td>
-              <td>  ${userInfo.uEmail}</td>
+              <td>  ${userInfo[0].uEmail}</td>
             </tr>
 
             <tr>
@@ -86,25 +86,22 @@
 
             <tr>
                <td> 소속팀1 </td>
-               <td>  </td>
-               <td>  </td>
+               <td>${userInfo[0].tName}  </td>
             </tr>
 
              <tr>
                <td> 소속팀2 </td>
-               <td>  </td>
-               <td> </td>
+               <td>  ${userInfo[1].tName}  </td>
             </tr>
 
              <tr>
                <td> 소속팀3 </td>
-               <td>  </td>
-               <td>  </td>
+               <td> ${userInfo[2].tName}   </td>
             </tr>
 
               <tr>
                 <td> 가입일자 </td>
-                <td> ${userInfo.createdDate}</td>
+                <td> ${userInfo[0].createdDate}</td>
             </tr>
       </table>
      <button onclick="window.history.back();"> 뒤로가기</button>

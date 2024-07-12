@@ -16,7 +16,7 @@
     </resultMap>
 
     <!--회원 상세보기-->
-    <resultMap id="userInfo" type="userInfoVO">
+    <resultMap id="userInfo" type="myPageInfoVO">
         <result property="uName"        column="u_name" />
         <result property="uID"          column="u_id" />
         <result property="uBday"        column="u_bday" />
@@ -26,6 +26,8 @@
         <result property="uEmail"       column="u_email" />
         <result property="uPhone"       column="u_phone"/>
         <result property="createdDate"  column="created_date" />
+        <result property="tID"          column="t_id" />
+        <result property="tName"        column="t_name"/>
     </resultMap>
 
     <!--팀목록 페이지-팀 리스트-->
@@ -74,17 +76,27 @@
 
     <!-- 경기목록-경기 상세보기-->
     <resultMap id="gameInfo" type="adminGameListVO">
-        <result property="gID"          column="g_id" />
+        <result property="gID"     column="g_id"  />
+        <result property="myTeam"       column="myTeam" />
+        <result property="awayTeam"     column="awayTeam" />
         <result property="gTitle"       column="g_title" />
         <result property="gResDate"     column="g_resdate" />
+        <result property="gTime"        column="g_time" />
+        <result property="gInfo"        column="g_info" />
+        <result property="gStatus"      column="g_status" />
+        <result property="createdID"    column="created_id" />
         <result property="sName"        column="s_name" />
-        <result property="gTeamID"      column="g_teamid" />
-        <result property="tAwayID"      column="t_awayid" />
         <result property="homeGoal"     column="home_goal" />
         <result property="awayGoal"     column="away_goal" />
-        <result property="uID"          column="u_id" />
-        <result property="gStatus"      column="g_status" />
+    </resultMap>
 
+    <resultMap id="gameResult" type="recentGameVO">
+        <result property="gResDate"     column="g_resdate"/>
+        <result property="myTeam"       column="myTeam" />
+        <result property="awayTeam"     column="awayTeam" />
+        <result property="homeGoal"     column="home_goal" />
+        <result property="awayGoal"     column="away_goal" />
+        <result property="sName"        column="s_name"   />
     </resultMap>
 
     <!--관리자메인페이지 - 최근 회원목록-->
@@ -140,17 +152,20 @@
     <!--회원 상세보기-->
     <select id="selectUserDetailById" resultMap="userInfo">
         <![CDATA[
-            select u_name,
-                   u_id,
-                   u_bday,
-                   u_gender,
-                   u_addr1,
-                   u_addr2,
-                   u_email,
-                   u_phone,
-                   created_date
-            from users
-            where u_id= #{uID}
+            select u.u_name,
+                    u.u_id,
+                    u_bday,
+                    u_gender,
+                    u_addr1,
+                    u_addr2,
+                    u_email,
+                    t.t_name,
+                    u.created_date
+            from users u, team t, team_member tm
+            where tm.u_id=u.u_id
+                and tm.t_id = t.t_id
+                and u.u_id  = #{uID}
+            order by t.rankscore asc
         ]]>
     </select>
 
@@ -229,8 +244,55 @@
                    ROW_NUMBER() OVER (ORDER BY game.G_CREATEDATE DESC) AS rnum
             FROM game
             JOIN stadium ON game.s_id = stadium.s_id
-            ORDER BY G_CREATEDATE DESC
+            ORDER BY game.g_id DESC
         )
+        ]]>
+    </select>
+
+    <!--경기 목록- 경기 상세보기-->
+    <select id="selectGameDetailById" resultMap="gameInfo">
+        <![CDATA[
+            select g.g_id,
+                   t.t_name as myTeam,
+                   tt.t_name as awayTeam,
+                   g.g_title,
+                   g.g_resdate,
+                   g.g_time,
+                   g.g_info,
+                   s.s_name,
+                   g.g_status,
+                   g.created_id
+            from game g
+                inner join team t
+                on g.g_teamid = t.t_id
+                inner join team tt
+                on g.t_awayid = tt.t_id
+                inner join stadium s
+                on g.s_id = s.s_id
+            where g.g_id = #{gID}
+        ]]>
+    </select>
+
+    <select id="selectGameResult" resultMap="gameResult">
+        <![CDATA[
+            select  distinct
+                   g.G_RESDATE,
+                   t.t_name as myTeam,
+                   r.home_goal,
+                   r.away_goal,
+                   tt.t_name as awayTeam,
+                   s.s_name
+           from G_RESULT r
+                INNER JOIN GAME g
+                ON g.G_ID = r.g_id
+                INNER JOIN STADIUM s
+                ON g.S_ID = s.S_ID
+                INNER JOIN TEAM t
+                ON t.T_ID = g.g_teamid
+                INNER JOIN TEAM tt
+                ON tt.T_ID = g.t_awayid
+           where g.g_id = #{gID}
+           order by g.g_resdate desc
         ]]>
     </select>
 

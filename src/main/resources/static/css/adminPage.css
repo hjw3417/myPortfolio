@@ -38,6 +38,7 @@ main{
   }
 }
 
+/*--------------------------------------------------*/
 /*상단 관리자페이지 글씨*/
 .admin{
   font-family: 'KCC-Hanbit';
@@ -69,6 +70,7 @@ main{
   }
 }
 
+/*--------------------------------------------------*/
 /*사이드 바*/
 .side{
   font-family: 'KCC-Hanbit';
@@ -124,7 +126,7 @@ main{
     padding-left: 20px;
   }
 
-  .logoutimg{
+  >a>.logoutimg{
     width: 25px;
     height: 25px;
     margin : 50px 0 0 80px;
@@ -132,6 +134,7 @@ main{
 
 }
 
+/*--------------------------------------------------*/
 /*회원,팀, 경기관리 테이블 담는 div*/
 .tablecontainer {
   position: absolute;
@@ -143,6 +146,7 @@ main{
   overflow : auto;
 }
 
+/*--------------------------------------------------*/
 /*회원,팀, 경기관리 테이블 설정*/
 .list {
   height: auto;
@@ -180,6 +184,8 @@ table.list td a:hover{
   text-underline-position : under;
 
 }
+
+/*--------------------------------------------------*/
 /*관리자 메인- 최근 회원 목록*/
 .usertablecontainer {
 
@@ -210,6 +216,7 @@ table.list td a:hover{
     }
   }
 
+/*--------------------------------------------------*/
 /*관리자 메인- 최근 팀 목록*/
   .teamtablecontainer {
     border-radius: 15px 15px 15px 15px;
@@ -238,6 +245,7 @@ table.list td a:hover{
       }
     }
 
+/*--------------------------------------------------*/
 /* 관리자 메인- 최근 회원.팀 테이블 설정*/
 table.user-list {
   height: auto;
@@ -257,7 +265,7 @@ table.user-list th {
   background-color: rgb(218, 228, 203);
 }
 
-
+/*--------------------------------------------------*/
 /*회원 목록 - 회원 상세보기*/
 .userDetail{
   width : 1020px;
@@ -266,7 +274,7 @@ table.user-list th {
   top : 160px;
   left : 212px;
   background-color: white;
-  border : 1px solid black;
+  border : 1px solid rgb(176, 202, 136) ;
   >table{
     position: absolute;
     top : 24px;
@@ -289,7 +297,7 @@ table.user-list th {
     text-align: left;
     }
 
-  >button{
+  >a>button{
     font-family: 'GmarketSansMedium';
     position: absolute;
     top : 570px;
@@ -302,12 +310,13 @@ table.user-list th {
     border : none;
     color : white;
   }
-  >button:hover{
+  >a>button:hover{
     text-decoration-line: underline ;
   }
 
 }
 
+/*--------------------------------------------------*/
 /*팀 목록 - 팀 상세보기*/
 .teamDetail{
   width : 1020px;
@@ -316,10 +325,10 @@ table.user-list th {
   top : 160px;
   left : 212px;
   background-color: white;
-  border : 1px solid black;
+  border : 1px solid rgb(176, 202, 136) ;
   >.info{
     position: absolute;
-    top : 24px;
+    top : 22px;
     left : 30px;
     width : 960px;
     height : 200px;
@@ -328,6 +337,7 @@ table.user-list th {
     border-collapse: collapse;
     text-align: center;
     line-height: 30px;
+    border :none;
   }
 
   >table tr:nth-child(9) td:nth-child(3),
@@ -340,40 +350,45 @@ table.user-list th {
     font-weight: bold;
     position: absolute;
     top : 260px;
-    left : 34px;
+    border-top : 1px solid rgb(176, 202, 136) ;
+    padding-top : 20px;
+    padding-left : 34px;
+    width : 987px;
   }
   >.playTableContainer{
+    border : 1px solid rgb(115, 138, 81);
     position: absolute;
-    top : 300px;
+    top : 330px;
     left : 30px;
-    border : none;
-    width : 960px;
-    height : 290px;
+    width : 930px;
+    height : 240px;
     overflow-y: auto;
     overflow-x: hidden;
     >.playTable{
-      border : 1px solid rgb(115, 138, 81) ;
-      width : 960px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width : 966px;
+      height : 260px;
       border-collapse: collapse;
       text-align: center;
-      font-size : 13pt;
-      font-weight: 100;
-        >tr,td{
-          border-bottom : 1px solid rgb(115, 138, 81) ;
-          border-top: 1px solid rgb(115, 138, 81) ;
-
+      >thead{
+        background-color:  rgb(218, 228, 203) ;
+        border-bottom: 1px solid rgb(115, 138, 81) ;
+        font-size : 13pt;
       }
-        >thead{
-          background-color:  rgb(218, 228, 203) ;
-        }
+      >tbody{
+        font-weight: 100;
+        font-size : 13pt;
+      }
     }
 
   }
-  >button{
+  button{
     font-family: 'GmarketSansMedium';
     position: absolute;
     top : 605px;
-    left : 875px;
+    left : 890px;
     width: 105px;
     height: 35px;
     border-radius: 10px 10px 10px 10px;
@@ -382,7 +397,91 @@ table.user-list th {
     border : none;
     color : white;
   }
-  >button:hover{
+  button:hover{
     text-decoration-line: underline ;
   }
+}
+
+/*--------------------------------------------------*/
+/*게임 상세보기*/
+.gameDetail{
+  width : 1020px;
+  height : 650px;
+  position: absolute;
+  top : 160px;
+  left : 212px;
+  background-color: white;
+  border : 1px solid rgb(176, 202, 136) ;
+ >.gameInfo{
+  border : none;
+  position: absolute;
+  left : 30px;
+  top: 20px;
+  width: 955px;
+  height : 260px;
+  text-align: center;
+  border-collapse: collapse;
+  >table tr:nth-child(5), td:first-child,
+           tr:nth-child(5) td:nth-child(2),
+           tr:nth-child(5) td:nth-child(3),
+           tr:nth-child(5) td:nth-child(4){
+            vertical-align: top;
+            padding-top : 10px;
+           }
+  >table tr:nth-child(5) td:nth-child(4){
+    text-align: left;
+  }
+ }
+ >div{
+  position: absolute;
+  top : 300px;
+  left : 0;
+  font-size: 16pt;
+  font-weight: bold;
+  border-top : 1px solid rgb(176, 202, 136) ;
+  padding-top : 20px;
+  padding-left : 34px;
+  width : 987px;
+ }
+ >.gameResult{
+  border : 1px solid rgb(115, 138, 81) ;
+  position: absolute;
+  top : 380px;
+  left : 30px;
+  width : 960px;
+  height : 140px;
+  border-collapse: collapse;
+  text-align: center;
+  >thead{
+    background-color:  rgb(218, 228, 203) ;
+    border-bottom: 1px solid rgb(115, 138, 81) ;
+  }
+ }
+}
+button{
+  font-family: 'GmarketSansMedium';
+  position: absolute;
+  top : 730px;
+  left : 1095px;
+  width: 105px;
+  height: 35px;
+  border-radius: 10px 10px 10px 10px;
+  font-size: 12pt;
+  background-color: rgb(115, 138, 81) ;
+  border : none;
+  color : white;
+}
+button:hover{
+  text-decoration-line: underline ;
+}
+
+
+/*특정 글씨 빨간색으로 보기*/
+.red-text{
+    color : red;
+}
+
+/*특정 글씨 빨간색으로 보기*/
+.blue-text{
+    color : blue;
 }

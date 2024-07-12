@@ -60,12 +60,20 @@
       <tbody>
        <c:forEach items="${gameList}" var="game">
            <tr>
-                 <td>${game.gameId}</td>
+                 <td><a href="/admin/gameDetail/${game.gameId}">${game.gameId}</a></td>
                  <td>${game.gameTitle}</td>
                  <td>${game.gameResDate}</td>
                  <td>${game.stadiumName}</td>
-                 <td>${game.gameStatus} </td>
-
+                 <td>
+                    <c:choose>
+                        <c:when test="${game.gameStatus == 0}">
+                            경기 생성
+                        </c:when>
+                        <c:when test="${game.gameStatus ==1}">
+                           <span class="red-text"> 경기 종료   </span>
+                        </c:when>
+                    </c:choose>
+                 </td>
            </tr>
        </c:forEach>
   </div>
