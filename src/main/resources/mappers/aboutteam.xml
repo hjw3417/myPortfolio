@@ -95,6 +95,7 @@
         INNER JOIN STADIUM s ON g.S_ID = s.S_ID
         INNER JOIN REGIONCODE r ON s.S_REGION = r.region_name
         WHERE 1=1
+        AND g.G_STATUS = 0
         AND g.G_TEAMID = #{tID}
         )
         WHERE
