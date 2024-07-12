@@ -126,7 +126,7 @@ main{
     padding-left: 20px;
   }
 
-  >a>.logoutimg{
+  >.logoutimg{
     width: 25px;
     height: 25px;
     margin : 50px 0 0 80px;
