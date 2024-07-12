@@ -181,8 +181,8 @@
         WHERE rn BETWEEN (#{pageNum} + #{rowNum} * 4) AND (#{pageNum} + #{rowNum} * 4) + 4
         ]]>
     </select>
-    <select id="myTeamName" resultType="int" resultMap="GameRecordInfoResultMap">
-        SELECT T_NAME AS tHomeName
+    <select id="myTeamName" parameterType="int" resultType="String">
+        SELECT T_NAME
         FROM TEAM
         WHERE t_id = #{tID}
     </select>

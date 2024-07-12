@@ -30,6 +30,11 @@ public class AboutTeamControllerImpl implements AboutTeamController {
         int rowNum = 0;
         List<GameListVO> gameListVO = aboutteamService.selectGameSchedule(pageNum, rowNum, tID);
         List<TeamInfoVO> myTeams = teamService.getTeamsByUserId(loginId);
+        String myTeamName = aboutteamService.myTeamName(tID);
+        if(myTeamName != null) {
+            mav.addObject("myTeamName", myTeamName);
+            System.out.println("myTeamName : " + myTeamName);
+        }
         if(gameListVO != null) {
             mav.addObject("gameListVO", gameListVO);
             System.out.println("controller gameListVO.size() : " + gameListVO.size());

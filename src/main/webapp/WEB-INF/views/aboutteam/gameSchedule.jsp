@@ -79,7 +79,7 @@
           </div>
           <div class="gameSchedule">
             <div>
-              경기 일정
+             ${myTeamName} 경기 일정
             </div>
             <div class="gameScheduleCardContainer" id="gameScheduleCardContainer">
                 <!-- 카드 시작 -->
