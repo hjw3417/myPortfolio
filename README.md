@@ -138,6 +138,16 @@ spring.datasource.driver-class-name=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
 
 ---
 
-## 팀
+## 팀 구성 및 역할
 
-**문주군단 (3차 프로젝트 팀)**
+**문주군단** — 4인 팀 프로젝트.
+각자 도메인 단위로 기능을 나눠 개발하고, `featureXxx` 브랜치 → `mergeTest` 브랜치로 통합했습니다.
+
+| 담당자 | 작업 브랜치 | 주요 담당 영역 |
+|--------|------------|---------------|
+| **허진욱** (hjw3417) | `featureHeo` | 경기 도메인 전반 — 경기 일정(GameSchedule), 경기 기록(GameRecord), 경기 상세/결과(GameInfo/Result), 경기장 목록·검색(StadiumList), 랭킹(Ranking), 통합/머지 작업 |
+| **홍성연** (hsy0521) | `featureHong` | 팀 도메인 전반 — 팀 생성(TeamMake), 팀 목록(TeamList), 팀원 관리(TeamMembers), 내 팀(MyTeam), 게시판 VO, 팀 인원 제한 로직 |
+| **최연희** (choiyeonhee1) | `featureChoi` | 마이페이지 + 관리자 페이지 — MyPage(정보 수정, 비밀번호 확인, 경기 결과 조회), Admin(회원/팀/경기 상세 관리), 관련 CSS |
+| **문주영** (jooyoungMoonn) | `featureMoon` | 사용자 인증 + 메인/게시판 — 회원가입(아이디 중복 체크), 로그인, 아이디/비밀번호 찾기, 서비스 메인(최신 경기·랭킹), 게시판 CRUD. 레포지토리 호스팅 |
+
+> 커밋 수 기준: hjw3417(142) · hsy0521(52) · choiyeonhee1(48) · jooyoungMoonn(32)
